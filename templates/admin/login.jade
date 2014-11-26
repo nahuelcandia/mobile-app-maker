@@ -1,0 +1,35 @@
+
+
+extends layout
+
+block content
+  .tab-pane.active
+    .container
+      .row
+        .col-xs-12.text-center
+          p.text-center
+            
+
+            a(href="http://shovelapps.org",target="_blank")
+              img(src="assets/img/shovelapps-logo.png",style="max-width:100%")        
+          form(method="post",role="form")
+            div.form-group
+              label(for="username") Username
+              input.form-control(name="username",placeholder="User name")
+            div.form-group
+              label(for="password") Password
+              input.form-control(type="password", name="password",placeholder="Password")              
+            button(type="submit").btn.btn-success Login
+
+
+block navbar-buttons            
+  ul.nav.navbar-nav
+    li
+    p.navbar-btn        
+      a.btn.btn-default(href="/")#adminhome Back to the frontend
+
+block scripts
+  script.
+    $(function() {
+      $("[name=username").focus();
+    });

@@ -1,0 +1,48 @@
+extends installer-layout
+block content
+  .container-fluid
+    .row
+      .col-xs-12
+        h1 Installer
+        .panel.panel-default
+          .panel-heading Admin user
+          .panel-body
+            form.form-horizontal(role=form)
+              div.form-group
+                label.control-label.col-xs-2(for="adminusername") Admin Username
+                div.col-xs-10
+                  input.form-control(name="adminusername",placeholder="admin")
+              div.form-group
+                label.control-label.col-xs-2(for="adminpassword") Admin password
+                div.col-xs-10
+                  input.form-control(type="password",name="adminpassword",placeholder="password") 
+        .panel.panel-default
+          .panel-heading Storage (MongoDB)
+          .panel-body
+            form.form-horizontal(role=form)
+              div.form-group
+                label.control-label.col-xs-2(for="dbhost") DB Host
+                div.col-xs-10
+                  input.form-control(name="dbhost",placeholder="ds053310.mongolab.com") 
+              div.form-group
+                label.control-label.col-xs-2(for="dbport") DB port
+                div.col-xs-10
+                  input.form-control(name="dbport",placeholder="27017")  
+              div.form-group
+                label.control-label.col-xs-2(for="dbname") DB name
+                div.col-xs-10
+                  input.form-control(name="dbname",placeholder="cms")                                                                               
+              div.form-group
+                label.control-label.col-xs-2(for="dbuser") DB User
+                div.col-xs-10
+                  input.form-control(name="dbuser")
+              div.form-group
+                label.control-label.col-xs-2(for="dbpassword") DB user password
+                div.col-xs-10
+                  input.form-control(type="password",name="dbpassword")     
+
+  block scripts
+    script.
+      $(function() {
+
+      });                  

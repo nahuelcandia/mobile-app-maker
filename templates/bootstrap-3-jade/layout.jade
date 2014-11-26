@@ -1,0 +1,97 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    //Favicons
+    link(rel='shortcut icon', href='assets/img/favicon/favicon.ico')
+    link(rel='apple-touch-icon', sizes='57x57', href='assets/img/favicon/apple-touch-icon-57x57.png')
+    link(rel='apple-touch-icon', sizes='114x114', href='assets/img/favicon/apple-touch-icon-114x114.png')
+    link(rel='apple-touch-icon', sizes='72x72', href='assets/img/favicon/apple-touch-icon-72x72.png')
+    link(rel='apple-touch-icon', sizes='144x144', href='assets/img/favicon/apple-touch-icon-144x144.png')
+    link(rel='apple-touch-icon', sizes='60x60', href='assets/img/favicon/apple-touch-icon-60x60.png')
+    link(rel='apple-touch-icon', sizes='120x120', href='assets/img/favicon/apple-touch-icon-120x120.png')
+    link(rel='apple-touch-icon', sizes='76x76', href='assets/img/favicon/apple-touch-icon-76x76.png')
+    meta(name='apple-mobile-web-app-title', content='Shovel apps CMS')
+    link(rel='icon', type='image/png', href='assets/img/favicon/favicon-96x96.png', sizes='96x96')
+    link(rel='icon', type='image/png', href='assets/img/favicon/favicon-16x16.png', sizes='16x16')
+    link(rel='icon', type='image/png', href='assets/img/favicon/favicon-32x32.png', sizes='32x32')
+    meta(name='msapplication-TileColor', content='#da532c')
+    meta(name='msapplication-TileImage', content='assets/img/favicon/mstile-144x144.png')
+    meta(name='msapplication-config', content='assets/img/favicon/browserconfig.xml')
+    meta(name='application-name', content='Shovel apps CMS')
+    //End of Favicons
+    
+    // Title block
+    block title 
+      title Shovel apps CMS
+    // End of Title block
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    script(src="assets/html5shiv/html5shiv.js")
+    script(src="assets/respond.js/respond.min.js")
+    <![endif]-->
+    // Bootstrap CSS 
+    link(href="assets/bootstrap/bootstrap.min.css", rel="stylesheet")
+    //jQuery
+    script(src="assets/jquery/jquery.js")
+    // Custom stylesheets
+    block stylesheets
+    // End of custom stylesheets
+
+    style(type="text/css").
+      html, body, body>.tab-content, 
+      body>.tab-content>.tab-pane {
+        width:100%;
+        height: 100%;
+      }
+      /*
+       * Compensate for navbar
+       */
+      body {
+        padding-bottom:50px;
+      }
+      body>.tab-content>.tab-pane { 
+        overflow:auto;
+      /*
+        border:10px solid white
+      */
+      }
+  body
+    // Content block
+    block content
+    // End of content block
+
+    div.navbar.navbar-default.navbar-fixed-bottom
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target="#navbar")
+            span.sr-only Toggle navbar
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        nav.collapse.navbar-collapse#navbar
+          // Custom buttons 
+          // Generally <li>s or <button> in Bootstrap 3
+          block navbar-buttons
+          // End of custom buttons
+    //FastClick
+    script(src="assets/FastClick/fastclick.js")
+
+    //Bootstrap JavaScript 
+    script(src="assets/bootstrap/bootstrap.min.js")
+    script.
+      $(function() {
+   
+            
+        FastClick.attach(document.body);
+        $("a[href*=#]").each(function(e) {
+          $(this).attr("data-toggle", "tab");
+        });        
+
+      })
+    // Custom scripts
+    block scripts
+    // End of custom Scripts

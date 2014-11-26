@@ -1,0 +1,3 @@
+
+
+- Fix medium-editor automatic <p> insertion definitely. Now the code from mediumeditor.min.js is modified for avoiding this.

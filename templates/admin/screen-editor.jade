@@ -1,0 +1,97 @@
+extends layout
+
+block head
+  // In order for assets to load as they would module.loaded
+  // insider file://
+  base(href="/")
+
+block title
+  title Editing #{screen.title}
+
+block content
+  #humancode.tab-pane.active
+    // In this template, we check if the html content is empty
+    // and we asume it's a newly created screen. So in this case,
+    // I add div.container-fluid, div.row and div.col-xs-12 as a basis
+    // for the .editable 
+
+    div.editable#html
+      if screen.html == ""
+        div.container-fluid
+          div.row
+            div.col-xs-12!=screen.html
+      else
+        !=screen.html
+  #sourcecodetab.tab-pane(style="height:100%;width:100%")
+    div#sourcecode(style="height:100%;width:100%")=screen.html
+  //
+    .toolbar(style="position:absolute;top:0;left:0;width:100%;height:40px;background:black")
+      button(data-command-name='bold') Bold
+      button(data-command-name='italic') Italic
+      button(data-command-name='strikeThrough') Strike Through
+      button(data-command-name='removeFormat') Remove Formatting
+      button(data-command-name='linkPrompt') Link
+      button(data-command-name='unlink') Unlink
+      button(data-command-name='insertOrderedList') Ordered List
+      button(data-command-name='insertUnorderedList') Unordered List
+      button(data-command-name='indent') Indent
+      button(data-command-name='outdent') Outdent
+      button(data-command-name='blockquote') Blockquote
+      button(data-command-name='code') Code
+      button(data-command-name='h2') H2
+      button(data-command-name='undo') Undo
+      button(data-command-name='redo') Redo
+block navbar-buttons
+  ul.nav.navbar-nav
+    li
+      a(href="/") Back to the frontend
+    li
+      p.navbar-btn
+        a#save.btn.btn-success.navbar-btn.navbar-left(href="#") Save
+    li
+      a(href="/admin")#adminhome Admin Home
+    li
+      a.active(data-toggle="tab",href="#humancode") Human      
+    li
+      a(data-toggle="tab",href="#sourcecodetab") &lt;&gt;
+  p.navbar-text
+    strong Page  
+    span#title.editable-inline!=screen.title
+  p.navbar-text
+    strong Slug: #
+    span#slug.editable-inline!=screen.slug
+  p.navbar-text
+    strong Weight: 
+    span#menuWeight.editable-inline
+      if screen.menuWeight
+        !=screen.menuWeight
+      else
+        !=5
+
+  ul.nav.navbar-nav.navbar-right          
+    li
+      a(href="/admin/screens/delete/#{screen._id}")#remove Remove this screen
+
+block stylesheets
+  link(rel="stylesheet",href="/coreassets/medium-editor/medium-editor.min.css")
+  link(rel="stylesheet",href="/coreassets/medium-editor/bootstrap.min.css")
+
+block scripts
+  
+  script(src="/coreassets/medium-editor/medium-editor.min.js")
+  script(src="/coreassets/medium-editor/MediumButton.min.js")
+
+  // Set current screen id in browser javascript
+  script.
+    window.screenId="#{screen._id}"
+  script(src="/coreassets/require/require.js")
+  script(src="/coreassets/bower_components/scribe/scribe.min.js")
+  script(src="/coreassets/bower_components/scribe-plugin-smart-lists/scribe-plugin-smart-lists.min.js")
+  script(src="/coreassets/bower_components/scribe-plugin-toolbar/scribe-plugin-toolbar.js")
+  script(src="/coreassets/bower_components/scribe-plugin-link-prompt-command/scribe-plugin-link-prompt-command.js")
+  script(src="/coreassets/ace/ace.js")
+  script(src="/coreassets/ace/mode-html.js")
+  script(src="/coreassets/ace/theme-monokai.js")
+  script(src="/coreassets/ace/worker-html.js")
+  script(src="/coreassets/shovelapps/editor.js")
+

@@ -1,0 +1,41 @@
+html5
+head
+  meta(charset="utf-8")
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+  meta(http-equiv="X-UA-Compatible", content="IE=edge")
+  block title 
+   title Shovelapps CMS
+  
+  <!-- Bootstrap CSS -->
+  link(href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", rel="stylesheet")
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  script(src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js")
+  script(src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js")
+  <![endif]-->
+  style(type="text/css").
+    html, body, body>.tab-content, body>.tab-content>.tab-pane {
+      width:100%;
+      height: 100%;
+    }
+    /*
+     * Compensate for navbar
+     */
+
+    body>.tab-content>.tab-pane { 
+      overflow:auto;
+    /*
+      border:10px solid white
+    */
+    }
+body
+  <!-- Everything wrapped in a 100% width/height tab-content-->
+  .tab-content
+    block content
+
+  <!-- jQuery -->
+  script(src="//code.jquery.com/jquery.js")
+  <!-- Bootstrap JavaScript -->
+  script(src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js")
+  block scripts

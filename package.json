@@ -1,0 +1,38 @@
+{
+  "name": "Shovel apps CMS",
+  "version": "0.1.0",
+  "description": "Open Source Mobile App CMS",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.10.2",
+    "express-session": "~1.9.1",
+    "jade": "~1.7.0",
+    "monk": "~0.9.1",
+    "cookie-parser": "~1.3.3",
+    "sprintf": "~0.1.4",
+    "node-uuid": "~1.4.1",
+    "config": "~1.8.1",
+    "debug": "~2.1.0",
+    "body-parser": "~1.9.2",
+    "archiver": "~0.12.0",
+    "ejs": "~1.0.0",
+    "socket.io-stream": "~0.5.3",
+    "npm": "~2.1.9",
+    "install": "~0.1.7",
+    "socket.io-client": "~1.2.1",
+    "randomstring": "~1.0.3",
+    "extend": "~2.0.0",
+    "express-session-json": "0.0.6",
+    "filestorage": "git://github.com/petersirka/node-filestorage",
+    "lokijs": "~1.0.2",
+    "nedb": "~0.11.1",
+    "cheerio": "~0.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "osk <oscar@shovelapps.com> (http://shovelapps.com/)",
+  "license": "MIT"
+}

@@ -1,0 +1,80 @@
+doctype html
+html(lang="en")
+head
+  meta(charset="utf-8")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+  meta(http-equiv="X-UA-Compatible", content="IE=edge")
+  block head
+  // Title block
+  block title
+    title Admin CMS
+  // End of Title block
+  // Bootstrap CSS 
+  link(href="/coreassets/bootstrap/bootstrap.min.css", rel="stylesheet")
+
+  // Custom stylesheets
+  block stylesheets
+  // End of custom stylesheets
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  script(src="/coreassets/html5shiv/html5shiv.js")
+  script(src="/coreassets/respond.js/respond.min.js")
+  <![endif]-->
+  style(type="text/css").
+    html, body, body>.tab-content, 
+    body>.tab-content>.tab-pane {
+      width:100%;
+      height: 100%;
+    }
+    /*
+     * Compensate for navbar
+     */
+    body {
+      padding-bottom:50px;
+    }
+    body>.tab-content>.tab-pane { 
+      overflow:auto;
+    /*
+      border:10px solid white
+    */
+    }
+body
+  #content.snap-content
+  //Everything wrapped in a 100% width/height tab-content
+  .tab-content
+    // Content block
+    block content
+    // End of content block
+
+  .navbar.navbar-default.navbar-fixed-bottom
+    .container-fluid
+      .navbar-header
+        button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target="#navbar")
+          span.sr-only Toggle navbar
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      nav.collapse.navbar-collapse#navbar
+        // Custom buttons 
+        // Generally <li>s or <button> in Bootstrap 3
+        block navbar-buttons
+        // End of custom buttons
+  //FastClick
+  script(src="/coreassets/FastClick/fastclick.js")
+  //jQuery
+  script(src="/coreassets/jquery/jquery.js")
+  //Bootstrap JavaScript 
+  script(src="/coreassets/bootstrap/bootstrap.min.js")
+  script.
+    $(function() {
+ 
+          
+      FastClick.attach(document.body);
+      
+    })
+  // Custom scripts
+  block scripts
+  // End of custom Scripts

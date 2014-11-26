@@ -1,0 +1,65 @@
+extends layout
+
+block title
+  title Shovel apps CMS
+block content
+  //Everything wrapped in a 100% width/height tab-content
+  .tab-content
+    .tab-pane.active(id="home")
+      .container-fluid
+        h2.text-center(data-editable="appTitle") Shovel apps CMS
+        h3.text-center(data-editable="tagline") Welcome to your first app
+        p.text-center.
+          You can edit every element that shines in the sun
+        p.text-center
+          img(src="assets/img/shovelapps-logo.png")
+        ul.list-group(data-editable="list")
+          li.list-group-item 
+            a(data-toggle="tab")#thevenue The venue
+          li.list-group-item
+            a(data-toggle="tab")#about About
+          li.list-group-item Qué tall
+    .tab-pane(id="thevenue")
+      .container-fluid(data-editable="secondscreen")  
+        ul.list-group
+          li.list-group-item sasa
+          li.list-group-item sasa
+          li.list-group-item Qué tall        
+    .tab-pane(id="about")
+      .container-fluid(data-editable="thirdscreen")
+        h2.page-header.text-center Shovel apps CMS       
+        p.lead.text-center
+          img(src="assets/img/shovelapps-logo.png")
+  
+
+block navbar-buttons
+  ul.nav.navbar-nav
+    li#firstlink
+      a(data-toggle="tab",href="#home",data-editable="firsttablink") Home
+    li(data-editable="secondtablink")
+      a(data-toggle="tab",href="#thevenue") The venue  
+    li(data-editable="thirdtablink")    
+      a(data-toggle="tab",href="#about") About     
+  if locals.previewing
+    ul.nav.navbar-nav.navbar-right
+      if locals.previewing && locals.session && locals.session.user
+        li
+          p.navbar-btn
+            a.btn.btn-primary(ref="#")#editButton Edit
+      li
+        a(href="/admin") Admin
+
+block stylesheets
+  if locals.previewing && locals.session && locals.session.user
+    link(rel="stylesheet",href="/coreassets/medium-editor/medium-editor.min.css")
+    link(rel="stylesheet",href="/coreassets/medium-editor/bootstrap.min.css")
+  
+block scripts
+  if locals.previewing && locals.session && locals.session.user
+    script(src="/coreassets/medium-editor/medium-editor.min.js")
+    script(src="/coreassets/medium-editor/MediumButton.min.js")  
+    script(src="/coreassets/shovelapps/shovelapps-cms.js")
+    script.
+      initEditor();
+      
+

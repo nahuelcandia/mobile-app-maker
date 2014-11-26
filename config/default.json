@@ -1,0 +1,11 @@
+{
+  "installed": true,
+  "template": "bootstrap-3-jade",
+  // "template": "ratchet-jade",
+  //"template": "jsconf-ar",
+  "stores": {
+    "localFile": {
+      "path": "filestorage/db"
+    }
+  }
+}
