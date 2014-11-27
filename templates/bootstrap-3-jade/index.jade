@@ -7,30 +7,40 @@ block content
   .tab-content
     .tab-pane.active(id="home")
       .container-fluid
-        h2.text-center(data-editable="appTitle") Shovel apps CMS
-        h3.text-center(data-editable="tagline") Welcome to your first app
-        p.text-center.
-          You can edit every element that shines in the sun
-        p.text-center
-          img(src="assets/img/shovelapps-logo.png")
-        ul.list-group(data-editable="list")
-          li.list-group-item 
-            a(data-toggle="tab",href="#thevenue") The venue
-          li.list-group-item
-            a(data-toggle="tab", href="#about") About
-          li.list-group-item Qué tall
+        .row
+          .col-xs-12        
+            h2.text-center(data-editable="appTitle") Shovel apps CMS
+            h3.text-center(data-editable="tagline") Welcome to your first app
+            p.text-center.
+              You can edit every element that shines in the sun
+            p.text-center
+              img(src="assets/img/shovelapps-logo.png")
+            ul.list-group(data-editable="list")
+              li.list-group-item 
+                a(href="#thevenue") The venue
+              li.list-group-item
+                a(data-toggle="tab", href="#about") About
     .tab-pane(id="thevenue")
-      .container-fluid(data-editable="secondscreen")  
-        ul.list-group
-          li.list-group-item sasa
-          li.list-group-item sasa
-          li.list-group-item Qué tall        
+      .container-fluid  
+        .row
+          .col-xs-12(data-editable="secondscreen")
+            ul.list-group
+              li.list-group-item Info
+              li.list-group-item More info
+              li.list-group-item Plus info       
     .tab-pane(id="about")
-      .container-fluid(data-editable="thirdscreen")
-        h2.page-header.text-center Shovel apps CMS       
-        p.lead.text-center
-          img(src="assets/img/shovelapps-logo.png")
-  
+      .container-fluid
+        .row
+          .col-xs-12(data-editable="thirdscreen")
+            h2.page-header.text-center About this app       
+            p.lead.text-center
+              img(src="assets/img/shovelapps-logo.png")
+            p.lead.text-center.
+              This app was created with
+            p.lead.text-center
+              a(href="http://www.shovelapps.org") Shovel apps CMS
+            p.lead.text-center.
+              Open source Mobile app maker
 
 block navbar-buttons
   ul.nav.navbar-nav
@@ -45,7 +55,7 @@ block navbar-buttons
       if locals.previewing && locals.session && locals.session.user
         li
           p.navbar-btn
-            a.btn.btn-primary(ref="#")#editButton Edit
+            a.btn.btn-primary(href="#")#editToggle Edit
       li
         a(href="/admin") Admin
 

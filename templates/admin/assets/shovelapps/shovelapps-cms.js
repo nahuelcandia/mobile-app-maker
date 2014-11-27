@@ -45,17 +45,58 @@ function setBuildByButton() {
 }
 
 function initEditor() {
-  var $editables = $("[data-editable!=''][data-editable]")
-  enableEditing();
-  mediumEditor();
+  var editing = false;
+  var $editables = $("[data-editable!=''][data-editable]"),
+    $editToggle = $("#editToggle"),
+    editors;
+  $editToggle.on("click", toggleEditing);
 
-  $("[data-editable]").on("blur", function() {
+  function toggleEditing() {
+    console.log(editing);
+    if (editing) {
+      disableEditing();
+    } else {
+      enableEditing();
+    }
+  }
+
+  function enableEditing() {
+
+    $editables.addClass("editable");
+    $editables.on("mouseenter", frameEditable)
+      .on("mouseleave", unframeEditable);
+    $editables.on("blur", saveEditableOnBlur);
+
+    if (!editors) {
+      // If we haven't created the editors yet
+      editors = mediumEditors();
+
+    }
+    editing = true;
+    $editToggle.html("Editing...");
+
+  }
+
+  function disableEditing() {
+    $editables.addClass("editable");
+    $editables.off("mouseenter", frameEditable)
+      .off("mouseleave", unframeEditable);
+    $editables.off("blur", saveEditableOnBlur);
+    editors.regular.deactivate();
+    editors.inline.deactivate();
+
+    editing = false;
+    $editToggle.html("Edit");
+  }
+
+  function saveEditableOnBlur() {
     var editable = {
       id: $(this).attr("data-editable"),
       html: $(this).html()
     }
     saveEditable(editable);
-  });
+
+  }
 
   function saveEditable(editable) {
     $.post("/admin/editable/", editable, function() {
@@ -65,16 +106,50 @@ function initEditor() {
     });
   }
 
-  function enableEditing() {
-    $editables.addClass("editable");
-    $editables.on("mouseenter", function() {
-      $(this).css("border", "1px dashed blue");
-    }).on("mouseleave", function() {
-      $(this).css("border", "none");
-    });
-  }
-  //$("[data-editable-inline]").addClass("editable-inline");
 
+  function frameEditable() {
+    // This should be an addClass/removeClass
+    $(this).css("border", "1px dashed blue");
+  }
+
+  function unframeEditable() {
+    $(this).css("border", "none");
+  }
+
+  function mediumEditors() {
+    var defaultEditorButtons = ['bold', 'italic', 'underline', 'anchor',
+      'header1', 'header2', 'quote'
+    ];
+    var editors = {
+      inline: new MediumEditor(".editable-inline", {
+        disableReturn: true,
+        // disableEditing: true,
+        buttons: []
+      }),
+      regular: new MediumEditor(".editable", {
+        //disableReturn: true,
+        forcePlainText: true,
+        cleanPastedHTML: true,
+        // disableEditing: true,
+        buttons: defaultEditorButtons.concat(["button", 'justifyCenter',
+          "image"
+        ]),
+        extensions: {
+          // 'screen-anchor': new MediumButton({
+          //   label: '#Screen',
+          //   start: '<a data-toggle="tab">',
+          //   end: '</a>',
+          //   action: function(html, mark) {
+          //     console.log(html, mark);
+          //     editors.regular.showAnchorForm();
+          //   }
+          // })
+        }
+      })
+    };
+
+    return editors;
+  }
 
 }
 
@@ -151,35 +226,4 @@ function aceEditor() {
 
 
 
-}
-
-function mediumEditor() {
-  var defaultEditorButtons = ['bold', 'italic', 'underline', 'anchor',
-    'header1', 'header2', 'quote'
-  ];
-  var editors = {
-    inline: new MediumEditor(".editable-inline", {
-      disableReturn: true,
-      buttons: []
-    }),
-    regular: new MediumEditor(".editable", {
-      //disableReturn: true,
-      forcePlainText: true,
-      cleanPastedHTML: true,
-      buttons: defaultEditorButtons.concat(["button", 'justifyCenter',
-        "image"
-      ]),
-      extensions: {
-        // 'screen-anchor': new MediumButton({
-        //   label: '#Screen',
-        //   start: '<a data-toggle="tab">',
-        //   end: '</a>',
-        //   action: function(html, mark) {
-        //     console.log(html, mark);
-        //     editors.regular.showAnchorForm();
-        //   }
-        // })
-      }
-    })
-  };
 }
