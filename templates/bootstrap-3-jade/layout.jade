@@ -59,6 +59,9 @@ html(lang="en")
         border:10px solid white
       */
       }
+      li.list-group-item.active {
+        background:none !important;
+      }
   body
     // Content block
     block content
@@ -79,13 +82,13 @@ html(lang="en")
           // End of custom buttons
     //FastClick
     script(src="assets/FastClick/fastclick.js")
-
+    script(src="assets/page.js/page.js")
     //Bootstrap JavaScript 
     script(src="assets/bootstrap/bootstrap.min.js")
     script.
       $(function() {
    
-            
+     
         FastClick.attach(document.body);
         $("a[href*=#]").each(function(e) {
           $(this).attr("data-toggle", "tab");

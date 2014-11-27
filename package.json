@@ -1,5 +1,5 @@
 {
-  "name": "Shovel apps CMS",
+  "name": "shovelapps-cms",
   "version": "0.1.0",
   "description": "Open Source Mobile App CMS",
   "main": "server.js",
