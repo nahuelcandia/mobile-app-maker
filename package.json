@@ -26,7 +26,8 @@
     "filestorage": "git://github.com/petersirka/node-filestorage",
     "lokijs": "~1.0.2",
     "nedb": "~0.11.1",
-    "cheerio": "~0.18.0"
+    "cheerio": "~0.18.0",
+    "better-console": "~0.2.3"
   },
   "devDependencies": {},
   "scripts": {
