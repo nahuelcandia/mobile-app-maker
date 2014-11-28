@@ -1,9 +1,14 @@
 function setBuildByButton() {
   var $buildButton = $("#build");
-  var socket = io.connect("/");
+  var socket = io.connect("/admin");
   socket.on("platform connect", function() {
     // Disable the button until we get the socket
     $buildButton.text("Build mobile app").removeClass("disabled btn-default")
+      .addClass("btn-success");
+  });
+  socket.on("platform disconnect", function() {
+    // Disable the button until we get the socket
+    $buildButton.text("Platform not reachable").addClass("disabled btn-default")
       .addClass("btn-success");
   });
   $buildButton.on("click", function onBuildClick() {
