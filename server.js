@@ -29,9 +29,9 @@ app.use(bodyParser.urlencoded({
 
 require("./lib/session")(app);
 var sockets = require("./lib/sockets")(app, server);
-require("./lib/template")(app);
 require("./lib/installer")(app);
-require("./lib/plugin-loader")(app);
+require("./lib/plugin-loader")(app, server, sockets);
+require("./lib/template")(app);
 require("./lib/frontend")(app);
 require("./lib/admin")(app);
 require("./lib/packager")(app);

@@ -76,3 +76,19 @@ Shovel apps CMS uses the `debug` module and debugs under the namespace `"cms*"`
 * Jade offers tidinees to other developers and designers. When the user or 
   another developers will 
   rarely find basic nesting issues with HTML tags that often cause misalignments.
+
+
+#Development
+
+##Libraries used
+
+* jQuery
+* socket.io
+* FastClick
+* medium-editor
+ * MediumButton
+
+
+#License 
+
+MIT
