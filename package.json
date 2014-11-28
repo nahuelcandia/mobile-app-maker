@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Open Source Mobile App CMS",
   "main": "server.js",
+  "bin": {
+    "shovelapps-cms": "./cli.js"
+  },
   "dependencies": {
     "express": "~4.10.2",
     "express-session": "~1.9.1",
