@@ -28,11 +28,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 require("./lib/session")(app);
+var sockets = require("./lib/sockets")(app, server);
 require("./lib/template")(app);
 require("./lib/installer")(app);
-plugins = require("./lib/plugin-loader")(app);
+require("./lib/plugin-loader")(app);
 require("./lib/frontend")(app);
 require("./lib/admin")(app);
 require("./lib/packager")(app);
-require("./lib/builderservice")(app, server);
+require("./lib/builderservice")(app, sockets);
 server.listen(3000);
