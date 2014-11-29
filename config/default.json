@@ -1,6 +1,7 @@
 {
   "installed": true,
-  "template": "bootstrap-3-jade",
+  //"template": "bootstrap-3-jade",
+   "template": "framework7",
   // "template": "ratchet-jade",
   //"template": "jsconf-ar",
   "stores": {
