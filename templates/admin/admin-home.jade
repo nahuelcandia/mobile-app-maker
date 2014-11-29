@@ -3,6 +3,12 @@ extends layout
 block title
   title Shovel apps CMS - Admin Panel
 
+block stylesheets
+  style.
+    #downloadapkqrcode {
+      height:150px;
+      width:150px;
+    }
 block content
   .tab-pane#home
     .container-fluid
@@ -21,6 +27,7 @@ block content
             a.btn.btn-default(href="/package/download") Download app as HTML 
         p.lead
           a.hidden#downloadapklink Download Android binary
+        div.text-center
           p.hidden#downloadapkqrcode
       .row
         .col-sm-6.hidden
