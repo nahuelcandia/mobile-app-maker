@@ -9,9 +9,9 @@ The CMS is based on well known technologies from the nodejs world like
 JSON based express sessions and JADE templates.
 
 
-[Debugging](#debugging)
-[Templates](#templates)
-[Plugin](#plugins)
+* [Debugging](#debugging)
+* [Templates](#templates)
+* [Plugins](#plugins)
 
 ## Shovel apps CMS Folder structure
 
@@ -43,7 +43,8 @@ on multiple tools and iterations in order for the app to have a design consisten
 with the mobile's OS look & feel.
 
 Shovel apps CMS templates offer a precise UI structure for designing a professional
-app that is designed with the practics you may already use in web developmentw.
+app that is designed with the practiques you may already use in web development
+as your own CSS or the [IDE](http://en.wikipedia.org/wiki/Integrated_development_environment) of your choide.
 
 ### How to make a template
 
