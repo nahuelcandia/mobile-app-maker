@@ -9,7 +9,11 @@ The CMS is based on well known technologies from the nodejs world like
 JSON based express sessions and JADE templates.
 
 
-##Folder structure
+[Debugging](#debugging)
+[Templates](#templates)
+[Plugin](#plugins)
+
+## Shovel apps CMS Folder structure
 
 
     
@@ -29,25 +33,19 @@ JSON based express sessions and JADE templates.
 
 ### About the CMS's storage
 
-Users data, session data and screens data is stored locally in the filesystem.
+Users data, session data and editables are stored locally in the filesystem.
 
-### Templates
+## Templates
 
 Templates are the base for an app. An hybrid app should respect the mobile OSs
-standards and these is difficult starting from pure HTML and having to relay
+standards and this task is difficult to achieve from pure HTML and having to rely
 on multiple tools and iterations in order for the app to have a design consistent
-with its look & feel.
+with the mobile's OS look & feel.
 
 Shovel apps CMS templates offer a precise UI structure for designing a professional
 app that is designed with the practics you may already use in web developmentw.
 
-####About paths in templates
-
-* Use relative paths in the templates in order to keep consistent with 
-the final structure that the app will have inside phonegap
-
-
-#### How to make a template
+### How to make a template
 
 Templates are written in the [Jade](http://jade-lang.com/) language. 
 *Jade allows you to write HTML code that is not bogus in terms of orphan tags.*
@@ -57,7 +55,7 @@ Templates are written in the [Jade](http://jade-lang.com/) language.
 download a responsive template from some bootstrap  theme providers for example. **Tip:** *If you want to try with your own HTML, convert it to JADE with [HTML to Jade converter](http://html2jade.aaron-powell.com/)*.
 1. Create an assets folder under `templates/mytemplate`. ** All files in assets will be available at the `assets/` URL in your apps frontend**.
 
-#### Recommendations about assets and libraries for your app
+### Recommendations about assets and libraries for your app
 
 * Load phonegap.js
 * Load cordova.js
@@ -67,6 +65,12 @@ download a responsive template from some bootstrap  theme providers for example.
 * Jade offers tidinees to other developers and designers. When the user or 
   another developers will 
   rarely find basic nesting issues with HTML tags that often cause misalignments.
+
+
+####About paths in template files
+
+* Use relative paths in the templates in order to keep consistent with 
+the final structure that the app will have inside phonegap
 
 
 ## Debugging
