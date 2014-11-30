@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 #Development
 
 The CMS is based on well known technologies from the nodejs world like
