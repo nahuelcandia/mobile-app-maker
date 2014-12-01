@@ -33,7 +33,11 @@ JSON based express sessions and JADE templates.
 
 ### About the CMS's storage
 
-Users data, session data and editables are stored locally in the filesystem.
+Users data, session data and editables are stored locally in the filesystem in these folders:
+
+* [filestorage/db]
+* [filestorage/tmp]
+* [filestorage/.session]
 
 ## Templates
 
