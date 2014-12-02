@@ -1,6 +1,6 @@
 {
   "name": "shovelapps-cms",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Open Source Mobile App CMS",
   "main": "server.js",
   "bin": {
