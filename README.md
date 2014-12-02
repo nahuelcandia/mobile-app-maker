@@ -16,14 +16,16 @@ to dedicate to the system content and the final frontend is on the browser.
 HTML templates and editing the content by yourself without the nagging of having to install
 an entire Phonegap environment for yourself.
 
-When your are done editing your app's contents, you  can **create Android binaries
+When you're done editing your app's contents, you  can **create Android binaries
  with one click and test it right away in your device.**
 
-**tl;dr**. **Shovel apps CMS** is a CMS that compiles itself to a mobile binary
+###tl;dr.
+
+**Shovel apps CMS** is a CMS that compiles itself to a mobile binary
 
 ##Download
 
-[Latest version](https://github.com/oskosk/shovelapps-cms/archive/latest.zip)
+[Latest version](https://github.com/shovelapps/shovelapps-cms/archive/latest.zip)
 
 
 ## Installation
@@ -35,7 +37,7 @@ You need [NodeJS](http://nodejs.org/download/) installed to run **Shovel apps CM
 * Download the latest version in this directory.
 
 ```
-$ wget https://github.com/oskosk/shovelapps-cms/archive/latest.zip
+$ wget https://github.com/shovelapps/shovelapps-cms/archive/latest.zip
 $ cd ~/shovelapps-cms
 ```
 * Unzip it and run it.
@@ -68,8 +70,8 @@ All config is loaded from the `config/default.json` once the CMS is installed.
 ##Development
 
 The CMS  is based on well known technologies from the nodejs world like
-(express)[http://expressjs.com], (socket.io)[http://socket.io], JSON storage,
-JSON based express sessions and JADE templates.
+[express](http://expressjs.com), [socket.io](http://socket.io), JSON storage,
+JSON based express sessions and [jade](http://jade-lang.com/) templates.
 
 
 ##Folder structure
@@ -102,7 +104,7 @@ on multiple tools and iterations in order for the app to have a design consisten
 with its look & feel.
 
 Shovel apps CMS templates offer a precise UI structure for designing a professional
-app that is designed with the practics you may already use in web developmentw.
+app that is designed with the practics you may already use in web development.
 
 ####About paths in templates
 
