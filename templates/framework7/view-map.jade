@@ -1,0 +1,17 @@
+.view.tab#view-map
+  //
+     Pages
+  .navbar
+    .navbar-inner
+      .left
+        a.link.icon-only.open-panel(href='#')
+          i.icon.icon-bars
+      .center(data-editable="mapScreenName") Map      
+      .right.contact-add-link
+ 
+  .pages.navbar-through
+    .page(data-page="list")
+      // Search bar
+      .page-content(style="text-align:center")
+        .content-block
+          .content-block-inner.googlemap!=googlemaps.map()
