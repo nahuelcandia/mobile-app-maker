@@ -40,10 +40,11 @@ You need [NodeJS](http://nodejs.org/download/) installed to run **Shovel apps CM
 $ wget https://github.com/shovelapps/shovelapps-cms/archive/latest.zip
 $ cd ~/shovelapps-cms
 ```
-* Unzip it and run it.
+* Unzip it, install dependencies and run it.
 ```
 $ unzip shovelapps-cms-latest.zip
 $ cd shovelapps-cms-latest/
+$ npm install
 $ ./start.sh
 ```
 
