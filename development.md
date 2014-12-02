@@ -35,9 +35,9 @@ JSON based express sessions and JADE templates.
 
 Users data, session data and editables are stored locally in the filesystem in these folders:
 
-* [filestorage/db]
-* [filestorage/tmp]
-* [filestorage/.session]
+* [filestorage/db]// User and editables data
+* [filestorage/tmp]. Temporary App's source code in a `zip` file after a build request.
+* [filestorage/.session]// Session data *(Using express-session-json module);
 
 ## Templates
 
