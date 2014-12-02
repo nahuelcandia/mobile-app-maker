@@ -1,0 +1,48 @@
+.view.tab#view-chat
+  //
+     Pages
+  .navbar
+    .navbar-inner
+      .left
+        a.link.icon-only.open-panel(href='#')
+          i.icon.icon-bars
+      .center(data-editable="view-3-name") Chat      
+      .right.contact-add-link
+ 
+  .pages.navbar-through
+    .page(data-page="list")
+      .page-content.messages-content
+        .messages
+            // Date stamp
+            .messages-date
+              | Sunday, Feb 9 
+              span 12:58
+            // Sent message (by default - green and on right side)
+            .message.message-sent
+              // Bubble with text
+              .message-text Hello
+            // Another sent message
+            .message.message-sent
+              // Bubble with text
+              .message-text How are you?
+            // Received message (by default - grey on left side)
+            .message.message-with-avatar.message-received
+              // Sender name
+              .message-name Kate
+              // Bubble with text
+              .message-text I am fine, thanks
+              // Sender avatar
+              .message-avatar(style='background-image:url(http://lorempixel.com/output/people-q-c-100-100-9.jpg)')
+            // Another date stamp
+            .messages-date
+              | Sunday, Feb 3 
+              span 11:58
+            // Sent message with image
+            .message.message-pic.message-sent
+              // Bubble with image
+              .message-text
+                img(src='http://lorempixel.com/300/300/')
+              // Message label
+              .message-label Delivered 2 days ago
+           
+          div!=chat.textinput() 
