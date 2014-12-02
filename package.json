@@ -1,6 +1,6 @@
 {
   "name": "shovelapps-cms",
-  "version": "0.1.0",
+  "version": "0.6.0",
   "description": "Open Source Mobile App CMS",
   "main": "server.js",
   "bin": {
@@ -25,7 +25,7 @@
     "socket.io-client": "~1.2.1",
     "randomstring": "~1.0.3",
     "extend": "~2.0.0",
-    "express-session-json": "0.0.6",
+    "express-session-json": "0.0.7",
     "filestorage": "git://github.com/petersirka/node-filestorage",
     "lokijs": "~1.0.2",
     "nedb": "~0.11.1",

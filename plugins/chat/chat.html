@@ -1,0 +1,29 @@
+<!-- <div  style="height:270px;max-width:100%">
+  <div class="chat-messages" style="height:200px;padding-bottom:30px;overflow-y:scroll"></div>
+  <input class="chat-input" style="height:40px" text="text" placeholder="Message">
+</div> -->
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var chatbackend = io.connect("/chat");
+  $(function() {
+    var $chatinput = $(".chat-input");
+    var $chatmessages = $(".chat-messages");
+    $chatinput.on("keyup", function(e) {
+      var code = e.which; // recommended to use e.which, it's normalized across browsers
+      
+      if(code==13){
+        e.preventDefault();
+        chatbackend.emit("message", $(this).val());
+        $(this).val("");
+        return;
+      }
+      chatbackend.emit("keyup", $(this).val());
+    })
+
+    chatbackend.on("message", function(data) {
+      var height = $chatmessages.get(0).scrollHeight;
+      $chatmessages.scrollTop(height);
+      $chatmessages.append($("<div></div>").html(data));
+    })
+  })
+</script>
