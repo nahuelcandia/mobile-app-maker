@@ -6,8 +6,8 @@
 **Shovel apps CMS** is a mobile oriented CMS that lets you create
 mobile apps editing the content of your app in a CMS fashion.
 
-In Web Content Management Systems, the finalilty of the system is to  allow you
-to dedicate to the system content and the final frontend is on the browser.
+In Web Content Management Systems, the purpose of the system is to allow you
+to focus on the content and the final frontend is rendered by the browser.
 
 **Shovel apps CMS** makes it easy for you to create an Hybrid App starting from 
 HTML templates and editing the content by yourself without the nagging of having to install
