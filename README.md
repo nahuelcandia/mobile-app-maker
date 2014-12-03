@@ -39,7 +39,7 @@ $ cd ~/shovelapps-cms
 ```
 * Unzip it, install dependencies and run it.
 ```
-$ unzip shovelapps-cms-latest.zip
+$ unzip latest.zip
 $ cd shovelapps-cms-latest/
 $ npm install
 $ ./start.sh
