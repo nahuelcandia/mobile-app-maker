@@ -41,5 +41,9 @@
     "start": "node server.js"
   },
   "author": "osk <oscar@shovelapps.com> (http://shovelapps.com/)",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shovelapps/shovelapps-cms"
+  }
 }
