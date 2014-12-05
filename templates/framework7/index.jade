@@ -51,18 +51,20 @@ html.with-statusbar-overlay
       
             if locals.previewing
               if locals.previewing && locals.session && locals.session.user
-                li.item-content.close-panel.item-link
-                  .item-media
-                    i.icon.ion-edit
-                  .item-inner
-                    .item-title
-                      a.btn.btn-primary(href="#")#editToggle Edit
-              li.item-content.close-panel.item-link
-                .item-media
-                  i.icon.ion-ios7-gear
-                .item-inner
-                  .item-title
-                    a(href="/admin").external Admin                                                                        
+                li
+                  a.close-panel.item-link(href="#")#editToggle  
+                    .item-content                 
+                      .item-media
+                        i.icon.ion-edit
+                      .item-inner
+                        .item-title Edit
+              li
+                a.close-panel.item-link.external(href="/admin")
+                  .item-content
+                    .item-media
+                      i.icon.ion-ios7-gear
+                    .item-inner
+                      .item-title Admin                                                                      
     // Views
       We need to set "toolbar-through" class on it to keep space for our tab bar
     .views.tabs.toolbar-through
