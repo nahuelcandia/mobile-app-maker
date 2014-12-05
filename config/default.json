@@ -1,12 +1,25 @@
 {
   "installed": true,
   //"template": "bootstrap-3-jade",
-   "template": "framework7",
+  "template": "framework7",
   // "template": "ratchet-jade",
   //"template": "jsconf-ar",
-  "stores": {
-    "localFile": {
-      "path": "filestorage/db"
-    }
+  "app": {
+    "appName": "My First App"
+  },
+  "paths": {
+    "templatesBasePath": "templates"
+  },
+  "session": {
+    "salt": "$2a$10$phUYETiJArxNIGLh6P.ZSe"
+  },
+  "packager": {
+    "htmlBasePath": ""
+  },
+  "platform": {
+    "shovelappsPlatformUrl": "http://platform.shovelapps.com"
+  },
+  "filestorage": {
+    "basePath": "filestorage"
   }
 }
