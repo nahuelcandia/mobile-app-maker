@@ -1,6 +1,6 @@
 {
   "name": "shovelapps-cms",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Open Source Mobile App CMS",
   "main": "server.js",
   "bin": {
@@ -41,5 +41,9 @@
     "start": "node server.js"
   },
   "author": "osk <oscar@shovelapps.com> (http://shovelapps.com/)",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shovelapps/shovelapps-cms"
+  }
 }
