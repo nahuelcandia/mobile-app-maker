@@ -78,6 +78,12 @@ download a responsive template from some bootstrap  theme providers for example.
 the final structure that the app will have inside phonegap
 
 
+####Variables available to templates (locals)
+
+* `config.app`
+* `isPreviewing`
+* `session`
+
 ## Debugging
 
 Shovel apps CMS uses the `debug` module and debugs under the namespace `"cms*"`.
