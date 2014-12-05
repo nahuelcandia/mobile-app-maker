@@ -5,7 +5,7 @@ html.with-statusbar-overlay
     meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui")
     meta(name="apple-mobile-web-app-capable", content="yes")
     meta(name="apple-mobile-web-app-status-bar-style", content="black-translucent")
-    title F7 MVC
+    title App
     link(rel="stylesheet", href="assets/lib/css/framework7.css")
     link(rel="stylesheet", href="assets/lib/css/ionicons.css")
     link(rel="stylesheet", href="assets/css/app.css")
@@ -19,35 +19,35 @@ html.with-statusbar-overlay
     // Left Panel with Reveal effect
     .panel.panel-left.panel-reveal
       .list-block
-          ul
-            li
-              a.close-panel.item-link.tab-link(href='#view-home')
-                .item-content
-                  .item-media
-                    i.icon.ion-ios7-paper
-                  .item-inner
-                    .item-title Home
-            li 
-              a.close-panel.item-link.tab-link(href='#view-map')
-                .item-content
-                  .item-media
-                    i.icon.ion-map
-                  .item-inner
-                    .item-title Map
-            li 
-              a.close-panel.item-link.tab-link(href='#view-chat')
-                .item-content
-                  .item-media
-                    i.icon.ion-chatbox
-                  .item-inner
-                    .item-title Chat                    
-            li 
-              a.close-panel.item-link.tab-link(href='#view-speakers')
-                .item-content
-                  .item-media
-                    i.icon.ion-person
-                  .item-inner
-                    .item-title Speakers   
+        ul
+          li
+            a.close-panel.item-link.tab-link(href='#view-home')
+              .item-content
+                .item-media
+                  i.icon.ion-ios7-paper
+                .item-inner
+                  .item-title Home
+          li 
+            a.close-panel.item-link.tab-link(href='#view-map')
+              .item-content
+                .item-media
+                  i.icon.ion-map
+                .item-inner
+                  .item-title Map
+          li 
+            a.close-panel.item-link.tab-link(href='#view-chat')
+              .item-content
+                .item-media
+                  i.icon.ion-chatbox
+                .item-inner
+                  .item-title Chat                    
+          li 
+            a.close-panel.item-link.tab-link(href='#view-speakers')
+              .item-content
+                .item-media
+                  i.icon.ion-person
+                .item-inner
+                  .item-title Speakers   
       
             if locals.previewing
               if locals.previewing && locals.session && locals.session.user
