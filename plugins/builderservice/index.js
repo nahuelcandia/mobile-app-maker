@@ -3,18 +3,18 @@ var ioclient = require('socket.io-client');
 var ss = require('socket.io-stream');
 var fs = require("fs");
 var path = require("path");
-var packager = require("../packager");
-var frontend = require("../frontend");
+var packager = require("../../lib/packager");
+var frontend = require("../../lib/frontend");
 var config = require("config").get("app");
 var debug = require("debug")("cms:builderservice");
 
 module.exports = builder;
 
 
-var sockets;
 
-function builder(app, io) {
-  sockets = io;
+
+function builder(app, server, sockets) {
+  builder.sockets = sockets;
   sockets.adminPanel.on("connection", function(socket) {
     socket.on("buildApk", function(options) {
       builder.renderAndRequestBuild(app, socket);
@@ -102,8 +102,8 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
 }
 
 builder.createBuildRequestStream = function(app, appOptions) {
-
-  var stream = ss.createStream();
+  var sockets = builder.sockets,
+    stream = ss.createStream();
 
   sockets.platform.on('apkbuilt', function(data) {
     debug('Platform emitted apkbuilt');
