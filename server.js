@@ -35,5 +35,4 @@ require("./lib/template")(app);
 require("./lib/frontend")(app);
 require("./lib/admin")(app);
 require("./lib/packager")(app);
-require("./lib/builderservice")(app, sockets);
 server.listen(3000);
