@@ -10,7 +10,7 @@ html.with-statusbar-overlay
     link(rel="stylesheet", href="assets/lib/css/ionicons.css")
     link(rel="stylesheet", href="assets/css/app.css")
     link(href="assets/img/favicon/favico.ico", rel="shortcut icon")
-    script(src="assets/jquery/jquery.js",data-main="assets/app.js")             
+    script(src="assets/jquery/jquery.js")             
   body.color-pink.theme-pink
     // Statusbar overlay
     .statusbar-overlay
@@ -78,6 +78,7 @@ html.with-statusbar-overlay
 
     script(src="assets/lib/framework7.min.js")             
     script(src="assets/app.js") 
+    script(src="assets/map-view-fix.js") 
   
   block stylesheets
     if locals.previewing && locals.session && locals.session.user
