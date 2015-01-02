@@ -1,3 +1,4 @@
+var $$ = Dom7;
 var f7 = new Framework7({
   modalTitle: 'Contacts7',
   swipePanel: 'left',
