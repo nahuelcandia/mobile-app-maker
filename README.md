@@ -22,7 +22,7 @@ When you're done editing your app's contents, you  can **create Android binaries
 
 ##Download
 
-[Latest version](https://github.com/shovelapps/shovelapps-cms/archive/latest.zip)
+[Latest version](https://github.com/shovelapps/shovelapps-cms/releases/latest)
 
 
 ## Installation
