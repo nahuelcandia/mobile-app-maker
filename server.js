@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+require("./lib/i18n")(app);
 require("./lib/session")(app);
 var sockets = require("./lib/sockets")(app, server);
 require("./lib/installer")(app);
