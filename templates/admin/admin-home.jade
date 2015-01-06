@@ -1,7 +1,7 @@
 extends layout
 
 block title
-  title Shovel apps CMS - Admin Panel
+  title Shovel apps CMS - #{__('Admin Panel')}
 
 block stylesheets
   style.
@@ -17,34 +17,37 @@ block content
           H1
   .tab-pane.active#adminhome
     .container-fluid
-      h2.text-center App Admin Panel
+      h2.text-center #{__('App Admin Panel')}
       div.text-center
         p
           .btn-group
             // This button is disabled untile we can reach
             // shovelapps build platform. 
-            a#build.disabled.btn.btn-default(href="#") Build mobile app 
-            a.btn.btn-default(href="/package/download") Download app as HTML 
+            a#build.disabled.btn.btn-default(href="#")
+              i.icon.ion-wrench
+              span.btn-text #{__('Build')} #{__('mobile app')} 
+              span#upload-progress 
+            a.btn.btn-default(href="/package/download") #{__('Download')} #{__('app as HTML')}  
         p.lead
-          a.hidden#downloadapklink Download Android binary
+          a.hidden#downloadapklink #{__('Download')} #{__('Android binary')}
         div.text-center
           p.hidden#downloadapkqrcode
       .row
         .col-sm-6.hidden
-          h3 Admin
+          h3 #{__('Admin')}
           ul.list-group
             li.list-group-item
-              a(data-toggle="tab",href="#users") User management             
+              a(data-toggle="tab",href="#users") #{__('User management')}             
       .row.hidden
         .col-sm-6
             h3 Data collections
             p
-              a(href="/admin/datacollections/create") New Data Collection            
+              a(href="/admin/datacollections/create") #{__('New')} #{__('Data Collection')}
             each datacollection in datacollections
               h4=datacollection.title
-              a(href="/admin/datacollections/update/"+datacollection.name) Modify 
+              a(href="/admin/datacollections/update/"+datacollection.name) #{__('Modify')} 
               | |  
-              a(href="/admin/datacollections/delete/"+datacollection.name) Remove
+              a(href="/admin/datacollections/delete/"+datacollection.name) #{__('Remove')}
 
 
   .tab-pane#users
@@ -55,11 +58,11 @@ block content
 block navbar-buttons
   ul.nav.navbar-nav
     li
-      a(href="/")#adminhome Back to the frontend
+      a(href="/")#adminhome #{__('Back to the frontend')}
 
   ul.nav.navbar-nav.navbar-right
     li
-      a(href="/logout") Logout
+      a(href="/logout") #{__('Logout')}
 
 block scripts
   script(src="/socket.io/socket.io.js")

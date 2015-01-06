@@ -14,19 +14,19 @@ block content
               img(src="/coreassets/img/shovelapps-logo.png",style="max-width:100%")        
           form(method="post",role="form")
             div.form-group
-              label(for="username") Username
-              input.form-control(name="username",placeholder="User name")
+              label(for="username") #{__('Username')}
+              input.form-control(name="username", placeholder=__('User name'))
             div.form-group
-              label(for="password") Password
-              input.form-control(type="password", name="password",placeholder="Password")              
-            button(type="submit").btn.btn-success Login
+              label(for="password") #{__('Password')}
+              input.form-control(type="password", name="password", placeholder=__('Password'))              
+            button(type="submit").btn.btn-success #{__('Login')}
 
 
 block navbar-buttons            
   ul.nav.navbar-nav
     li
     p.navbar-btn        
-      a.btn.btn-default(href="/")#adminhome Back to the frontend
+      a.btn.btn-default(href="/")#adminhome #{__('Back to the frontend')}
 
 block scripts
   script.

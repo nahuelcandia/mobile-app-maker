@@ -6,7 +6,7 @@ block head
   base(href="/")
 
 block title
-  title Editing #{screen.title}
+  title #{__('Editing')} #{screen.title}
 
 block content
   #humancode.tab-pane.active
@@ -26,42 +26,42 @@ block content
     div#sourcecode(style="height:100%;width:100%")=screen.html
   //
     .toolbar(style="position:absolute;top:0;left:0;width:100%;height:40px;background:black")
-      button(data-command-name='bold') Bold
-      button(data-command-name='italic') Italic
-      button(data-command-name='strikeThrough') Strike Through
-      button(data-command-name='removeFormat') Remove Formatting
-      button(data-command-name='linkPrompt') Link
-      button(data-command-name='unlink') Unlink
-      button(data-command-name='insertOrderedList') Ordered List
-      button(data-command-name='insertUnorderedList') Unordered List
-      button(data-command-name='indent') Indent
-      button(data-command-name='outdent') Outdent
-      button(data-command-name='blockquote') Blockquote
-      button(data-command-name='code') Code
-      button(data-command-name='h2') H2
-      button(data-command-name='undo') Undo
-      button(data-command-name='redo') Redo
+      button(data-command-name='bold') #{__('Bold')}
+      button(data-command-name='italic') #{__('Italic')}
+      button(data-command-name='strikeThrough') #{__('Strike Through')}
+      button(data-command-name='removeFormat') #{__('Remove Formatting')}
+      button(data-command-name='linkPrompt') #{__('Link')}
+      button(data-command-name='unlink') #{__('Unlink')}
+      button(data-command-name='insertOrderedList') #{__('Ordered List')}
+      button(data-command-name='insertUnorderedList') #{__('Unordered List')}
+      button(data-command-name='indent') #{__('Indent')}
+      button(data-command-name='outdent') #{__('Outdent')}
+      button(data-command-name='blockquote') #{__('Blockquote')}
+      button(data-command-name='code') #{__('Code')}
+      button(data-command-name='h2') #{__('H2')}
+      button(data-command-name='undo') #{__('Undo')}
+      button(data-command-name='redo') #{__('Redo')}
 block navbar-buttons
   ul.nav.navbar-nav
     li
-      a(href="/") Back to the frontend
+      a(href="/") #{__('Back to the frontend')}
     li
       p.navbar-btn
         a#save.btn.btn-success.navbar-btn.navbar-left(href="#") Save
     li
-      a(href="/admin")#adminhome Admin Home
+      a(href="/admin")#adminhome #{__('Admin Home')}
     li
-      a.active(data-toggle="tab",href="#humancode") Human      
+      a.active(data-toggle="tab",href="#humancode") #{__('Human')}
     li
       a(data-toggle="tab",href="#sourcecodetab") &lt;&gt;
   p.navbar-text
-    strong Page  
+    strong #{__('Page')}  
     span#title.editable-inline!=screen.title
   p.navbar-text
-    strong Slug: #
+    strong #{__('Slug')}: #
     span#slug.editable-inline!=screen.slug
   p.navbar-text
-    strong Weight: 
+    strong #{__('Weight')}: 
     span#menuWeight.editable-inline
       if screen.menuWeight
         !=screen.menuWeight
@@ -70,7 +70,7 @@ block navbar-buttons
 
   ul.nav.navbar-nav.navbar-right          
     li
-      a(href="/admin/screens/delete/#{screen._id}")#remove Remove this screen
+      a(href="/admin/screens/delete/#{screen._id}")#remove #{__('Remove this screen')} 
 
 block stylesheets
   link(rel="stylesheet",href="/coreassets/medium-editor/medium-editor.min.css")

@@ -1,0 +1,27 @@
+{
+  "app.slogan": "Open Source Mobile App Maker",
+  "Please": "Por favor",
+  "login": "acceda",
+  "to manage this app": "para administrar la aplicación",
+  "Shovel apps CMS": "Shovel apps CMS",
+  "Username": "Usuario",
+  "User name": "Nombre de usuario",
+  "Password": "Contraseña",
+  "Login": "Acceder",
+  "Back to the frontend": "Volver al frontend",
+  "Admin Panel": "Panel de Administración",
+  "App Admin Panel": "Panel de administración de la aplicación",
+  "Build": "Compilar",
+  "mobile app": "mobile app",
+  "Download": "Download",
+  "app as HTML": "app as HTML",
+  "Android binary": "Android binary",
+  "Admin": "Admin",
+  "User management": "Administración de usuarios",
+  "New": {
+    "m": "Nuevo",
+    "f": "Nueva"
+  },
+  "Data Collection": "Data Collection",
+  "Logout": "Logout"
+}

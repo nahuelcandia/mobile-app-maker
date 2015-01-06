@@ -2,12 +2,12 @@ extends layout
 
 block content
   .container-fluid 
-    h3.text-center.page-header Shovel apps CMS
-      h4.text-center Open Source Mobile App Maker
+    h3.text-center.page-header #{__('Shovel apps CMS')}
+      h4.text-center #{__('app.slogan')}
     .row
       .col-xs-12
         p.lead.text-center
           img(src="/coreassets/img/shovelapps-logo.png")
-        p.lead.text-center Please 
-          a(href="/login") login 
-          | to manage this app.
+        p.lead.text-center #{__('Please')} 
+          a(href="/login") #{__('login')}
+          |  #{__('to manage this app')}.

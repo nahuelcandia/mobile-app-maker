@@ -18,15 +18,15 @@ block content
       else
         !=datacollection.html
 block navbar-buttons
-  a#save.btn.btn-success.navbar-btn(href="#") Save
-  a.btn.btn-default.navbar-btn(href="/admin")#adminhome Admin Home
+  a#save.btn.btn-success.navbar-btn(href="#") #{__('Save')}
+  a.btn.btn-default.navbar-btn(href="/admin")#adminhome #{__('Admin Home')}
   p.navbar-text
-    a(href="/") Back to the frontend
+    a(href="/") #{__('Back to the frontend')}
   p.navbar-text
-    strong Page  
+    strong #{__('Page')}  
     span#title.editable-inline!=datacollection.title
   p.navbar-text
-    strong Slug: #
+    strong #{__('Slug')}: #
     span#slug.editable-inline!=datacollection.slug
   p.navbar-text
     strong Weight: 
@@ -37,7 +37,7 @@ block navbar-buttons
         !=5
   ul.nav.navbar-nav.navbar-right          
     li
-      a(href="/admin/datacollections/delete/#{datacollection._id}")#remove Remove this datacollection
+      a(href="/admin/datacollections/delete/#{datacollection._id}")#remove #{__('Remove')} #{__('this datacollection')} 
 
 block stylesheets
   link(rel="stylesheet",href="/assets/medium-editor/medium-editor.min.css")
