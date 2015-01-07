@@ -11,28 +11,36 @@ var debug = require("debug")("cms:builderservice");
 module.exports = builder;
 
 
-
-
 function builder(app, server, sockets) {
+  var status = "";
   builder.sockets = sockets;
   sockets.adminPanel.on("connection", function(socket) {
+    socket.on("already working?", function() {
+      if (status == "") {
+        socket.emit('doin nothing');
+      } else if (status != 'source code upload progress') {
+        socket.emit(status);
+      }
+      debug('checking builder status: ' + status);
+    });
     socket.on("buildApk", function(options) {
       builder.renderAndRequestBuild(app, socket);
+      status = 1;
     });
-
-    app.on("source code upload progress", function() {
-      socket.emit("source code upload progress");
+    app.on("source code upload progress", function(data) {
+      socket.emit("source code upload progress", data);
+      status = "source code upload progress";
     });
-
     app.on("apkbuilt", function(data) {
       debug('apkbuilt');
-      debug(arguments);
+      //debug(arguments);
       socket.emit("apkbuilt", data);
+      status = "";
     });
-    app.on("upload-complete", function() {
-      socket.emit("upload-complete");
+    app.on("upload-complete", function(data) {
+      socket.emit("upload-complete", data);
+      status = "upload-complete";
     });
-
     // Tell the CMS frontend that we are connected
     // to the build platform by emitting.
     // If we are already connected on init
@@ -44,8 +52,6 @@ function builder(app, server, sockets) {
       socket.emit("platform connect");
     });
   });
-
-
 }
 
 builder.renderAndRequestBuild = function(app, clientSocket) {
@@ -55,13 +61,11 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
       debug("rendering failed on builder %s", err.stack);
       return;
     }
-
     var zipStream = packager.createAppZipStream(html);
     //temporary file for getting the stream size
     var filename = path.join(process.cwd(), "filestorage", "tmp", "app.zip");
     var fs = require("fs");
     var tmpFileStream = fs.createWriteStream(filename);
-
     zipStream.on("error", function(err) {
       debug("Error creating app zip stream");
       debug(err);
@@ -86,25 +90,20 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
           size: fs.statSync(filename).size
         });
         debug(fs.statSync(filename).size);
-
         buildStream.on("error", function(err) {
           debug("Error building app.");
           debug(err);
         });
-
         readStream.pipe(buildStream);
       });
     });
-
     zipStream.pipe(tmpFileStream);
-
   });
 }
 
 builder.createBuildRequestStream = function(app, appOptions) {
   var sockets = builder.sockets,
     stream = ss.createStream();
-
   sockets.platform.on('apkbuilt', function(data) {
     debug('Platform emitted apkbuilt');
     debug(arguments);
@@ -121,5 +120,4 @@ builder.createBuildRequestStream = function(app, appOptions) {
   });
   ss(sockets.platform).emit('sourcecodeupload', stream, appOptions);
   return stream;
-
 }
