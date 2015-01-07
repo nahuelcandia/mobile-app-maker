@@ -1,0 +1,58 @@
+html, body {
+  height: 100%;
+}
+body {
+  padding: 50px 0 0 0;
+}
+
+.navmenu {
+  padding-top: 50px;
+}
+.navmenu li a{
+  font-size: 16px;
+}
+.navmenu .bg-lightgrey{
+  background-color: #333;
+}
+.navmenu .bg-lightergrey{
+  background-color: #666;
+}
+.navmenu .bg-darkergrey{
+  background-color: #111;
+}
+.navbar {
+  display: block;
+  text-align: center;
+  z-index:9999;
+}
+.navbar-brand {
+  display: inline-block;
+  float: none;
+}
+.navbar-toggle {
+  position: absolute;
+  float: left;
+  margin-left: 15px;
+}
+
+.container {
+  max-width: 100%;
+}
+
+@media (min-width: 1px) {
+  .navbar-toggle {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    padding: 0 0 0 300px;
+  }
+  .navmenu {
+    padding-top: 0;
+  }
+  .navbar {
+    display: none !important; /* IE8 fix */
+  }
+}
