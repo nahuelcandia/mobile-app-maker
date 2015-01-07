@@ -14,8 +14,8 @@ module.exports = builder;
 function builder(app, server, sockets) {
   var status = "";
   builder.sockets = sockets;
-  sockets.adminPanel.on("connection", function (socket) {
-    socket.on("already working?", function () {
+  sockets.adminPanel.on("connection", function(socket) {
+    socket.on("already working?", function() {
       if (status == "") {
         socket.emit('doin nothing');
       } else if (status != 'source code upload progress') {
@@ -23,22 +23,21 @@ function builder(app, server, sockets) {
       }
       debug('checking builder status: ' + status);
     });
-    socket.on("buildApk", function (options) {
+    socket.on("buildApk", function(options) {
       builder.renderAndRequestBuild(app, socket);
       status = 1;
     });
-    app.on("source code upload progress", function (data) {
+    app.on("source code upload progress", function(data) {
       socket.emit("source code upload progress", data);
-      debug(parseInt(data.progress));
       status = "source code upload progress";
     });
-    app.on("apkbuilt", function (data) {
+    app.on("apkbuilt", function(data) {
       debug('apkbuilt');
-      debug(arguments);
+      //debug(arguments);
       socket.emit("apkbuilt", data);
       status = "";
     });
-    app.on("upload-complete", function (data) {
+    app.on("upload-complete", function(data) {
       socket.emit("upload-complete", data);
       status = "upload-complete";
     });
@@ -55,8 +54,8 @@ function builder(app, server, sockets) {
   });
 }
 
-builder.renderAndRequestBuild = function (app, clientSocket) {
-  frontend.renderFrontend(app, {}, function (err, html) {
+builder.renderAndRequestBuild = function(app, clientSocket) {
+  frontend.renderFrontend(app, {}, function(err, html) {
     if (err) {
       clientSocket.emit("error rendering frontend");
       debug("rendering failed on builder %s", err.stack);
@@ -67,7 +66,7 @@ builder.renderAndRequestBuild = function (app, clientSocket) {
     var filename = path.join(process.cwd(), "filestorage", "tmp", "app.zip");
     var fs = require("fs");
     var tmpFileStream = fs.createWriteStream(filename);
-    zipStream.on("error", function (err) {
+    zipStream.on("error", function(err) {
       debug("Error creating app zip stream");
       debug(err);
     });
@@ -77,9 +76,9 @@ builder.renderAndRequestBuild = function (app, clientSocket) {
     //   set listeners beforehand to properly detect stream completion. 
     // BUT!!! The finish event on archive is unreliable. it fires when
     // finalize() is called.
-    zipStream.on("end", function () {
+    zipStream.on("end", function() {
       debug(fs.statSync(filename).size);
-      tmpFileStream.end(undefined, undefined, function () {
+      tmpFileStream.end(undefined, undefined, function() {
         zipStream.unpipe(tmpFileStream);
         debug("finished zipping");
         clientSocket.emit("finished zipping");
@@ -91,7 +90,7 @@ builder.renderAndRequestBuild = function (app, clientSocket) {
           size: fs.statSync(filename).size
         });
         debug(fs.statSync(filename).size);
-        buildStream.on("error", function (err) {
+        buildStream.on("error", function(err) {
           debug("Error building app.");
           debug(err);
         });
@@ -102,15 +101,15 @@ builder.renderAndRequestBuild = function (app, clientSocket) {
   });
 }
 
-builder.createBuildRequestStream = function (app, appOptions) {
+builder.createBuildRequestStream = function(app, appOptions) {
   var sockets = builder.sockets,
     stream = ss.createStream();
-  sockets.platform.on('apkbuilt', function (data) {
+  sockets.platform.on('apkbuilt', function(data) {
     debug('Platform emitted apkbuilt');
     debug(arguments);
     app.emit('apkbuilt', data);
   });
-  sockets.platform.on('datareceived', function (data) {
+  sockets.platform.on('datareceived', function(data) {
     debug("Platform emitted datareceived");
     debug(data);
     app.emit('source code upload progress', data);
