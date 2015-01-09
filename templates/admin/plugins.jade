@@ -1,0 +1,38 @@
+extends layout
+
+block title
+  title #{__('Plugins')} - #{__('Admin Panel')}
+
+block stylesheets
+
+block content
+
+  .container
+    h2 #{__('Manage')} #{__('Plugins')}
+    table.table.table-responsive.table-hover.table-striped
+      thead: tr
+        th #{__('Plugin name')}
+        th #{__('Description')}
+        th #{__('Actions')}
+      tbody
+        each val, key in plugins
+          tr
+            td
+              h3.panel-title= (typeof plugins[key].metadata.name === 'undefined' ? key : plugins[key].metadata.name)
+            td
+              p= plugins[key].metadata.description
+              p= plugins[key].metadata.author
+            td
+              div(aria-label="#{__('Options')}")
+
+                -var action= (enabled.indexOf(key) > -1 ? 'enable' : 'disable')
+                -var btnclass= (enabled.indexOf(key) > -1 ? 'btn-warning' : 'btn-success')
+                -var icon= (enabled.indexOf(key) > -1 ? 'ion-close-circled' : 'ion-checkmark-circled')
+                a(href="/admin/plugin/toggle/" + key)
+                  button.btn(class=btnclass, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
+                    i.icon(class=icon, style="color:white")
+
+                a(href="/admin/plugin/config/" + key ): button.btn.btn-default(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Configuration')}")
+                  i.icon.ion-levels
+                a(href="/admin/plugin/delete/" + key ): button.btn.btn-danger(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Remove this plugin...')}")
+                  i.icon.ion-trash-b(style="color:white")
