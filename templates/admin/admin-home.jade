@@ -16,26 +16,8 @@ block content
     .tab-pane.active#adminhome
       .container-fluid
         h2 #{__('App Admin Panel')}
-        div
-          p
-            .btn-group
-              // This button is disabled untile we can reach
-              // shovelapps build platform. 
-              a#build.disabled.btn.btn-default(href="#")
-                span.btn-text #{__('Checking status')}
-                span#upload-progress
-              a.btn.btn-default(href="/package/download") #{__('Download')} #{__('app as HTML')}  
-          p.lead
-            a.hidden#downloadapklink #{__('Download')} #{__('Android binary')}
-          div.text-center
-            p.hidden#downloadapkqrcode
-        .row
-          .col-sm-6.hidden
-            h3 #{__('Admin')}
-            ul.list-group
-              li.list-group-item
-                a(data-toggle="tab",href="#users") #{__('User management')}             
-        .row
+              
+        .row.hidden
           .col-sm-6
               h3 Data collections
               p
@@ -52,5 +34,4 @@ block scripts
   script(src="/shovelapps/shovelapps-cms.js")
   script.
     $(function() {
-      setBuildByButton();
     });

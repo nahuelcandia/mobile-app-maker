@@ -1,0 +1,16 @@
+extends layout
+
+block title
+  title #{__('Plugin')} - #{__('Admin Panel')}
+
+block stylesheets
+
+block content
+
+  .container
+    h2 #{__('Manage')} #{__('Plugin')}#{__(':')} #{plugin[0].name} 
+
+block scripts
+  script.
+    $(function() {
+    });

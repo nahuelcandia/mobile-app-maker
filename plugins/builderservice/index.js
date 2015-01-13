@@ -3,16 +3,39 @@ var ioclient = require('socket.io-client');
 var ss = require('socket.io-stream');
 var fs = require("fs");
 var path = require("path");
+var jade = require("jade");
 var packager = require("../../lib/packager");
 var frontend = require("../../lib/frontend");
 var config = require("config").get("app");
 var debug = require("debug")("cms:builderservice");
-
+var db = require("../../lib/db");
+var builds = require("../../lib/db").builds;
 module.exports = builder;
 
 
 function builder(app, server, sockets) {
   var status = "";
+
+  app.locals.googlemaps = {}
+  app.get('/admin/build', function(req, res, next) {
+    builds.find({}).limit(9).exec(function(err, docs) {
+
+      docs.forEach(function(doc) {
+        var d = new Date(doc.timestamp);
+        doc.date = d.toDateString();
+      });
+
+      debug(docs);
+      if (err) {
+        // do something
+      } else {
+        app.locals.builds = docs;
+      }
+    });
+    debug(app.locals.builds);
+    res.send(jade.renderFile(__dirname + "/build.jade", app.locals));
+  });
+
   builder.sockets = sockets;
   sockets.adminPanel.on("connection", function(socket) {
     socket.on("already working?", function() {
@@ -33,8 +56,22 @@ function builder(app, server, sockets) {
     });
     app.on("apkbuilt", function(data) {
       debug('apkbuilt');
-      //debug(arguments);
-      socket.emit("apkbuilt", data);
+      debug(data);
+      var buildData = data.url.split('/');
+      var buildId = buildData[buildData.length - 1].split('.')[0];
+
+      builds.insert({
+        buildId: buildId,
+        apkUrl: data.url,
+        timestamp: Date.now()
+      }, function(err) {
+        if (err) {
+          socket.emit("build not saved", data);
+        } else {
+          socket.emit("apkbuilt", data);
+        }
+
+      });
       status = "";
     });
     app.on("upload-complete", function(data) {
