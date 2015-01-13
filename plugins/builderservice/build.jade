@@ -1,0 +1,58 @@
+extends ../../templates/admin/layout.jade
+
+block title
+  title Shovel apps CMS - #{__('Admin Panel')}
+
+block stylesheets
+  style.
+    #downloadapkqrcode {
+    }
+
+block content
+  
+  .container
+    .row
+      .col-lg-12
+        h1 #{__('Build!')}
+    .row
+      .col-lg-12
+        .well
+          p #{__('Here you can build and rebuild your app as many times as you need')}
+
+        div.col-xs-6
+          // This button is disabled untile we can reach
+          // shovelapps build platform. 
+          a#build.disabled.btn.btn-default.btn-lg.btn-block(href="#")
+            span.btn-text #{__('Checking status')}
+            span#upload-progress
+          a.btn.btn-default.btn-lg.btn-block(href="/package/download") #{__('Download')} #{__('app as HTML')}  
+          a.btn.btn-default.btn-lg.btn-block.hidden#downloadapklink #{__('Download')} #{__('Android binary')}          
+        div.col-xs-6.text-center#latestbuild
+          p#downloadapkqrcode
+            img.img-responsive(src="/coreassets/img/qr-placeholder.png", width="200")
+
+      .col-lg-12.col-sm-12.col-xs-12
+
+        h2 #{__('Previous builds')}
+        .row
+          each build in builds
+            .col-xs-12.col-sm-4.col-lg-4
+              .col-xs-12.text-center
+                .well(data-uri=build.apkUrl)                  
+                  div= build.date
+                  button.btn.btn-small.btn-default.btn-block(role="button") #{__('Download')}
+                  button.btn.btn-small.btn-default.btn-block(role="button") #{__('View QR')}
+
+
+
+                
+
+      
+block scripts
+  script(src="/socket.io/socket.io.js")
+  script(src="/coreassets/jquery.qrcode/jquery.qrcode-0.11.0.js")
+  script(src="/shovelapps/shovelapps-cms.js")
+  script.
+    $(function() {
+      setBuildByButton();
+    });

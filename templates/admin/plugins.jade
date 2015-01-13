@@ -1,0 +1,77 @@
+extends layout
+
+block title
+  title #{__('Plugins')} - #{__('Admin Panel')}
+
+block stylesheets
+
+block content
+
+  .container
+    h2 #{__('Manage')} #{__('Plugins')}
+    table.table.table-responsive.table-hover.table-striped
+      thead: tr
+        th #{__('Plugin name')}
+        th #{__('Description')}
+        th #{__('Actions')}
+      tbody
+        each plugin in states
+          tr
+            td
+              h3.panel-title= (typeof plugins[plugin.name].metadata.name === 'undefined' ? plugin.name : plugins[plugin.name].metadata.name)
+            td
+              p= plugins[plugin.name].metadata.description
+              p= plugins[plugin.name].metadata.author
+            td
+              div(aria-label="#{__('Options')}")
+
+                -var action= (plugin.enabled? 'disable' : 'enable')
+                -var btnclass= (plugin.enabled? 'btn-warning' : 'btn-success')
+                -var icon= (plugin.enabled? 'ion-close-circled' : 'ion-checkmark-circled')
+                
+                button.btn(class=btnclass, data-action="toggle", data-id=plugin.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
+                  i.icon(class=icon, style="color:white")
+                a(href="/admin/plugin/" + plugin.name ): button.btn.btn-default(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Configuration')}")
+                  i.icon.ion-levels
+                a(href="#", data-action="delete" ): button.btn.btn-danger(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Remove this plugin...')}")
+                  i.icon.ion-trash-b(style="color:white")
+block scripts
+  script.
+    $(function() {
+      $("button[data-action='toggle']").bind('click', function(){
+        var plugin = $(this).data('id');
+        var that = this;
+        $.ajax({
+          url: '/admin/plugin/toggle/' + plugin,
+          dataType: 'json',
+          complete: function(response){
+            var data = $.parseJSON(response.responseText);
+            var icon, btnclass, action;
+            if(data.state=='enabled'){
+              action = '#{__('Click to disable')}';
+              icon = 'ion-close-circled';
+              btnclass = 'btn-warning';
+            }else if(data.state=='disabled'){
+              action = '#{__('Click to enable')}';
+              icon = 'ion-checkmark-circled';
+              btnclass = 'btn-success';
+            }
+            console.log(data.state);
+            $("button[data-id='" + data.key + "']").removeClass (function (index, css) {
+                return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
+              .addClass(btnclass)
+              .css({'color': 'white'});
+            $("button[data-id='" + data.key + "']").find('i')
+              .removeClass (function (index, css) {
+                return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
+              .addClass(icon);
+            $("button[data-id='" + data.key + "']")
+              .attr('data-original-title', action)
+              .tooltip('fixTitle')
+              .tooltip('show');
+          }
+        
+
+        });
+      });
+    });

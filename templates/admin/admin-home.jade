@@ -11,93 +11,12 @@ block stylesheets
     }
 
 block content
-
-  .navmenu.navmenu-inverse.navmenu-fixed-left.offcanvas-sm
-    a.navmenu-brand.visible-md.visible-lg(href="#")
-      img(src="/coreassets/img/shovelapps-logo.png",style="width:32px")
-      | Shovelapps
-    ul.nav.navmenu-nav
-      li.active
-        a 
-          i.icon.ion-speedometer
-          |  #{__('Dashboard')}
-      li.dropdown
-        a.dropdown-toggle(href="#", data-toggle="dropdown")
-          i.icon.ion-code
-          |  #{__('Plugins')}
-          b.caret
-        ul.dropdown-menu.navmenu-nav
-          li.dropdown-header #{__('Manage current plugins or add a new one')}
-          li.divider
-          li
-            a Chat
-          li 
-            a Builder
-          li 
-            a Speakers
-          li.bg-darkergrey
-            a Add new
-      li.divider
-      li.dropdown
-        a.dropdown-toggle(href="#", data-toggle="dropdown") 
-          i.icon.ion-person-stalker
-          |  #{__('Users')}
-          b.caret
-        ul.dropdown-menu.navmenu-nav
-          li.dropdown-header #{__('Here you can add or manage users')}
-          li.divider
-          li
-            a 
-              i.icon.ion-user-group
-              |  #{__('Manage users')}
-            a 
-              i.icon.ion-user-add
-              |  #{__('Add new user')}
-      li.bg-lightgrey
-        a 
-          i.icon.ion-cube
-          |  #{__('Build')}
-      li
-        a 
-          i.icon.ion-arrow-return-left
-          |  #{__('Back to the frontend')}
-      li
-        a 
-          i.icon.ion-log-out
-          |  #{__('Logout')}
-
-  .navbar.navbar-inverse.navbar-fixed-top.hidden-md.hidden-lg
-    button.navbar-toggle(type="button", data-toggle="offcanvas", data-target=".navmenu", data-canvas=".container")
-      span.icon-bar
-      span.icon-bar
-      span.icon-bar
-    a.navbar-brand(href="#", style="margin:0 50px 0 50px; padding: 10px")
-      img(src="/coreassets/img/shovelapps-logo.png",style="width:32px; display:inline;")
-      span Shovel Apps
-
+  
   .container
     .tab-pane.active#adminhome
       .container-fluid
         h2 #{__('App Admin Panel')}
-        div
-          p
-            .btn-group
-              // This button is disabled untile we can reach
-              // shovelapps build platform. 
-              a#build.disabled.btn.btn-default(href="#")
-                span.btn-text #{__('Checking status')}
-                span#upload-progress
-              a.btn.btn-default(href="/package/download") #{__('Download')} #{__('app as HTML')}  
-          p.lead
-            a.hidden#downloadapklink #{__('Download')} #{__('Android binary')}
-          div.text-center
-            p.hidden#downloadapkqrcode
-        .row
-          .col-sm-6.hidden
-            h3 #{__('Admin')}
-            ul.list-group
-              li.list-group-item
-                a(data-toggle="tab",href="#users") #{__('User management')}             
+              
         .row.hidden
           .col-sm-6
               h3 Data collections
@@ -115,5 +34,4 @@ block scripts
   script(src="/shovelapps/shovelapps-cms.js")
   script.
     $(function() {
-      setBuildByButton();
     });
