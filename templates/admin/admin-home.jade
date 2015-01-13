@@ -16,17 +16,6 @@ block content
     .tab-pane.active#adminhome
       .container-fluid
         h2 #{__('App Admin Panel')}
-              
-        .row.hidden
-          .col-sm-6
-              h3 Data collections
-              p
-                a(href="/admin/datacollections/create") #{__('New')} #{__('Data Collection')}
-              each datacollection in datacollections
-                h4=datacollection.title
-                a(href="/admin/datacollections/update/"+datacollection.name) #{__('Modify')} 
-                | |  
-                a(href="/admin/datacollections/delete/"+datacollection.name) #{__('Remove')}
 
 block scripts
   script(src="/socket.io/socket.io.js")

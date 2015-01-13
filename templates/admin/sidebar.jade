@@ -19,6 +19,18 @@
           a(href="/admin/plugins") #{__('Manage plugins')}
         li
           a(href="/admin/plugins") #{__('Add new plugin')}
+    li.dropdown
+      a.dropdown-toggle(data-toggle="dropdown")
+        i.icon.ion-filing
+        |  #{__('Data Collections')}
+        b.caret    
+      ul.dropdown-menu.navmenu-nav
+        li.dropdown-header #{__('Manage or add data collections')}
+        li.divider
+        li
+          a(href="/admin/datacollections/") #{__('View Collections')}
+        li
+          a(href="/admin/datacollections/create") #{__('Add Data Collection')}
     li.divider
     li.dropdown
       a.dropdown-toggle(href="#", data-toggle="dropdown") 
