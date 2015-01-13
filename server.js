@@ -3,10 +3,12 @@
 var http = require("http");
 var app = require("express")();
 var bodyParser = require("body-parser");
+var myelements = require("myelements.jquery");
 
 // Regular HTTP Server
 var server = http.createServer(app);
 
+myelements(app, server);
 //Using HTTPS server
 // http://docs.nodejitsu.com/articles/HTTP/servers/how-to-create-a-HTTPS-server
 // Generate keys like this
