@@ -8,7 +8,6 @@ var packager = require("../../lib/packager");
 var frontend = require("../../lib/frontend");
 var config = require("config").get("app");
 var debug = require("debug")("cms:builderservice");
-var db = require("../../lib/db");
 var builds = require("../../lib/db").builds;
 module.exports = builder;
 
@@ -19,21 +18,17 @@ function builder(app, server, sockets) {
   app.locals.googlemaps = {}
   app.get('/admin/build', function(req, res, next) {
     builds.find({}).limit(9).exec(function(err, docs) {
-
       docs.forEach(function(doc) {
         var d = new Date(doc.timestamp);
         doc.date = d.toDateString();
       });
-
-      debug(docs);
       if (err) {
         // do something
       } else {
         app.locals.builds = docs;
       }
+      res.send(jade.renderFile(__dirname + "/build.jade", app.locals));
     });
-    debug(app.locals.builds);
-    res.send(jade.renderFile(__dirname + "/build.jade", app.locals));
   });
 
   builder.sockets = sockets;
