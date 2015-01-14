@@ -26,28 +26,28 @@ html.with-statusbar-overlay
                 .item-media
                   i.icon.ion-ios7-paper
                 .item-inner
-                  .item-title Home
+                  .item-title #{__('Home')}
           li 
             a.close-panel.item-link.tab-link(href='#view-map')
               .item-content
                 .item-media
                   i.icon.ion-map
                 .item-inner
-                  .item-title Map
+                  .item-title #{__('Map')}
           li 
             a.close-panel.item-link.tab-link(href='#view-chat')
               .item-content
                 .item-media
                   i.icon.ion-chatbox
                 .item-inner
-                  .item-title Chat                    
+                  .item-title #{__('Chat')}
           li 
             a.close-panel.item-link.tab-link(href='#view-speakers')
               .item-content
                 .item-media
                   i.icon.ion-person
                 .item-inner
-                  .item-title Speakers   
+                  .item-title #{__('Speakers')}
       
             if locals.previewing
               if locals.previewing && locals.session && locals.session.user
@@ -57,22 +57,22 @@ html.with-statusbar-overlay
                       .item-media
                         i.icon.ion-edit
                       .item-inner
-                        .item-title Edit
+                        .item-title #{__('Edit')}
               li
                 a.close-panel.item-link.external(href="/admin")
                   .item-content
                     .item-media
                       i.icon.ion-ios7-gear
                     .item-inner
-                      .item-title Admin                                                                      
+                      .item-title #{__('Admin')}
     // Views
       We need to set "toolbar-through" class on it to keep space for our tab bar
     .views.tabs.toolbar-through
       include view-home
 
-      include view-map
+      include ../../plugins/chat/view-chat
 
-      include view-chat
+      include ../../plugins/google-map/view-map
 
       include view-speakers
 

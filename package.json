@@ -1,6 +1,6 @@
 {
   "name": "shovelapps-cms",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Open Source Mobile App CMS",
   "main": "server.js",
   "bin": {
@@ -33,7 +33,9 @@
     "bcrypt": "~0.8.0",
     "require-directory": "~2.0.0",
     "socket.io": "~1.2.1",
-    "filestorage": "~1.1.0"
+    "filestorage": "~1.1.0",
+    "i18n": "~0.5.0",
+    "myelements.jquery": "*"
   },
   "devDependencies": {},
   "scripts": {

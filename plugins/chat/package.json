@@ -1,0 +1,16 @@
+{
+  "name": "Chat",
+  "version": "0.1.0",
+  "description": "Includes a chat feature to your Shovelapps application",
+  "main": "index.js",
+  "bin": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {},
+  "author": "osk <oscar@shovelapps.com> (http://shovelapps.com/)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shovelapps/shovelapps-cms"
+  }
+}

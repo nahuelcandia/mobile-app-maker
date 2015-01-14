@@ -11,8 +11,6 @@ head
   // End of Title block
   // Bootstrap CSS 
   link(href="/coreassets/bootstrap/bootstrap.min.css", rel="stylesheet")
-  link(href="/coreassets/bootstrap/jasny-bootstrap.min.css", rel="stylesheet")
-  link(href="/coreassets/bootstrap/navmenu.css", rel="stylesheet")
   link(href="/coreassets/ionicons/css/ionicons.min.css", rel="stylesheet")
 
   // Custom stylesheets
@@ -29,8 +27,6 @@ head
 
 body
 
-  include ./sidebar.jade
-
   // Content block
   block content
   // End of content block
@@ -41,17 +37,13 @@ body
   script(src="/coreassets/jquery/jquery.js")
   //Bootstrap JavaScript 
   script(src="/coreassets/bootstrap/bootstrap.min.js")
-  script(src="/coreassets/bootstrap/jasny-bootstrap.min.js")
-  script(src="/myelements.jquery.js")
   script.
     $(function() {
  
           
       FastClick.attach(document.body);
-
-      $('[data-toggle="tooltip"]').tooltip();
-
-    });
+      
+    })
   // Custom scripts
   block scripts
   // End of custom Scripts

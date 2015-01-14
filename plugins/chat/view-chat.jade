@@ -6,7 +6,7 @@
       .left
         a.link.icon-only.open-panel(href='#')
           i.icon.icon-bars
-      .center(data-editable="view-3-name") Chat      
+      .center(data-editable="view-3-name") #{__('Chat')}
       .right.contact-add-link
  
   .pages.navbar-through
@@ -15,9 +15,9 @@
         .toolbar-inner
           a#sendPhoto.link.icon-only(href='#')
             i.icon.icon-camera
-          textarea(placeholder='Message')
+          textarea(placeholder=__('Message'))
           a.link(href='#')
-            | Send
+            | #{__('Send')}
       .page-content.messages-content
         .messages
           // Date stamp
@@ -50,6 +50,6 @@
             .message-text
               img(src='http://lorempixel.com/300/300/')
             // Message label
-            .message-label Delivered 2 days ago
+            .message-label #{__('Delivered')} #{__n("%s day ago", "%s days ago", 2)}
         
           div!=chat.textinput() 
