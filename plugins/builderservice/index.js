@@ -31,6 +31,34 @@ function builder(app, server, sockets) {
   });
 
   builder.sockets = sockets;
+
+  sockets.platform.on('apkbuilt', function(data) {
+    debug('Platform emitted apkbuilt');
+    debug(arguments);
+    app.emit('apkbuilt', data);
+  });
+
+  sockets.platform.on('datareceived', function(data) {
+    debug("Platform emitted datareceived");
+    debug(data);
+    app.emit('source code upload progress', data);
+    if (data.progress == "100%") {
+      debug('source code upload complete');
+      app.emit('upload-complete', data);
+    }
+  });
+
+  app.on("apkbuilt", function(data) {
+    debug('apkbuilt');
+    debug(data);
+    var buildData = data.url.split('/');
+    var buildId = buildData[buildData.length - 1].split('.')[0];
+    builds.insert({
+      buildId: buildId,
+      apkUrl: data.url,
+      timestamp: Date.now()
+    });
+  });
   sockets.adminPanel.on("connection", function(socket) {
     socket.on("already working?", function() {
       if (status == "") {
@@ -49,23 +77,7 @@ function builder(app, server, sockets) {
       status = "source code upload progress";
     });
     app.on("apkbuilt", function(data) {
-      debug('apkbuilt');
-      debug(data);
-      var buildData = data.url.split('/');
-      var buildId = buildData[buildData.length - 1].split('.')[0];
-
-      builds.insert({
-        buildId: buildId,
-        apkUrl: data.url,
-        timestamp: Date.now()
-      }, function(err) {
-        if (err) {
-          socket.emit("build not saved", data);
-        } else {
-          socket.emit("apkbuilt2", data);
-        }
-
-      });
+      socket.emit("apkbuilt", data);
       status = "";
     });
     app.on("upload-complete", function(data) {
@@ -107,7 +119,7 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
     //   set listeners beforehand to properly detect stream completion. 
     // BUT!!! The finish event on archive is unreliable. it fires when
     // finalize() is called.
-    zipStream.on("end", function() {
+    zipStream.once("end", function() {
       debug(fs.statSync(filename).size);
       tmpFileStream.end(undefined, undefined, function() {
         zipStream.unpipe(tmpFileStream);
@@ -135,20 +147,6 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
 builder.createBuildRequestStream = function(app, appOptions) {
   var sockets = builder.sockets,
     stream = ss.createStream();
-  sockets.platform.on('apkbuilt', function(data) {
-    debug('Platform emitted apkbuilt');
-    debug(arguments);
-    app.emit('apkbuilt', data);
-  });
-  sockets.platform.on('datareceived', function(data) {
-    debug("Platform emitted datareceived");
-    debug(data);
-    app.emit('source code upload progress', data);
-    if (data.progress == "100%") {
-      debug('source code upload complete');
-      app.emit('upload-complete', data);
-    }
-  });
   ss(sockets.platform).emit('sourcecodeupload', stream, appOptions);
   return stream;
 }
