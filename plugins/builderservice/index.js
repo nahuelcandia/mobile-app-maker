@@ -18,15 +18,14 @@ function builder(app, server, sockets) {
   app.locals.googlemaps = {}
   app.get('/admin/build', function(req, res, next) {
     builds.find({}).limit(9).exec(function(err, docs) {
+      if (err) {
+        return res.send(500, "I errored");
+      }
       docs.forEach(function(doc) {
         var d = new Date(doc.timestamp);
         doc.date = d.toDateString();
       });
-      if (err) {
-        // do something
-      } else {
-        app.locals.builds = docs;
-      }
+      app.locals.builds = docs;
       res.send(jade.renderFile(__dirname + "/build.jade", app.locals));
     });
   });
@@ -63,7 +62,7 @@ function builder(app, server, sockets) {
         if (err) {
           socket.emit("build not saved", data);
         } else {
-          socket.emit("apkbuilt", data);
+          socket.emit("apkbuilt2", data);
         }
 
       });
