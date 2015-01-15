@@ -6,7 +6,10 @@ block title
 block stylesheets
   style.
     #downloadapkqrcode {
-    }
+        }
+    .modal-dialog{
+      margin-top: 75px;
+    } 
 
 block content
   
@@ -25,7 +28,9 @@ block content
           a#build.disabled.btn.btn-default.btn-lg.btn-block(href="#")
             span.btn-text #{__('Checking status')}
             span#upload-progress
-          a.btn.btn-default.btn-lg.btn-block(href="/package/download") #{__('Download')} #{__('app as HTML')}  
+          a.btn.btn-default.btn-lg.btn-block(href="/package/download")
+            i.icon.ion-code-download
+            |  #{__('Download')} #{__('app as HTML')}  
           a.btn.btn-default.btn-lg.btn-block.hidden#downloadapklink #{__('Download')} #{__('Android binary')}          
         div.col-xs-6.text-center#latestbuild
           p#downloadapkqrcode
@@ -40,14 +45,26 @@ block content
               .col-xs-12.text-center
                 .well(data-uri=build.apkUrl)                  
                   div= build.date
-                  button.btn.btn-small.btn-default.btn-block(role="button") #{__('Download')}
-                  button.btn.btn-small.btn-default.btn-block(role="button") #{__('View QR')}
+                  a(href="build.apkUrl", target="_blank", title="#{__('Download')} .apk")
+                    button.btn.btn-small.btn-default.btn-block(role="button")
+                      i.icon.ion-android-download
+                      |  #{__('Download')}
+                  button.btn.btn-small.btn-default.btn-block(role="button", data-toggle="modal", data-target="#qr-modal", data-uri=build.apkUrl, data-buildid=build.buildId)
+                    i.icon.ion-qr-scanner
+                    |  #{__('View QR')}
 
+    .modal.fade#qr-modal(tabindex="-1", role="dialog", aria-labelledby="qrModalLabel")
+      .modal-dialog.modal-sm
+        .modal-content
+          .modal-body
+            button.close(type="button", data-dismiss="modal", aria-label="#{__('Close')}")
+              span(aria-hidden="true") &times;
+            p #{__('Scan this QR code to install this build in your device, or download to use wherever you need.')}
+            .text-center
+              #modal-qr-container
+              small#modal-build-id
+             
 
-
-                
-
-      
 block scripts
   script(src="/socket.io/socket.io.js")
   script(src="/coreassets/jquery.qrcode/jquery.qrcode-0.11.0.js")
@@ -55,4 +72,12 @@ block scripts
   script.
     $(function() {
       setBuildByButton();
+      $('#qr-modal').on('shown.bs.modal', function (e) {
+        $("#modal-build-id").html($(e.relatedTarget).data('buildid'));
+        $("#modal-qr-container").html('')
+        .qrcode({
+          "color": "#3a3",
+          "text": $(e.relatedTarget).data('uri')
+        });
+      });
     });
