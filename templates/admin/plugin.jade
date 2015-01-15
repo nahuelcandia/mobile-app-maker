@@ -4,13 +4,48 @@ block title
   title #{__('Plugin')} - #{__('Admin Panel')}
 
 block stylesheets
+  link(href="/coreassets/jsoneditor/jsoneditor.css", rel="stylesheet")
 
 block content
-
   .container
-    h2 #{__('Manage')} #{__('Plugin')}#{__(':')} #{plugin[0].name} 
+    .row
+      h2 #{__('Manage')} #{__('Plugin')}#{__(':')} #{plugin[0].name}
+      .alert.alert-message(role="alert")
+      #jsoneditor.col-sm-12(style="margin-bottom:15px;")
+      .col-sm-12
+        button.btn.btn-success.save #{__('Save')}
 
 block scripts
+  script(src="/coreassets/jsoneditor/jsoneditor.min.js")
   script.
     $(function() {
+      // create the editor
+      var options = {
+          "mode": "form",
+          "search": false,
+          "name": "Config"
+      };
+      var container = document.getElementById("jsoneditor");
+      var editor = new JSONEditor(container, options);
+      // set json
+      var json = !{JSON.stringify(plugin[0].config)};
+      editor.set(json);
+      // get json
+      $('.save').bind('click', function(){
+        $.ajax({
+          url: '/admin/plugin/config/#{plugin[0].name}',
+          type: "POST",
+          data: JSON.stringify(editor.get()),
+          contentType: "application/json",
+          complete: function(response){
+            if(response.responseText=='ok bitch'){
+              $(".alert-message").attr('class','show alert alert-message alert-success').text('#{__('Configuration successfully saved')}').alert();
+            
+            }else{
+              $(".alert-message").attr('class','show alert alert-message alert-danger').text('#{__('Error ocurred while saving configuration')}').alert();
+            }
+            window.setTimeout(function() { $(".alert-message").addClass('fade').alert('close'); }, 2000);
+          }
+        })
+      });
     });
