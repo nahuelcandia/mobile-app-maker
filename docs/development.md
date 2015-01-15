@@ -93,13 +93,13 @@ Shovel apps CMS uses the `debug` module and debugs under the namespace `"cms*"`.
 So in order to see debug messages logged by **shovelapps CMS** run it like this
 
 ```
-$ DEBUG='cms*' server.js
+$ DEBUG='cms*' node server.js
 ```
 
 Or if you prefer, watch every module log with
 
 ```
-$ DEBUG='*' server.js 
+$ DEBUG='*' node server.js 
 ```
 
 ##Plugins
