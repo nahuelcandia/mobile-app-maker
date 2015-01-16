@@ -5,15 +5,22 @@ block title
 
 block stylesheets
   link(href="/coreassets/jsoneditor/jsoneditor.css", rel="stylesheet")
+  style.
+    .menu button.collapse-all,.menu button.expand-all{
+    	display:none;
+    }
 
 block content
   .container
+    h2 #{__('Manage')} #{__('Plugin')}#{__(':')} #{plugin[0].name}
+    #alerts
     .row
-      h2 #{__('Manage')} #{__('Plugin')}#{__(':')} #{plugin[0].name}
-      .alert.alert-message(role="alert")
       #jsoneditor.col-sm-12(style="margin-bottom:15px;")
       .col-sm-12
-        button.btn.btn-success.save #{__('Save')}
+        button.btn.btn-success.live-btn.save
+          i.icon.ion-checkmark
+          |  #{__('Save')}
+  .alert.alert-message(role="alert")
 
 block scripts
   script(src="/coreassets/jsoneditor/jsoneditor.min.js")
@@ -38,13 +45,13 @@ block scripts
           data: JSON.stringify(editor.get()),
           contentType: "application/json",
           complete: function(response){
+          	var alert = $(".alert-message").clone().removeClass('alert-message');
             if(response.responseText=='ok bitch'){
-              $(".alert-message").attr('class','show alert alert-message alert-success').text('#{__('Configuration successfully saved')}').alert();
-            
+              $(alert).addClass('alert-success').html('<i class="icon ion-checkmark-circled"/> #{__('Configuration successfully saved')}').appendTo('#alerts').alert();
             }else{
-              $(".alert-message").attr('class','show alert alert-message alert-danger').text('#{__('Error ocurred while saving configuration')}').alert();
+              $(alert).addClass('alert-danger').html('<i class="icon ion-alert-circled"/> #{__('Error ocurred while saving configuration')}').appendTo('#alerts').alert();
             }
-            window.setTimeout(function() { $(".alert-message").addClass('fade').alert('close'); }, 2000);
+            $(alert).delay(1500).fadeOut();
           }
         })
       });
