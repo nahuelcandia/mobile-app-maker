@@ -17,7 +17,7 @@ block content
     .row
       #jsoneditor.col-sm-12(style="margin-bottom:15px;")
       .col-sm-12
-        button.btn.btn-success.save
+        button.btn.btn-success.live-btn.save
           i.icon.ion-checkmark
           |  #{__('Save')}
   .alert.alert-message(role="alert")
@@ -46,7 +46,7 @@ block scripts
           contentType: "application/json",
           complete: function(response){
           	var alert = $(".alert-message").clone().removeClass('alert-message');
-            if(response.responseText=='ok bi2tch'){
+            if(response.responseText=='ok bitch'){
               $(alert).addClass('alert-success').html('<i class="icon ion-checkmark-circled"/> #{__('Configuration successfully saved')}').appendTo('#alerts').alert();
             }else{
               $(alert).addClass('alert-danger').html('<i class="icon ion-alert-circled"/> #{__('Error ocurred while saving configuration')}').appendTo('#alerts').alert();
