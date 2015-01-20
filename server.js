@@ -40,4 +40,4 @@ require("./lib/template")(app);
 require("./lib/frontend")(app);
 require("./lib/admin")(app);
 require("./lib/packager")(app);
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
