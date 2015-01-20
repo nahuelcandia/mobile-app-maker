@@ -63,36 +63,17 @@ body
       socketPath: "/myelements"
     }
   script(src="/myelements.jquery.js")
-  
-  // Custom scripts
-  block scripts
   script.
-
-    function notificate(message, type, closable) {
-        var closable = (typeof closable === 'undefined' ? true : closable)
-        var html = '<div id="notification" class="alert alert-' + type + ' alert-dismissable page-alert">';    
-        if(closable) html += '<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
-        html += message;
-        html += '</div>';
-        $(html).hide().prependTo('#notifications').slideDown();
-    };
     $(function() {
 
       FastClick.attach(document.body);
-
       $('[data-toggle="tooltip"]').tooltip();
-
-      $('body').myelement().on('disconnect', function(){
-        $('.live-btn').attr('disabled', 'disabled');
-        $('a').attr('disabled','disabled').css({'pointer-events':'none'});
-        notificate('<i class="icon ion-alert-circled"/> #{__('Check your internet connection, it seems that we are disconnected.')}', 'danger', false);
-      }).on('reconnect', function(){
-        $('.live-btn').removeAttr('disabled');
-        $('#notification').alert('close');
-        notificate('<i class="icon ion-checkmark-circled"/> #{__('Connection restablished.')}', 'success', false);
-        $('#notification').delay(2500).fadeOut(function(){$('#notification').alert('close');});
-        $('a').attr('disabled','').css({'pointer-events':'auto'});
-      });
-      
+    
     });
+
+  script(src="/shovelapps/optimism.js")
+  script.
+    var lang = !{JSON.stringify(lang)};
+  // Custom scripts
+  block scripts
   // End of custom Scripts
