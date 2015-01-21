@@ -31,7 +31,7 @@ block content
                 
                 button.btn.live-btn(class=btnclass, data-action="toggle", data-id=plugin.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
                   i.icon(class=icon, style="color:white")
-                a(href="/admin/plugin/" + plugin.name ): button.btn.btn-default(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Configuration')}")
+                a(href="/admin/plugin/" + plugin.name ): button.btn.btn-default.live-btn(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Configuration')}")
                   i.icon.ion-levels
                 //a(href="#", data-action="delete" ): button.btn.btn-danger(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Remove this plugin...')}")
                 //  i.icon.ion-trash-b(style="color:white")

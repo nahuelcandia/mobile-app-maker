@@ -71,9 +71,17 @@ body
     
     });
 
-  script(src="/shovelapps/optimism.js")
   script.
     var lang = !{JSON.stringify(lang)};
+    function __(term) {
+      if(!typeof lang['Checking status'] === 'undefined'){
+        return lang[term];
+      }
+      return term;
+    }
+
+  script(src="/shovelapps/optimism.js")
+  script(src="/shovelapps/shovelapps-cms.js")
   // Custom scripts
   block scripts
   // End of custom Scripts
