@@ -25,10 +25,10 @@ block content
         div.col-xs-6
           // This button is disabled untile we can reach
           // shovelapps build platform. 
-          a#build.disabled.btn.btn-default.btn-lg.btn-block(href="#")
+          a#build.disabled.btn.btn-default.btn-lg.btn-block.live-btn(href="#")
             span.btn-text #{__('Checking status')}
             span#upload-progress
-          a.btn.btn-default.btn-lg.btn-block(href="/package/download")
+          a.btn.btn-default.btn-lg.btn-block.live-btn(href="/package/download")
             i.icon.ion-code-download
             |  #{__('Download')} #{__('app as HTML')}  
           a.btn.btn-default.btn-lg.btn-block.hidden#downloadapklink #{__('Download')} #{__('Android binary')}          
@@ -45,7 +45,7 @@ block content
               .col-xs-12.text-center
                 .well(data-uri=build.apkUrl)                  
                   div= build.date
-                  a(href="build.apkUrl", target="_blank", title="#{__('Download')} .apk")
+                  a(href="#{build.apkUrl}", target="_blank", title="#{__('Download')} .apk")
                     button.btn.btn-small.btn-default.btn-block(role="button")
                       i.icon.ion-android-download
                       |  #{__('Download')}
