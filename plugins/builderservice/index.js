@@ -24,7 +24,10 @@ function builder(app, server, sockets) {
       docs.forEach(function(doc) {
         var d = new Date(doc.timestamp);
         doc.date = d.toDateString();
+        doc.buildIdShort = doc.buildId.split('-')[0];
+
       });
+      debug(docs);
       app.locals.builds = docs;
       res.send(jade.renderFile(__dirname + "/build.jade", app.locals));
     });
@@ -53,46 +56,60 @@ function builder(app, server, sockets) {
     debug(data);
     var buildData = data.url.split('/');
     var buildId = buildData[buildData.length - 1].split('.')[0];
+    builds.update({
+      buildId: buildId
+    }, {
+      $set: {
+        buildId: buildId,
+        apkUrl: data.url,
+        built: 1,
+        timestamp: Date.now()
+      }
+    });
+  });
+  app.on("upload-complete", function(data) {
     builds.insert({
-      buildId: buildId,
-      apkUrl: data.url,
+      buildId: data.buildId.buildId,
+      apkUrl: '',
+      built: 0,
       timestamp: Date.now()
     });
   });
-  sockets.adminPanel.on("connection", function(socket) {
-    socket.on("already working?", function() {
+  sockets.adminPanel.on("connection", function(backendSocket) {
+    backendSocket.on("already working?", function() {
       if (status == "") {
-        socket.emit('doin nothing');
+        backendSocket.emit('doin nothing');
       } else if (status != 'source code upload progress') {
-        socket.emit(status);
+        backendSocket.emit(status);
       }
       debug('checking builder status: ' + status);
     });
-    socket.on("buildApk", function(options) {
-      builder.renderAndRequestBuild(app, socket);
+    backendSocket.on("buildApk", function(options) {
+      builder.renderAndRequestBuild(app, backendSocket);
       status = 1;
     });
     app.on("source code upload progress", function(data) {
-      socket.emit("source code upload progress", data);
+      backendSocket.emit("source code upload progress", data);
       status = "source code upload progress";
     });
     app.on("apkbuilt", function(data) {
-      socket.emit("apkbuilt", data);
+      backendSocket.emit("apkbuilt", data);
       status = "";
     });
     app.on("upload-complete", function(data) {
-      socket.emit("upload-complete", data);
+      debug("upload-complete", data);
+      backendSocket.emit("upload-complete", data);
       status = "upload-complete";
     });
     // Tell the CMS frontend that we are connected
     // to the build platform by emitting.
     // If we are already connected on init
     if (!sockets.platform.disconnected) {
-      socket.emit("platform connect");
+      backendSocket.emit("platform connect");
     }
     // Or if the connection takes place later
     sockets.platform.on("connect", function platformSocketError(err) {
-      socket.emit("platform connect");
+      backendSocket.emit("platform connect");
     });
   });
 }

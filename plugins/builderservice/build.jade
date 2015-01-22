@@ -26,12 +26,20 @@ block content
           // This button is disabled untile we can reach
           // shovelapps build platform. 
           a#build.disabled.btn.btn-default.btn-lg.btn-block.live-btn(href="#")
-            span.btn-text #{__('Checking status')}
+            i.icon.ion-social-android
+            span.hidden-xs.btn-text #{__('Checking status')}
+            span.visible-xs.btn-text #{__('...')}
             span#upload-progress
-          a.btn.btn-default.btn-lg.btn-block.live-btn(href="/package/download")
+          a.btn.btn-default.btn-lg.btn-block.text-center.live-btn(href="/package/download")
             i.icon.ion-code-download
-            |  #{__('Download')} #{__('app as HTML')}  
-          a.btn.btn-default.btn-lg.btn-block.hidden#downloadapklink #{__('Download')} #{__('Android binary')}          
+            span.hidden-xs #{__('Download')} #{__('app as HTML')}
+            span.visible-xs #{__('Get ')} #{__('HTML')}   
+          a.btn.btn-default.btn-lg.btn-block.hidden#downloadapklink 
+            span.hidden-xs #{__('Download')} #{__('Android binary')}          
+            span.visible-xs 
+              #{__('Download')} 
+              i.icon.ion-social-android
+              |  #{__('Build')}          
         div.col-xs-6.text-center#latestbuild
           p#downloadapkqrcode
             img.img-responsive(src="/coreassets/img/qr-placeholder.png", width="200")
@@ -40,18 +48,27 @@ block content
 
         h2 #{__('Previous builds')}
         .row
-          each build in builds
-            .col-xs-12.col-sm-4.col-lg-4
-              .col-xs-12.text-center
-                .well(data-uri=build.apkUrl)                  
-                  div= build.date
-                  a(href="#{build.apkUrl}", target="_blank", title="#{__('Download')} .apk")
-                    button.btn.btn-small.btn-default.btn-block(role="button")
-                      i.icon.ion-android-download
-                      |  #{__('Download')}
-                  button.btn.btn-small.btn-default.btn-block(role="button", data-toggle="modal", data-target="#qr-modal", data-uri=build.apkUrl, data-buildid=build.buildId)
-                    i.icon.ion-qr-scanner
-                    |  #{__('View QR')}
+          table.table.table-responsive
+            thead
+            tbody
+              each build in builds
+                tr
+                  td.col-xs-2.hidden-xs
+                    .label.label-default= build.date
+                  td
+                    a.label.label-primary
+                      i.icon.ion-pound
+                      |  #{build.buildIdShort}
+                  td.text-right
+                    if build.built == 1
+                      a.label.label-primary(href="#{build.apkUrl}", target="_blank", title="#{__('Download')} .apk")
+                        i.icon.ion-android-download
+                        |  #{__('Download')}
+                      a.label.label-info(data-toggle="modal", data-target="#qr-modal", data-uri=build.apkUrl, data-buildid=build.buildId)
+                        i.icon.ion-qr-scanner
+                        |  #{__('Display QR')}
+                    else
+                      .label.label-danger #{__('Not built')}
 
     .modal.fade#qr-modal(tabindex="-1", role="dialog", aria-labelledby="qrModalLabel")
       .modal-dialog.modal-sm
