@@ -1,7 +1,6 @@
 .navmenu.navmenu-inverse.navmenu-fixed-left.offcanvas-sm
   a.navmenu-brand.visible-md.visible-lg(href="#")
-    img(src="/coreassets/img/shovelapps-logo.png",style="width:32px")
-    | Shovelapps
+    img(src="/coreassets/img/logo-shovel-2-sm.png",style="width:200px")
   ul.nav.navmenu-nav
     li.active
       a(href="/admin")
@@ -19,6 +18,19 @@
           a(href="/admin/plugins") #{__('Manage plugins')}
         li
           a(href="/admin/plugins") #{__('Add new plugin')}
+    li.divider
+    li.dropdown
+      a.dropdown-toggle(data-toggle="dropdown")
+        i.icon.ion-code
+        |  #{__('Template')}
+        b.carets
+      ul.dropdown-menu.navmenu-nav
+        li.dropdown-header #{__('Manage current templates or add a new one')}
+        li.divider
+        li
+          a(href="/admin/templates") #{__('Manage templates')}
+        li
+          a(href="/admin/templates") #{__('Add new template')}
     li.divider
     li.dropdown
       a.dropdown-toggle(href="#", data-toggle="dropdown") 
@@ -47,11 +59,10 @@
       a(href="/logout") 
         i.icon.ion-log-out
         |  #{__('Logout')}
-.navbar.navbar-inverse.navbar-fixed-top.hidden-md.hidden-lg
+.navbar.navbar-fixed-top.hidden-md.hidden-lg.navbar-inverse
   button.navbar-toggle(type="button", data-toggle="offcanvas", data-target=".navmenu", data-canvas=".container")
     span.icon-bar
     span.icon-bar
     span.icon-bar
-  a.navbar-brand(href="#", style="margin:0 50px 0 50px; padding: 10px")
-    img(src="/coreassets/img/shovelapps-logo.png",style="width:32px; display:inline;")
-    span Shovel Apps
+  a.navbar-brand(href="#", style="margin:0 50px 0 50px; padding: 12px")
+    img(src="/coreassets/img/logo-shovel-2-sm.png",style="width:200px; display:inline;")
