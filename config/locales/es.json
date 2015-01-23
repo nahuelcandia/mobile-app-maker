@@ -62,5 +62,15 @@
   "Building Android binary...": "Compilando binario Android...",
   "Compressing app...": "Comprimiendo...",
   "Check your internet connection, it seems that we are disconnected.": "Comprueba tu conexión, parece que estamos desconectados.",
-  "Connection restablished": "Conexión restablecida"
+  "Connection restablished": "Conexión restablecida",
+  "Template": "Template",
+  "Manage current templates or add a new one": "Manage current templates or add a new one",
+  "Manage templates": "Manage templates",
+  "Add new template": "Add new template",
+  "template": "template",
+  "plugin": "plugin",
+  "plugins": "plugins",
+  "plugins name": "plugins name",
+  "templates": "templates",
+  "templates name": "templates name"
 }
