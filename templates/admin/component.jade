@@ -39,10 +39,12 @@ block scripts
       editor.set(json);
       // get json
       $('.save').bind('click', function(){
+       console.log(JSON.stringify(editor.get()));
         $.ajax({
-          url: '/admin/' + componentType + '/config/#{component[0].name}',
+          url: '/admin/#{componentType}/config/#{component[0].name}',
           type: "POST",
           data: JSON.stringify(editor.get()),
+          dataType: "json",
           contentType: "application/json",
           complete: function(response){
           	var alert = $(".alert-message").clone().removeClass('alert-message');

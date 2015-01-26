@@ -39,5 +39,15 @@
   "Get ": "Get ",
   "HTML": "HTML",
   "Display QR": "Display QR",
-  "Welcome!": "Welcome!"
+  "Welcome!": "Welcome!",
+  "Template": "Template",
+  "Manage current templates or add a new one": "Manage current templates or add a new one",
+  "Manage templates": "Manage templates",
+  "Add new template": "Add new template",
+  "Apps": "Apps",
+  "Manage yout apps or create new ones": "Manage yout apps or create new ones",
+  "Manage apps": "Manage apps",
+  "Create app": "Create app",
+  "Templates": "Templates",
+  "Not built": "Not built"
 }
