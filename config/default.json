@@ -5,8 +5,9 @@
   // "template": "ratchet-jade",
   //"template": "jsconf-ar",
   "app": {
-    "appName": "My First App"
+    "appName": "My New App"
   },
+  "availableApps": 20,
   "paths": {
     "templatesBasePath": "templates"
   },

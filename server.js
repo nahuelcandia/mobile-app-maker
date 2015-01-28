@@ -8,7 +8,9 @@ var myelements = require("myelements.jquery");
 // Regular HTTP Server
 var server = http.createServer(app);
 
-myelements(app, server);
+myelements(app, server, {
+  socketPath: "/myelements"
+});
 //Using HTTPS server
 // http://docs.nodejitsu.com/articles/HTTP/servers/how-to-create-a-HTTPS-server
 // Generate keys like this
@@ -38,4 +40,4 @@ require("./lib/template")(app);
 require("./lib/frontend")(app);
 require("./lib/admin")(app);
 require("./lib/packager")(app);
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
