@@ -7,22 +7,8 @@ block sidebar
         li.active
           a(href="/admin")
             i.icon.ion-speedometer
-            |  #{__('Dashboard')}
-        li.dropdown
-          a.dropdown-toggle(data-toggle="dropdown")
-            i.icon.ion-cube
-            |  #{__('Apps')} 
-            span.label.label-secondary #{locals.apps.length} / 
-              span.info #{locals.config.availableApps}
-            b.caret
-          ul.dropdown-menu.navmenu-nav
-            li.dropdown-header #{__('Manage yout apps or create new ones')}
-            li.divider
-            li
-              a(href="/admin/apps") #{__('Manage apps')}
-            li
-              a(href="/admin/app/new") #{__('Create app')}
-        li.divider
+            |  #{__("Dashboard")}
+            //|  #{appl.locals.activeApp} #{__("Dashboard")}
         li.dropdown
           a.dropdown-toggle(data-toggle="dropdown")
             i.icon.ion-code
@@ -68,7 +54,7 @@ block sidebar
           a(href="/admin/build")
             i.icon.ion-cube
             |  #{__('Build')}
-        li
+        li.hide
           a(href="/") 
             i.icon.ion-arrow-return-left
             |  #{__('Preview/Edit app')}
@@ -76,6 +62,23 @@ block sidebar
           a(href="/logout") 
             i.icon.ion-log-out
             |  #{__('Logout')}
+        li.dropdown(style="margin-top:45px;")
+          a.dropdown-toggle(data-toggle="dropdown", style="color: #ec1164;")
+            i.icon.ion-cube
+            |  #{__('My ShovelApps')} 
+            span.label.label-secondary
+              span #{locals.apps.length} / 
+              span #{locals.config.availableApps}
+            b.caret
+          ul.dropdown-menu.navmenu-nav
+            li.dropdown-header #{__('Manage other apps or create new ones')}
+            li.divider
+            li
+              a(href="/admin/apps") #{__('Switch app')}
+            li
+              a(href="/admin/apps") #{__('Go to apps manager')}
+        li.divider
+
   .navbar.navbar-fixed-top.hidden-md.hidden-lg.navbar-inverse
     button.navbar-toggle(type="button", data-toggle="offcanvas", data-target=".navmenu", data-canvas=".container")
       span.icon-bar

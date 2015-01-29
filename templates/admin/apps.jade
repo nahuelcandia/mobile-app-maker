@@ -4,6 +4,10 @@ block title
   title #{__('Apps')} - #{__('Admin Panel')}
 
 block stylesheets
+  style.
+    .modal-dialog{
+      margin-top: 75px;
+    }
 
 block content
 
@@ -24,7 +28,7 @@ block content
           h5 "Brute force dev"
     
     .modal.fade#createapp-modal(tabindex="-1", role="dialog", aria-labelledby="createAppModalLabel")
-      .modal-dialog
+      .modal-dialog.modal-sm(style="width:400px;")
         .modal-content
           .modal-body
             button.close(type="button", data-dismiss="modal", aria-label="#{__('Close')}")
@@ -43,13 +47,17 @@ block content
     .panel.text-center
       h2 #{__('My')} #{__('Apps')}
       .row.text-center
+        .visible-xs.col-xs-12.col-sm-3.col-md-3.columns(data-toggle="modal", data-target="#createapp-modal")
+          .well 
+            button.btn.btn-success.btn-block.live-btn(style="") #{__("Create new app")}
         each component in components
           .col-xs-12.col-sm-3.col-md-3.columns
-            .well(style="background-color:#eee; height:128px;")
-              h3 #{component.name}
-        .col-xs-12.col-sm-3.col-md-3.columns(data-toggle="modal", data-target="#createapp-modal")
-          .well(style="background-color:#eee; height:128px;")
-            h3 #{__("Create a new app")}
+            .well.hidden-xs(style="background-color:#eee; height:128px;")
+              h4 #{component.name}
+            .panel.visible-xs(style="background-color:#eee;")
+              h4 #{component.name}
+        .hidden-xs.col-xs-12.col-sm-3.col-md-3.columns(data-toggle="modal", data-target="#createapp-modal")
+          button.btn.btn-success.btn-block.live-btn(style="height:128px;") #{__("Create new app")}
 
 block scripts
   script.
