@@ -37,7 +37,8 @@
     "i18n": "~0.5.0",
     "myelements.jquery": "*",
     "walkdir": "~0.0.7",
-    "body-parser": "~1.10.2"
+    "body-parser": "~1.10.2",
+    "webshot": "*"
   },
   "devDependencies": {},
   "scripts": {
