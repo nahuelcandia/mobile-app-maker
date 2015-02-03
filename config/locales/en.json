@@ -76,5 +76,9 @@
   "Error ocurred while saving configuration": "Error ocurred while saving configuration",
   "templates": "templates",
   "templates name": "templates name",
-  "template": "template"
+  "template": "template",
+  "My ShovelApps": "My ShovelApps",
+  "Manage other apps or create new ones": "Manage other apps or create new ones",
+  "Switch app": "Switch app",
+  "Go to apps manager": "Go to apps manager"
 }
