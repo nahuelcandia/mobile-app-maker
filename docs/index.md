@@ -2,7 +2,7 @@
 layout: default
 ---
 
-#Getting Started 
+# Getting Started 
 
 ## Prerequisites
 
