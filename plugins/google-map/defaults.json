@@ -1,5 +1,5 @@
 {
-  "api-url": "http://maps.google.com/maps/api/js?sensor=false",
+  "api-url": "https://maps.google.com/maps/api/js?sensor=false",
   "time-format": "HH:MM:SS",
   "default-lat": "-34",
   "default-lon": "-59",
