@@ -10,7 +10,7 @@ block content
 
             a(href="http://shovelapps.org",target="_blank")
               img(src="/coreassets/img/shovelapps-logo.png",style="max-width:100%")        
-          form(method="post",role="form")
+          form(method="post",role="form",action="/login")
             div.form-group
               label(for="username") #{__('Username')}
               input.form-control(name="username", placeholder=__('User name'))
@@ -18,6 +18,10 @@ block content
               label(for="password") #{__('Password')}
               input.form-control(type="password", name="password", placeholder=__('Password'))              
             button(type="submit").btn.btn-success #{__('Login')}
+
+      .row(style="margin-top:20px;")
+        p.text-center
+          a(href="/") #{__('Go back')}
 
 
 block navbar-buttons            
