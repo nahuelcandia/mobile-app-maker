@@ -41,6 +41,12 @@ function builder(app, server, sockets) {
     app.emit('apkbuilt', data);
   });
 
+  sockets.platform.on('apkbuilderror', function(data) {
+    debug('Platform emitted apkbuilderror');
+    debug(arguments);
+    app.emit('apkbuilderror', data);
+  });
+
   sockets.platform.on('datareceived', function(data) {
     debug("Platform emitted datareceived");
     debug(data);
@@ -67,6 +73,25 @@ function builder(app, server, sockets) {
       }
     });
   });
+
+  app.on("apkbuilderror", function(data) {
+    debug('apkbuilderror');
+    debug(data);
+    var buildData = data.url.split('/');
+    var buildId = buildData[buildData.length - 1].split('.')[0];
+    builds.update({
+      buildId: buildId
+    }, {
+      $set: {
+        buildId: buildId,
+        apkUrl: data.url,
+        built: 0,
+        error: 1,
+        timestamp: Date.now()
+      }
+    });
+  });
+
   app.on("upload-complete", function(data) {
     builds.insert({
       buildId: data.buildId.buildId,

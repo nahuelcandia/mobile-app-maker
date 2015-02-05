@@ -5,7 +5,7 @@ block title
 
 block stylesheets
   style.
-    #downloadapkqrcode {
+    .downloadapkqrcode {
         }
     .modal-dialog{
       margin-top: 75px;
@@ -34,14 +34,15 @@ block content
             i.icon.ion-code-download
             span.hidden-xs #{__('Download')} #{__('app as HTML')}
             span.visible-xs #{__('Get ')} #{__('HTML')}   
-          a.btn.btn-default.btn-lg.btn-block.hidden#downloadapklink 
+          a.btn.btn-default.btn-lg.btn-block.hidden.live-btn#downloadapklink 
             span.hidden-xs #{__('Download')} #{__('Android binary')}          
-            span.visible-xs 
-              #{__('Download')} 
+            span.visible-xs
               i.icon.ion-social-android
-              |  #{__('Build')}          
+              |  #{__('Get APK')}          
         div.col-xs-6.text-center#latestbuild
-          p#downloadapkqrcode
+          p.downloadapkqrcode.hidden-xs
+            img.img-responsive(src="/coreassets/img/qr-placeholder.png", width="200")
+          p.downloadapkqrcode.visible-xs
             img.img-responsive(src="/coreassets/img/qr-placeholder.png", width="200")
 
       .col-lg-12.col-sm-12.col-xs-12
