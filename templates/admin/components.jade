@@ -12,16 +12,21 @@ block content
     table.table.table-responsive.table-hover.table-striped
       thead: tr
         th #{__(componentTypePlural + ' name')}
-        th #{__('Description')}
-        th #{__('Actions')}
+        th.hidden-xs #{__('Description')}
+        th 
+          .hidden-xs #{__('Actions')}
       tbody
         each component in states
           tr
             td
-              h3.panel-title= (typeof components[component.name].metadata.name === 'undefined' ? component.name : components[component.name].metadata.name)
-            td
-              p= components[component.name].metadata.description
-              p= components[component.name].metadata.author
+              b.panel-title= (typeof components[component.name].metadata.name === 'undefined' ? component.name : components[component.name].metadata.name)
+              .visible-xs
+                p= components[component.name].metadata.description
+                p= components[component.name].metadata.author
+            td.hidden-xs
+              small
+                p= components[component.name].metadata.description
+                p= components[component.name].metadata.author
             td
               div(aria-label="#{__('Options')}")
 
