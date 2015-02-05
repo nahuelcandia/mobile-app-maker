@@ -2,7 +2,7 @@
 layout: default
 ---
 
-#Development
+# Development
 
 The CMS is based on well known technologies from the nodejs world like
 [express](http://expressjs.com), [socket.io](http://socket.io), [JSON storage](https://www.npmjs.com/package/nedb),
@@ -74,7 +74,7 @@ download a responsive template from some bootstrap  theme providers for example.
   rarely find basic nesting issues with HTML tags that often cause misalignments.
 
 
-####About paths in template files
+#### About paths in template files
 
 * Use relative paths in the templates in order to keep consistent with 
 the final structure that the app will have inside phonegap
@@ -102,7 +102,7 @@ Or if you prefer, watch every module log with
 $ DEBUG='*' node server.js 
 ```
 
-##Plugins
+## Plugins
 
 Plugins extend **Shovel apps CMS**'s backend features or the frontend by using extra
 scripts or whatever HTML you want for extending the core.
@@ -117,7 +117,7 @@ will be the main file for the plugin.
     └── plugins
         └── chat    
 
-###Required files
+### Required files
 
 
 You need at least an `index.js` file inside the plugin directory.
@@ -129,7 +129,7 @@ You need at least an `index.js` file inside the plugin directory.
 
 
 
-###File structure of a plugin
+### File structure of a plugin
 
     shovelapps-cms
     └── plugins
@@ -172,3 +172,35 @@ about a Phonegap installation.
 The exported function will receive `app`, `server` and `sockets` parameters
 in order for you to extend the CMS. *Remember, the cms backend is an express app*.
 
+
+#API
+
+The API is distributd in the backend and in the frontend. There are also some methods avaiable just for the admin panel. 
+
+The CMS emits events locally (via a regular EventEmitter) and events through socket.io. 
+
+## Backend events
+
+These events are emitted on the express() application object.
+
+* `apkBuilt`: Emitted when the CMS has compiled the app for the Android platform through the `buildservice` plugin. This event causes the frontend to be notified via the socket.io event `apkBuilt`.
+* `source code upload progress`: Emitted when the zip file with the app created by the CMS is uploading to the Shovel apps Platform in order to be compiled.
+* `upload-complete`. Emitted when the zip file containt the app created by the CMS has finished uploading. At this moment, the platform will compile it for the differente mobile platforms
+
+
+### socket.io events 
+
+#### Events emitted by the backend through the Backend socket.
+
+* `apkBuilt`: Emitted when the CMS has compiled the app for the Android platform through the `buildservice` plugin.
+* `doin nothing`: Emitted when a new client connects to the backend admin panel in order to tell the frohtend that it can enable the build button.
+* `error rendering fronted`: Emmited when there was an error creating the rendered version of the app.
+* `finished zipping`: Emitted when the CMS could succesfully render the app and package it into a zip file.
+* `platform connect`: Emittend when the CMS could connect succesfully to Shovel apps Platform.
+* `source code upload progress`: Emitted when the zip file with the app created by the CMS is uploading to the Shovel apps Platform in order to be compiled.
+* `upload-complete`. Emitted when the zip file containt the app created by the CMS has finished uploading. At this moment, the platform will compile it for the differente mobile platforms
+
+## Events emitted by the frontend through the backend socket.
+
+* `already working`: Emitted by the frontend in order to figure out if the backend is compiling the app.
+* `buildApk`: Emitted by the frontend in order to request the backend a new compilation. 

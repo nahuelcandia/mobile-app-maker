@@ -75,41 +75,41 @@ function builder(app, server, sockets) {
       timestamp: Date.now()
     });
   });
-  sockets.adminPanel.on("connection", function(backendSocket) {
-    backendSocket.on("already working?", function() {
+  sockets.adminPanel.on("connection", function(adminpanelSocket) {
+    adminpanelSocket.on("already working?", function() {
       if (status == "") {
-        backendSocket.emit('doin nothing');
+        adminpanelSocket.emit('doin nothing');
       } else if (status != 'source code upload progress') {
-        backendSocket.emit(status);
+        adminpanelSocket.emit(status);
       }
       debug('checking builder status: ' + status);
     });
-    backendSocket.on("buildApk", function(options) {
-      builder.renderAndRequestBuild(app, backendSocket);
+    adminpanelSocket.on("buildApk", function(options) {
+      builder.renderAndRequestBuild(app, adminpanelSocket);
       status = 1;
     });
     app.on("source code upload progress", function(data) {
-      backendSocket.emit("source code upload progress", data);
+      adminpanelSocket.emit("source code upload progress", data);
       status = "source code upload progress";
     });
     app.on("apkbuilt", function(data) {
-      backendSocket.emit("apkbuilt", data);
+      adminpanelSocket.emit("apkbuilt", data);
       status = "";
     });
     app.on("upload-complete", function(data) {
       debug("upload-complete", data);
-      backendSocket.emit("upload-complete", data);
+      adminpanelSocket.emit("upload-complete", data);
       status = "upload-complete";
     });
     // Tell the CMS frontend that we are connected
     // to the build platform by emitting.
     // If we are already connected on init
     if (!sockets.platform.disconnected) {
-      backendSocket.emit("platform connect");
+      adminpanelSocket.emit("platform connect");
     }
     // Or if the connection takes place later
     sockets.platform.on("connect", function platformSocketError(err) {
-      backendSocket.emit("platform connect");
+      adminpanelSocket.emit("platform connect");
     });
   });
 }
