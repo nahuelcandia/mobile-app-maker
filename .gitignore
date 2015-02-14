@@ -1,4 +1,5 @@
-
+config/production.json
+config/development.json
 # Ignore session files
 filestorage/.session/*
 !filestorage/.session/.gitkeep
