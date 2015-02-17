@@ -25,7 +25,6 @@
     "socket.io-client": "~1.2.1",
     "randomstring": "~1.0.3",
     "extend": "~2.0.0",
-    "express-session-json": "~0.0.8",
     "lokijs": "~1.0.2",
     "nedb": "~0.11.1",
     "cheerio": "~0.18.0",
