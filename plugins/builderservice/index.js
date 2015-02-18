@@ -17,6 +17,7 @@ function builder(app, server, sockets) {
 
   app.locals.googlemaps = {}
   app.get('/admin/build', function(req, res, next) {
+    debug("Finding previous builds");
     builds.find({}).limit(9).exec(function(err, docs) {
       if (err) {
         return res.send(500, "I errored");
@@ -27,7 +28,7 @@ function builder(app, server, sockets) {
         doc.buildIdShort = doc.buildId.split('-')[0];
 
       });
-      debug(docs);
+      debug("Found %s previous builds", docs.length);
       app.locals.builds = docs;
       res.send(jade.renderFile(__dirname + "/build.jade", app.locals));
     });
@@ -36,30 +37,26 @@ function builder(app, server, sockets) {
   builder.sockets = sockets;
 
   sockets.platform.on('apkbuilt', function(data) {
-    debug('Platform emitted apkbuilt');
-    debug(arguments);
+    debug('Platform emitted apkbuilt with data: %j', data);
     app.emit('apkbuilt', data);
   });
 
   sockets.platform.on('apkbuilderror', function(data) {
-    debug('Platform emitted apkbuilderror');
-    debug(arguments);
+    debug('Platform emitted apkbuilderror with data: %j', data);
     app.emit('apkbuilderror', data);
   });
 
   sockets.platform.on('datareceived', function(data) {
-    debug("Platform emitted datareceived");
-    debug(data);
+    debug("Platform emitted datareceived with data: %j", data);
     app.emit('source code upload progress', data);
     if (data.progress == "100%") {
-      debug('source code upload complete');
+      debug('Source code upload complete');
       app.emit('upload-complete', data);
     }
   });
 
   app.on("apkbuilt", function(data) {
-    debug('apkbuilt');
-    debug(data);
+    debug('CMS emitted apkbuilt with data: %j', data);
     var buildData = data.url.split('/');
     var buildId = buildData[buildData.length - 1].split('.')[0];
     builds.update({
@@ -75,8 +72,7 @@ function builder(app, server, sockets) {
   });
 
   app.on("apkbuilderror", function(data) {
-    debug('apkbuilderror');
-    debug(data);
+    debug('CMS emitted apkbuilderror with data: %j', data);
     var buildData = data.url.split('/');
     var buildId = buildData[buildData.length - 1].split('.')[0];
     builds.update({
@@ -107,7 +103,7 @@ function builder(app, server, sockets) {
       } else if (status != 'source code upload progress') {
         adminpanelSocket.emit(status);
       }
-      debug('checking builder status: ' + status);
+      debug('Checking builder status: ' + status);
     });
     adminpanelSocket.on("buildApk", function(options) {
       builder.renderAndRequestBuild(app, adminpanelSocket);
@@ -143,7 +139,7 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
   frontend.renderFrontend(app, {}, function(err, html) {
     if (err) {
       clientSocket.emit("error rendering frontend");
-      debug("rendering failed on builder %s", err.stack);
+      debug("Rendering failed on builder %s", err.stack);
       return;
     }
     var zipStream = packager.createAppZipStream(html);
@@ -152,8 +148,7 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
     var fs = require("fs");
     var tmpFileStream = fs.createWriteStream(filename);
     zipStream.on("error", function(err) {
-      debug("Error creating app zip stream");
-      debug(err);
+      debug("Error creating app zip stream: %s", err);
     });
     // From archiver docs.
     //   The end, close or finish events on the destination stream 
@@ -162,10 +157,9 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
     // BUT!!! The finish event on archive is unreliable. it fires when
     // finalize() is called.
     zipStream.once("end", function() {
-      debug(fs.statSync(filename).size);
       tmpFileStream.end(undefined, undefined, function() {
         zipStream.unpipe(tmpFileStream);
-        debug("finished zipping");
+        debug("Finished zipping");
         clientSocket.emit("finished zipping");
         var readStream = fs.createReadStream(filename, {
           autoClose: true
@@ -174,10 +168,8 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
           appName: config.appName,
           size: fs.statSync(filename).size
         });
-        debug(fs.statSync(filename).size);
         buildStream.on("error", function(err) {
-          debug("Error building app.");
-          debug(err);
+          debug("Error building app: %j", err);
         });
         readStream.pipe(buildStream);
       });
