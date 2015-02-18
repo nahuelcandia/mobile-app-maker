@@ -13,6 +13,19 @@ filestorage/db/editables.db
 filestorage/db/plugins.db
 filestorage/db/templates.db
 
+#Ignore non-default templates
+templates/
+!templates/admin/
+!templates/bootstrap-3-jade/
+!templates/framework7/
+
+#Ignore non-default plugins
+plugins/
+!plugins/builderservice/
+!plugins/chat/
+!plugins/google-map/
+
+
 .sslcerts
 
 # Logs
