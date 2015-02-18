@@ -1,0 +1,15 @@
+{
+  "name": "shovelapps-google-map",
+  "version": "0.0.1",
+  "description": "A Shovel apps CMS plugin for embedding a Google Maps map.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "googlemaps",
+    "map"
+  ],
+  "author": "osk <oskosk@gmail.com> (http://olopez.com.ar/)",
+  "license": "MIT"
+}
