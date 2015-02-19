@@ -45,7 +45,7 @@ function builder(app, server, sockets) {
   sockets.platform.on("datareceived", function(data) {
     debug("Uploading %s to Shovel apps Platform. Progress: %s",
       data.buildId.buildId, data.progress);
-    app.emit("source code upload progress:", data);
+    app.emit("source code upload progress", data);
     if (data.progress === "100%") {
       debug("Source code upload complete");
       app.emit("upload-complete", data);
@@ -108,6 +108,7 @@ function builder(app, server, sockets) {
       status = 1;
     });
     app.on("source code upload progress", function(data) {
+      debug("Emitting 'source code upload progress' to Admin panel client");
       adminpanelSocket.emit("source code upload progress", data);
       status = "source code upload progress";
     });
