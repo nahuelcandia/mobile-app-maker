@@ -2,22 +2,34 @@
   "installed": true,
   //--- DEPRECATED: -------
   //"template": "bootstrap-3-jade",
-  "template": "framework7",
+  "template": "phonegap-jqm-boilerplate",
+  //"template": "framework7",
   "app": {
     "appName": "My New App"
   },
   //-----------------------
   // If "availableApps" is greater than one, the CMS will then be multitenant, 
   // otherwise it will be dedicated to a single app
-  "availableApps": 20,
+  "availableApps": 1,
   "paths": {
-    "templatesBasePath": "templates"
+    "templatesBase": "templates",
+    "adminTemplateBase": "templates/admin"
   },
   "session": {
-    "salt": "$2a$10$phUYETiJArxNIGLh6P.ZSe"
+    "salt": "$2a$10$phUYETiJArxNIGLh6P.ZSe",
+    "secret": "shovelapps-cms",
+    "jsonstore": {
+      "filename": "session.json",
+      "path": "filestorage/.session"
+    }
+  },
+  "localization": {
+    "locales": ["en", "es", "fr", "de", "ja", "pt"],
+    "directory": "./config/locales"
   },
   "packager": {
-    "htmlBasePath": ""
+    "htmlBasePath": "www",
+    "zipFilename": "shovelapps-cms-app.zip"
   },
   "backend": {
     // should be a reachable url for the shipped app in order to communicate to the backend to fetch dynamic content.
