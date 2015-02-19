@@ -47,8 +47,8 @@ function builder(app, server, sockets) {
   });
 
   sockets.platform.on('datareceived', function(data) {
-    debug("Platform emitted datareceived with data: %j", data);
-    app.emit('source code upload progress', data);
+    debug("Uploading %s to Shovel apps Platform. Progress: %s", data.buildId.buildId, data.progress);
+    app.emit('source code upload progress:', data);
     if (data.progress == "100%") {
       debug('Source code upload complete');
       app.emit('upload-complete', data);
@@ -118,7 +118,7 @@ function builder(app, server, sockets) {
       status = "";
     });
     app.on("upload-complete", function(data) {
-      debug("upload-complete", data);
+      debug("Uploading %s to Shovel apps platform completed.", data.buildId.buildId);
       adminpanelSocket.emit("upload-complete", data);
       status = "upload-complete";
     });
@@ -171,6 +171,7 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
         buildStream.on("error", function(err) {
           debug("Error building app: %j", err);
         });
+        debug("Started piping zip file to platorm");
         readStream.pipe(buildStream);
       });
     });
