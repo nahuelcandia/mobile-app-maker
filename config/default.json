@@ -23,6 +23,10 @@
       "path": "filestorage/.session"
     }
   },
+  "localization": {
+    "locales": ["en", "es", "fr", "de", "ja", "pt"],
+    "directory": "./config/locales"
+  },
   "packager": {
     "htmlBasePath": ""
   },
