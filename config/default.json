@@ -28,7 +28,8 @@
     "directory": "./config/locales"
   },
   "packager": {
-    "htmlBasePath": ""
+    "htmlBasePath": "www",
+    "zipFilename": "shovelapps-cms-app.zip"
   },
   "backend": {
     // should be a reachable url for the shipped app in order to communicate to the backend to fetch dynamic content.
