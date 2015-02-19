@@ -1,22 +1,18 @@
-var io = require('socket.io');
-var ioclient = require('socket.io-client');
-var ss = require('socket.io-stream');
-var fs = require("fs");
-var path = require("path");
-var jade = require("jade");
-var packager = require("../../lib/packager");
-var frontend = require("../../lib/frontend");
-var config = require("config").get("app");
-var debug = require("debug")("cms:builderservice");
-var builds = require("../../lib/db").builds;
+var ss = require("socket.io-stream"),
+  path = require("path"),
+  jade = require("jade"),
+  packager = require("../../lib/packager"),
+  frontend = require("../../lib/frontend"),
+  config = require("config").get("app"),
+  debug = require("debug")("cms:builderservice"),
+  builds = require("../../lib/db").builds;
 module.exports = builder;
 
 
 function builder(app, server, sockets) {
   var status = "";
 
-  app.locals.googlemaps = {}
-  app.get('/admin/build', function(req, res, next) {
+  app.get("/admin/build", function(req, res) {
     debug("Finding previous builds");
     builds.find({}).limit(9).exec(function(err, docs) {
       if (err) {
@@ -25,7 +21,7 @@ function builder(app, server, sockets) {
       docs.forEach(function(doc) {
         var d = new Date(doc.timestamp);
         doc.date = d.toDateString();
-        doc.buildIdShort = doc.buildId.split('-')[0];
+        doc.buildIdShort = doc.buildId.split("-")[0];
 
       });
       debug("Found %s previous builds", docs.length);
@@ -36,29 +32,30 @@ function builder(app, server, sockets) {
 
   builder.sockets = sockets;
 
-  sockets.platform.on('apkbuilt', function(data) {
-    debug('Platform emitted apkbuilt with data: %j', data);
-    app.emit('apkbuilt', data);
+  sockets.platform.on("apkbuilt", function(data) {
+    debug("Platform emitted apkbuilt with data: %j", data);
+    app.emit("apkbuilt", data);
   });
 
-  sockets.platform.on('apkbuilderror', function(data) {
-    debug('Platform emitted apkbuilderror with data: %j', data);
-    app.emit('apkbuilderror', data);
+  sockets.platform.on("apkbuilderror", function(data) {
+    debug("Platform emitted apkbuilderror with data: %j", data);
+    app.emit("apkbuilderror", data);
   });
 
-  sockets.platform.on('datareceived', function(data) {
-    debug("Uploading %s to Shovel apps Platform. Progress: %s", data.buildId.buildId, data.progress);
-    app.emit('source code upload progress:', data);
-    if (data.progress == "100%") {
-      debug('Source code upload complete');
-      app.emit('upload-complete', data);
+  sockets.platform.on("datareceived", function(data) {
+    debug("Uploading %s to Shovel apps Platform. Progress: %s",
+      data.buildId.buildId, data.progress);
+    app.emit("source code upload progress:", data);
+    if (data.progress === "100%") {
+      debug("Source code upload complete");
+      app.emit("upload-complete", data);
     }
   });
 
   app.on("apkbuilt", function(data) {
-    debug('CMS emitted apkbuilt with data: %j', data);
-    var buildData = data.url.split('/');
-    var buildId = buildData[buildData.length - 1].split('.')[0];
+    debug("CMS emitted apkbuilt with data: %j", data);
+    var buildData = data.url.split("/");
+    var buildId = buildData[buildData.length - 1].split(".")[0];
     builds.update({
       buildId: buildId
     }, {
@@ -72,9 +69,9 @@ function builder(app, server, sockets) {
   });
 
   app.on("apkbuilderror", function(data) {
-    debug('CMS emitted apkbuilderror with data: %j', data);
-    var buildData = data.url.split('/');
-    var buildId = buildData[buildData.length - 1].split('.')[0];
+    debug("CMS emitted apkbuilderror with data: %j", data);
+    var buildData = data.url.split("/");
+    var buildId = buildData[buildData.length - 1].split(".")[0];
     builds.update({
       buildId: buildId
     }, {
@@ -91,21 +88,22 @@ function builder(app, server, sockets) {
   app.on("upload-complete", function(data) {
     builds.insert({
       buildId: data.buildId.buildId,
-      apkUrl: '',
+      apkUrl: "",
       built: 0,
       timestamp: Date.now()
     });
   });
   sockets.adminPanel.on("connection", function(adminpanelSocket) {
     adminpanelSocket.on("already working?", function() {
-      if (status == "") {
-        adminpanelSocket.emit('doin nothing');
-      } else if (status != 'source code upload progress') {
+      if (status === "") {
+        adminpanelSocket.emit("doin nothing");
+      } else if (status !== "source code upload progress") {
         adminpanelSocket.emit(status);
       }
-      debug('Checking builder status: ' + status);
+      debug("Checking builder status: " + status);
     });
     adminpanelSocket.on("buildApk", function(options) {
+      debug("APK build request from Admin panel with options: %j", options);
       builder.renderAndRequestBuild(app, adminpanelSocket);
       status = 1;
     });
@@ -118,7 +116,8 @@ function builder(app, server, sockets) {
       status = "";
     });
     app.on("upload-complete", function(data) {
-      debug("Uploading %s to Shovel apps platform completed.", data.buildId.buildId);
+      debug("Uploading %s to Shovel apps platform completed.",
+        data.buildId.buildId);
       adminpanelSocket.emit("upload-complete", data);
       status = "upload-complete";
     });
@@ -129,7 +128,7 @@ function builder(app, server, sockets) {
       adminpanelSocket.emit("platform connect");
     }
     // Or if the connection takes place later
-    sockets.platform.on("connect", function platformSocketError(err) {
+    sockets.platform.on("connect", function platformSocketError() {
       adminpanelSocket.emit("platform connect");
     });
   });
@@ -177,11 +176,11 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
     });
     zipStream.pipe(tmpFileStream);
   });
-}
+};
 
 builder.createBuildRequestStream = function(app, appOptions) {
   var sockets = builder.sockets,
     stream = ss.createStream();
-  ss(sockets.platform).emit('sourcecodeupload', stream, appOptions);
+  ss(sockets.platform).emit("sourcecodeupload", stream, appOptions);
   return stream;
-}
+};
