@@ -136,13 +136,13 @@ function builder(app, server, sockets) {
 }
 
 builder.renderAndRequestBuild = function(app, clientSocket) {
-  frontend.renderFrontend(app, {}, function(err, html) {
+  app.cms.frontend.trigger("render", {}, {}, function(err, data, locals) {
     if (err) {
       clientSocket.emit("error rendering frontend");
       debug("Rendering failed on builder %s", err.stack);
       return;
     }
-    var zipStream = packager.createAppZipStream(html);
+    var zipStream = packager.createAppZipStream(data.html);
     //temporary file for getting the stream size
     var filename = path.join(process.cwd(), "filestorage", "tmp", "app.zip");
     var fs = require("fs");
