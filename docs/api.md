@@ -113,6 +113,7 @@ on a hookable object. Every triggered event needs different parameters
 specific to task the imply.
 
 #### app.cms.frontend.trigger("render", data, locals, done)
+
 * done(app, locals, cb)
  * `err` - null if nothing bad happened.
  * `data` - Object.
