@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Plugins
 
 Plugins extend **Shovel apps CMS**'s backend features or the frontend by using extra
