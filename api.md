@@ -90,7 +90,7 @@ These events are emitted on the [app](#app) object.
 
 ## Hooks
 
-Internally Shovel apps CMS backend trigers events that result in some actions
+Internally **Shovel apps CMS** backend triggers events that result in some actions
 and offer hooks for you as a developer to hang on and add custom functionality. 
 
 This behaviour is achieved via the [hooke](https://www.npmjs.com/package/hooke) offering thus, hooks for plugins and modules.
