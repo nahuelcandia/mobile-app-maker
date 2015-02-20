@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Templates
 
 Templates are the base for an app. You can create templates using differente rendering
