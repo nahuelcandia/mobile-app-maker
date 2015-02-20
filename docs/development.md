@@ -10,7 +10,7 @@ and [JADE](http://jade-lang.com/)/[EJS](http://www.embeddedjs.com/)/HTML  templa
 
 * [Templates](templates)
 * [Plugins](plugins)
-* [Hooks](hooks)
+* [Hooks](api#hooks)
 
 ## Shovel apps CMS directory structure
 
