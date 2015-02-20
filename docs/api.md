@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 #API
 
 The API is distributd in the backend and in the frontend. There are also some methods avaiable just for the admin panel. 
