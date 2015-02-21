@@ -114,6 +114,17 @@ specific to task the imply.
 
 #### app.cms.frontend.trigger("render", data, locals, done)
 
+* `data` - Object.
+  * `html` - render html as a string.
+* `locals` - Object passed as locals to the render function
+* done(app, locals, cb)
+ * `err` - null if nothing bad happened.
+ * `data` - Object.
+  * `html` - render html as a string.
+ * `locals` - Object passed as locals to the render function
+
+#### app.cms.packager.trigger("packager", bulks, files, done)
+
 * done(app, locals, cb)
  * `err` - null if nothing bad happened.
  * `data` - Object.
