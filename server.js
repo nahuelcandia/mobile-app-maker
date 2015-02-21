@@ -9,7 +9,7 @@ var myelements = require("myelements.jquery");
 var server = http.createServer(app);
 
 myelements(app, server, {
-  socketPath: "/myelements"
+  socketPath: "/myelements.io"
 });
 //Using HTTPS server
 // http://docs.nodejitsu.com/articles/HTTP/servers/how-to-create-a-HTTPS-server
@@ -41,5 +41,6 @@ app.cms.template = require("./lib/template")(app),
 app.cms.frontend = require("./lib/frontend")(app),
 app.cms.admin = require("./lib/admin")(app),
 app.cms.packager = require("./lib/packager")(app),
+require("./lib/optimism")(app);
 
 server.listen(process.env.PORT || 3000)
