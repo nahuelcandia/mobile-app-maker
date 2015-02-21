@@ -14,10 +14,10 @@ filestorage/db/plugins.db
 filestorage/db/templates.db
 
 #Ignore non-default templates
-templates/
+templates/*
 !templates/admin/
 !templates/bootstrap-3-jade/
-!templates/framework7/
+!templates/jqmobile/
 
 #Ignore non-default plugins
 plugins/

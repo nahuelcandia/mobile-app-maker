@@ -2,7 +2,7 @@
   "installed": true,
   //--- DEPRECATED: -------
   //"template": "bootstrap-3-jade",
-  "template": "phonegap-jqm-boilerplate",
+  "template": "jqmobile",
   //"template": "framework7",
   "app": {
     "appName": "My New App"
