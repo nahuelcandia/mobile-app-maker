@@ -31,6 +31,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+app.use(bodyParser.json());
+
 app.cms = {};
 app.cms.i18n = require("./lib/i18n")(app),
 app.cms.session = require("./lib/session")(app),
