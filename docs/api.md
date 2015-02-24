@@ -101,10 +101,12 @@ This behaviour is achieved via the [hooke](https://www.npmjs.com/package/hooke) 
 
 **Arguments**
 
-* done(data, locals)
+* done(data, locals, next)
  * `data` - Object.
   * `html` - render html as a string.
  * `locals` - object passed as locals to the render function
+ * `next([err])` - Call next when your hook is done.
+   * `next` - Call next when your hook is done.
 
 ### Triggering hookable events
 
@@ -117,7 +119,7 @@ specific to task the imply.
 * `data` - Object.
   * `html` - render html as a string.
 * `locals` - Object passed as locals to the render function
-* done(app, locals, cb)
+* done(app, locals, cb) - A callback called when all hooks are done.
  * `err` - null if nothing bad happened.
  * `data` - Object.
   * `html` - render html as a string.
