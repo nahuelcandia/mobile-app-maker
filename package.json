@@ -31,7 +31,9 @@
     "myelements.jquery": "*",
     "walkdir": "~0.0.7",
     "bcryptjs": "~2.1.0",
-    "hooke": "~0.1.0"
+    "hooke": "~0.1.0",
+    "async": "~0.9.0",
+    "simple-random-id": "~1.0.1"
   },
   "devDependencies": {},
   "scripts": {
