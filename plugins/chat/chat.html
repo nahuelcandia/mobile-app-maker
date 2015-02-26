@@ -7,13 +7,52 @@
   var chatbackend = io.connect("/chat");
   $(function() {
 
+    function appendMessage(elem, data, labelclass){
+      $(elem).append($("<div class='round'><span style='font-size:13px; font-weight: 700;' class='label " + labelclass + " radius large'>" + data.s + ":</span> </div>").append($("<p class='' style='word-wrap: break-word;'></p>").html(data.m)));
+    }
 
     var $chatinput = $(".chat-input");
     var $chatmessages = $(".chat-messages");
     var $chatstatus = $(".chat-status");
     var timestamp = new Date();
     var guest_seed = timestamp.getTime() * (Math.random() * 1);
-    var nickname = 'Guest_' + guest_seed.toString().substr(2, 5);
+    var nickname = 'Guest #' + guest_seed.toString().substr(2, 5);
+    /*localforage.getItem('nickname', function(err, value){
+      if(err){
+        console.log('error');
+      }else{
+        console.log(typeof value);
+        if(typeof value == 'undefined'){
+          var nick = 'Guest #' + guest_seed.toString().substr(2, 5);
+          localforage.setItem('nickname', nick);
+          nickname = nick;
+           
+        }else{
+          nickname = value;
+        }
+      }
+    });*/
+
+
+    var chatlog = localforage.getItem('chatlog', function(err, value){
+      if(err){
+        console.log('error');
+      }else{
+        try{
+
+          var messages = value.messages; 
+          if(typeof messages == 'object'){
+            for (i = 0; i < value.messages.length; i++) { 
+              var labelclass = (value.messages[i].s == nickname ? 'success' : 'alert');
+              appendMessage($chatmessages, value.messages[i], labelclass);
+            }
+              
+          }  
+        }
+        catch(err){}
+      }
+    });
+    
     $chatinput.on("keyup", function(e) {
       
       var code = e.which; // recommended to use e.which, it's normalized across browsers
@@ -26,11 +65,15 @@
         $(this).val("");
         return;
       }
-      chatbackend.emit("keyup", $(this).val());
+      chatbackend.emit("keyup", {s: nickname, m: $(this).val()});
     })
 
     chatbackend.on("message", function(data) {
       console.log('message');
+      var labelclass = "alert";
+      if(data.s == nickname){
+        var labelclass = "success";
+      }
       var height = $chatmessages.get(0).scrollHeight;
       $chatmessages.scrollTop(height);
 
@@ -47,17 +90,38 @@
       } 
       var today = dd+'/'+mm+'/'+yyyy;
       
-      $chatmessages.append($("<div class='round'><span style='font-size:16px' class='label alert radius large'>" + data.s + ":</span> </div>").append($("<p class='' style='word-wrap: break-word;'></p>").html(data.m)));
+      appendMessage($chatmessages, data, labelclass);
+      
+      var chatlog = localforage.getItem('chatlog', function(err, value) { 
+        var messages = value.messages;
+        if(typeof messages == 'undefined'){
+          value = {messages: []};  
+        }
+        value.messages.push(data);
+        localforage.setItem('chatlog', value); 
+        
+      });
+      
     })    
 
     chatbackend.on("keyup", function(data) {
       console.log('keyup');
-      $chatstatus.fadeIn(500);
-      timeout = setTimeout(function(){
+      typing = true;
+      $chatstatus.find('.user').html(data.s);
+      $chatstatus.animate({
+        opacity: 1,
+        queue: 'typing'
+      }, 100, function(){
+        if(typing == true){
+          setTimeout(function(){
+            $chatstatus.animate({opacity: 0, queue: 'typing'},100);
+            typing = false;
+          }, 400);
+          typing=false;
+        }
         
-        clearTimeout(timeout);
-        $chatstatus.fadeOut(500);
-      }, 500);
+      });
+
     })
   })
 </script>

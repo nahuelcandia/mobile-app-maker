@@ -1,0 +1,16 @@
+{
+  "name": "Facebook Connect",
+  "version": "0.1.0",
+  "description": "Adds support for facebook connect",
+  "main": "index.js",
+  "bin": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {},
+  "author": "Fernando <fernando@shovelapps.com> (http://shovelapps.com/)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shovelapps/shovelapps-cms"
+  }
+}
