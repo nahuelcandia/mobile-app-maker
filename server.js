@@ -9,7 +9,7 @@ var myelements = require("myelements.jquery");
 var server = http.createServer(app);
 
 myelements(app, server, {
-  socketPath: "/myelements"
+  socketPath: "/myelements.io"
 });
 //Using HTTPS server
 // http://docs.nodejitsu.com/articles/HTTP/servers/how-to-create-a-HTTPS-server
@@ -31,13 +31,18 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-require("./lib/i18n")(app);
-require("./lib/session")(app);
-var sockets = require("./lib/sockets")(app, server);
-require("./lib/installer")(app);
-require("./lib/plugin-loader")(app, server, sockets);
-require("./lib/template")(app);
-require("./lib/frontend")(app);
-require("./lib/admin")(app);
-require("./lib/packager")(app);
-server.listen(process.env.PORT || 3000);
+app.use(bodyParser.json());
+
+app.cms = {};
+app.cms.i18n = require("./lib/i18n")(app),
+app.cms.session = require("./lib/session")(app),
+app.cms.sockets = require("./lib/sockets")(app, server),
+app.cms.installer = require("./lib/installer")(app),
+app.cms.pluginloader = require("./lib/plugin-loader")(app, server, app.cms.sockets),
+app.cms.template = require("./lib/template")(app),
+app.cms.frontend = require("./lib/frontend")(app),
+app.cms.admin = require("./lib/admin")(app),
+app.cms.packager = require("./lib/packager")(app),
+require("./lib/optimism")(app);
+
+server.listen(process.env.PORT || 3000)

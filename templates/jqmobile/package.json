@@ -1,0 +1,22 @@
+{
+  "name": "phonegap-jqm-boilerplate",
+  "version": "0.0.0",
+  "description": "the template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mappmechanic/phonegap-jqm-boilerplate"
+  },
+  "keywords": [
+    "template",
+    "shovelappscms"
+  ],
+  "author": "osk <oskosk@gmail.com> (http://olopez.com.ar/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mappmechanic/phonegap-jqm-boilerplate/issues"
+  }
+}
