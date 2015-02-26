@@ -1,7 +1,6 @@
 <div data-role="navbar" data-iconpos="bottom">
   <ul data-menuitems-container>
     <li><a href="#home">Home</a></li>
-    <li><a href="#screen2">Screen 2</a></li>
     <%screens.forEach(function(screen) { %>
       <li><a href="#<%=screen.id%>"><%=screen.title%></a></li>
     <%})%>
