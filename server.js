@@ -43,6 +43,8 @@ app.cms.frontend = require("./lib/frontend")(app),
 app.cms.pluginloader = require("./lib/plugin-loader")(app, server, app.cms.sockets),
 app.cms.admin = require("./lib/admin")(app),
 app.cms.packager = require("./lib/packager")(app),
+app.cms.menus = require("./lib/menus")(app),
+app.cms.screens = require("./lib/screens")(app),
 require("./lib/optimism")(app);
 
 server.listen(process.env.PORT || 3000)

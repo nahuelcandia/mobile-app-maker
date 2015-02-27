@@ -1,0 +1,23 @@
+extend ../../templates/admin/layout 
+
+block content
+  .container
+    h2 App screens
+    if !screens.length
+      .row
+        .col-xs-12
+          strong It seems you have not created any screen for this app
+
+    .row
+      each screen in screens
+        .col-sm-3
+          .panel.panel-default
+            .panel-body
+              .container-fluid
+                .row
+                  .col-sm-12
+                    h4=screen.title
+                    br
+                    a(href="/admin/screens/#{screen.id}") Edit
+                    hr
+                    div=screen.text
