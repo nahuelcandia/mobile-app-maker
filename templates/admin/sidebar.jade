@@ -22,7 +22,7 @@ block sidebar
             li
               a(href="/admin/plugins") #{__('Add new plugin')}
         li.divider
-        li.dropdown
+        li.dropdown.hidden
           a.dropdown-toggle(data-toggle="dropdown")
             i.icon.ion-code-working
             |  #{__('Templates')}
@@ -35,7 +35,7 @@ block sidebar
             li
               a(href="/admin/templates") #{__('Add new template')}
         li.divider
-        li.dropdown
+        li.dropdown.hidden
           a.dropdown-toggle(href="#", data-toggle="dropdown") 
             i.icon.ion-person-stalker
             |  #{__('Users')}
@@ -62,7 +62,7 @@ block sidebar
           a(href="/logout") 
             i.icon.ion-log-out
             |  #{__('Logout')}
-        li.dropdown(style="margin-top:45px;")
+        li.dropdown.hidden(style="margin-top:45px;")
           a.dropdown-toggle(data-toggle="dropdown", style="color: #ec1164;")
             i.icon.ion-cube
             |  #{__('My ShovelApps')} 
@@ -78,6 +78,8 @@ block sidebar
             li
               a(href="/admin/apps") #{__('Go to apps manager')}
         li.divider
+          each item in menus.admin
+            a(href="#{item.href}")=item.title
 
   .navbar.navbar-fixed-top.hidden-md.hidden-lg.navbar-inverse
     button.navbar-toggle(type="button", data-toggle="offcanvas", data-target=".navmenu", data-canvas=".container")

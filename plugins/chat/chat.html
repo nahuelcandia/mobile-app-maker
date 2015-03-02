@@ -6,14 +6,23 @@
 <script>
   var chatbackend = io.connect("/chat");
   $(function() {
+
+
     var $chatinput = $(".chat-input");
     var $chatmessages = $(".chat-messages");
+    var $chatstatus = $(".chat-status");
+    var timestamp = new Date();
+    var guest_seed = timestamp.getTime() * (Math.random() * 1);
+    var nickname = 'Guest_' + guest_seed.toString().substr(2, 5);
     $chatinput.on("keyup", function(e) {
+      
       var code = e.which; // recommended to use e.which, it's normalized across browsers
       
       if(code==13){
         e.preventDefault();
-        chatbackend.emit("message", $(this).val());
+        var message = {s: nickname, m: $(this).val()};
+        console.log(message);
+        chatbackend.emit("message", message);
         $(this).val("");
         return;
       }
@@ -21,9 +30,34 @@
     })
 
     chatbackend.on("message", function(data) {
+      console.log('message');
       var height = $chatmessages.get(0).scrollHeight;
       $chatmessages.scrollTop(height);
-      $chatmessages.append($("<div></div>").html(data));
+
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+
+      var yyyy = today.getFullYear();
+      if(dd<10){
+          dd='0'+dd
+      } 
+      if(mm<10){
+          mm='0'+mm
+      } 
+      var today = dd+'/'+mm+'/'+yyyy;
+      
+      $chatmessages.append($("<div class='round'><span style='font-size:16px' class='label alert radius large'>" + data.s + ":</span> </div>").append($("<p class='' style='word-wrap: break-word;'></p>").html(data.m)));
+    })    
+
+    chatbackend.on("keyup", function(data) {
+      console.log('keyup');
+      $chatstatus.fadeIn(500);
+      timeout = setTimeout(function(){
+        
+        clearTimeout(timeout);
+        $chatstatus.fadeOut(500);
+      }, 500);
     })
   })
 </script>

@@ -1,0 +1,69 @@
+extend ../../templates/admin/layout
+
+block content
+  .container
+    h3.page-header Editing screen #{screen.title}
+    .row
+      .col-sm-12(style="text-align:right")
+          button.btn.btn-primary#save Save screen
+
+    .row
+      form#screenform(action="/admin/screens")
+        input(type="hidden", name="currentId", value="#{screen.id}")
+        .col-md-6
+          .form-group
+            label(for="content") Content
+            // Create toolbar container
+            #editortoolbar
+              // Add font size dropdown
+              select.ql-size
+                option(value='small') Small
+                option(value='normal', selected='') Normal
+                option(value='large') Large
+                option(value='huge') Huge
+              // Add a bold button
+              span.ql-format-group
+                span.ql-format-button.ql-bold(title='Bold')
+                span.ql-format-separator
+                span.ql-format-button.ql-italic(title='Italic')
+                span.ql-format-separator
+                span.ql-format-button.ql-underline(title='Underline')
+                span.ql-format-separator
+              span.ql-format-group
+                span.ql-format-button.ql-list(title='List')
+                span.ql-format-separator
+                span.ql-format-button.ql-bullet(title='Bullet')
+                span.ql-format-separator
+                select.ql-align(title='Text Alignment')
+                  option(value='left', label='Left', selected='')
+                  option(value='center', label='Center')
+                  option(value='right', label='Right')
+                  option(value='justify', label='Justify')
+              span.ql-format-group
+                span.ql-format-button.ql-link(title='Link') 
+            div.form-control#screen(name="content",style="height:400px")!=screen.content
+        .col-md-6
+          .form-group
+            label(for="title") Title
+            input.form-control(name="title", value="#{screen.title}")
+            span.help-block The title will be shown in links and in the top navbar
+          .checkbox
+            label
+              input(type="checkbox") 
+              | Show in menu
+          .form-group
+            label(for="title") Screen id
+            input.form-control(name="id", value="#{screen.id}")  
+            span.help-block For links between screens   
+          h4.page-header Other screen actions
+          p
+            a#destroyScreenButton(href="#") Remove screen          
+
+
+block stylesheets
+  link(rel="stylesheet", href="css/quill.base.css")
+  link(rel="stylesheet", href="css/quill.snow.css")
+block scripts
+  script(src="js/quill.min.js")
+  script(src="js/jquery.rest.min.js")
+  script(src="js/screeneditor.js")
