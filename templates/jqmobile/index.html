@@ -10,28 +10,26 @@
  	<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
  	<link rel="stylesheet" href="css/app.css" type="text/css">
  </head>
- <body data-screens-container> 
+ <body> 
 
  	<div data-role="page" id="home" data-add-back-btn="true">
  		<div data-role="header">
  			<h1 class="myelement">The app</h1>
  		</div>
  		<div data-role="content">
- 			<h3>This is the homescreen of the App</h3>
+      <div style="text-align:center">
+ 			  <h3>This is the homescreen of the App</h3>
+        <img src="shovelapps-logo.png">
+        <p>
+          This screen is to be modified by editing the template.
+        </p>
+        <p>
+          You can add extra screens from the <strong>Admin menu</strong>
+        </p>
+      </div>
  		</div>
  		<div data-role="footer" data-position="fixed">
  			<%- include navbar.html %>
- 		</div>
- 	</div>
- 	<div data-role="page" id="screen2" data-add-back-btn="true">
- 		<div data-role="header">
- 			<h1>Screen 2</h1>
- 		</div>
- 		<div data-role="content">
-
- 		</div>
- 		<div data-role="footer" data-position="fixed">
-      <%- include navbar.html %>
  		</div>
  	</div>
   <%=typeof screens%>

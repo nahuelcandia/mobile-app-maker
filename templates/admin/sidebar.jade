@@ -78,6 +78,8 @@ block sidebar
             li
               a(href="/admin/apps") #{__('Go to apps manager')}
         li.divider
+          each item in menus.admin
+            a(href="#{item.href}")=item.title
 
   .navbar.navbar-fixed-top.hidden-md.hidden-lg.navbar-inverse
     button.navbar-toggle(type="button", data-toggle="offcanvas", data-target=".navmenu", data-canvas=".container")
