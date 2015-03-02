@@ -22,7 +22,7 @@ block sidebar
             li
               a(href="/admin/plugins") #{__('Add new plugin')}
         li.divider
-        li.dropdown
+        li.dropdown.hidden
           a.dropdown-toggle(data-toggle="dropdown")
             i.icon.ion-code-working
             |  #{__('Templates')}
@@ -35,7 +35,7 @@ block sidebar
             li
               a(href="/admin/templates") #{__('Add new template')}
         li.divider
-        li.dropdown
+        li.dropdown.hidden
           a.dropdown-toggle(href="#", data-toggle="dropdown") 
             i.icon.ion-person-stalker
             |  #{__('Users')}
