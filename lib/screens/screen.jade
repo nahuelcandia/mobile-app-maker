@@ -47,7 +47,10 @@ block content
             span.help-block The title will be shown in links and in the top navbar
           .checkbox
             label
-              input(type="checkbox") 
+              if screen.showinmenu
+                input(name="showinmenu", type="checkbox", checked) 
+              else
+                input(name="showinmenu", type="checkbox") 
               | Show in menu
           .form-group
             label(for="title") Screen id
