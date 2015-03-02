@@ -3,7 +3,9 @@ layout: default
 ---
 
 #Shovel apps CMS 
-### **Open Source mobile App Maker**.
+
+### Open Source mobile App Maker
+
 [http://shovelapps.org](http://shovelapps.org)
 
 
