@@ -21,7 +21,7 @@ templates/*
 !templates/jqmobile/
 
 #Ignore non-default plugins
-plugins/
+plugins/*
 !plugins/builderservice/
 !plugins/chat/
 !plugins/google-map/

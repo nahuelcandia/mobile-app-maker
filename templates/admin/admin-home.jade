@@ -11,7 +11,17 @@ block content
     .tab-pane.active#adminhome
       .container-fluid
         h2 #{__('App Admin Panel')}
-
+        h3 From here, you can
+        ul
+          li 
+            a(href="/admin/screens") Mange your app screens
+          li 
+            a(href="/admin/build") Compile your app 
+            | to Android binaries.
+          li 
+            a(href="/admin/plugins") Enable/disable specific plugins 
+        h3 Documentation
+        p You can find <a target="_blank" href="http://shovelapps.github.io/shovelapps-cms">Shovel apps CMS docs</a> at the Github repo.           
 block scripts
   script(src="/socket.io/socket.io.js")
   script(src="/coreassets/jquery.qrcode/jquery.qrcode.min.js")

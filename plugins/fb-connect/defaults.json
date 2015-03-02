@@ -1,0 +1,8 @@
+{
+  "app-id": "359817797541747",
+  "api-key": "",
+  "secret": "",
+  "scope": "public_profile, user_likes, user_friends",
+  "cookie": true,
+  "xfbml": true
+}

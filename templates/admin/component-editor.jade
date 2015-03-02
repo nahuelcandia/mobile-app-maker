@@ -1,0 +1,60 @@
+extends layout
+
+block head
+  // In order for assets to load as they would module.loaded
+  // insider file://
+  base(href="/")
+
+block title
+  title #{__('Editing')} 
+
+block content
+  .container(style="height:100%;")
+    div#editor_div
+    textarea(name="editor")!=source
+ 
+
+block stylesheets
+  style.
+    #editor_div{
+      position:relative;
+      height:99%;
+    }
+    #editor { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+
+block scripts
+
+  script(src="/coreassets/ace/ace.js")
+  script(src="/coreassets/ace/mode-html.js")
+  script(src="/coreassets/ace/theme-monokai.js")
+  script(src="/coreassets/ace/worker-html.js")
+  script(src="/coreassets/ace/ext-settings_menu.js")
+
+  script.
+    var textarea = $('textarea[name="editor"]');
+    textarea.hide();
+    var editor = ace.edit("editor_div");
+    ace.require('ace/ext/settings_menu').init(editor);
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/jade");
+    editor.setValue($('textarea[name="editor"]').val());
+
+    editor.commands.addCommands([{
+      name: "showSettingsMenu",
+      bindKey: {win: "Ctrl-q", mac: "Command-q"},
+      exec: function(editor) {
+        editor.showSettingsMenu();
+      },
+      readOnly: true
+    }]);
+
+    $('#submit').on('click', function() {
+        textarea.val(editor.getSession().getValue());
+    });
