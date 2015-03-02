@@ -6,7 +6,10 @@ block content
     if !screens.length
       .row
         .col-xs-12
-          strong It seems you have not created any screen for this app
+          strong It seems you have not created any screen for this app.
+          p
+            a(href="/admin/screens/new") Create your first screen now.
+
 
     .row
       each screen in screens
