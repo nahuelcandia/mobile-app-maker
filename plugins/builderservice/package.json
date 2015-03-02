@@ -1,0 +1,16 @@
+{
+  "name": "Builder service",
+  "version": "0.1.0",
+  "description": "Connects the CMS to Shovel apps platform bulider service. Allows you to create mobile binaries from this CMS.",
+  "main": "index.js",
+  "bin": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {},
+  "author": "osk <oscar@shovelapps.com> (http://shovelapps.com/)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shovelapps/shovelapps-cms"
+  }
+}
