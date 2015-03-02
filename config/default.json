@@ -34,7 +34,7 @@
   "backend": {
     // should be a reachable url for the shipped app in order to communicate to the backend to fetch dynamic content.
     // if testing the app in the same network, a local ip address like 192.168.X.XXX might be used.
-    "baseUrl": "http://192.168.1.145:3000"
+    "baseUrl": ""
   },
   "platform": {
     "shovelappsPlatformUrl": "http://platform.shovelapps.com"
