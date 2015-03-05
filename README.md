@@ -64,7 +64,7 @@ All config is loaded from the `config/default.json` once the CMS is installed.
 
 ##Issues
 
-[Report your issues with Shovel apps CMS here](http://github.com/shovelapps/issues).
+[Report your issues with Shovel apps CMS here](http://github.com/shovelapps/shovelapps-cms/issues).
 
 ##Libraries used
 
