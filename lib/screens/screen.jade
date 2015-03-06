@@ -39,17 +39,18 @@ block content
                   option(value='center', label='Center')
                   option(value='right', label='Right')
                   option(value='justify', label='Justify')
-              span.ql-format-group
-                span.ql-format-button.ql-link(title='Link') 
             div.form-control#screen(name="content",style="height:400px")!=screen.content
         .col-md-6
           .form-group
             label(for="title") Title
             input.form-control(name="title", value="#{screen.title}")
-            span.help-block The title will be shown in links and in the top navbar
+            span.help-block The title will be shown in links and in the navbar
           .checkbox
             label
-              input(type="checkbox") 
+              if screen.showinmenu
+                input(name="showinmenu", type="checkbox", checked) 
+              else
+                input(name="showinmenu", type="checkbox") 
               | Show in menu
           .form-group
             label(for="title") Screen id
