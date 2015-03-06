@@ -22,7 +22,7 @@ block sidebar
             li
               a(href="/admin/plugins") #{__('Add new plugin')}
         li.divider
-        li.dropdown.hidden
+        li.dropdown
           a.dropdown-toggle(data-toggle="dropdown")
             i.icon.ion-code-working
             |  #{__('Templates')}
@@ -32,7 +32,7 @@ block sidebar
             li.divider
             li
               a(href="/admin/templates") #{__('Manage templates')}
-            li
+            li.hidden
               a(href="/admin/templates") #{__('Add new template')}
         li.divider
         li.dropdown.hidden

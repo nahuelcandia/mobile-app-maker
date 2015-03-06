@@ -10,15 +10,23 @@ block title
 
 block content
   .container(style="height:100%;")
-    div#editor_div
+    div.col-xs-2#editor_sidebar
+      .chosensearch
+    div.col-xs-10#editor_div
     textarea(name="editor")!=source
  
 
 block stylesheets
+  link(href="/coreassets/tree/TreeStyle.css", rel="stylesheet")
   style.
     #editor_div{
       position:relative;
-      height:99%;
+      height:100%;
+    }
+    #editor_sidebar{
+      position:relative;
+      height:100%;
+      background-color:#333;
     }
     #editor { 
         position: absolute;
@@ -31,6 +39,7 @@ block stylesheets
 
 block scripts
 
+  script(src="/coreassets/tree/jquery.chosentree.js")
   script(src="/coreassets/ace/ace.js")
   script(src="/coreassets/ace/mode-html.js")
   script(src="/coreassets/ace/theme-monokai.js")
@@ -38,6 +47,22 @@ block scripts
   script(src="/coreassets/ace/ext-settings_menu.js")
 
   script.
+    jQuery(function() {
+      $('div.chosensearch').chosentree({
+        width: 500,
+        deepLoad: true,
+        inputName: '',
+        input_placeholder: '#{__('Find')}',
+        input_type: 'search',
+        showtree: true,
+        load: function(node, callback) {
+
+          node = !{JSON.stringify(tree)}
+          
+        }
+      });
+    });
+
     var textarea = $('textarea[name="editor"]');
     textarea.hide();
     var editor = ace.edit("editor_div");
