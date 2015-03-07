@@ -34,6 +34,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.cms = {};
+app.cms.server = server;
 require("./lib/setup")(app);
 app.cms.i18n = require("./lib/i18n")(app);
 app.cms.session = require("./lib/session")(app);
