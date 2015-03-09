@@ -37,7 +37,7 @@ block content
                 if componentType == 'template'
                   button.btn.live-btn(class=btnclass, data-action="activate", data-id=component.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
                     i.icon(class=icon, style="color:white")
-                  a(href="/admin/#{componentType}/edit/" + component.name): button.btn.btn-info.live-btn(data-action="edit", data-id=component.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Edit')}") 
+                  a(href="/admin/#{componentType}/edit/" + component.name): button.btn.btn-info.live-btn(data-action="edit", type="button", data-toggle="tooltip", data-placement="top", title="#{__('Edit')}") 
                     i.icon.ion-edit(style="color:white")
                 else
                   button.btn.live-btn(class=btnclass, data-action="toggle", data-id=component.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
@@ -132,3 +132,4 @@ block scripts
         });
       });
     });
+  
