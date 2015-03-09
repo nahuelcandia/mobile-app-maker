@@ -142,7 +142,7 @@ builder.renderAndRequestBuild = function(app, clientSocket) {
       debug("Rendering failed on builder %s", err.stack);
       return;
     }
-    var zipStream = packager.createAppZipStream(html);
+    var zipStream = packager.createAppZipStream(app, html);
     //temporary file for getting the stream size
     var filename = path.join(process.cwd(), "filestorage", "tmp", "app.zip");
     var fs = require("fs");
