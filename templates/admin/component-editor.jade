@@ -55,6 +55,7 @@ block scripts
       var textarea = $('textarea[name="editor"]');
       textarea.hide();
       var editor = ace.edit("editor_div");
+      editor.setFontSize(16);
       ace.require('ace/ext/settings_menu').init(editor);
       editor.setTheme("ace/theme/monokai");
       editor.getSession().setMode("ace/mode/jade");
@@ -68,6 +69,7 @@ block scripts
         },
         readOnly: true
       }]);
+      var UndoManager = require("ace/undomanager").UndoManager;
       var EditSession = require("ace/edit_session").EditSession;
       var Document = require("ace/document").Document;
       
@@ -141,6 +143,8 @@ block scripts
                   success: function(data){
                     var doc = new Document(data);
                     var newSession = new EditSession(doc, "ace/mode/" + modes[itemData['format']]);
+                    var newUndoManager = new UndoManager();
+                    newSession.setUndoManager(newUndoManager);
                     sessions[itemData['path']] = newSession;
                     editor.setSession(newSession);
                     actualSession = itemData['path'];
