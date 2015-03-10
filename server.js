@@ -2,7 +2,6 @@
 //var config = require("config");
 var http = require("http");
 var app = require("express")();
-var bodyParser = require("body-parser");
 var myelements = require("myelements.jquery");
 
 // Regular HTTP Server
@@ -25,13 +24,6 @@ myelements(app, server, {
 //   key: fs.readFileSync('.sslcerts/key.pem'),
 //   cert: fs.readFileSync('.sslcerts/cert.pem')
 // }, app);
-
-app.use(bodyParser.urlencoded({
-  limit: "50mb",
-  extended: false
-}));
-
-app.use(bodyParser.json());
 
 app.cms = {};
 app.cms.server = server;
