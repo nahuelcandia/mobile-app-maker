@@ -28,6 +28,7 @@ block stylesheets
       position:relative;
       height:100%;
       background-color:#fff;
+      overflow-y: auto;
     }
     #editor { 
         position: absolute;
@@ -50,6 +51,7 @@ block scripts
 
   script.
     $(function() {
+      var actualSession = false;
       var textarea = $('textarea[name="editor"]');
       textarea.hide();
       var editor = ace.edit("editor_div");
@@ -70,7 +72,7 @@ block scripts
       var Document = require("ace/document").Document;
       
       $('#submit').on('click', function() {
-          textarea.val(editor.getSession().getValue());
+          textarea.val(editor.setSession(actualSession).getValue());
       });
 
       $('#tree').aciTree({
@@ -123,12 +125,14 @@ block scripts
       });
       var sessions = [];
 
+      var modes = {css: 'css', html: 'html', md: 'markdown', js: 'javascript', less: 'less', jade: 'jade', json: 'json'};
       $('#tree').on('acitree', function(event, api, item, eventName, options) {
           if (eventName == 'selected'){
               // do something when a item is selected
+
               var itemData = api.itemData(item);
-              alert(itemData);
               if(itemData['inode']) return;
+              if(itemData['editable']) return;
               if(!(itemData['path'] in sessions)){
                 $.ajax({
                   url: '/admin/template/get/' + itemData['template'],
@@ -136,14 +140,16 @@ block scripts
                   data: 'file=' + itemData['path'],
                   success: function(data){
                     var doc = new Document(data);
-                    var newSession = new EditSession(doc, "ace/mode/" + itemData['format']);
+                    var newSession = new EditSession(doc, "ace/mode/" + modes[itemData['format']]);
                     sessions[itemData['path']] = newSession;
                     editor.setSession(newSession);
+                    actualSession = itemData['path'];
                     console.log(sessions);
                   }
                 });
               }else{
                 editor.setSession(sessions[itemData['path']]);
+                actualSession = itemData['path'];
               }
           }
       });
