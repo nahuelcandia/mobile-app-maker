@@ -10,14 +10,15 @@ block title
 
 block content
   .container(style="height:100%;")
-    div.col-xs-2#editor_sidebar
-      .chosensearch
-    div.col-xs-10#editor_div
+    div.col-xs-3#editor_sidebar
+      h3 #{__('Files')}
+      div#tree.aciTree
+    div.col-xs-9#editor_div
     textarea(name="editor")!=source
  
 
 block stylesheets
-  link(href="/coreassets/tree/TreeStyle.css", rel="stylesheet")
+  link(href="/coreassets/tree/css/aciTree.css", rel="stylesheet")
   style.
     #editor_div{
       position:relative;
@@ -26,7 +27,7 @@ block stylesheets
     #editor_sidebar{
       position:relative;
       height:100%;
-      background-color:#333;
+      background-color:#fff;
     }
     #editor { 
         position: absolute;
@@ -39,7 +40,8 @@ block stylesheets
 
 block scripts
 
-  script(src="/coreassets/tree/jquery.chosentree.js")
+  script(src="/coreassets/tree/js/jquery.aciPlugin.min.js")
+  script(src="/coreassets/tree/js/jquery.aciTree.min.js")
   script(src="/coreassets/ace/ace.js")
   script(src="/coreassets/ace/mode-html.js")
   script(src="/coreassets/ace/theme-monokai.js")
@@ -47,19 +49,62 @@ block scripts
   script(src="/coreassets/ace/ext-settings_menu.js")
 
   script.
-    jQuery(function() {
-      $('div.chosensearch').chosentree({
-        width: 500,
-        deepLoad: true,
-        inputName: '',
-        input_placeholder: '#{__('Find')}',
-        input_type: 'search',
-        showtree: true,
-        load: function(node, callback) {
-
-          node = !{JSON.stringify(tree)}
-          
-        }
+    $(function() {
+      $('#tree').aciTree({
+          rootData: [!{JSON.stringify(tree)}],
+          queue: {
+              async: 4,
+              interval: 50,
+              delay: 10
+          },
+          selectable: true,           // selectable extension
+          multiSelectable: false,     // selectable extension
+          fullRow: false,             // selectable extension
+          textSelection: false,       // selectable extension
+          checkbox: false,            // checkbox extension
+          checkboxChain: true,        // checkbox extension
+          checkboxBreak: true,        // checkbox extension
+          checkboxClick: false,       // checkbox extension
+          radio: false,               // radio extension
+          radioChain: true,           // radio extension
+          radioBreak: true,           // radio extension
+          radioClick: false,          // radio extension
+          columnData: [],             // column extension
+          editable: false,            // editable extension
+          editDelay: 250,             // editable extension
+          persist: null,              // persist extension
+          selectHash: null,           // hash extension
+          openHash: null,             // hash extension
+          sortable: false,            // sortable extension
+          sortDelay: 750,             // sortable extension
+          show: {
+              props: {
+                  'height': 'show'
+              },
+              duration: 'medium',
+              easing: 'linear'
+          },
+          animateRoot: true,
+          hide: {
+              props: {
+                  'height': 'hide'
+              },
+              duration: 'medium',
+              easing: 'linear'
+          },
+          view: {
+              duration: 'medium',
+              easing: 'linear'
+          },
+          autoInit: true
+      });
+      $('#tree').on('acitree', function(event, api, item, eventName, options) {
+          if (eventName == 'selected'){
+              // do something when a item is selected
+              var itemData = api.itemData(item);
+              alert('You just selected the item with the ID: ' + api.getId(item) + '\n' +
+                  'also the custom property [my-url] equals: ' + itemData['my-url']);
+          }
       });
     });
 
