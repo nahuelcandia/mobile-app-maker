@@ -50,6 +50,29 @@ block scripts
 
   script.
     $(function() {
+      var textarea = $('textarea[name="editor"]');
+      textarea.hide();
+      var editor = ace.edit("editor_div");
+      ace.require('ace/ext/settings_menu').init(editor);
+      editor.setTheme("ace/theme/monokai");
+      editor.getSession().setMode("ace/mode/jade");
+      editor.setValue($('textarea[name="editor"]').val());
+
+      editor.commands.addCommands([{
+        name: "showSettingsMenu",
+        bindKey: {win: "Ctrl-q", mac: "Command-q"},
+        exec: function(editor) {
+          editor.showSettingsMenu();
+        },
+        readOnly: true
+      }]);
+      var EditSession = require("ace/edit_session").EditSession;
+      var Document = require("ace/document").Document;
+      
+      $('#submit').on('click', function() {
+          textarea.val(editor.getSession().getValue());
+      });
+
       $('#tree').aciTree({
           rootData: [!{JSON.stringify(tree)}],
           queue: {
@@ -98,33 +121,30 @@ block scripts
           },
           autoInit: true
       });
+      var sessions = [];
+
       $('#tree').on('acitree', function(event, api, item, eventName, options) {
           if (eventName == 'selected'){
               // do something when a item is selected
               var itemData = api.itemData(item);
-              alert('You just selected the item with the ID: ' + api.getId(item) + '\n' +
-                  'also the custom property [my-url] equals: ' + itemData['my-url']);
+              alert(itemData);
+              if(itemData['inode']) return;
+              if(!(itemData['path'] in sessions)){
+                $.ajax({
+                  url: '/admin/template/get/' + itemData['template'],
+                  type: 'post',
+                  data: 'file=' + itemData['path'],
+                  success: function(data){
+                    var doc = new Document(data);
+                    var newSession = new EditSession(doc, "ace/mode/" + itemData['format']);
+                    sessions[itemData['path']] = newSession;
+                    editor.setSession(newSession);
+                    console.log(sessions);
+                  }
+                });
+              }else{
+                editor.setSession(sessions[itemData['path']]);
+              }
           }
       });
-    });
-
-    var textarea = $('textarea[name="editor"]');
-    textarea.hide();
-    var editor = ace.edit("editor_div");
-    ace.require('ace/ext/settings_menu').init(editor);
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/jade");
-    editor.setValue($('textarea[name="editor"]').val());
-
-    editor.commands.addCommands([{
-      name: "showSettingsMenu",
-      bindKey: {win: "Ctrl-q", mac: "Command-q"},
-      exec: function(editor) {
-        editor.showSettingsMenu();
-      },
-      readOnly: true
-    }]);
-
-    $('#submit').on('click', function() {
-        textarea.val(editor.getSession().getValue());
     });
