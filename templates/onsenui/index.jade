@@ -1,0 +1,40 @@
+doctype html
+html(lang="en", ng-app="myApp")
+  head
+    meta(charset="utf-8")
+    title Tabbar Demo | Onsen UI
+    //- link(rel="stylesheet", href="css/app.css")
+    link(rel="stylesheet", href="css/onsenui.css")
+    link(rel="stylesheet", href="css/onsen-css-components.css")
+    script(src="js/angular/angular.js")
+    script(src="js/onsenui.min.js")
+    script(src="js/jquery.js")
+    script(src="js/app.js")
+  body
+    ons-tabbar(var="tabbar")
+      ons-tabbar-item(label="Home", page="home.html", active="true")
+      if screens
+        each screen in screens
+          if screen.showinmenu
+            ons-tabbar-item(label=screen.title, page=screen.id+".html")
+
+    script(id="home.html", type="text/ons-template").
+      <ons-toolbar>
+        <div class="center">Home</div>
+      </ons-toolbar>
+
+    if screens
+      each screen in screens
+        if screen.showinmenu
+
+          script(id=screen.id+".html", type="text/ons-template").
+            <ons-page>
+              <ons-toolbar>
+                <div class="center">#{screen.title}</div>
+              </ons-toolbar>
+              <ons-row style="padding:8px">
+                <ons-col>
+                  !{screen.content}
+                </ons-col>
+              </ons-row>
+            </ons-page>
