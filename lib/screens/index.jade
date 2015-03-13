@@ -11,9 +11,13 @@ block content
       .col-sm-12
         a.btn.btn-success(href="/admin/screens/new") Create a screen.
     hr
-    .row
+    if screens.length
+      .row
+        .col-xs-12
+          strong You can change the screens order by drag and drop
+    #sortableScreens.row
       each screen in screens
-        .col-sm-3
+        .col-sm-3(id=screen.id)
           .panel.panel-default
             .panel-body
               .container-fluid
@@ -24,3 +28,14 @@ block content
                     a(href="/admin/screens/#{screen.id}") Edit
                     hr
                     div=screen.text
+block stylesheets
+  link(rel="stylesheet", href="/coreassets/jquery.ui/jquery-ui.min.css")
+block scripts
+  script(src="/coreassets/jquery.ui/jquery-ui.min.js")
+  script(src="screens/js/jquery.rest.min.js")
+  script(src="screens/js/screenposition.js")
+
+
+
+
+
