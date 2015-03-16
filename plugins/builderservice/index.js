@@ -12,6 +12,13 @@ module.exports = builder;
 function builder(app, server, sockets) {
   var status = "";
 
+  app.cms.menus.registerAdminMenu({
+    title: "Build",
+    href: "/admin/build",
+    icon: "ion-cube",
+    weight: 10
+  });
+
   app.get("/admin/build", function(req, res) {
     debug("Finding previous builds");
     builds.find({}).limit(9).exec(function(err, docs) {
