@@ -9,7 +9,19 @@ block title
   title #{__('Editing')} 
 
 block content
-  .container(style="height:100%;")
+  
+  div#editor_menu
+    div.btn-group
+      button.btn-sm.btn
+        i.icon.ion-cube 
+        |  #{__('Save')}
+      button.btn-sm.btn#undo
+        i.icon.ion-arrow-return-left
+        |  #{__('Undo')}
+      button.btn-sm.btn
+        i.icon.ion-arrow-return-right 
+        |  #{__('Redo')}
+  div(style="height:100%;")
     div.col-xs-3#editor_sidebar
       h3 #{__('Files')}
       div#tree.aciTree
@@ -27,15 +39,14 @@ block stylesheets
     #editor_sidebar{
       position:relative;
       height:100%;
-      background-color:#fff;
       overflow-y: auto;
+      border-right:1px solid #000;
     }
-    #editor { 
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+    #editor_menu{
+      background-color:#ddd; 
+    }
+    #editor_menu .btn{
+      border-radius: 0; 
     }
 
 
@@ -74,6 +85,16 @@ block scripts
       var Document = require("ace/document").Document;
       
       $('#submit').on('click', function() {
+          textarea.val(editor.setSession(actualSession).getValue());
+      });      
+      $('#undo').on('click', function() {
+          if(actualSession!=''){
+            var undo = editor.getSession();
+            alert(editor.session);
+            
+          }
+      });      
+      $('#redo').on('click', function() {
           textarea.val(editor.setSession(actualSession).getValue());
       });
 
