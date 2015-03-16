@@ -125,10 +125,10 @@ block scripts
           },
           autoInit: true
       });
-      var sessions = [];
-
+      var sessions = {};
       var modes = {css: 'css', html: 'html', md: 'markdown', js: 'javascript', less: 'less', jade: 'jade', json: 'json'};
       $('#tree').on('acitree', function(event, api, item, eventName, options) {
+          
           if (eventName == 'selected'){
               // do something when a item is selected
 
@@ -136,19 +136,23 @@ block scripts
               if(itemData['inode']) return;
               if(itemData['editable']) return;
               if(!(itemData['path'] in sessions)){
+
                 $.ajax({
                   url: '/admin/template/get/' + itemData['template'],
                   type: 'post',
+                  dataType: 'text',
                   data: 'file=' + itemData['path'],
                   success: function(data){
                     var doc = new Document(data);
                     var newSession = new EditSession(doc, "ace/mode/" + modes[itemData['format']]);
                     var newUndoManager = new UndoManager();
-                    newSession.setUndoManager(newUndoManager);
                     sessions[itemData['path']] = newSession;
                     editor.setSession(newSession);
+                    newSession.setUndoManager(newUndoManager);
                     actualSession = itemData['path'];
-                    console.log(sessions);
+                  },
+                  error: function(err, lala){
+                    //console.log(arguments);
                   }
                 });
               }else{
