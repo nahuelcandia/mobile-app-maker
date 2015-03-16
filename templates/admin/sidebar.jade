@@ -9,31 +9,30 @@ block sidebar
             i.icon.ion-speedometer
             |  #{__("Dashboard")}
             //|  #{appl.locals.activeApp} #{__("Dashboard")}
-        li.dropdown
-          a.dropdown-toggle(data-toggle="dropdown")
-            i.icon.ion-code
-            |  #{__('Plugins')}
-            b.caret
-          ul.dropdown-menu.navmenu-nav
-            li.dropdown-header #{__('Manage current plugins or add a new one')}
-            li.divider
+
+        each item in menus.admin
+          if(item.items)
+            li.dropdown
+              a.dropdown-toggle(data-toggle="dropdown")
+                i(class="icon #{item.icon || 'ion-navicon'}")
+                |  #{__(item.title)}
+                b.caret
+              ul.dropdown-menu.navmenu-nav
+                li.dropdown-header #{__(item.description)}
+                li.divider
+                each subitem in item.items
+                  li
+                    a(href="#{subitem.href}")
+                      i(class="icon #{subitem.icon || 'ion-navicon'}")
+                      | 
+                      | #{subitem.title}
+          else
             li
-              a(href="/admin/plugins") #{__('Manage plugins')}
-            li
-              a(href="/admin/plugins") #{__('Add new plugin')}
-        li.divider
-        li.dropdown
-          a.dropdown-toggle(data-toggle="dropdown")
-            i.icon.ion-code-working
-            |  #{__('Templates')}
-            b.caret
-          ul.dropdown-menu.navmenu-nav
-            li.dropdown-header #{__('Manage current templates or add a new one')}
-            li.divider
-            li
-              a(href="/admin/templates") #{__('Manage templates')}
-            li.hidden
-              a(href="/admin/templates") #{__('Add new template')}
+              a(href="#{item.href}")
+                i(class="icon #{item.icon || 'ion-navicon'}")
+                | 
+                | #{item.title}
+
         li.divider
         li.dropdown.hidden
           a.dropdown-toggle(href="#", data-toggle="dropdown") 
@@ -50,24 +49,11 @@ block sidebar
               a 
                 i.icon.ion-user-add
                 |  #{__('Add new user')}
-        li.bg-lightgrey
-          a(href="/admin/build")
-            i.icon.ion-cube
-            |  #{__('Build')}
         li
           a(href="/") 
             i.icon.ion-arrow-return-left
             |  #{__('Preview/Edit app')}
         li.divider
-        each item in menus.admin
-          li
-            a(href="#{item.href}")
-              if item.icon
-                i(class="icon #{item.icon}")
-              else 
-                i.icon.ion-navicon
-              | 
-              | #{item.title}
         li
           a(href="/logout") 
             i.icon.ion-log-out
