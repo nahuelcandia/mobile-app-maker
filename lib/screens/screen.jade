@@ -10,6 +10,7 @@ block content
     .row
       form#screenform(action="/admin/screens")
         input(type="hidden", name="currentId", value="#{screen.id}")
+        input(type="hidden", name="position", value="#{screen.position}")
         .col-md-6
           .form-group
             label(for="content") Content
