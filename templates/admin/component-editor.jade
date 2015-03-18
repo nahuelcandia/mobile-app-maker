@@ -12,16 +12,16 @@ block content
   
   div#editor_menu
     div.btn-group
-      button.btn-sm.btn
+      button.btn-sm.btn#save
         i.icon.ion-cube 
         |  #{__('Save')}
       button.btn-sm.btn#undo
         i.icon.ion-arrow-return-left
         |  #{__('Undo')}
-      button.btn-sm.btn
+      button.btn-sm.btn#redo
         i.icon.ion-arrow-return-right 
         |  #{__('Redo')}
-  div(style="height:100%;")
+  div#editor_wrapper(style="height:100%;")
     div.col-xs-3#editor_sidebar
       h3 #{__('Files')}
       div#tree.aciTree
@@ -32,8 +32,8 @@ block content
 block stylesheets
   link(href="/coreassets/tree/css/aciTree.css", rel="stylesheet")
   style.
+
     #editor_div{
-      position:relative;
       height:100%;
     }
     #editor_sidebar{
@@ -42,13 +42,40 @@ block stylesheets
       overflow-y: auto;
       border-right:1px solid #000;
     }
-    #editor_menu{
-      background-color:#ddd; 
-    }
+
     #editor_menu .btn{
       border-radius: 0; 
     }
-
+    @media (max-width: 992px) {
+      #editor_wrapper{
+        position:fixed;
+        top:80px;
+        width:100%;
+      }        
+      #editor_menu{
+        background-color:#ddd; 
+        position: fixed;
+        top:50px;
+        height:30px;
+        width:100%;
+        display:block;
+      }
+    }
+    @media (min-width: 992px) {
+      #editor_wrapper{
+        position:fixed;
+        top:30px;
+        width:100%;
+      }
+      #editor_menu{
+        background-color:#ddd; 
+        position: fixed;
+        top:0;
+        height:30px;
+        width:100%;
+        display:block;
+      }
+    }
 
 block scripts
 
@@ -61,7 +88,11 @@ block scripts
   script(src="/coreassets/ace/ext-settings_menu.js")
 
   script.
+    function saveDocument(){
+      return true;
+    }
     $(function() {
+
       var actualSession = false;
       var textarea = $('textarea[name="editor"]');
       textarea.hide();
@@ -80,6 +111,13 @@ block scripts
         },
         readOnly: true
       }]);
+      editor.commands.addCommand({
+        name: 'saveDocument',
+        bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+        exec: function(editor) {
+            saveDocument();
+        }
+      });
       var UndoManager = require("ace/undomanager").UndoManager;
       var EditSession = require("ace/edit_session").EditSession;
       var Document = require("ace/document").Document;
@@ -89,13 +127,18 @@ block scripts
       });      
       $('#undo').on('click', function() {
           if(actualSession!=''){
-            var undo = editor.getSession();
-            alert(editor.session);
-            
+            var undo = editor.session.getUndoManager();
+            undo.undo();
           }
       });      
       $('#redo').on('click', function() {
-          textarea.val(editor.setSession(actualSession).getValue());
+          if(actualSession!=''){
+            var redo = editor.session.getUndoManager();
+            redo.redo();
+          }
+      });      
+      $('#save').on('click', function() {
+          saveDocument();
       });
 
       $('#tree').aciTree({
