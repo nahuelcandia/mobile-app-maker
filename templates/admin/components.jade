@@ -17,16 +17,26 @@ block content
           .hidden-xs #{__('Actions')}
       tbody
         each component in states
+          -var componentExists = components[component.name] ? true : false
+          -var componentHasMetadata = componentExists && components[component.name].metadata ? true : false
           tr
             td
-              b.panel-title= (typeof components[component.name].metadata.name === 'undefined' ? component.name : components[component.name].metadata.name)
+              //- no es lo mas elegante, pero chequear las diff antes de este commit
+              //- b.panel-title= (typeof components[component.name] === 'undefined' ? component.name : components[component.name].metadata.name)
+              b.panel-title
+                if componentExists
+                  p= component.name
+                else
+                  p.text-muted= component.name
               .visible-xs
-                p= components[component.name].metadata.description
-                p= components[component.name].metadata.author
+                if componentExists && componentHasMetadata
+                  p= components[component.name].metadata.description
+                  p= components[component.name].metadata.author
             td.hidden-xs
               small
-                p= components[component.name].metadata.description
-                p= components[component.name].metadata.author
+                if componentExists && componentHasMetadata
+                  p= components[component.name].metadata.description
+                  p= components[component.name].metadata.author
             td
               div(aria-label="#{__('Options')}")
 
@@ -35,14 +45,19 @@ block content
                 -var icon= ( 'ion-checkmark-circled')
                 
                 if componentType == 'template'
-                  button.btn.live-btn(class=btnclass, data-action="activate", data-id=component.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
+
+                  -var enabled= (componentExists ? false : true)
+                  button.btn.live-btn(disabled=enabled, class=btnclass, data-action="activate", data-id=component.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
                     i.icon(class=icon, style="color:white")
-                  a(href="/admin/#{componentType}/edit/" + component.name): button.btn.btn-info.live-btn(data-action="edit", type="button", data-toggle="tooltip", data-placement="top", title="#{__('Edit')}") 
+                  a(href="/admin/#{componentType}/edit/" + component.name): button.btn.btn-info.live-btn(disabled=enabled, data-action="edit", type="button", data-toggle="tooltip", data-placement="top", title="#{__('Edit')}") 
                     i.icon.ion-edit(style="color:white")
+
                 else
+
                   button.btn.live-btn(class=btnclass, data-action="toggle", data-id=component.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
                     i.icon(class=icon, style="color:white")
-                a(href="/admin/#{componentType}/" + component.name ): button.btn.btn-default.live-btn(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Configuration')}")
+
+                a(href="/admin/#{componentType}/" + component.name ): button.btn.btn-default.live-btn(disabled=enabled, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Configuration')}")
                   i.icon.ion-levels
                 //a(href="#", data-action="delete" ): button.btn.btn-danger(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Remove this #{componentType}...')}")
                 //  i.icon.ion-trash-b(style="color:white")
