@@ -88,11 +88,23 @@ block scripts
   script(src="/coreassets/ace/ext-settings_menu.js")
 
   script.
-    function saveDocument(){
-      return true;
-    }
     $(function() {
 
+      function saveDocument(doc, filename){
+        $.ajax({
+          url: '/admin/template/edit/#{template}' + filename,
+          type: 'POST',
+          dataType: 'text',
+          contentType: 'text/plain',
+          data: doc,
+          success: function(data){
+            console.log(data);
+          },
+          error: function(err, lala){
+            console.log(err);
+          }
+        });
+      }
       var actualSession = false;
       var textarea = $('textarea[name="editor"]');
       textarea.hide();
@@ -115,7 +127,7 @@ block scripts
         name: 'saveDocument',
         bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
         exec: function(editor) {
-            saveDocument();
+            saveDocument(editor.getSession().getValue(), actualSession);
         }
       });
       var UndoManager = require("ace/undomanager").UndoManager;
@@ -138,7 +150,10 @@ block scripts
           }
       });      
       $('#save').on('click', function() {
-          saveDocument();
+        if(actualSession!=''){
+          alert(editor.getSession().getValue());
+          saveDocument(editor.getSession().getValue(), actualSession);
+        }
       });
 
       $('#tree').aciTree({
