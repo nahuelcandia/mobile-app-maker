@@ -57,6 +57,31 @@ If you found yourself in front of code and will start fixing, think first if the
 
 Also think if it's worth the issue and the branch. It it's a typo, you can risk a main branch commit and push as long as you comment it very **thoroughly**
 
+### Merging
+
+When you are about to merge some issue branch back into *develop*, take into account this checklist:
+
+  * You are merging a branch into the **main development branch** , think before you hit *Enter*
+  * Merge comments should include the default branch name message
+  * Merging issue branches should include a comment about the issue number or topic to be able to find it later
+  * Shall any conflicts arise, you **WILL** resolve them
+  * If in doubt (after a conflict resolution) of breaking any code/functionality, comment it on the issue, send mails to everyone and ensure the merge is checked by everyone you can reach. Be aware of the uncomfort you can create and **learn how not to do it again**.
+
+
+**If you are not confident with your merging/conflict resolution capabilities, make it safe:**
+
+  * When you're done with your branch's commits and push, checkout to *develop*
+  * Pull the latest changes in *develop*
+  * Checkout your branch again
+  * Standing in your branch, merge *develop* **into** your branch:
+  * `merge --no-ff develop
+  * Resolve conflicts (if any)
+  * Checkout *develop*
+  * Merge your resolved branch into *develop*
+  * Push *develop*
+
+This way will let you keep your conflicts more controlled and not polluting main *develop* branch with scenarios you may or may not be able to resolve.
+
 ## Coding
 
 ### Variables
