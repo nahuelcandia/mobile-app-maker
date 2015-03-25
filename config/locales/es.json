@@ -97,5 +97,8 @@
   "Insert the name for your new app": "Ingrese el nombre para la nueva app",
   "Create new app": "Crear nueva app",
   "Edit": "Editar",
-  "Find": "Buscar"
+  "Find": "Buscar",
+  "Undo": "Undo",
+  "Redo": "Redo",
+  "Files": "Files"
 }
