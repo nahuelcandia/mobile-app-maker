@@ -42,9 +42,6 @@ $ cd ~/shovelapps-cms
 $ unzip latest.zip
 $ cd shovelapps-cms-latest/
 $ npm install
-$ cd templates/admin/assets/shovelapps-bootstrap
-$ git submodule init
-$ git submodule update
 $ ./start.sh
 ```
 
