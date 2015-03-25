@@ -8,11 +8,9 @@ This is by no means a strict requirement, but this manifest will be considered a
 
 Yes. Docs are as important as code. We should care about them even before we start talking about code.
 
-We use github, get use to it. Get to know MarkDown, learn it, embrace it, breath it. Every single module, library or snippet is entitled to have its own documentation and usage instructions/guidelines.
+We use github, get used to it. Get to know [MarkDown](https://help.github.com/articles/markdown-basics/) for text formatting, learn it, embrace it, breath it. Every single module, library or snippet is entitled to have its own documentation and usage instructions/guidelines.
 
 If it happens that whatever-code-file you were working on is inside a directory you can use the default `README.md` file and github will display it when entering that directory.
-
-If not, or if you need only to document some API or functionality inside a more massive set of files, name your documentation file accordingly and append it a `.md` extension.
 
     ├── lib
     │   └── menus
@@ -20,7 +18,6 @@ If not, or if you need only to document some API or functionality inside a more 
     │       └── README.md <- menus module docs
     ├── views
     ├── index.js
-    ├── index.md <- some needed index.js docs
     └── README.md <- general docs
 
 
@@ -49,7 +46,7 @@ Branches shall be named accordingly with the issue or problem they are addressin
   * fixLoginView
   * generalFixes
 
-Try to append good commit messages. Not something cryptic, but detailed information of what you did. Try one commit per file or per functional change.
+Try to append good commit messages. Not something cryptic, but detailed information of what you did.Try one commit per file or per functional change.
 
 Always merge with *--no-ff*
 
