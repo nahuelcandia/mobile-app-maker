@@ -37,13 +37,18 @@ You need [NodeJS](http://nodejs.org/download/) installed to run **Shovel apps CM
 $ wget https://github.com/shovelapps/shovelapps-cms/archive/latest.zip
 $ cd ~/shovelapps-cms
 ```
-* Unzip it, install dependencies and run it.
+* Unzip it, install dependencies and submodules and run it.
 ```
 $ unzip latest.zip
 $ cd shovelapps-cms-latest/
 $ npm install
 $ ./start.sh
 ```
+
+### Submodules
+
+The CMS css is a customized bootstrap, wich is in another repo [shovelapps/shovelapps-bootstrap](https://github.com/shovelapps/shovelapps-bootstrap) used as a [submodule](http://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
 
 
 

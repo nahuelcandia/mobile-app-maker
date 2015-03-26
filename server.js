@@ -34,10 +34,10 @@ app.cms.sockets = require("./lib/sockets")(app, server);
 app.cms.installer = require("./lib/installer")(app);
 app.cms.template = require("./lib/template")(app);
 app.cms.frontend = require("./lib/frontend")(app);
+app.cms.menus = require("./lib/menus")(app);
 app.cms.pluginloader = require("./lib/plugin-loader")(app, server, app.cms.sockets);
 app.cms.admin = require("./lib/admin")(app);
 app.cms.packager = require("./lib/packager")(app);
-app.cms.menus = require("./lib/menus")(app);
 app.cms.screens = require("./lib/screens")(app);
 require("./lib/optimism")(app);
 
