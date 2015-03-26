@@ -19,6 +19,7 @@ templates/*
 !templates/admin/
 !templates/bootstrap-3-jade/
 !templates/jqmobile/
+!templates/onsenui/
 
 #Ignore non-default plugins
 plugins/*
