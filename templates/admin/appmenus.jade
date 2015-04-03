@@ -1,0 +1,22 @@
+extend ../../templates/admin/layout 
+
+block content
+  .container
+    h2 App menus
+    h3 Tabbar menus
+    if appmenus.length
+      h5 hay content
+    each appmenu in appmenus
+      div= appmenu.title
+    hr
+    h3 Sidepanel menus
+    script.
+      console.log(#{appmenus});
+block stylesheets
+
+block scripts
+  script(src="screens/js/jquery.rest.min.js")
+
+
+
+

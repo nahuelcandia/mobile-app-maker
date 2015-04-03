@@ -1,0 +1,89 @@
+extend ../../templates/admin/layout 
+
+block content
+  .container
+      h2 App menus
+        h4 Select Menu
+        .row
+          .col-md-4
+            select.form-control#menuType
+              -var opt1 = appmenus[0].menu=="tabbar"
+              -var opt2 = appmenus[0].menu=="sidemenu"
+                option(selected=opt1) tabbar
+                option(selected=opt2) sidemenu
+            hr
+      table#tableTabbar.table.table-responsive.table-striped
+        thead: tr
+          th Title
+          th Screen ID
+          th Icon
+        tbody
+          each appmenu in appmenus
+            tr
+              td
+                input.inputTitleTabbar.form-control(type='text',value=appmenu.title)
+              td
+                select.selectScreenIDTabbar.form-control
+                  each screen in screens
+                    -var sel = appmenu.screenID==screen.id
+                    option(selected=sel)=screen.id
+              td
+                select.selectIconTabbar.form-control
+                  each icon in icons
+                    -var sel = appmenu.icon==icon
+                    option(selected=sel)=icon
+              td
+                a.icon.ion-trash-b.deleteRow(href="#")
+              td
+                a.icon.ion-arrow-up-a.up(href="#")
+              td
+                a.icon.ion-arrow-down-a.down(href="#")
+        tr
+          td
+            input.inputTitleTabbar.form-control(type='text', placeholder='Add New')
+          td
+            select.selectScreenIDTabbar.form-control
+              each screen in screens
+                option=screen.id
+          td
+            select.selectIconTabbar.form-control
+              each icon in icons
+                option=icon
+          td
+            a.icon.ion-plus.addNew(href="#")
+          td
+          td
+      button#saveMenus.btn.btn-success Save
+block stylesheets
+
+block scripts
+  script(src="screens/js/jquery.rest.min.js")
+  script.
+    $(document).ready(function(){
+        $("table").on("click",".deleteRow",function(e){
+          e.preventDefault();
+          var btn=$(this);
+          var row = btn.parent().parent();
+          row.remove();
+        });
+        $("table").on("click",".addNew",function(e){
+          e.preventDefault();
+          var row = $(this).closest('tr');
+          row.after($(this).closest('tr').clone());
+          row.children().last().remove();
+          row.children().last().remove();
+          row.children().last().remove();
+          row.append('<td><a href="#" class="icon ion-trash-b deleteRow"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td>');
+        });
+        $("table").on("click",".up",function(e){
+          e.preventDefault();
+          var row = $(this).parents("tr:first");
+          row.insertBefore(row.prev());
+        });
+        $("table").on("click",".down",function(e){
+          e.preventDefault();
+          var row = $(this).parents("tr:first");
+          row.insertAfter(row.next());
+        });
+    });
+  script(src="menus/js/menueditor.js")

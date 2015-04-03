@@ -11,30 +11,47 @@ html(lang="en", ng-app="myApp")
     script(src="js/jquery.js")
     script(src="js/app.js")
   body
-    ons-tabbar(var="tabbar")
-      ons-tabbar-item(label="Home", page="home.html", active="true")
-      if screens
-        each screen in screens
-          if screen.showinmenu
-            ons-tabbar-item(label=screen.title, page=screen.id+".html")
 
-    script(id="home.html", type="text/ons-template").
-      <ons-toolbar>
-        <div class="center">Home</div>
-      </ons-toolbar>
+  if appmenus
+    -var tabbarlist=appmenus.filter(function(i){return i.menu=="tabbar"})
+    if tabbarlist.length
+      ons-tabbar(var="tabbar")
+        ons-tab(label="Home", page="home.html", active="true")
+        each menu in tabbarlist
+          ons-tab(label=menu.title, page=menu.screenID+".html")
+
+    if appmenus
+      -var sidemenulist=appmenus.filter(function(i){return i.menu=="sidemenu"})
+      if sidemenulist.length
+        ons-sliding-menu(main-page="home.html", menu-page="menu.html", side="left", var="Smenu")
+
+        ons-template(id="menu.html")
+          ons-list
+            each menu in sidemenulist
+              ons-list-item(modifier="chevron", onclick="Smenu.setMainPage('#{menu.screenID}.html', {closeMenu: true})")
+                span=menu.title
+
+    ons-template(id="home.html")
+      ons-toolbar
+        if sidemenulist.length
+          div(class="left")
+            ons-toolbar-button(onclick="Smenu.toggleMenu()")
+              ons-icon(icon="fa-bars")
+        div(class="center") Home
+
 
     if screens
       each screen in screens
-        if screen.showinmenu
+        ons-template(id=screen.id+".html")
+          ons-page
+            ons-toolbar
+              if sidemenulist.length
+                div(class="left")
+                  ons-toolbar-button(onclick="Smenu.toggleMenu()")
+                    ons-icon(icon="fa-bars")
+              div(class="center")
+                !{screen.title}
+            ons-row(style="padding:8px")
+              ons-col 
+                !{screen.content}
 
-          script(id=screen.id+".html", type="text/ons-template").
-            <ons-page>
-              <ons-toolbar>
-                <div class="center">#{screen.title}</div>
-              </ons-toolbar>
-              <ons-row style="padding:8px">
-                <ons-col>
-                  !{screen.content}
-                </ons-col>
-              </ons-row>
-            </ons-page>
