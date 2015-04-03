@@ -38,21 +38,21 @@ block content
                 a.icon.ion-arrow-up-a.up(href="#")
               td
                 a.icon.ion-arrow-down-a.down(href="#")
-        tr
-          td
-            input.inputTitleTabbar.form-control(type='text', placeholder='Add New')
-          td
-            select.selectScreenIDTabbar.form-control
-              each screen in screens
-                option=screen.id
-          td
-            select.selectIconTabbar.form-control
-              each icon in icons
-                option=icon
-          td
-            a.icon.ion-plus.addNew(href="#")
-          td
-          td
+          tr
+            td
+              input.inputTitleTabbar.form-control(type='text', placeholder='Add New')
+            td
+              select.selectScreenIDTabbar.form-control
+                each screen in screens
+                  option=screen.id
+            td
+              select.selectIconTabbar.form-control
+                each icon in icons
+                  option=icon
+            td
+              a.icon.ion-plus.addNew(href="#")
+            td
+            td
       button#saveMenus.btn.btn-success Save
 block stylesheets
 
@@ -60,30 +60,53 @@ block scripts
   script(src="screens/js/jquery.rest.min.js")
   script.
     $(document).ready(function(){
+        checkPosition();
         $("table").on("click",".deleteRow",function(e){
           e.preventDefault();
           var btn=$(this);
           var row = btn.parent().parent();
           row.remove();
+          checkPosition();
         });
         $("table").on("click",".addNew",function(e){
           e.preventDefault();
-          var row = $(this).closest('tr');
-          row.after($(this).closest('tr').clone());
+          var row = $(this).parents("tr:first");
+          row.after($(this).parents("tr:first").clone());
+          //- $(row).find('.inputTitleTabbar').attr('placeholder','');
           row.children().last().remove();
           row.children().last().remove();
           row.children().last().remove();
           row.append('<td><a href="#" class="icon ion-trash-b deleteRow"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td>');
+          row.next().find('.inputTitleTabbar').attr('placeholder','Add New');
+          checkPosition();
         });
         $("table").on("click",".up",function(e){
           e.preventDefault();
           var row = $(this).parents("tr:first");
           row.insertBefore(row.prev());
+          checkPosition();
         });
         $("table").on("click",".down",function(e){
           e.preventDefault();
           var row = $(this).parents("tr:first");
           row.insertAfter(row.next());
+          checkPosition();
         });
+        function checkPosition(){
+        var rowCount = $('#tableTabbar tr').length - 3;
+        var rows = $('#tableTabbar tr').each(function(index){
+          if ($(this).index()==0){
+            $(this).children().children('.up').hide();
+          } else {
+          if ($(this).index()==rowCount){
+            $(this).children().children('.down').hide();
+          } else {
+            $(this).children().children('.up').show();
+            $(this).children().children('.down').show();
+          }
+          }
+          });
+        };
+
     });
   script(src="menus/js/menueditor.js")
