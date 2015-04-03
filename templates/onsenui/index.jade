@@ -49,9 +49,7 @@ html(lang="en", ng-app="myApp")
                 div(class="left")
                   ons-toolbar-button(onclick="Smenu.toggleMenu()")
                     ons-icon(icon="fa-bars")
-              div(class="center")
-                !{screen.title}
+              div(class="center")=screen.title
             ons-row(style="padding:8px")
-              ons-col 
-                !{screen.content}
+              ons-col !{screen.content}
 
