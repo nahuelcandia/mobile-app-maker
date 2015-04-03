@@ -11,13 +11,8 @@ head
   // End of Title block
   // Bootstrap CSS 
   link(href="/coreassets/shovelapps-bootstrap/bootstrap.css", rel="stylesheet")
-  link(href="/coreassets/shovelapps-bootstrap/main.css", rel="stylesheet")
-  //link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/lumen/bootstrap.min.css", rel="stylesheet")
+  link(href="/coreassets/css/main.css", rel="stylesheet")
 
-  link(href="/coreassets/bootstrap/jasny-bootstrap.min.css", rel="stylesheet")
-  link(href="/coreassets/bootstrap/navmenu.css", rel="stylesheet")
-  link(href="/coreassets/ionicons/css/ionicons.min.css", rel="stylesheet")
-  link(href="/coreassets/Tokenize-2.2.2/jquery.tokenize.css", rel="stylesheet")
 
   // Custom stylesheets
   block stylesheets
@@ -47,7 +42,7 @@ head
 
 body
   #notifications
-  include ./sidebar.jade
+  include ./navbar.jade
 
   // Content block
   block content
