@@ -104,6 +104,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-*testing*: this is a conflict test
-just ignore it
+
+*testing*: this is a conflict test3
+just ignore it3
+this will conflict with pato changeset
 pato was here
