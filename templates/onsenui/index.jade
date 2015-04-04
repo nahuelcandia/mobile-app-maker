@@ -11,25 +11,10 @@ html(lang="en", ng-app="myApp")
     script(src="js/jquery.js")
     script(src="js/app.js")
   body
-
-  if appmenus
-    -var tabbarlist=appmenus.filter(function(i){return i.menu=="tabbar"})
-    if tabbarlist.length
-      ons-tabbar(var="tabbar")
-        ons-tab(label="Home", page="home.html", active="true")
-        each menu in tabbarlist
-          ons-tab(label=menu.title, page=menu.screenID+".html")
-
     if appmenus
       -var sidemenulist=appmenus.filter(function(i){return i.menu=="sidemenu"})
       if sidemenulist.length
-        ons-sliding-menu(main-page="home.html", menu-page="menu.html", side="left", var="Smenu")
-
-        ons-template(id="menu.html")
-          ons-list
-            each menu in sidemenulist
-              ons-list-item(modifier="chevron", onclick="Smenu.setMainPage('#{menu.screenID}.html', {closeMenu: true})")
-                span=menu.title
+        ons-sliding-menu(main-page="tab-bar.html", menu-page="menu.html", side="left", var="Smenu")
 
     ons-template(id="home.html")
       ons-toolbar
@@ -38,7 +23,6 @@ html(lang="en", ng-app="myApp")
             ons-toolbar-button(onclick="Smenu.toggleMenu()")
               ons-icon(icon="fa-bars")
         div(class="center") Home
-
 
     if screens
       each screen in screens
@@ -53,3 +37,22 @@ html(lang="en", ng-app="myApp")
             ons-row(style="padding:8px")
               ons-col !{screen.content}
 
+    if appmenus
+      -var tabbarlist=appmenus.filter(function(i){return i.menu=="tabbar"})
+      if tabbarlist.length
+        ons-template(id="tab-bar.html")
+          ons-tabbar(var="tabbar")
+            ons-tab(label="Home", page="home.html", active="true")
+            each menu in tabbarlist
+              ons-tab(label=menu.title, page=menu.screenID+".html")
+
+    if appmenus
+      -var sidemenulist=appmenus.filter(function(i){return i.menu=="sidemenu"})
+      if sidemenulist.length
+        ons-template(id="menu.html")
+          ons-list
+            ons-list-item(modifier="chevron", onclick="Smenu.setMainPage('tab-bar.html', {closeMenu: true})")
+              span Home
+            each menu in sidemenulist
+              ons-list-item(modifier="chevron", onclick="Smenu.setMainPage('#{menu.screenID}.html', {closeMenu: true})")
+                span=menu.title
