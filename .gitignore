@@ -13,7 +13,6 @@ filestorage/db/editables.db
 filestorage/db/plugins.db
 filestorage/db/templates.db
 filestorage/db/screens.db
-filestorage/db/appmenus.db
 
 #Ignore non-default templates
 templates/*
