@@ -137,9 +137,11 @@ block scripts
         var rowsT = $('#tableTabbar tr').each(function(index){
           if ($(this).index()==0){
             $(this).children().children('.up').hide();
+            $(this).children().children('.down').show();
           } else {
           if ($(this).index()==rowCountT){
             $(this).children().children('.down').hide();
+            $(this).children().children('.up').show();
           } else {
             $(this).children().children('.up').show();
             $(this).children().children('.down').show();
