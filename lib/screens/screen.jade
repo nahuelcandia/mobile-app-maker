@@ -1,51 +1,63 @@
 extend ../../themes/admin/layout
 
 block content
-  .container
-    h3.page-header Editing screen #{screen.title}
-    .row
-      .col-sm-12(style="text-align:right")
-          button.btn.btn-primary#save Save screen
+  form#screenform(action="/admin/screens", method="post")
+    input(type="hidden", name="currentId", value="#{screen.id}")
+    input(type="hidden", name="position", value="#{screen.position}")
+    .container-fluid.bg-white.cms(role='main')
+      .header.center-block.row.voffset6
+        a.back-button.pull-left(href='#')
+        .col-md-3.devices.text-right
+          .os
+            a.android.active(href='#')
+            a.ios(href='#')
+          a.phone.active(href='#')
+          a.tablet(href='#')
+        .col-md-3
+          input.shovel-control(type='text', value="#{screen.title}")
+        .col-md-3.col-md-offset-2
+          select.form-control
+            option Splash
+        .col-md-1
+          a.upload-theme.pull-right(href='#', onclick='return $("#screenform").submit(), false;')
+            img(src='/coreassets/assets/save-icon.svg')
+            span Save
+      .row.center-block.voffset7.text-left
+        .col-md-2.col-md-offset-1.text-right
+          .header.small
+            h4 Plugins
+            .search
+              input(type='text', placeholder='Search')
+          .panel-group.text-left.voffset3.shovel-group-panel.small
+            .panel.panel-default.open
+              .panel-heading(href='#ContentPlugins', data-toggle='collapse')
+                h5.panel-title
+                  i.open.pull-right
+                  | Content Plugins
+              #ContentPlugins.panel-collapse.collapse.in
+                .list-group
+                  a.list-group-item.active(href='#') Static Content (HTML)
+                  a.list-group-item(href='#') Form
+                  a.list-group-item(href='#') Image Gallery
+            .panel.panel-default.open
+              .panel-heading(href='#AudioVideo', data-toggle='collapse')
+                h5.panel-title
+                  i.open.pull-right
+                  | Audio &amp; video
+              #AudioVideo.panel-collapse.collapse.in
+                .list-group
+                  a.list-group-item(href='#') Youtube
+                  a.list-group-item(href='#') Grooveshark
+                  a.list-group-item(href='#') Cloud Up
+        .col-md-5
+          textarea.form-control(rows='12')=screen.content
+        .col-md-4.demo-phone.text-left
+          .demo-theme.android
+            img.phone(src='/coreassets/assets/android-cel.svg')
+            img.theme(src='/coreassets/assets/elmeme.jpg')
+            // <iframe src="https://www.shovelapps.org/"></iframe>
 
-    .row
-      form#screenform(action="/admin/screens")
-        input(type="hidden", name="currentId", value="#{screen.id}")
-        input(type="hidden", name="position", value="#{screen.position}")
-        .col-md-6
-          .form-group
-            label(for="content") Content
-            // Create toolbar container
-            #editortoolbar
-              // Add font size dropdown
-              select.ql-size
-                option(value='small') Small
-                option(value='normal', selected='') Normal
-                option(value='large') Large
-                option(value='huge') Huge
-              // Add a bold button
-              span.ql-format-group
-                span.ql-format-button.ql-bold(title='Bold')
-                span.ql-format-separator
-                span.ql-format-button.ql-italic(title='Italic')
-                span.ql-format-separator
-                span.ql-format-button.ql-underline(title='Underline')
-                span.ql-format-separator
-              span.ql-format-group
-                span.ql-format-button.ql-list(title='List')
-                span.ql-format-separator
-                span.ql-format-button.ql-bullet(title='Bullet')
-                span.ql-format-separator
-                select.ql-align(title='Text Alignment')
-                  option(value='left', label='Left', selected='')
-                  option(value='center', label='Center')
-                  option(value='right', label='Right')
-                  option(value='justify', label='Justify')
-            div.form-control#screen(name="content",style="height:400px")!=screen.content
-        .col-md-6
-          .form-group
-            label(for="title") Title
-            input.form-control(name="title", value="#{screen.title}")
-            span.help-block The title will be shown in links and in the navbar
+        .col-md-12
           .checkbox
             label
               if screen.showinmenu
@@ -59,13 +71,7 @@ block content
             span.help-block For links between screens   
           h4.page-header Other screen actions
           p
-            a#destroyScreenButton(href="#") Remove screen          
-
+            a#destroyScreenButton(href="#") Remove screen   
 
 block stylesheets
-  link(rel="stylesheet", href="css/quill.base.css")
-  link(rel="stylesheet", href="css/quill.snow.css")
 block scripts
-  script(src="js/quill.min.js")
-  script(src="js/jquery.rest.min.js")
-  script(src="js/screeneditor.js")

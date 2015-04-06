@@ -1,40 +1,43 @@
 extends layout
 
 block title
-  title #{__('Plugins')} - #{__('Admin Panel')}
+  title #{__('asdasdsadasdasdasdasd')} - #{__('Admin Panel')}
 
 block stylesheets
 
 block content
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href='#')
+      .col-md-3.devices.text-right
+        .os
+          a.android.active(href='#')
+          a.ios.active(href='#')
+        a.phone.active(href='#')
+        a.tablet.active(href='#')
+      .col-md-6
+        h2 #{__('My Plugins')}
+        .search
+          input(type='text', placeholder='#{__("Search")}')
+    .row.center-block.voffset7
+      .col-md-8.col-md-offset-2
+        .row.plugins
+          each plugin in states
+            .col-md-3
+              a(href="/admin/plugin/" + plugin.name)
+                img(src='assets/plugins/splash.svg')
+                span.ellipsis= (typeof plugins[plugin.name].metadata.name === 'undefined' ? plugin.name : plugins[plugin.name].metadata.name)
+              .options
+                a.enable(href='#')
+                a.delete(href='#')
 
-  .container
-    h2 #{__('Manage')} #{__('Plugins')}
-    table.table.table-responsive.table-hover.table-striped
-      thead: tr
-        th #{__('Plugin name')}
-        th #{__('Description')}
-        th #{__('Actions')}
-      tbody
-        each plugin in states
-          tr
-            td
-              h3.panel-title= (typeof plugins[plugin.name].metadata.name === 'undefined' ? plugin.name : plugins[plugin.name].metadata.name)
-            td
-              p= plugins[plugin.name].metadata.description
-              p= plugins[plugin.name].metadata.author
-            td
-              div(aria-label="#{__('Options')}")
+          .col-md-3
+            .add-plugin
+              .options
+                a.chart(href='plugins.html')
+                a.upload(href='upload-plugin.html')
+    .voffset6
 
-                -var action= (plugin.enabled? 'disable' : 'enable')
-                -var btnclass= (plugin.enabled? 'btn-warning' : 'btn-success')
-                -var icon= (plugin.enabled? 'ion-close-circled' : 'ion-checkmark-circled')
-                
-                button.btn.live-btn(class=btnclass, data-action="toggle", data-id=plugin.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
-                  i.icon(class=icon, style="color:white")
-                a(href="/admin/plugin/" + plugin.name ): button.btn.btn-default.live-btn(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Configuration')}")
-                  i.icon.ion-levels
-                //a(href="#", data-action="delete" ): button.btn.btn-danger(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Remove this plugin...')}")
-                //  i.icon.ion-trash-b(style="color:white")
 block scripts
   script.
     $(function() {
