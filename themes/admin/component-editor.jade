@@ -92,7 +92,7 @@ block scripts
 
       function saveDocument(doc, filename){
         $.ajax({
-          url: '/admin/template/edit/#{template}' + filename,
+          url: '/admin/theme/edit/#{theme}' + filename,
           type: 'POST',
           dataType: 'text',
           contentType: 'text/plain',
@@ -216,7 +216,7 @@ block scripts
               if(!(itemData['path'] in sessions)){
 
                 $.ajax({
-                  url: '/admin/template/get/' + itemData['template'],
+                  url: '/admin/theme/get/' + itemData['theme'],
                   type: 'post',
                   dataType: 'text',
                   data: 'file=' + itemData['path'],

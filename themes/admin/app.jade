@@ -18,17 +18,17 @@ block content
       .row
         .col-xs-12
           .well
-            .carousel.fdi-carousel.slide#templates
-              each template in templates
+            .carousel.fdi-carousel.slide#themes
+              each theme in themes
                 .carousel.fdi-Carousel.slide#eventCarousel(data-interval="0")
                   .carousel-inner.onebyone-carousel
                     .item.active
                       .col-md-4
-                        h1 Template
+                        h1 Theme
                         
       .row
         .col-xs-12.col-md-6.columns
-            input.form-control(type="text", data-provide="typeahead", data-object="template", autocomplete="off", placeholder="Apps template")
+            input.form-control(type="text", data-provide="typeahead", data-object="theme", autocomplete="off", placeholder="Apps theme")
         .col-xs-12.col-md-6.column
            select#tokenize(style="width:300px", multiple="multiple", data-object="plugin", placeholder="Apps plugins")
     .row

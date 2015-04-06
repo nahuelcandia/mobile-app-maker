@@ -44,7 +44,7 @@ block content
                 -var btnclass= (component.enabled? 'btn-success' : 'btn-inverse')
                 -var icon= ( 'ion-checkmark-circled')
                 
-                if componentType == 'template'
+                if componentType == 'theme'
 
                   -var enabled= (componentExists ? false : true)
                   button.btn.live-btn(disabled=enabled, class=btnclass, data-action="activate", data-id=component.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
