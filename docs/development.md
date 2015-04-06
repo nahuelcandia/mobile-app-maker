@@ -6,9 +6,9 @@ layout: default
 
 The CMS is based on well known technologies from the nodejs world like
 [express](http://expressjs.com), [socket.io](http://socket.io), [NeDB storage](https://www.npmjs.com/package/nedb),
-and [JADE](http://jade-lang.com/)/[EJS](http://www.embeddedjs.com/)/HTML  templates.
+and [JADE](http://jade-lang.com/)/[EJS](http://www.embeddedjs.com/)/HTML  themes.
 
-* [Templates](templates)
+* [Themes](themes)
 * [Plugins](plugins)
 * [Hooks](api#hooks)
 
@@ -23,7 +23,7 @@ and [JADE](http://jade-lang.com/)/[EJS](http://www.embeddedjs.com/)/HTML  templa
     ├── server.js  // this is the process that is lifted by the start scripts
     ├── start.sh  // Linux/OSX start script
     ├── start.bat  // Windows start batch script
-    ├── templates
+    ├── themes
     │   ├── admin
     │   └── bootstrap-3-jade
     └── README.md

@@ -2,9 +2,9 @@
 layout: default
 ---
 
-## Templates
+## Themes
 
-Templates are the base for an app. You can create templates using differente rendering
+Themes are the base for an app. You can create themes using differente rendering
 engines.
 
 An hybrid app should respect the mobile OSs
@@ -12,13 +12,13 @@ standards and this task is difficult to achieve from pure HTML and having to rel
 on multiple tools and iterations in order for the app to have a design consistent
 with the mobile's OS look & feel.
 
-### Templates directory
+### Themes directory
 
-Templates are installed under the /templates directory. Inside, there's one directory
-for each template for the CMS
+Themes are installed under the /themes directory. Inside, there's one directory
+for each theme for the CMS
 
     shovelapps-cms
-    └── templates
+    └── themes
         ├── admin
         └── bootstrap-3-jade
 
@@ -27,15 +27,15 @@ for each template for the CMS
 
 
 
-### How to make a template
+### How to make a theme
 
-Templates are written in the [Jade](http://jade-lang.com/) language. 
+Themes are written in the [Jade](http://jade-lang.com/) language. 
 *Jade allows you to write HTML code that is not bogus in terms of orphan tags.*
 
-1. Create a directory  called `mytemplate` under the `templates` dir.
+1. Create a directory  called `mytheme` under the `themes` dir.
 1. Start from an `index.jade`. Put all of your page there. For example,
-download a responsive template from some bootstrap  theme providers for example. **Tip:** *If you want to try with your own HTML, convert it to JADE with [HTML to Jade converter](http://html2jade.aaron-powell.com/)*.
-1. Create an assets directory under `templates/mytemplate`. **All files in assets will be available at the `assets/` URL in your apps frontend**.
+download a responsive theme from some bootstrap  theme providers for example. **Tip:** *If you want to try with your own HTML, convert it to JADE with [HTML to Jade converter](http://html2jade.aaron-powell.com/)*.
+1. Create an assets directory under `themes/mytheme`. **All files in assets will be available at the `assets/` URL in your apps frontend**.
 
 ### Recommendations about assets and libraries for your app
 
@@ -43,19 +43,19 @@ download a responsive template from some bootstrap  theme providers for example.
 * Load cordova.js
 * Recommend loading jQuery
 * Recommend loading FastClick
-* Plugins and templates are written in jade
+* Plugins and themes are written in jade
 * Jade offers tidiness to other developers and designers. When the user or 
   another developers will 
   rarely find basic nesting issues with HTML tags that often cause misalignments.
 
 
-#### About paths in template files
+#### About paths in theme files
 
-* Use relative paths in the templates in order to keep consistent with 
+* Use relative paths in the themes in order to keep consistent with 
 the final structure that the app will have inside phonegap
 
 
-####Variables available to templates (locals)
+####Variables available to themes (locals)
 
 * `config.app`
 * `isPreviewing`
