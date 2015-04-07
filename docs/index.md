@@ -16,7 +16,7 @@ In Web Content Management Systems, the purpose of the system is to allow you
 to focus on the content and the final frontend is rendered by the browser.
 
 **Shovel apps CMS** makes it easy for you to create an Hybrid App starting from 
-HTML templates and editing the content by yourself without the nagging of having to install
+HTML themes and editing the content by yourself without the nagging of having to install
 an entire Phonegap environment for yourself.
 
 When you're done editing your app's contents, you  can **create Android binaries

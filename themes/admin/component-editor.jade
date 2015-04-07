@@ -1,0 +1,242 @@
+extends layout
+
+block head
+  // In order for assets to load as they would module.loaded
+  // insider file://
+  base(href="/")
+
+block title
+  title #{__('Editing')} 
+
+block content
+  
+  div#editor_menu
+    div.btn-group
+      button.btn-sm.btn#save
+        i.icon.ion-cube 
+        |  #{__('Save')}
+      button.btn-sm.btn#undo
+        i.icon.ion-arrow-return-left
+        |  #{__('Undo')}
+      button.btn-sm.btn#redo
+        i.icon.ion-arrow-return-right 
+        |  #{__('Redo')}
+  div#editor_wrapper(style="height:100%;")
+    div.col-xs-3#editor_sidebar
+      h3 #{__('Files')}
+      div#tree.aciTree
+    div.col-xs-9#editor_div
+    textarea(name="editor")!=source
+ 
+
+block stylesheets
+  link(href="/coreassets/tree/css/aciTree.css", rel="stylesheet")
+  style.
+
+    #editor_div{
+      height:100%;
+    }
+    #editor_sidebar{
+      position:relative;
+      height:100%;
+      overflow-y: auto;
+      border-right:1px solid #000;
+    }
+
+    #editor_menu .btn{
+      border-radius: 0; 
+    }
+    @media (max-width: 992px) {
+      #editor_wrapper{
+        position:fixed;
+        top:101px;
+        width:100%;
+      }        
+      #editor_menu{
+        background-color:#ddd; 
+        position: fixed;
+        top:65px;
+        height:36px;
+        width:100%;
+        display:block;
+      }
+    }
+    @media (min-width: 992px) {
+      #editor_wrapper{
+        position:fixed;
+        top:36px;
+        width:100%;
+      }
+      #editor_menu{
+        background-color:#ddd; 
+        position: fixed;
+        top:0;
+        height:36px;
+        width:100%;
+        display:block;
+      }
+    }
+
+block scripts
+
+  script(src="/coreassets/tree/js/jquery.aciPlugin.min.js")
+  script(src="/coreassets/tree/js/jquery.aciTree.min.js")
+  script(src="/coreassets/ace/ace.js")
+  script(src="/coreassets/ace/mode-html.js")
+  script(src="/coreassets/ace/theme-monokai.js")
+  script(src="/coreassets/ace/worker-html.js")
+  script(src="/coreassets/ace/ext-settings_menu.js")
+
+  script.
+    $(function() {
+
+      function saveDocument(doc, filename){
+        $.ajax({
+          url: '/admin/theme/edit/#{theme}' + filename,
+          type: 'POST',
+          dataType: 'text',
+          contentType: 'text/plain',
+          data: doc,
+          success: function(data){
+            console.log(data);
+          },
+          error: function(err, lala){
+            console.log(err);
+          }
+        });
+      }
+      var actualSession = false;
+      var textarea = $('textarea[name="editor"]');
+      textarea.hide();
+      var editor = ace.edit("editor_div");
+      editor.setFontSize(16);
+      ace.require('ace/ext/settings_menu').init(editor);
+      editor.setTheme("ace/theme/monokai");
+      editor.getSession().setMode("ace/mode/jade");
+      editor.setValue($('textarea[name="editor"]').val());
+
+      editor.commands.addCommands([{
+        name: "showSettingsMenu",
+        bindKey: {win: "Ctrl-q", mac: "Command-q"},
+        exec: function(editor) {
+          editor.showSettingsMenu();
+        },
+        readOnly: true
+      }]);
+      editor.commands.addCommand({
+        name: 'saveDocument',
+        bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+        exec: function(editor) {
+            saveDocument(editor.getSession().getValue(), actualSession);
+        }
+      });
+      var UndoManager = require("ace/undomanager").UndoManager;
+      var EditSession = require("ace/edit_session").EditSession;
+      var Document = require("ace/document").Document;
+      
+      $('#submit').on('click', function() {
+          textarea.val(editor.setSession(actualSession).getValue());
+      });      
+      $('#undo').on('click', function() {
+          if(actualSession!=''){
+            var undo = editor.session.getUndoManager();
+            undo.undo();
+          }
+      });      
+      $('#redo').on('click', function() {
+          if(actualSession!=''){
+            var redo = editor.session.getUndoManager();
+            redo.redo();
+          }
+      });      
+      $('#save').on('click', function() {
+        if(actualSession!=''){
+          saveDocument(editor.getSession().getValue(), actualSession);
+        }
+      });
+
+      $('#tree').aciTree({
+          rootData: [!{JSON.stringify(tree)}],
+          queue: {
+              async: 4,
+              interval: 50,
+              delay: 10
+          },
+          selectable: true,           // selectable extension
+          multiSelectable: false,     // selectable extension
+          fullRow: false,             // selectable extension
+          textSelection: false,       // selectable extension
+          checkbox: false,            // checkbox extension
+          checkboxChain: true,        // checkbox extension
+          checkboxBreak: true,        // checkbox extension
+          checkboxClick: false,       // checkbox extension
+          radio: false,               // radio extension
+          radioChain: true,           // radio extension
+          radioBreak: true,           // radio extension
+          radioClick: false,          // radio extension
+          columnData: [],             // column extension
+          editable: false,            // editable extension
+          editDelay: 250,             // editable extension
+          persist: null,              // persist extension
+          selectHash: null,           // hash extension
+          openHash: null,             // hash extension
+          sortable: false,            // sortable extension
+          sortDelay: 750,             // sortable extension
+          show: {
+              props: {
+                  'height': 'show'
+              },
+              duration: 'medium',
+              easing: 'linear'
+          },
+          animateRoot: true,
+          hide: {
+              props: {
+                  'height': 'hide'
+              },
+              duration: 'medium',
+              easing: 'linear'
+          },
+          view: {
+              duration: 'medium',
+              easing: 'linear'
+          },
+          autoInit: true
+      });
+      var sessions = {};
+      var modes = {css: 'css', html: 'html', md: 'markdown', js: 'javascript', less: 'less', jade: 'jade', json: 'json'};
+      $('#tree').on('acitree', function(event, api, item, eventName, options) {
+          
+          if (eventName == 'selected'){
+              // do something when a item is selected
+
+              var itemData = api.itemData(item);
+              if(itemData['inode']) return;
+              if(itemData['editable']) return;
+              if(!(itemData['path'] in sessions)){
+
+                $.ajax({
+                  url: '/admin/theme/get/' + itemData['theme'],
+                  type: 'post',
+                  dataType: 'text',
+                  data: 'file=' + itemData['path'],
+                  success: function(data){
+                    var doc = new Document(data);
+                    var newSession = new EditSession(doc, "ace/mode/" + modes[itemData['format']]);
+                    var newUndoManager = new UndoManager();
+                    sessions[itemData['path']] = newSession;
+                    editor.setSession(newSession);
+                    newSession.setUndoManager(newUndoManager);
+                    actualSession = itemData['path'];
+                  },
+                  error: function(err, lala){
+                    //console.log(arguments);
+                  }
+                });
+              }else{
+                editor.setSession(sessions[itemData['path']]);
+                actualSession = itemData['path'];
+              }
+          }
+      });
+    });

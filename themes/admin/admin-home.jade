@@ -1,0 +1,89 @@
+extends layout
+
+block title
+  title Shovel apps CMS - #{__('Admin Panel')}
+
+block stylesheets
+
+block content
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset6.text-left
+      .col-md-6.col-md-offset-2
+        h2 El meme
+    .row.text-left.no-margin
+      .col-md-4.col-sm-5.col-sm-offset-1.col-md-offset-2
+        .panel-group.shovel-group-panel
+          .panel.panel-default.open
+            .panel-heading(href='#Content', data-toggle='collapse')
+              h5.panel-title
+                i.open.pull-right
+                img(src='/coreassets/assets/content-icon.svg')
+                |                                 Content
+            #Content.panel-collapse.collapse.in.align-img
+              .list-group
+                a.list-group-item(href='/admin/screens')
+                  h6 Screens manager
+                  p.ellipsis Create your app's screns and manage them...
+                a.list-group-item(href='#')
+                  h6 Categories manager
+                  p.ellipsis Manage your content
+                a.list-group-item(href='menues-manager.html')
+                  h6 Menues managuer
+                  p.ellipsis Manage your menu's content by ...
+          .panel.panel-default.open
+            .panel-heading(href='#Plugins', data-toggle='collapse')
+              h5.panel-title
+                i.open.pull-right
+                img(src='/coreassets/assets/plugin-dashboard.svg')
+                |                                 Plugins
+            #Plugins.panel-collapse.collapse.in.align-img
+              .list-group
+                a.list-group-item(href='/admin/plugins')
+                  h6 Plugins manager
+                  p.ellipsis Upload your own plugins or add them from market...
+          .panel.panel-default.open
+            .panel-heading(href='#Themes', data-toggle='collapse')
+              h5.panel-title
+                i.open.pull-right
+                img(src='/coreassets/assets/themes-dashboard.svg')
+                |                                 Themes
+            #Themes.panel-collapse.collapse.in.align-img
+              .list-group
+                a.list-group-item(href='/admin/templates')
+                  h6 Themes manager
+                  p.ellipsis Upload your own themes or add them from market...
+      .col-md-4.col-sm-5.col-md-offset-1
+        .panel-group.shovel-group-panel
+          .panel.panel-default.open
+            .panel-heading(href='#Publish', data-toggle='collapse')
+              h5.panel-title
+                i.open.pull-right
+                img(src='/coreassets/assets/rocket-dashboard.svg')
+                |                                 Publish
+            #Publish.panel-collapse.collapse.in.align-img
+              .list-group
+                a.list-group-item(href='#')
+                  h6 Build
+                  p.ellipsis Manage your content.
+                a.list-group-item(href='/admin/build')
+                  h6 Publish app
+                  p.ellipsis Manage your content
+                a.list-group-item(href='#')
+                  h6 Add / Edit icon
+                  p.ellipsis Manage your content
+          .panel.panel-default.open
+            .panel-heading(href='#Settings', data-toggle='collapse')
+              h5.panel-title
+                i.open.pull-right
+                img(src='/coreassets/assets/settings-dashboard.svg')
+                |                                 Settings
+            #Settings.panel-collapse.collapse.in.align-img
+              .list-group
+                a.list-group-item(href='#')
+                  h6 Change app name
+                  p.ellipsis Manague your content.
+                a.list-group-item(href='#')
+                  h6 Delete app
+                  p.ellipsis Manague your content.
+
+block scripts
