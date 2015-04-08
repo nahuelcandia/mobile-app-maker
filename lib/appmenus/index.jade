@@ -1,0 +1,166 @@
+extend ../../themes/admin/layout 
+
+block content
+  .container
+      h2 App menus
+      h4 Tabbar menu
+      table#tableTabbar.table.table-responsive.table-striped
+        thead: tr
+          th Title
+          th Screen ID
+          th Icon
+        tbody
+          each appmenu in appmenus
+            if appmenu.menu=="tabbar"
+              tr
+                td
+                  input.inputTitle.form-control(type='text',value=appmenu.title)
+                td
+                  select.selectScreenID.form-control
+                    each screen in screens
+                      -var sel = appmenu.screenID==screen.id
+                      option(selected=sel)=screen.id
+                td
+                  select.selectIcon.form-control
+                    each icon in icons
+                      -var sel = appmenu.icon==icon
+                      option(selected=sel)=icon
+                td
+                  a.icon.ion-trash-b.deleteRow(href="#")
+                td
+                  a.icon.ion-arrow-up-a.up(href="#")
+                td
+                  a.icon.ion-arrow-down-a.down(href="#")
+          tr
+            td
+              input.inputTitle.form-control(type='text', placeholder='Add New')
+            td
+              select.selectScreenID.form-control
+                each screen in screens
+                  option=screen.id
+            td
+              select.selectIcon.form-control
+                each icon in icons
+                  option=icon
+            td
+              a.icon.ion-plus.addNew(href="#")
+            td
+            td
+      hr
+      h4 Side menu
+      table#tableSidemenu.table.table-responsive.table-striped
+        thead: tr
+          th Title
+          th Screen ID
+          th Icon
+        tbody
+          each appmenu in appmenus
+            if appmenu.menu=="sidemenu"
+              tr
+                td
+                  input.inputTitle.form-control(type='text',value=appmenu.title)
+                td
+                  select.selectScreenID.form-control
+                    each screen in screens
+                      -var sel = appmenu.screenID==screen.id
+                      option(selected=sel)=screen.id
+                td
+                  select.selectIcon.form-control
+                    each icon in icons
+                      -var sel = appmenu.icon==icon
+                      option(selected=sel)=icon
+                td
+                  a.icon.ion-trash-b.deleteRow(href="#")
+                td
+                  a.icon.ion-arrow-up-a.up(href="#")
+                td
+                  a.icon.ion-arrow-down-a.down(href="#")
+          tr
+            td
+              input.inputTitle.form-control(type='text', placeholder='Add New')
+            td
+              select.selectScreenID.form-control
+                each screen in screens
+                  option=screen.id
+            td
+              select.selectIcon.form-control
+                each icon in icons
+                  option=icon
+            td
+              a.icon.ion-plus.addNew(href="#")
+            td
+            td
+      button#saveMenus.btn.btn-success Save
+      hr
+      hr
+      hr
+block stylesheets
+
+block scripts
+  script(src="screens/js/jquery.rest.min.js")
+  script.
+    $(document).ready(function(){
+        checkPosition();
+        $("table").on("click",".deleteRow",function(e){
+          e.preventDefault();
+          var btn=$(this);
+          var row = btn.parent().parent();
+          row.remove();
+          checkPosition();
+        });
+        $("table").on("click",".addNew",function(e){
+          e.preventDefault();
+          var row = $(this).parents("tr:first");
+          row.after($(this).parents("tr:first").clone());
+          row.children().last().remove();
+          row.children().last().remove();
+          row.children().last().remove();
+          row.append('<td><a href="#" class="icon ion-trash-b deleteRow"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td>');
+          row.next().find('.inputTitle').attr('placeholder','Add New').val('');
+          checkPosition();
+        });
+        $("table").on("click",".up",function(e){
+          e.preventDefault();
+          var row = $(this).parents("tr:first");
+          row.insertBefore(row.prev());
+          checkPosition();
+        });
+        $("table").on("click",".down",function(e){
+          e.preventDefault();
+          var row = $(this).parents("tr:first");
+          row.insertAfter(row.next());
+          checkPosition();
+        });
+        function checkPosition(){
+        var rowCountT = $('#tableTabbar tr').length - 3;
+        var rowCountS = $('#tableSidemenu tr').length - 3;
+        var rowsT = $('#tableTabbar tr').each(function(index){
+          if ($(this).index()==0){
+            $(this).children().children('.up').hide();
+            $(this).children().children('.down').show();
+          } else {
+          if ($(this).index()==rowCountT){
+            $(this).children().children('.down').hide();
+            $(this).children().children('.up').show();
+          } else {
+            $(this).children().children('.up').show();
+            $(this).children().children('.down').show();
+          }
+          }
+          });
+        var rowsS = $('#tableSidemenu tr').each(function(index){
+          if ($(this).index()==0){
+            $(this).children().children('.up').hide();
+          } else {
+          if ($(this).index()==rowCountS){
+            $(this).children().children('.down').hide();
+          } else {
+            $(this).children().children('.up').show();
+            $(this).children().children('.down').show();
+          }
+          }
+          });
+        };
+
+    });
+  script(src="menus/js/menueditor.js")
