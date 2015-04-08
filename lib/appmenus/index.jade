@@ -4,15 +4,19 @@ block content
   .container
       h2 App menus
       h4 Tabbar menu
-      table#tableTabbar.table.table-responsive.table-striped
+      table#tableTabbar.table.table-responsive
         thead: tr
+          th #
           th Title
           th Screen ID
           th Icon
         tbody
+          -var tindex = 0
+          -var sindex = 0
           each appmenu in appmenus
             if appmenu.menu=="tabbar"
               tr
+                td=tindex=tindex+1
                 td
                   input.inputTitle.form-control(type='text',value=appmenu.title)
                 td
@@ -31,7 +35,9 @@ block content
                   a.icon.ion-arrow-up-a.up(href="#")
                 td
                   a.icon.ion-arrow-down-a.down(href="#")
+
           tr
+            td
             td
               input.inputTitle.form-control(type='text', placeholder='Add New')
             td
@@ -48,8 +54,9 @@ block content
             td
       hr
       h4 Side menu
-      table#tableSidemenu.table.table-responsive.table-striped
+      table#tableSidemenu.table.table-responsive
         thead: tr
+          th #
           th Title
           th Screen ID
           th Icon
@@ -57,6 +64,7 @@ block content
           each appmenu in appmenus
             if appmenu.menu=="sidemenu"
               tr
+                td=sindex=sindex+1
                 td
                   input.inputTitle.form-control(type='text',value=appmenu.title)
                 td
@@ -77,6 +85,7 @@ block content
                   a.icon.ion-arrow-down-a.down(href="#")
           tr
             td
+            td
               input.inputTitle.form-control(type='text', placeholder='Add New')
             td
               select.selectScreenID.form-control
@@ -92,8 +101,7 @@ block content
             td
       button#saveMenus.btn.btn-success Save
       hr
-      hr
-      hr
+
 block stylesheets
 
 block scripts
@@ -112,6 +120,7 @@ block scripts
           e.preventDefault();
           var row = $(this).parents("tr:first");
           row.after($(this).parents("tr:first").clone());
+          row.children('td:first').text(row[0].rowIndex);
           row.children().last().remove();
           row.children().last().remove();
           row.children().last().remove();
@@ -135,30 +144,48 @@ block scripts
         var rowCountT = $('#tableTabbar tr').length - 3;
         var rowCountS = $('#tableSidemenu tr').length - 3;
         var rowsT = $('#tableTabbar tr').each(function(index){
-          if ($(this).index()==0){
+          if($(this).index()!=rowCountT+1){
+            $(this).children('td:first').text(index);
+          }
+          if(rowCountT==0){
             $(this).children().children('.up').hide();
-            $(this).children().children('.down').show();
-          } else {
-          if ($(this).index()==rowCountT){
             $(this).children().children('.down').hide();
-            $(this).children().children('.up').show();
           } else {
-            $(this).children().children('.up').show();
-            $(this).children().children('.down').show();
+            if ($(this).index()==0){
+              $(this).children().children('.up').hide();
+              $(this).children().children('.down').show();
+            } else {
+              if ($(this).index()==rowCountT){
+                $(this).children().children('.down').hide();
+                $(this).children().children('.up').show();
+              } else {
+                $(this).children().children('.up').show();
+                $(this).children().children('.down').show();
+              }
+            }
           }
-          }
-          });
+        });
         var rowsS = $('#tableSidemenu tr').each(function(index){
-          if ($(this).index()==0){
+          if($(this).index()!=rowCountS+1){
+            $(this).children('td:first').text(index);
+          }
+          if(rowCountS==0){
             $(this).children().children('.up').hide();
-          } else {
-          if ($(this).index()==rowCountS){
             $(this).children().children('.down').hide();
           } else {
-            $(this).children().children('.up').show();
-            $(this).children().children('.down').show();
-          }
-          }
+              if ($(this).index()==0){
+                $(this).children().children('.up').hide();
+                $(this).children().children('.down').show();
+              } else {
+                if ($(this).index()==rowCountS){
+                  $(this).children().children('.down').hide();
+                  $(this).children().children('.up').show();
+                } else {
+                  $(this).children().children('.up').show();
+                  $(this).children().children('.down').show();
+                }
+              }
+            }
           });
         };
 
