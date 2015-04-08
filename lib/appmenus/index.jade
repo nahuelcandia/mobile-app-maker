@@ -4,6 +4,9 @@ block content
   .container
       h2 App menus
       h4 Tabbar menu
+      -var tindex = 0
+      -var sindex = 0
+      -var types=['Link to page','Menu header']
       table#tableTabbar.table.table-responsive
         thead: tr
           th #
@@ -12,8 +15,6 @@ block content
           th Icon
           th(colspan="4") Actions
         tbody
-          -var tindex = 0
-          -var sindex = 0
           each appmenu in appmenus
             if appmenu.menu=="tabbar"
               tr
@@ -41,7 +42,6 @@ block content
                   a.icon.ion-arrow-up-a.up(href="#")
                 td
                   a.icon.ion-arrow-down-a.down(href="#")
-
           tr
             td
             td
@@ -65,6 +65,7 @@ block content
         thead: tr
           th #
           th Title
+          th Type
           th Links to
           th Icon
           th(colspan="4") Actions
@@ -76,6 +77,11 @@ block content
                 td
                   input.inputTitle.form-control(type='text',value=appmenu.title)
                 td
+                  select.selectType.form-control
+                    each type in types
+                      -var tsel = appmenu.type==type
+                      option(selected=tsel)=type
+                td
                   select.selectScreenID.form-control
                     each screen in screens
                       -var sel = appmenu.screenID==screen.id
@@ -86,6 +92,11 @@ block content
                       -var sel = appmenu.icon==icon
                       option(selected=sel)=icon
                 td
+                  if appmenu.state=="enabled"
+                    a.icon.ion-eye.state(href="#")
+                  else
+                    a.icon.ion-eye-disabled.state(href="#")
+                td
                   a.icon.ion-trash-b.deleteRow(href="#")
                 td
                   a.icon.ion-arrow-up-a.up(href="#")
@@ -95,6 +106,10 @@ block content
             td
             td
               input.inputTitle.form-control(type='text', placeholder='Add New')
+            td
+              select.selectType.form-control
+                each type in types
+                  option=type
             td
               select.selectScreenID.form-control
                 each screen in screens
@@ -118,6 +133,7 @@ block scripts
   script.
     $(document).ready(function(){
         checkPosition();
+        checktypes();
         $("table").on("click",".deleteRow",function(e){
           e.preventDefault();
           var btn=$(this);
@@ -136,6 +152,8 @@ block scripts
           row.children().last().remove();
           row.append('<td><a href="#" class="icon ion-eye state"></a></td><td><a href="#" class="icon ion-trash-b deleteRow"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td>');
           row.next().find('.inputTitle').attr('placeholder','Add New').val('');
+          row.next().find('.selectType').val('Link to page');
+          row.next().find('.selectScreenID').attr('disabled',false);
           checkPosition();
         });
         $("table").on("click",".up",function(e){
@@ -160,6 +178,24 @@ block scripts
             $(this).removeClass('ion-eye-disabled');
           }
         });
+        $("table").on("change",".selectType",function(e){
+          e.preventDefault();
+          var row = $(this).parents("tr:first");
+          if($(this).val()=='Menu header'){
+            row.find('.selectScreenID').attr('disabled',true);
+          } else {
+            row.find('.selectScreenID').attr('disabled',false);
+          }
+        });
+        function checktypes(){
+          $('#tableSidemenu tr').each(function(index){
+            if($(this).find('.selectType').val()=='Menu header'){
+              $(this).find('.selectScreenID').attr('disabled',true);
+            } else {
+              $(this).find('.selectScreenID').attr('disabled',false);
+            }
+          });
+        }
         function checkPosition(){
         var rowCountT = $('#tableTabbar tr').length - 3;
         var rowCountS = $('#tableSidemenu tr').length - 3;

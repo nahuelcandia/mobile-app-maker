@@ -1,13 +1,15 @@
-{"title":"tab2","screenID":"screen-GNDJ1","icon":"ion-images","menu":"tabbar","position":"1","state":"enabled","_id":"4DIFNTG4qvcWTnHY"}
-{"title":"asd","screenID":"screen-OUUJB","icon":"ion-monitor","menu":"tabbar","position":"2","state":"disabled","_id":"faJBfsXkAAzI1oOW"}
-{"$$deleted":true,"_id":"4DIFNTG4qvcWTnHY"}
-{"$$deleted":true,"_id":"faJBfsXkAAzI1oOW"}
-{"title":"tab2","screenID":"screen-GNDJ1","icon":"ion-images","menu":"tabbar","position":"1","state":"enabled","_id":"RkDIJTskX9fLjZPZ"}
-{"title":"asd","screenID":"screen-OUUJB","icon":"ion-monitor","menu":"tabbar","position":"2","state":"disabled","_id":"iR6gWcC8lfuVWcXs"}
-{"title":"sasas","screenID":"screen-OUUJB","icon":"ion-monitor","menu":"tabbar","position":"3","state":"enabled","_id":"gHsMPYZ4EjSCQcqT"}
-{"$$deleted":true,"_id":"RkDIJTskX9fLjZPZ"}
-{"$$deleted":true,"_id":"iR6gWcC8lfuVWcXs"}
-{"$$deleted":true,"_id":"gHsMPYZ4EjSCQcqT"}
-{"title":"tab2","screenID":"screen-GNDJ1","icon":"ion-images","menu":"tabbar","position":"1","state":"disabled","_id":"MtWEjiGHtQh7nUwt"}
-{"title":"asd","screenID":"screen-OUUJB","icon":"ion-monitor","menu":"tabbar","position":"2","state":"enabled","_id":"vJ2pEXPdDnarMdEW"}
-{"title":"sasas","screenID":"screen-OUUJB","icon":"ion-monitor","menu":"tabbar","position":"3","state":"disabled","_id":"mb4eplyKAZ0a3iCL"}
+{"title":"tab2","screenID":"screen-GNDJ1","icon":"ion-map","menu":"tabbar","position":"2","state":"enabled","type":"Link to page","_id":"8r6F6dAcesyrpsOW"}
+{"title":"side 1","screenID":"screen-OUUJB","icon":"ion-monitor","menu":"sidemenu","position":"1","state":"enabled","type":"Menu header","_id":"A6W4fiSggefWzEME"}
+{"title":"tab 1","screenID":"screen-OUUJB","icon":"ion-play","menu":"tabbar","position":"1","state":"enabled","type":"Link to page","_id":"IElzrcBujCxZbv1H"}
+{"title":"side1.2","screenID":"screen-GNDJ1","icon":"ion-gear-b","menu":"sidemenu","position":"3","state":"disabled","type":"Link to page","_id":"VvhRrc6HkspEOtJL"}
+{"title":"side 1.1","screenID":"screen-OUUJB","icon":"ion-images","menu":"sidemenu","position":"2","state":"enabled","type":"Link to page","_id":"u3imlUIqToILBOJN"}
+{"$$deleted":true,"_id":"A6W4fiSggefWzEME"}
+{"$$deleted":true,"_id":"IElzrcBujCxZbv1H"}
+{"$$deleted":true,"_id":"8r6F6dAcesyrpsOW"}
+{"$$deleted":true,"_id":"u3imlUIqToILBOJN"}
+{"$$deleted":true,"_id":"VvhRrc6HkspEOtJL"}
+{"title":"tab 1","screenID":"screen-OUUJB","icon":"ion-play","menu":"tabbar","position":"1","state":"enabled","type":"Link to page","_id":"lspARDnP74GQ8Sjv"}
+{"title":"tab2","screenID":"screen-GNDJ1","icon":"ion-map","menu":"tabbar","position":"2","state":"enabled","type":"Link to page","_id":"SxJ0TVBx5YBCvl60"}
+{"title":"side 1","screenID":"screen-OUUJB","icon":"ion-monitor","menu":"sidemenu","position":"1","state":"enabled","type":"Menu header","_id":"JRMkzsyZ1mPZ7IC5"}
+{"title":"side 1.1","screenID":"screen-OUUJB","icon":"ion-images","menu":"sidemenu","position":"2","state":"enabled","type":"Link to page","_id":"CRGKawbs2VreMvl5"}
+{"title":"side1.2","screenID":"screen-GNDJ1","icon":"ion-gear-b","menu":"sidemenu","position":"3","state":"enabled","type":"Link to page","_id":"Coweqr07yec27mLc"}
