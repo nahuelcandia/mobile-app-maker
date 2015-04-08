@@ -2,32 +2,34 @@
 
 ## Structure
 	/url/page/of/model
-		- modelStructure
-		|- varData
-		|- nameOfVar: model
+		─ modelStructure
+		└─ var
+		└─ nameOfVar: model
 
-		- model
-		|- other
-		|- model
+		─ model
+		└─ other
+		└─ model
+		└─ var2
+		└─ var3
 
 ## Models
 
 ###/admin/screens 
-	- categorie
-	|- name 
-	|- subcategories: subcategorie
-	|- id 
+	─ categorie
+	└─ name 
+	└─ subcategories: subcategorie
+	└─ id 
 
-	- subcategorie
-	|- id
-	|- name
-	|- screens: screen
+	─ subcategorie
+	└─ id
+	└─ name
+	└─ screens: screen
 
-	- screen
-	|- id 
-	|- imgpreview 
-	|- title 
-	|- content 
+	─ screen
+	└─ id 
+	└─ imgpreview 
+	└─ title 
+	└─ content 
 
 **Example:**
 
@@ -67,21 +69,21 @@
 
 
 ###/screens/edit/:id
-	- screen
-	|- id 
-	|- imgpreview 
-	|- title 
-	|- content
-	|- categorie: categorie
-	|- subcategorie: subcategorie
+	─ screen
+	└─ id 
+	└─ imgpreview 
+	└─ title 
+	└─ content
+	└─ categorie: categorie
+	└─ subcategorie: subcategorie
 
-	- categorie
-	|- name
-	|- id
+	─ categorie
+	└─ name
+	└─ id
 
-	- subcategorie
-	|- name
-	|- id
+	─ subcategorie
+	└─ name
+	└─ id
 
 
 
@@ -104,20 +106,20 @@
 
 
 ###/admin/menues
-	- place
-	|- id
-	|- title
-	|- menues: menu
+	─ place
+	└─ id
+	└─ title
+	└─ menues: menu
 
-	- menu
-	|- id
-	|- title
-	|- linked: linked
-	|- publish
+	─ menu
+	└─ id
+	└─ title
+	└─ linked: linked
+	└─ publish
 
-	- linked
-	|- parent
-	|- linkedto
+	─ linked
+	└─ parent
+	└─ linkedto
 
 **Example:**
 
@@ -143,11 +145,11 @@
 
 
 ###/admin/themes
-	- theme
-	|- id
-	|- title
-	|- osname
-	|- imgpreview
+	─ theme
+	└─ id
+	└─ title
+	└─ osname
+	└─ imgpreview
 
 **Example:**
 
@@ -169,16 +171,16 @@
 	}
 
 ###/admin/plugins
-	- plugin
-	|- id
-	|- title
-	|- imgpreview
-	|- enabled
-	|- support: support
+	─ plugin
+	└─ id
+	└─ title
+	└─ imgpreview
+	└─ enabled
+	└─ support: support
 
-	- support
-	|- os
-	|- devices
+	─ support
+	└─ os
+	└─ devices
 
 **Example:**
 
@@ -209,13 +211,13 @@
 
 
 ###/admin/* (all pages)
-	- app
-	|- id
-	|- name
-	|- imgpreview
+	─ app
+	└─ id
+	└─ name
+	└─ imgpreview
 
-	- navigate
-	|- actualpage
+	─ navigate
+	└─ actualpage
 
 **Example:**
 
