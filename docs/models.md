@@ -115,15 +115,52 @@
 	└─ id
 	└─ title
 	└─ linked: linked
-	└─ publish
+	└─ icon: icon
+	└─ position
 
 	─ linked
-	└─ parent
-	└─ linkedto
+	└─ name
+	└─ id
+
+	─ icon
+	└─ name
+	└─ id
 
 **Example:**
 
 	{
+		"linkeds": [
+			{
+				"name": "Home",
+				"id": 1
+			},
+			{
+				"name": "Cars",
+				"id": 2
+			},
+			{
+				"name": "Home 2",
+				"id": 3
+			},
+			{
+				"name": "Home 3",
+				"id": 4
+			}
+		],
+		"icons": [
+			{
+				"name": "icon-cars",
+				"id": 3
+			},
+			{
+				"name": "icon-home",
+				"id": 4
+			},
+			{
+				"name": "icon-upload",
+				"id": 5
+			}
+		],
 		"places": [
 			{
 				"id": "place-1",
@@ -132,17 +169,67 @@
 					{
 						"id": 1,
 						"title": "Test menu",
-						"publish": true,
 						linked: {
-							"parent": "Screen",
-							"kinkedto": "Cars"
-						}
+							"name": "Home",
+							"id": 1
+						},
+						"icon": {
+							"name": "icon-cars",
+							"id": 3
+						},
+						"position": 1
+					},
+					{
+						"id": 2,
+						"title": "Test menu 2",
+						linked: {
+							"name": "Cars",
+							"id": 2
+						},
+						"icon": {
+							"name": "icon-cars",
+							"id": 3
+						},
+						"position": 1
 					}
 				]
 			}
 		]
 	}
 
+
+###/admin/categories
+	─ categorie
+	└─ id
+	└─ name
+	└─ parent: categorie
+	└─ publish
+
+
+**Example:**
+
+	{
+		"categories": [
+			{
+				"id": "category-1",
+				"name": "Behaviors",
+				"parent": null
+			},
+			{
+				"id": "category-2",
+				"name": "Content",
+				"parent": null
+			},
+			{
+				"id": "category-3",
+				"name": "Post1",
+				"parent": {
+					"id": "category-2",
+					"name": "Content"
+				}
+			}
+		]
+	}
 
 ###/admin/themes
 	─ theme
