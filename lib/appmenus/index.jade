@@ -8,8 +8,9 @@ block content
         thead: tr
           th #
           th Title
-          th Screen ID
+          th Links to
           th Icon
+          th(colspan="4") Actions
         tbody
           -var tindex = 0
           -var sindex = 0
@@ -29,6 +30,11 @@ block content
                     each icon in icons
                       -var sel = appmenu.icon==icon
                       option(selected=sel)=icon
+                td
+                  if appmenu.state=="enabled"
+                    a.icon.ion-eye.state(href="#")
+                  else
+                    a.icon.ion-eye-disabled.state(href="#")
                 td
                   a.icon.ion-trash-b.deleteRow(href="#")
                 td
@@ -52,14 +58,16 @@ block content
               a.icon.ion-plus.addNew(href="#")
             td
             td
+            td
       hr
       h4 Side menu
       table#tableSidemenu.table.table-responsive
         thead: tr
           th #
           th Title
-          th Screen ID
+          th Links to
           th Icon
+          th(colspan="4") Actions
         tbody
           each appmenu in appmenus
             if appmenu.menu=="sidemenu"
@@ -99,6 +107,7 @@ block content
               a.icon.ion-plus.addNew(href="#")
             td
             td
+            td
       button#saveMenus.btn.btn-success Save
       hr
 
@@ -124,7 +133,8 @@ block scripts
           row.children().last().remove();
           row.children().last().remove();
           row.children().last().remove();
-          row.append('<td><a href="#" class="icon ion-trash-b deleteRow"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td>');
+          row.children().last().remove();
+          row.append('<td><a href="#" class="icon ion-eye state"></a></td><td><a href="#" class="icon ion-trash-b deleteRow"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td>');
           row.next().find('.inputTitle').attr('placeholder','Add New').val('');
           checkPosition();
         });
@@ -139,6 +149,16 @@ block scripts
           var row = $(this).parents("tr:first");
           row.insertAfter(row.next());
           checkPosition();
+        });
+        $("table").on("click",".state",function(e){
+          e.preventDefault();
+          if($(this).hasClass('ion-eye')){
+            $(this).addClass('ion-eye-disabled')
+            $(this).removeClass('ion-eye');
+          } else {
+            $(this).addClass('ion-eye')
+            $(this).removeClass('ion-eye-disabled');
+          }
         });
         function checkPosition(){
         var rowCountT = $('#tableTabbar tr').length - 3;
