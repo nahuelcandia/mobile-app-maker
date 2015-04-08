@@ -1,26 +1,33 @@
 # Data Models to Jade files
 
 ## Structure
-	/url/page
-		- structure
-		|- of
-		|- data
+	/url/page/of/model
+		- modelStructure
+		|- varData
+		|- nameOfVar: model
 
+		- model
+		|- other
+		|- model
 
 ## Models
 
 ###/admin/screens 
 	- categorie
 	|- name 
-	|- screens: screen
+	|- subcategories: subcategorie
 	|- id 
+
+	- subcategorie
+	|- id
+	|- name
+	|- screens: screen
 
 	- screen
 	|- id 
 	|- imgpreview 
 	|- title 
 	|- content 
-	|- subcategorie
 
 **Example:**
 
@@ -29,54 +36,74 @@
 			{
 				"name": "Places",
 				"id": 1,
-				"screens": [
+				"subcategories": [
 					{
-						"id": "screen-852",
-						"imgpreview": "screen-852.png",
-						"title": "Hotel Tucuman",
-						"content": " HTML or other model",
-						"subcategorie": "Splash" 
+						"name": "Splash",
+						"id": 1,
+						"screens": [
+							{
+								"id": "screen-852",
+								"imgpreview": "screen-852.png",
+								"title": "Hotel Tucuman",
+								"content": " HTML or other model"
+							},
+							{
+								"id": "screen-882",
+								"imgpreview": "screen-852.png",
+								"title": "Hotel Cordoba",
+								"content": " HTML or other model"
+							}
+						]
 					}
 				]
 			},
 			{
 				"name": "Other Places",
 				"id": 2,
-				"screens": []
+				"subcategories": []
 			}
 		]
 	}
 
 
-/screens/edit/:id
+###/screens/edit/:id
 	- screen
 	|- id 
 	|- imgpreview 
 	|- title 
-	|- content 
-	|- options: options 
+	|- content
+	|- categorie: categorie
+	|- subcategorie: subcategorie
+
+	- categorie
+	|- name
+	|- id
+
+	- subcategorie
+	|- name
+	|- id
 
 
-	- options
-	|- position 
-	|- showinmenu
+
+**Example:**
+
+	{
+		"id": "screen-852",
+		"imgpreview": "screen-852.png",
+		"title": "Hotel Tucuman",
+		"content": " HTML",
+		"categorie": {
+			"name": "Places",
+			"id": 1
+		},
+		"subcategorie": {
+			"name": "Splash",
+			"id": 1
+		}
+	}   
 
 
-	Example:
-
-		{
-			"id": "screen-852",
-			"imgpreview": "screen-852.png",
-			"title": "Hotel Tucuman",
-			"content": " HTML",
-			"options": {
-				"position": 1,
-				"showinmenu": true
-			}   
-		}   
-
-
-/admin/menues
+###/admin/menues
 	- place
 	|- id
 	|- title
@@ -92,115 +119,114 @@
 	|- parent
 	|- linkedto
 
-	Example:
+**Example:**
 
-		{
-			"places": [
-				{
-					"id": "place-1",
-					"title": "Bottom app menu"
-					"menues": [
-						{
-							"id": 1,
-							"title": "Test menu",
-							"publish": true,
-							linked: {
-								"parent": "Screen",
-								"kinkedto": "Cars"
-							}
+	{
+		"places": [
+			{
+				"id": "place-1",
+				"title": "Bottom app menu"
+				"menues": [
+					{
+						"id": 1,
+						"title": "Test menu",
+						"publish": true,
+						linked: {
+							"parent": "Screen",
+							"kinkedto": "Cars"
 						}
-					]
-				}
-			]
-		}
+					}
+				]
+			}
+		]
+	}
 
 
-/admin/themes or /admin/templates
+###/admin/themes
 	- theme
 	|- id
 	|- title
 	|- osname
 	|- imgpreview
 
-	Example:
+**Example:**
 
-		{
-			"themes": [
-				{
-					"id": "theme-1",
-					"title": "Elmeme theme A",
-					"osname": "iOS",
-					"imgpreview": "preview.png"
-				},
-				{
-					"id": "theme-2",
-					"title": "Elmeme theme B",
-					"osname": "Android",
-					"imgpreview": "preview.png"
-				}
-			]
-		}
+	{
+		"themes": [
+			{
+				"id": "theme-1",
+				"title": "Elmeme theme A",
+				"osname": "iOS",
+				"imgpreview": "preview.png"
+			},
+			{
+				"id": "theme-2",
+				"title": "Elmeme theme B",
+				"osname": "Android",
+				"imgpreview": "preview.png"
+			}
+		]
+	}
 
-/admin/plugins
+###/admin/plugins
 	- plugin
 	|- id
 	|- title
 	|- imgpreview
-	|- enable
+	|- enabled
 	|- support: support
 
 	- support
 	|- os
 	|- devices
 
-	Example:
+**Example:**
 
-		{
-			"plugins": [
-				{
-					"id": "plugin-1",
-					"title": "Facebook Comments",
-					"imgpreview": "comments.png",
-					"enable": true,
-					"support": {
-						"os": ["android", "ios"],
-						"devices": ["phone", "tablet"]
-					}
-				},
-				{
-					"id": "plugin-2",
-					"title": "Chat",
-					"imgpreview": "preview.png",
-					"enable": false,
-					"support": {
-						"os": ["ios"],
-						"devices": ["phone", "tablet"]
-					}
+	{
+		"plugins": [
+			{
+				"id": "plugin-1",
+				"title": "Facebook Comments",
+				"imgpreview": "comments.png",
+				"enabled": true,
+				"support": {
+					"os": ["android", "ios"],
+					"devices": ["phone", "tablet"]
 				}
-			]
-		}
+			},
+			{
+				"id": "plugin-2",
+				"title": "Chat",
+				"imgpreview": "preview.png",
+				"enabled": false,
+				"support": {
+					"os": ["ios"],
+					"devices": ["phone", "tablet"]
+				}
+			}
+		]
+	}
 
 
-
-/admin/* (all pages)
+###/admin/* (all pages)
 	- app
 	|- id
 	|- name
 	|- imgpreview
 
 	- navigate
-	|- thispage
+	|- actualpage
 
-	Example:
+**Example:**
 
-		{
-			"app": {
-				"id": "app-1",
-				"name": "Elmeme",
-				"imgpreview": "elmeme1-1.png",
-			},
-			"navigate": {
-				"thispage": "/admin/screens"
-			},
-			"categories": [...] /* All normal data model /admin/screens */
-		}
+	{
+		"app": {
+			"id": "app-1",
+			"name": "Elmeme",
+			"imgpreview": "elmeme1-1.png",
+		},
+		"navigate": {
+			"actualpage": "/admin/screens"
+		},
+		"categories": [...] /* All normal data model /admin/screens */
+	}
