@@ -3,22 +3,9 @@
 [http://shovelapps.org](http://shovelapps.org)
 
 
-**Shovel apps CMS** is a mobile oriented CMS that lets you create
-mobile apps editing the content of your app in a CMS fashion.
-
-In Web Content Management Systems, the purpose of the system is to allow you
-to focus on the content and the final frontend is rendered by the browser.
-
-**Shovel apps CMS** makes it easy for you to create an Hybrid App starting from 
-HTML templates and editing the content by yourself without the nagging of having to install
-an entire Phonegap environment for yourself.
-
-When you're done editing your app's contents, you  can **create Android binaries
- with one click and test it right away in your device.**
-
-###tl;dr.
-
-**Shovel apps CMS** is a CMS that compiles itself to a mobile binary
+**Shovel apps CMS** is a web CMS that lets you create
+mobile apps for Android and iOS  with full control over the UI/UX as well functionality of each platform.
+From this Web CMS and App Maker, you are also able to update the contents of your app in realtime, creating production-ready binaries, and also publishing to AppStore and Google Play from a single place.
 
 ##Download
 
