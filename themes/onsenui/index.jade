@@ -92,5 +92,8 @@ html(lang="en", ng-app="myApp")
               span Home
           each menu in sidemenulist
             //- add link for each item in the sidemenu
-            ons-list-item(modifier="chevron", onclick="Smenu.setMainPage('#{menu.screenID}.html', {closeMenu: true})")
-              span=menu.title
+            if menu.type=='Link to page'
+              ons-list-item(modifier="chevron", onclick="Smenu.setMainPage('#{menu.screenID}.html', {closeMenu: true})")
+                span=menu.title
+            else if menu.type=='Menu header'
+              ons-list-header=menu.title
