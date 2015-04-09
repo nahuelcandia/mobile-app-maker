@@ -304,7 +304,7 @@
 	└─ imgpreview
 
 	─ navigate
-	└─ actualpage
+	└─ currentpage
 
 **Example:**
 
@@ -315,7 +315,7 @@
 			"imgpreview": "elmeme1-1.png",
 		},
 		"navigate": {
-			"actualpage": "/admin/screens"
+			"currentpage": "/admin/screens"
 		},
 		"categories": [...] /* All normal data model /admin/screens */
 	}
