@@ -7,6 +7,8 @@ block content
       -var tindex = 0
       -var sindex = 0
       -var types=['Link to page','Menu header']
+      -var icons = ["ion-monitor", "ion-play", "ion-images", "ion-map", "ion-gear-b"]
+
       table#tableTabbar.table.table-responsive
         thead: tr
           th #
@@ -37,11 +39,11 @@ block content
                   else
                     a.icon.ion-eye-disabled.state(href="#")
                 td
-                  a.icon.ion-trash-b.deleteRow(href="#")
-                td
                   a.icon.ion-arrow-up-a.up(href="#")
                 td
                   a.icon.ion-arrow-down-a.down(href="#")
+                td
+                  a.icon.ion-trash-b.deleteRow(href="#")
           tr
             td
             td
@@ -97,11 +99,11 @@ block content
                   else
                     a.icon.ion-eye-disabled.state(href="#")
                 td
-                  a.icon.ion-trash-b.deleteRow(href="#")
-                td
                   a.icon.ion-arrow-up-a.up(href="#")
                 td
                   a.icon.ion-arrow-down-a.down(href="#")
+                td
+                  a.icon.ion-trash-b.deleteRow(href="#")
           tr
             td
             td
@@ -150,7 +152,7 @@ block scripts
           row.children().last().remove();
           row.children().last().remove();
           row.children().last().remove();
-          row.append('<td><a href="#" class="icon ion-eye state"></a></td><td><a href="#" class="icon ion-trash-b deleteRow"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td>');
+          row.append('<td><a href="#" class="icon ion-eye state"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td><td><a href="#" class="icon ion-trash-b deleteRow"></a></td>');
           row.next().find('.inputTitle').attr('placeholder','Add New').val('');
           row.next().find('.selectType').val('Link to page');
           row.next().find('.selectScreenID').attr('disabled',false);
