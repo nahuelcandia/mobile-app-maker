@@ -68,7 +68,10 @@ html(lang="en", ng-app="myApp")
             ons-tab(label="Home", page="home.html", active="true")
             //- add tabbar items for each menu
             each menu in tabbarlist
-              ons-tab(label=menu.title, page=menu.screenID+".html")
+              if menu.icon=='none'
+                ons-tab(label=menu.title, page=menu.screenID+".html")
+              else
+                ons-tab(label=menu.title, icon=menu.icon, page=menu.screenID+".html")
       else
         //- if only tabbar menu is present, tabbar should be a ons-page element
         ons-page
@@ -76,7 +79,10 @@ html(lang="en", ng-app="myApp")
             ons-tab(label="Home", page="home.html", active="true")
             //- add tabbar items for each menu
             each menu in tabbarlist
-              ons-tab(label=menu.title, page=menu.screenID+".html")
+              if menu.icon=='none'
+                ons-tab(label=menu.title, page=menu.screenID+".html")
+              else
+                ons-tab(label=menu.title, icon=menu.icon, page=menu.screenID+".html")
 
     //- if sidemenu is present, add the ons template for the menu screen
     if sidemenulist.length
@@ -94,6 +100,13 @@ html(lang="en", ng-app="myApp")
             //- add link for each item in the sidemenu
             if menu.type=='Link to page'
               ons-list-item(modifier="chevron", onclick="Smenu.setMainPage('#{menu.screenID}.html', {closeMenu: true})")
+                if menu.icon!=='none'
+                  ons-icon(icon=menu.icon)
                 span=menu.title
             else if menu.type=='Menu header'
               ons-list-header=menu.title
+
+style.
+  ons-list-item > ons-icon {
+  margin: 0 6px 0 0;
+  }
