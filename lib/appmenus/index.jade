@@ -7,7 +7,7 @@ block content
       -var tindex = 0
       -var sindex = 0
       -var types=['Link to page','Menu header']
-      -var icons = ["ion-monitor", "ion-play", "ion-images", "ion-map", "ion-gear-b"]
+      -var icons = ["ion-monitor", "ion-play", "ion-images", "ion-map", "ion-gear-b","ion-music-note", "ion-radio-waves", "ion-earth", "ion-eye", "ion-person", "ion-location", "ion-link", "ion-chevron-left", "ion-information-circled", "ion-share"]
 
       table#tableTabbar.table.table-responsive
         thead: tr
@@ -29,10 +29,10 @@ block content
                       -var sel = appmenu.screenID==screen.id
                       option(selected=sel)=screen.id
                 td
-                  select.selectIcon.form-control
-                    each icon in icons
-                      -var sel = appmenu.icon==icon
-                      option(selected=sel)=icon
+                  if appmenu.icon=="none"
+                    button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
+                  else
+                    button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal")=appmenu.icon
                 td
                   if appmenu.state=="enabled"
                     a.icon.ion-eye.state(href="#")
@@ -53,9 +53,7 @@ block content
                 each screen in screens
                   option=screen.id
             td
-              select.selectIcon.form-control
-                each icon in icons
-                  option=icon
+              button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
             td
               a.icon.ion-plus.addNew(href="#")
             td
@@ -89,10 +87,10 @@ block content
                       -var sel = appmenu.screenID==screen.id
                       option(selected=sel)=screen.id
                 td
-                  select.selectIcon.form-control
-                    each icon in icons
-                      -var sel = appmenu.icon==icon
-                      option(selected=sel)=icon
+                  if appmenu.icon=="none"
+                    button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
+                  else
+                    button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal")=appmenu.icon
                 td
                   if appmenu.state=="enabled"
                     a.icon.ion-eye.state(href="#")
@@ -117,9 +115,7 @@ block content
                 each screen in screens
                   option=screen.id
             td
-              select.selectIcon.form-control
-                each icon in icons
-                  option=icon
+              button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
             td
               a.icon.ion-plus.addNew(href="#")
             td
@@ -127,15 +123,39 @@ block content
             td
       button#saveMenus.btn.btn-success Save
       hr
+  .modal.fade(id="iconsModal", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-header(style="border-bottom:none; min-height:100px;")
+          .container.col-md-12
+            .row
+              button.close(type="button", data-dismiss="modal", aria-label="Close")
+                span(aria-hidden="true") &times;
+            .row
+              .col-md-6
+                h4.modal-title(id="myModalLabel") Choose Icon
+              .col-md-6
+                button.btn.btn-default.iconSelect(style="float:right;",type="button", data-dismiss="modal", data-iconname="Select icon") No icon
 
+        .modal-body
+          each icon in icons
+            a.icon.iconSelect(class=icon, style="font-size:40px; margin:30px; color:#676767;", href="#", data-dismiss="modal", data-iconname=icon)
 block stylesheets
 
 block scripts
   script(src="screens/js/jquery.rest.min.js")
   script.
     $(document).ready(function(){
+        var lastIconButton;
         checkPosition();
         checktypes();
+        $('#iconsModal').on('show.bs.modal', function (e) {
+          lastIconButton=e.relatedTarget;
+        });
+        $('.modal').on("click",".iconSelect", function(e){
+            e.preventDefault();
+            $(lastIconButton).html($(this).attr('data-iconname'));
+          });
         $("table").on("click",".deleteRow",function(e){
           e.preventDefault();
           var btn=$(this);
@@ -155,6 +175,7 @@ block scripts
           row.append('<td><a href="#" class="icon ion-eye state"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td><td><a href="#" class="icon ion-trash-b deleteRow"></a></td>');
           row.next().find('.inputTitle').attr('placeholder','Add New').val('');
           row.next().find('.selectType').val('Link to page');
+          row.next().find('.btn-icon').html('Select icon');
           row.next().find('.selectScreenID').attr('disabled',false);
           checkPosition();
         });
@@ -249,3 +270,6 @@ block scripts
 
     });
   script(src="menus/js/menueditor.js")
+
+
+
