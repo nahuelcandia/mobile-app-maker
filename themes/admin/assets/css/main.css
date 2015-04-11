@@ -165,11 +165,6 @@ body {
 .cms .devices .os {
 	display: inline-block;
 }
-.cms .header .devices .os {
-	border-right: solid 1px #c0c0c0;
-	margin-right: 15px;
-	padding-right: 15px;
-}
 .cms .devices .ios {
 	width: 30px;
 	height: 30px;
@@ -195,34 +190,16 @@ body {
 	height: 22px;
 }
 
-.cms .devices .phone {
-	width: 25px;
-	height: 25px;
-	background: url('../assets/cel-grey.svg');
-	background-size: cover;
-}
-.cms .devices .phone:hover, .cms .devices .phone.active {
-	background: url('../assets/cel-pink.svg');
-	background-size: cover;
-}
-.cms .devices .tablet {
-	width: 30px;
-	height: 30px;
-	background: url('../assets/tablet-grey.svg');
-	background-size: cover;
-}
-.cms .devices .tablet:hover, .cms .devices .tablet.active {
-	background: url('../assets/tablet-pink.svg');
-	background-size: cover;
-}
-.cms .devices .os.separate {
-	border-right: none;
-}
-.cms .devices .os.separate .separate {
+.cms .devices .os .separate {
 	border-right: solid 1px #c0c0c0;
 	display: inline-block;
-	height: 22px;
+	height: 30px;
 	vertical-align: middle;
+	margin: 0 5px;
+}
+.cms .devices .os.small .separate,
+.cms .devices .os .separate.small {
+	height: 22px;
 }
 
 .cms .btn-default.active {
@@ -352,7 +329,7 @@ body {
 	height: 100%;
 }
 .cms .themes-categories-list .carousel .left-control {
-	left: -5%;
+	left: -11%;
 	right: auto;
 }
 .cms .themes-categories-list .carousel .left-control i {
@@ -404,26 +381,47 @@ body {
 	top: 17%;
 	left: 6.1%;
 }
+.cms .themes-categories-list .carousel-inner .item {
+	padding-top: 15px;
+}
+.cms .carousel  {
+	margin: 35px 0;
+}
 .cms .slider-themes {
-	margin: 25px 0;
+	height: 255px;
 }
-.cms .slider-themes > div {
+.cms .slider-themes > li {
 	position: relative;
+	float: left;
+	margin: 0;
+	padding: 0 40px;
+	width: 33%;
+	list-style: none;
+	transition: all 0.3s ease-out;
 }
-.cms .slider-themes > div img {
+.cms .slider-themes > li img {
 	width: 140px;
 	height: 200px;
 	border: solid 1px #e9e9ea;
 	border-radius: 4px;
+	transition: all 0.1s ease-out;
 }
-.cms .slider-themes > div.active img,
-.cms .slider-themes > div a:hover img  {
-	border: solid 1px #ec1164;
+.cms .slider-themes > li a:hover img  {
+	box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
 }
-.cms .slider-themes > div .front {
+.cms .slider-themes > li .front {
 	position: absolute;
-	right: 0;
+	right: 5px;
 	bottom: -25px;
+}
+
+.cms .slider-themes > li.inactive {
+	opacity: 0.3;
+}
+.cms .slider-themes > li.active img {
+	width: 170px;
+	height: 230px;
+	box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
 }
 
 .cms .themes {
@@ -563,6 +561,17 @@ body {
 .cms .table-shovel .actions a.delete {
 	background-image: url('../assets/delete.svg');
 }
+.cms .table-shovel .actions a.publish, .cms .table-shovel .actions a.unpublish {
+	width: 30px;
+	height: 30px;
+	vertical-align: bottom;
+}
+.cms .table-shovel .actions a.publish {
+	background-image: url('../assets/icons_preview.svg');
+}
+.cms .table-shovel .actions a.unpublish {
+	background-image: url('../assets/icons_preview-none.svg');
+}
 .cms .table-shovel .actions a.add {
 	background-image: url('../assets/icons_plus.svg');
 	width: 25px;
@@ -589,6 +598,11 @@ body {
 .cms .table-shovel .actions a:last-child {
 	border-right: none;
 	margin-right: 0;
+}
+
+.cms .table-category {
+	width: 70%;
+	margin: 0 auto;
 }
 
 .cms .apps {
@@ -777,7 +791,8 @@ body {
 .cms .tab-content {
 	border: solid 1px #adafaf;
 	border-top: none;
-	padding: 10px;
+	padding: 10px 10px 50px 10px;
+	border-radius: 0 0 10px 10px;
 }
 .cms .nav-tabs .nav {
 	background: #e9e9ea;
@@ -1224,6 +1239,7 @@ body {
 	margin: 20px auto;
 	border: dashed 2px #aeafb2;
 	padding: 100px;
+	border-radius: 10px;
 }
 .upload-zone .icon {
 	background: url('../assets/cloud-upload-1.svg');
