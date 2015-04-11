@@ -116,5 +116,15 @@
   "Category Manager": "Category Manager",
   "Save changes": "Save changes",
   "Category name": "Category name",
-  "Parent": "Parent"
+  "Parent": "Parent",
+  "Screens manager": "Screens manager",
+  "Categories manager": "Categories manager",
+  "Menues manager": "Menues manager",
+  "Plugins manager": "Plugins manager",
+  "Themes manager": "Themes manager",
+  "Publish app": "Publish app",
+  "Add / Edit icon": "Add / Edit icon",
+  "Settings": "Settings",
+  "Change app name": "Change app name",
+  "Delete app": "Delete app"
 }
