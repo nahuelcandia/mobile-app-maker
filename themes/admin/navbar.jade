@@ -7,29 +7,29 @@ nav.navbar.navbar-shovel
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      .logo-app
+      a(href="/admin/").logo-app
         img(src='/coreassets/assets/elmeme1-1.jpg')
         h1.hidden-xs Elmeme
     #navbar.navbar-collapse.collapse
       ul.nav.navbar-nav.navbar-right
         li
-          a(href='/admin') #{__('Dashboard')}
+          a(href='/admin/') #{__('Dashboard')}
         li.dropdown
           a.dropdown-toggle(data-toggle='dropdown', href='#') #{__('Content')} 
             span.glyphicon.glyphicon-menu-down
           ul.dropdown-menu(role='menu')
             li
-              a(href='/admin/categories') #{__('Categories Manager')}
+              a(href='categories') #{__('Categories Manager')}
             li
-              a(href='/admin/screens') #{__('Screens Manager')}
+              a(href='screens') #{__('Screens Manager')}
             li
-              a(href='#') #{__('Menues Manager')}
+              a(href='menues') #{__('Menues Manager')}
         li
-          a(href='/admin/plugins') #{__('Plugins')}
+          a(href='plugins') #{__('Plugins')}
         li
-          a(href='/admin/themes') #{__('Themes')}
+          a(href='themes') #{__('Themes')}
         li
-          a(href='/admin/build') #{__('Publish')}
+          a(href='build') #{__('Publish')}
         li
           a.preview-app(href='/', target='_blank')
         li.dropdown
