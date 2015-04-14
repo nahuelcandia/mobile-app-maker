@@ -9,7 +9,7 @@ block content
 
   .container
     h2 #{__('Manage')} #{__(componentTypePlural)}
-    table.table.table-responsive.table-hover.table-striped
+    table.table.table-responsive.table-hover
       thead: tr
         th #{__(componentTypePlural + ' name')}
         th.hidden-xs #{__('Description')}
@@ -41,8 +41,8 @@ block content
               div(aria-label="#{__('Options')}")
 
                 -var action= (component.enabled? 'disable' : 'enable')
-                -var btnclass= (component.enabled? 'btn-success' : 'btn-inverse')
-                -var icon= ( 'ion-checkmark-circled')
+                -var btnclass= (component.enabled? 'btn-primary' : 'btn-info')
+                -var icon= (component.enabled? 'ion-checkmark-circled' : 'ion-close-circled')
                 
                 if componentType == 'theme'
 
@@ -76,11 +76,11 @@ block scripts
             if(data.state=='enabled'){
               action = '#{__('Click to disable')}';
               icon = 'ion-checkmark-circled';
-              btnclass = 'btn-success';
+              btnclass = 'btn-primary';
             }else if(data.state=='disabled'){
               action = '#{__('Click to enable')}';
               icon = 'ion-close-circled';
-              btnclass = 'btn-inverse';
+              btnclass = 'btn-info';
             }
             console.log(data.state);
             $("button[data-id='" + data.key + "']").removeClass (function (index, css) {
