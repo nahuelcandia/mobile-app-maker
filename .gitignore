@@ -1,3 +1,4 @@
+.DS_Store
 config/production.json
 config/development.json
 # Ignore session files
