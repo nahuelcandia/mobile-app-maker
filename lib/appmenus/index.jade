@@ -7,7 +7,7 @@ block content
       -var tindex = 0
       -var sindex = 0
       -var types=['Link to page','Menu header']
-      -var icons = ["ion-monitor", "ion-play", "ion-images", "ion-map", "ion-gear-b","ion-music-note", "ion-radio-waves", "ion-earth", "ion-eye", "ion-person", "ion-location", "ion-link", "ion-chevron-left", "ion-information-circled", "ion-share"]
+      -var icons = ["ion-arrow-up-a","ion-arrow-right-a","ion-arrow-down-a","ion-arrow-left-a","ion-arrow-up-b","ion-arrow-right-b","ion-arrow-down-b","ion-arrow-left-b","ion-arrow-up-c","ion-arrow-right-c","ion-arrow-down-c","ion-arrow-left-c","ion-arrow-return-right","ion-arrow-return-left","ion-arrow-swap","ion-arrow-shrink","ion-arrow-expand","ion-arrow-move","ion-arrow-resize","ion-chevron-up","ion-chevron-right","ion-chevron-down","ion-chevron-left","ion-navicon-round","ion-navicon","ion-drag","ion-log-in","ion-log-out","ion-checkmark-round","ion-checkmark","ion-checkmark-circled","ion-close-round","ion-close","ion-close-circled","ion-plus-round","ion-plus","ion-plus-circled","ion-minus-round","ion-minus","ion-minus-circled","ion-information","ion-information-circled","ion-help","ion-help-circled","ion-backspace-outline","ion-backspace","ion-help-buoy","ion-asterisk","ion-alert","ion-alert-circled","ion-refresh","ion-loop","ion-shuffle","ion-home","ion-search","ion-flag","ion-star","ion-heart","ion-heart-broken","ion-gear-a","ion-gear-b","ion-toggle-filled","ion-toggle","ion-settings","ion-wrench","ion-hammer","ion-edit","ion-trash-a","ion-trash-b","ion-document","ion-document-text","ion-clipboard","ion-scissors","ion-funnel","ion-bookmark","ion-email","ion-email-unread","ion-folder","ion-filing","ion-archive","ion-reply","ion-reply-all","ion-forward","ion-share","ion-paper-airplane","ion-link","ion-paperclip","ion-compose","ion-briefcase","ion-medkit","ion-at","ion-pound","ion-quote","ion-cloud","ion-upload","ion-more","ion-grid","ion-calendar","ion-clock","ion-compass","ion-pinpoint","ion-pin","ion-navigate","ion-location","ion-map","ion-lock-combination","ion-locked","ion-unlocked","ion-key","ion-arrow-graph-up-right","ion-arrow-graph-down-right","ion-arrow-graph-up-left","ion-arrow-graph-down-left","ion-stats-bars","ion-connection-bars","ion-pie-graph","ion-chatbubble","ion-chatbubble-working","ion-chatbubbles","ion-chatbox","ion-chatbox-working","ion-chatboxes","ion-person","ion-person-add","ion-person-stalker","ion-woman","ion-man","ion-female","ion-male","ion-transgender","ion-fork","ion-knife","ion-spoon","ion-soup-can-outline","ion-soup-can","ion-beer","ion-wineglass","ion-coffee","ion-icecream","ion-pizza","ion-power","ion-mouse","ion-battery-full","ion-battery-half","ion-battery-low","ion-battery-empty","ion-battery-charging","ion-wifi","ion-bluetooth","ion-calculator","ion-camera","ion-eye","ion-eye-disabled","ion-flash","ion-flash-off","ion-qr-scanner","ion-image","ion-images","ion-wand","ion-contrast","ion-aperture","ion-crop","ion-easel","ion-paintbrush","ion-paintbucket","ion-monitor","ion-laptop","ion-ipad","ion-iphone","ion-ipod","ion-printer","ion-usb","ion-outlet","ion-bug","ion-code","ion-code-working","ion-code-download","ion-fork-repo","ion-network","ion-pull-request","ion-merge","ion-xbox","ion-playstation","ion-steam","ion-closed-captioning","ion-videocamera","ion-film-marker","ion-disc","ion-headphone","ion-music-note","ion-radio-waves","ion-speakerphone","ion-mic-a","ion-mic-b","ion-mic-c","ion-volume-high","ion-volume-medium","ion-volume-low","ion-volume-mute","ion-levels","ion-play","ion-pause","ion-stop","ion-record","ion-skip-forward","ion-skip-backward","ion-eject","ion-bag","ion-card","ion-cash","ion-pricetag","ion-pricetags","ion-thumbsup","ion-thumbsdown","ion-happy-outline","ion-happy","ion-sad-outline","ion-sad","ion-bowtie","ion-tshirt-outline","ion-tshirt","ion-trophy","ion-podium","ion-ribbon-a","ion-ribbon-b","ion-university","ion-magnet","ion-beaker","ion-erlenmeyer-flask","ion-egg","ion-earth","ion-planet","ion-lightbulb","ion-cube","ion-leaf","ion-waterdrop","ion-flame","ion-fireball","ion-bonfire","ion-umbrella","ion-nuclear","ion-no-smoking","ion-thermometer","ion-speedometer","ion-model-s","ion-plane","ion-jet","ion-load-a","ion-load-b","ion-load-c","ion-load-d"]
 
       table#tableTabbar.table.table-responsive
         thead: tr
@@ -115,13 +115,13 @@ block content
                 each screen in screens
                   option=screen.id
             td
-              button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
+              button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") #{__('Select icon')}
             td
               a.icon.ion-plus.addNew(href="#")
             td
             td
             td
-      button#saveMenus.btn.btn-success Save
+      button#saveMenus.btn.btn-success #{__('Save')}
       hr
   .modal.fade(id="iconsModal", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
     .modal-dialog
@@ -133,13 +133,14 @@ block content
                 span(aria-hidden="true") &times;
             .row
               .col-md-6
-                h4.modal-title(id="myModalLabel") Choose Icon
+                h4.modal-title(id="myModalLabel") #{__('Choose Icon')}
               .col-md-6
-                button.btn.btn-default.iconSelect(style="float:right;",type="button", data-dismiss="modal", data-iconname="Select icon") No icon
+                button.btn.btn-default.iconSelect(style="float:right;",type="button", data-dismiss="modal", data-iconname="Select icon") #{__('No icon')}
 
         .modal-body
-          each icon in icons
-            a.icon.iconSelect(class=icon, style="font-size:40px; margin:30px; color:#676767;", href="#", data-dismiss="modal", data-iconname=icon)
+          .row
+            each icon in icons
+              a.icon.iconSelect.col-md-1(class=icon, style="font-size:40px; margin:30px; color:#676767;", href="#", data-dismiss="modal", data-iconname=icon)
 block stylesheets
 
 block scripts
