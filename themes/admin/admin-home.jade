@@ -9,7 +9,7 @@ block content
   .container-fluid.bg-white.cms(role='main')
     .header.center-block.row.voffset6.text-left
       .col-md-6.col-md-offset-2
-        h2 #{locals.config.app.appName}
+        h2 Dashboard
     .row.text-left.no-margin
       .col-md-4.col-sm-5.col-sm-offset-1.col-md-offset-2
         .panel-group.shovel-group-panel
@@ -18,40 +18,32 @@ block content
               h5.panel-title
                 i.open.pull-right
                 img(src='/coreassets/assets/content-icon.svg')
-                | #{__('Content')}
+                | #{__("Content")}
             #Content.panel-collapse.collapse.in.align-img
               .list-group
-                a.list-group-item(href='/admin/screens')
-                  h6 #{__('Screens manager')}
-                  p.ellipsis #{__("Create your app's screns and manage them")}...
-                a.list-group-item(href='#')
-                  h6 #{__('Categories manager')}
-                  p.ellipsis #{__('Manage your content')}
-                a.list-group-item(href='/admin/menus')
-                  h6 #{__('Menu manager')}
-                  p.ellipsis #{__("Manage your menu's content by")} ...
+                a.list-group-item(href='screens')
+                  h6 #{__("Screens manager")}
+                  p.ellipsis Manage your app's contents.
+                a.list-group-item(href='categories')
+                  h6 #{__("Categories manager")}
+                  p.ellipsis Categorize your screens.
+                a.list-group-item(href='menues')
+                  h6 #{__("Menues manager")}
+                  p.ellipsis Each menu option links to a category or screen of your app.
           .panel.panel-default.open
-            .panel-heading(href='#Plugins', data-toggle='collapse')
+            .panel-heading(href='#Customize', data-toggle='collapse')
               h5.panel-title
                 i.open.pull-right
                 img(src='/coreassets/assets/plugin-dashboard.svg')
-                | #{__('Plugins')}
-            #Plugins.panel-collapse.collapse.in.align-img
+                | #{__("Customize")}
+            #Customize.panel-collapse.collapse.in.align-img
               .list-group
-                a.list-group-item(href='/admin/plugins')
-                  h6 #{__('Plugins manager')}
-                  p.ellipsis #{__('Upload your own plugins or add them from market...')}
-          .panel.panel-default.open
-            .panel-heading(href='#Themes', data-toggle='collapse')
-              h5.panel-title
-                i.open.pull-right
-                img(src='/coreassets/assets/themes-dashboard.svg')
-                | #{__('Themes')}
-            #Themes.panel-collapse.collapse.in.align-img
-              .list-group
-                a.list-group-item(href='/admin/themes')
-                  h6 #{__('Themes manager')}
-                  p.ellipsis #{__('Upload your own themes or add them from market...')}
+                a.list-group-item(href='plugins')
+                  h6 #{__("Plugins manager")}
+                  p.ellipsis Manage your app's functionallity.
+                a.list-group-item(href='themes')
+                  h6 #{__("Themes")}
+                  p.ellipsis Upload your own themes or add them from market.
       .col-md-4.col-sm-5.col-md-offset-1
         .panel-group.shovel-group-panel
           .panel.panel-default.open
@@ -59,18 +51,18 @@ block content
               h5.panel-title
                 i.open.pull-right
                 img(src='/coreassets/assets/rocket-dashboard.svg')
-                | #{__('Publish')}
+                | #{__("Publish")}
             #Publish.panel-collapse.collapse.in.align-img
               .list-group
+                a.list-group-item(href='build')
+                  h6 #{__("Download iOS App")}
+                  p.ellipsis Download your builded and signed iOS App.
                 a.list-group-item(href='#')
-                  h6 #{__('Build')}
-                  p.ellipsis #{__('Manage your content')}.
-                a.list-group-item(href='/admin/build')
-                  h6 #{__('Publish app')}
-                  p.ellipsis #{__('Manage your content')}
+                  h6 #{__("Download Android App")}
+                  p.ellipsis Download your builded and signed Android App.
                 a.list-group-item(href='#')
-                  h6 #{__('Add / Edit icon')}
-                  p.ellipsis #{__('Manage your content')}
+                  h6 #{__("Edit publish settings")}
+                  p.ellipsis Forms for publishing at multiple stores.
           .panel.panel-default.open
             .panel-heading(href='#Settings', data-toggle='collapse')
               h5.panel-title
@@ -87,3 +79,13 @@ block content
                   p.ellipsis #{__('Manage your content')}.
 
 block scripts
+                | #{__("Settings")}
+            #Settings.panel-collapse.collapse.in.align-img
+              .list-group
+                a.list-group-item(href='#')
+                  h6 #{__("Change app settings")}
+                  p.ellipsis Modify app's name and icon.
+                a.list-group-item(href='#')
+                  h6 #{__("Access Management")}
+                  p.ellipsis Add/remove permissions of users.
+
