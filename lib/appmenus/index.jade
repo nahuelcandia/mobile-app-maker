@@ -1,164 +1,151 @@
 extend ../../themes/admin/layout 
 
+block title
+  title Shovel apps CMS - #{__('Menues Manager')}
+
 block content
-  .container
-      h2 App menus
-      h4 Tabbar menu
-      table#tableTabbar.table.table-responsive.table-striped
-        thead: tr
-          th Title
-          th Screen ID
-          th Icon
-        tbody
-          each appmenu in appmenus
-            if appmenu.menu=="tabbar"
-              tr
-                td
-                  input.inputTitle.form-control(type='text',value=appmenu.title)
-                td
-                  select.selectScreenID.form-control
-                    each screen in screens
-                      -var sel = appmenu.screenID==screen.id
-                      option(selected=sel)=screen.id
-                td
-                  select.selectIcon.form-control
-                    each icon in icons
-                      -var sel = appmenu.icon==icon
-                      option(selected=sel)=icon
-                td
-                  a.icon.ion-trash-b.deleteRow(href="#")
-                td
-                  a.icon.ion-arrow-up-a.up(href="#")
-                td
-                  a.icon.ion-arrow-down-a.down(href="#")
-          tr
-            td
-              input.inputTitle.form-control(type='text', placeholder='Add New')
-            td
-              select.selectScreenID.form-control
-                each screen in screens
-                  option=screen.id
-            td
-              select.selectIcon.form-control
-                each icon in icons
-                  option=icon
-            td
-              a.icon.ion-plus.addNew(href="#")
-            td
-            td
-      hr
-      h4 Side menu
-      table#tableSidemenu.table.table-responsive.table-striped
-        thead: tr
-          th Title
-          th Screen ID
-          th Icon
-        tbody
-          each appmenu in appmenus
-            if appmenu.menu=="sidemenu"
-              tr
-                td
-                  input.inputTitle.form-control(type='text',value=appmenu.title)
-                td
-                  select.selectScreenID.form-control
-                    each screen in screens
-                      -var sel = appmenu.screenID==screen.id
-                      option(selected=sel)=screen.id
-                td
-                  select.selectIcon.form-control
-                    each icon in icons
-                      -var sel = appmenu.icon==icon
-                      option(selected=sel)=icon
-                td
-                  a.icon.ion-trash-b.deleteRow(href="#")
-                td
-                  a.icon.ion-arrow-up-a.up(href="#")
-                td
-                  a.icon.ion-arrow-down-a.down(href="#")
-          tr
-            td
-              input.inputTitle.form-control(type='text', placeholder='Add New')
-            td
-              select.selectScreenID.form-control
-                each screen in screens
-                  option=screen.id
-            td
-              select.selectIcon.form-control
-                each icon in icons
-                  option=icon
-            td
-              a.icon.ion-plus.addNew(href="#")
-            td
-            td
-      button#saveMenus.btn.btn-success Save
-      hr
-      hr
-      hr
-block stylesheets
+  .container-fluid.bg-white.cms.menues-manager(role="main")
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href="#")
+      .col-md-3.col-sm-4.devices.text-right.hidden-xs
+        .os
+          a.android.active(href="#")
+          .separate
+          a.ios(href="#")
+      .col-md-6.col-sm-6
+        h2 #{__('Menues Manager')}
+      .col-md-1
+        a.upload-theme.pull-right#saveMenus(href="#")
+          img(src="/coreassets/assets/save-icon.svg")
+          span #{__('Save changes')}
+    .col-md-8.col-md-offset-2.voffset7.text-left
+
+      - var appmenusByMenu = function(m){
+      -   for(var i = 0, result = []; i < appmenus.length; i++){
+      -     appmenus[i].menu == m && result.push(appmenus[i]);
+      -   }
+      -   return result;
+      - }
+      
+      - var places = [{"title": "Main Menu", "menu": "tabbar"}, {"title": "Side Menu", "menu": "sidemenu"}];
+
+      each place in places
+        h4.voffset7=place.title
+        table.table.table-bordered.table-shovel(data-menu=place.menu)
+          thead
+            tr
+              th #
+              th #{__('Title')}
+              th #{__('Linked to')}
+              th #{__('Icon')}
+              th #{__('Actions')}
+          tbody
+
+
+            - var menues = appmenusByMenu(place.menu);
+            each appmenu in menues
+                - var moveUp = appmenu.position == 1? "move-up hidden" : "move-up";
+                - var moveDown = (appmenu.position == menues.length)? "move-down hidden" : "move-down";
+                tr(data-position=appmenu.position)
+                  td.text-center=appmenu.position
+                  td
+                    input.title(type="text", value=appmenu.title, placeholder="Name your menu")
+                  td
+                    select.select2.screenId(data-placeholder="Parent")
+                      each screen in screens
+                        -var sel = appmenu.screenID==screen.id
+                        option(selected=sel, value=screen.id)=screen.title
+                  td
+                    select.select2.iconId(data-placeholder="Icons")
+                      each icon in icons
+                        -var sel = appmenu.icon==icon
+                        option(selected=sel,value=icon)=icon
+                  td.actions
+                    .move
+                      a(class=moveUp, href="#")
+                      a(class=moveDown, href="#")
+                    a.delete(href="#")
+
+
+            tr.new
+              td
+              td
+                input.title(type="text", placeholder="Name your menu")
+              td
+                select.select2.screenId(data-placeholder="Parent")
+                  each screen in screens
+                    option(value=screen.id)=screen.title
+              td
+                select.select2.iconId(data-placeholder="Icons")
+                  each icon in icons
+                    option(value=icon)=icon
+              td.actions
+                a.add(href="#")
+
+
+    .voffset5
+
+
 
 block scripts
   script(src="screens/js/jquery.rest.min.js")
   script.
     $(document).ready(function(){
-        checkPosition();
-        $("table").on("click",".deleteRow",function(e){
-          e.preventDefault();
-          var btn=$(this);
-          var row = btn.parent().parent();
-          row.remove();
-          checkPosition();
+        $("table").on("click",".delete",function(e){
+          var btn = $(this), row = btn.parents("tr");
+
+          return row.fadeOut(function(){ $(this).remove(); checkPosition();}), false;
         });
-        $("table").on("click",".addNew",function(e){
-          e.preventDefault();
+        $("table").on("click",".add",function(e){
           var row = $(this).parents("tr:first");
-          row.after($(this).parents("tr:first").clone());
-          row.children().last().remove();
-          row.children().last().remove();
-          row.children().last().remove();
-          row.append('<td><a href="#" class="icon ion-trash-b deleteRow"></a></td><td><a href="#" class="icon ion-arrow-up-a up"></a></td><td><a href="#" class="icon ion-arrow-down-a down"></a></td>');
-          row.next().find('.inputTitle').attr('placeholder','Add New').val('');
+          var newRow = $(this).parents("tr:first").clone().removeClass("new");
+
+          row.before(newRow.hide());
+          newRow.fadeIn().find("td:last").html("").append(
+            $("<div>").addClass("move").append(
+              $("<a>").addClass("move-up").attr("href", "#"),
+              $("<a>").addClass("move-down").attr("href", "#")
+            ),
+            $("<a>").addClass("delete").attr("href", "#")
+          );
+
+          row.find('input:first').val('');
+
           checkPosition();
+
+          return false;
         });
-        $("table").on("click",".up",function(e){
-          e.preventDefault();
+        $("table").on("click",".move-up",function(e){
           var row = $(this).parents("tr:first");
           row.insertBefore(row.prev());
           checkPosition();
+
+          return false;
         });
-        $("table").on("click",".down",function(e){
-          e.preventDefault();
+        $("table").on("click",".move-down",function(e){
           var row = $(this).parents("tr:first");
           row.insertAfter(row.next());
           checkPosition();
+
+          return false;
         });
         function checkPosition(){
-        var rowCountT = $('#tableTabbar tr').length - 3;
-        var rowCountS = $('#tableSidemenu tr').length - 3;
-        var rowsT = $('#tableTabbar tr').each(function(index){
-          if ($(this).index()==0){
-            $(this).children().children('.up').hide();
-            $(this).children().children('.down').show();
-          } else {
-          if ($(this).index()==rowCountT){
-            $(this).children().children('.down').hide();
-            $(this).children().children('.up').show();
-          } else {
-            $(this).children().children('.up').show();
-            $(this).children().children('.down').show();
-          }
-          }
-          });
-        var rowsS = $('#tableSidemenu tr').each(function(index){
-          if ($(this).index()==0){
-            $(this).children().children('.up').hide();
-          } else {
-          if ($(this).index()==rowCountS){
-            $(this).children().children('.down').hide();
-          } else {
-            $(this).children().children('.up').show();
-            $(this).children().children('.down').show();
-          }
-          }
+          var tables = $("table");
+
+          tables.each(function(){
+            var rows = $(this).find("tbody tr:not(.new)");
+            for(var i = 0; i < rows.length; i++)
+              {
+                var position = i + 1;
+
+                rows.eq(i).data("position", position);
+
+                rows.eq(i).find("td:first").text(position);
+                rows.eq(i).find(".move-up, .move-down").removeClass("hidden");
+
+                rows.eq(i).find(".move-up").addClass(position == 1? "hidden" : "");
+                rows.eq(i).find(".move-down").addClass(position == rows.length? "hidden" : "");
+              }
           });
         };
 

@@ -1,3 +1,35 @@
 {"title":"pantalla 2","screenID":"screen-OUUJB","icon":"ion-monitor","menu":"tabbar","position":"2","_id":"TfhiHEgLr2oFIxfQ"}
 {"title":"dfs","screenID":"screen-OUUJB","icon":"ion-monitor","menu":"sidemenu","position":"1","_id":"UTpunW9KNujZhIAr"}
 {"title":"pantalla 1","screenID":"screen-GNDJ1","icon":"ion-images","menu":"tabbar","position":"1","_id":"WnXHsFDl9EgsQdi6"}
+{"$$deleted":true,"_id":"UTpunW9KNujZhIAr"}
+{"$$deleted":true,"_id":"WnXHsFDl9EgsQdi6"}
+{"$$deleted":true,"_id":"TfhiHEgLr2oFIxfQ"}
+{"title":"pantalla 1","screenID":"screen-GS4R4","icon":"ion-images","menu":"tabbar","position":"1","_id":"SMa9WDMeNteKwziG"}
+{"title":"pantalla 2","screenID":"screen-0VER1","icon":"ion-monitor","menu":"tabbar","position":"2","_id":"Aps1Occ2CHN1aZcZ"}
+{"title":"dfs","screenID":"screen-GS4R4","icon":"ion-monitor","menu":"sidemenu","position":"1","_id":"pXtIkS5O8NHORbyc"}
+{"$$deleted":true,"_id":"SMa9WDMeNteKwziG"}
+{"$$deleted":true,"_id":"pXtIkS5O8NHORbyc"}
+{"$$deleted":true,"_id":"Aps1Occ2CHN1aZcZ"}
+{"screenID":"screen-GS4R4","menu":"tabbar","position":"1","_id":"O9hkKXYGN3SYnsAP"}
+{"title":"pantalla 1","screenID":"screen-GS4R4","icon":"ion-images","menu":"tabbar","position":"2","_id":"UkQb7SjYBObDROVq"}
+{"title":"pantalla 2","screenID":"screen-0VER1","icon":"ion-monitor","menu":"tabbar","position":"3","_id":"kO63vhlGA6q9Y8rY"}
+{"title":"dfs","screenID":"screen-GS4R4","icon":"ion-monitor","menu":"sidemenu","position":"1","_id":"bOnKtftfMdlZb7yi"}
+{"$$deleted":true,"_id":"O9hkKXYGN3SYnsAP"}
+{"$$deleted":true,"_id":"bOnKtftfMdlZb7yi"}
+{"$$deleted":true,"_id":"UkQb7SjYBObDROVq"}
+{"$$deleted":true,"_id":"kO63vhlGA6q9Y8rY"}
+{"title":"probando","screenID":"screen-GS4R4","icon":"ion-map","menu":"tabbar","position":"1","_id":"KkS3W0iogkTp4FLP"}
+{"title":"pantalla 1","screenID":"screen-GS4R4","icon":"ion-images","menu":"tabbar","position":"2","_id":"SoeO8jtWNZdWuI19"}
+{"title":"pantalla 2","screenID":"screen-0VER1","icon":"ion-monitor","menu":"tabbar","position":"3","_id":"SWSWgc1agao7M0rv"}
+{"title":"dfs","screenID":"screen-GS4R4","icon":"ion-monitor","menu":"sidemenu","position":"1","_id":"0y29dvzrsF3gnTqj"}
+{"title":"jaja","screenID":"screen-GS4R4","icon":"ion-monitor","menu":"sidemenu","position":"2","_id":"YJbKyeyt0INI1DA6"}
+{"$$deleted":true,"_id":"0y29dvzrsF3gnTqj"}
+{"$$deleted":true,"_id":"KkS3W0iogkTp4FLP"}
+{"$$deleted":true,"_id":"SoeO8jtWNZdWuI19"}
+{"$$deleted":true,"_id":"YJbKyeyt0INI1DA6"}
+{"$$deleted":true,"_id":"SWSWgc1agao7M0rv"}
+{"title":"probando","screenID":"screen-GS4R4","icon":"ion-map","menu":"tabbar","position":"1","_id":"fiInc806YXn56hKW"}
+{"title":"pantalla 1","screenID":"screen-GS4R4","icon":"ion-images","menu":"tabbar","position":"2","_id":"UEEhmAao2meEGabb"}
+{"title":"pantalla 2","screenID":"screen-0VER1","icon":"ion-monitor","menu":"tabbar","position":"3","_id":"J3dBMbsiBV7etE4r"}
+{"title":"dfs","screenID":"screen-GS4R4","icon":"ion-monitor","menu":"sidemenu","position":"1","_id":"8iDrzkaQi2MXzoJy"}
+{"title":"jaja","screenID":"screen-GS4R4","icon":"ion-monitor","menu":"sidemenu","position":"2","_id":"BRgOCbPPhdvRXEpD"}
