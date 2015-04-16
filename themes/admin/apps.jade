@@ -1,71 +1,33 @@
-extends layout
+extends layout-noapp
 
 block title
-  title #{__('Apps')} - #{__('Admin Panel')}
-
-block stylesheets
-  style.
-    .modal-dialog{
-      margin-top: 75px;
-    }
+  title Shovel apps CMS - #{__('My apps')}
 
 block content
-
-  .container
-
-    .panel
-      .row(style="margin-top:25px;")
-        .col-xs-6.col-sm-offset-4.col-sm-2.col-md-offset-4.col-md-2.columns.text-right
-          img.visible-xs.img-responsive.img-circle(align="right", src="/coreassets/img/avatar-male.png", style="height:102px;")
-          img.hidden-xs.img-circle(align="right", src="/coreassets/img/avatar-male.png", style="height:132px;")
-        .col-xs-6.col-sm-6.col-md-6.columns.text-left
-          h4 
-            b Fernando Sanz
-          .label.label-default #{currentApps} #{__('apps used of')} #{availableApps} #{__('available')} 
-          h5 Argentina
-          h5 
-            a(href="http://shovelapps.com") Shovelapps.com
-          h5 "Brute force dev"
-    
-    .modal.fade#createapp-modal(tabindex="-1", role="dialog", aria-labelledby="createAppModalLabel")
-      .modal-dialog.modal-sm(style="width:400px;")
-        .modal-content
-          .modal-body
-            button.close(type="button", data-dismiss="modal", aria-label="#{__('Close')}")
-              span(aria-hidden="true") &times;
-            p #{__('Insert the name for your new app')}
-            div.form-inline(action="#")
-              .form-group
-                label(for="newapptitle")
-                input.form-control#newapptitle(type="text", placeholder="#{__('apps name')}")
-              button.btn.btn-success.live-btn#createApp
-                i.icon.ion-arrow-right-a 
-                |  #{__('Create!')}
-
-    .hide
-      .col-xs-12
-    .panel.text-center
-      h2 #{__('My')} #{__('Apps')}
-      .row.text-center
-        .visible-xs.col-xs-12.col-sm-3.col-md-3.columns(data-toggle="modal", data-target="#createapp-modal")
-          .well 
-            button.btn.btn-success.btn-block.live-btn(style="") #{__("Create new app")}
-        each component in components
-          .col-xs-12.col-sm-3.col-md-3.columns
-            .well.hidden-xs(style="background-color:#eee; height:128px;")
-              h4 #{component.name}
-            .panel.visible-xs(style="background-color:#eee;")
-              h4 #{component.name}
-        .hidden-xs.col-xs-12.col-sm-3.col-md-3.columns(data-toggle="modal", data-target="#createapp-modal")
-          button.btn.btn-success.btn-block.live-btn(style="height:128px;") #{__("Create new app")}
-
-block scripts
-  script.
-    $(function(){
-      $('#createApp').bind('click',function(e){
-        console.log('clic');
-        var name = $('#newapptitle').val();
-        window.location = '/admin/app/' + name;
-      })
-    });
-
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href='#')
+      .col-md-3.col-sm-4.devices.text-right.hidden-xs
+        .os
+          a.android(href='#')
+          span.separate
+          a.ios(href='#')
+      .col-md-6.col-sm-7
+        h2 #{__('My apps')}
+        .search
+          input(type='text', placeholder='Search')
+      .devices.text-center.visible-xs
+        .os
+          a.android(href='#')
+          .separate
+          a.ios(href='#')
+    .row.apps.center-block.voffset7
+      each component in components
+        .app
+          a(href='/admin/app/' + component.name)
+            img(src='/coreassets/assets/elmeme.jpg')
+            span.ellipsis=component.name
+      .app.add-app
+        a(href='/admin/create-app')
+          span
+          | #{__('Create App')}
