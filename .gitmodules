@@ -1,0 +1,3 @@
+[submodule "themes/admin/assets/shovelapps-bootstrap"]
+	path = themes/admin/assets/shovelapps-bootstrap
+	url = https://github.com/shovelapps/shovelapps-bootstrap

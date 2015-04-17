@@ -1,0 +1,10 @@
+<div data-role="navbar" data-iconpos="bottom">
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <%screens.forEach(function(screen) { %>
+      <% if (screen.showinmenu) { %>
+        <li><a href="#<%=screen.id%>"><%=screen.title%></a></li>
+      <% } %>
+    <%})%>
+  </ul>
+</div>

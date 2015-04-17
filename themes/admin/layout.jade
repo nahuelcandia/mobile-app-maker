@@ -1,0 +1,74 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    block head
+    // Title block
+    block title
+      title Admin CMS
+    // End of Title block
+    // Bootstrap CSS 
+    link(href="http://fonts.googleapis.com/css?family=Roboto:100,400,300", rel="stylesheet")
+    link(href="/coreassets/shovelapps-bootstrap/shovelapps-bootstrap.css", rel="stylesheet")
+    link(href="/coreassets/ionicons/css/ionicons.min.css", rel="stylesheet")
+    link(href="/coreassets/css/main.css", rel="stylesheet")
+
+    // Custom stylesheets
+    block stylesheets
+    // End of custom stylesheets
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    script(src="/coreassets/html5shiv/html5shiv.js")
+    script(src="/coreassets/respond.js/respond.min.js")
+    <![endif]-->
+
+  body
+    #notifications
+    include ./navbar.jade
+
+    // Content block
+    block content
+    // End of content block
+
+
+    include ./footer.jade
+    //FastClick
+    script(src="/coreassets/FastClick/fastclick.js")
+    //jQuery
+    script(src="/coreassets/jquery/jquery.js")
+    script(src="/coreassets/Tokenize-2.2.2/jquery.tokenize.js")
+    //Bootstrap JavaScript 
+    script(src="/coreassets/bootstrap/bootstrap.min.js")
+    script(src="/coreassets/bootstrap/jasny-bootstrap.min.js")
+    script.
+      window.myElementsOptions = {
+        socketPath: "/myelements.io"
+      }
+    script(src="/myelements/myelements.jquery.js")
+    script.
+      $(function() {
+
+        FastClick.attach(document.body);
+        $('[data-toggle="tooltip"]').tooltip();
+      
+      });
+
+    script.
+      var lang = !{JSON.stringify(lang)};
+      function __(term) {
+        if(!typeof lang['Checking status'] === 'undefined'){
+          return lang[term];
+        }
+        return term;
+      }
+
+    script(src="/shovelapps/optimism.js")
+    script(src="/shovelapps/shovelapps-cms.js")
+    // Custom scripts
+    block scripts
+    // End of custom Scripts

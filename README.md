@@ -10,7 +10,7 @@ In Web Content Management Systems, the purpose of the system is to allow you
 to focus on the content and the final frontend is rendered by the browser.
 
 **Shovel apps CMS** makes it easy for you to create an Hybrid App starting from 
-HTML templates and editing the content by yourself without the nagging of having to install
+HTML themes and editing the content by yourself without the nagging of having to install
 an entire Phonegap environment for yourself.
 
 When you're done editing your app's contents, you  can **create Android binaries
@@ -37,13 +37,18 @@ You need [NodeJS](http://nodejs.org/download/) installed to run **Shovel apps CM
 $ wget https://github.com/shovelapps/shovelapps-cms/archive/latest.zip
 $ cd ~/shovelapps-cms
 ```
-* Unzip it, install dependencies and run it.
+* Unzip it, install dependencies and submodules and run it.
 ```
 $ unzip latest.zip
 $ cd shovelapps-cms-latest/
 $ npm install
 $ ./start.sh
 ```
+
+### Submodules
+
+The CMS css is a customized bootstrap, wich is in another repo [shovelapps/shovelapps-bootstrap](https://github.com/shovelapps/shovelapps-bootstrap) used as a [submodule](http://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
 
 
 
@@ -64,7 +69,7 @@ All config is loaded from the `config/default.json` once the CMS is installed.
 
 ##Issues
 
-[Report your issues with Shovel apps CMS here](http://github.com/shovelapps/issues).
+[Report your issues with Shovel apps CMS here](http://github.com/shovelapps/shovelapps-cms/issues).
 
 ##Libraries used
 
@@ -79,7 +84,7 @@ All config is loaded from the `config/default.json` once the CMS is installed.
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Shovel apps, Inc.
+Copyright (c) 2014, 2015 Shovel apps, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

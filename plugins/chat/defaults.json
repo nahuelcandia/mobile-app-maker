@@ -1,4 +1,8 @@
 {
   "date-format": "YYYY-MM-DD",
-  "time-format": "HH:MM:SS"
+  "time-format": "HH:MM:SS",
+  "multiroom": false,
+  "privaterooms": false,
+  "allow-pm": false,
+  "guest-prefix": 'guest_',
 }

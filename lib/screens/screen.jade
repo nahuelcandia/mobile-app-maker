@@ -1,0 +1,77 @@
+extend ../../themes/admin/layout
+
+block content
+  form#screenform(action="/admin/screens", method="post")
+    input(type="hidden", name="currentId", value="#{screen.id}")
+    input(type="hidden", name="position", value="#{screen.position}")
+    .container-fluid.bg-white.cms(role='main')
+      .header.center-block.row.voffset6
+        a.back-button.pull-left(href='#')
+        .col-md-3.devices.text-right
+          .os
+            a.android.active(href='#')
+            a.ios(href='#')
+          a.phone.active(href='#')
+          a.tablet(href='#')
+        .col-md-3
+          input.shovel-control(type='text', value="#{screen.title}")
+        .col-md-3.col-md-offset-2
+          select.form-control
+            option Splash
+        .col-md-1
+          a.upload-theme.pull-right(href='#', onclick='return $("#screenform").submit(), false;')
+            img(src='/coreassets/assets/save-icon.svg')
+            span Save
+      .row.center-block.voffset7.text-left
+        .col-md-2.col-md-offset-1.text-right
+          .header.small
+            h4 Plugins
+            .search
+              input(type='text', placeholder='Search')
+          .panel-group.text-left.voffset3.shovel-group-panel.small
+            .panel.panel-default.open
+              .panel-heading(href='#ContentPlugins', data-toggle='collapse')
+                h5.panel-title
+                  i.open.pull-right
+                  | Content Plugins
+              #ContentPlugins.panel-collapse.collapse.in
+                .list-group
+                  a.list-group-item.active(href='#') Static Content (HTML)
+                  a.list-group-item(href='#') Form
+                  a.list-group-item(href='#') Image Gallery
+            .panel.panel-default.open
+              .panel-heading(href='#AudioVideo', data-toggle='collapse')
+                h5.panel-title
+                  i.open.pull-right
+                  | Audio &amp; video
+              #AudioVideo.panel-collapse.collapse.in
+                .list-group
+                  a.list-group-item(href='#') Youtube
+                  a.list-group-item(href='#') Grooveshark
+                  a.list-group-item(href='#') Cloud Up
+        .col-md-5
+          textarea.form-control(rows='12')=screen.content
+        .col-md-4.demo-phone.text-left
+          .demo-theme.android
+            img.phone(src='/coreassets/assets/android-cel.svg')
+            img.theme(src='/coreassets/assets/elmeme.jpg')
+            // <iframe src="https://www.shovelapps.org/"></iframe>
+
+        .col-md-12
+          .checkbox
+            label
+              if screen.showinmenu
+                input(name="showinmenu", type="checkbox", checked) 
+              else
+                input(name="showinmenu", type="checkbox") 
+              | Show in menu
+          .form-group
+            label(for="title") Screen id
+            input.form-control(name="id", value="#{screen.id}")  
+            span.help-block For links between screens   
+          h4.page-header Other screen actions
+          p
+            a#destroyScreenButton(href="#") Remove screen   
+
+block stylesheets
+block scripts

@@ -1,0 +1,45 @@
+block navbar
+nav.navbar.navbar-shovel
+  .container-fluid.bg-white
+    .navbar-header
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+        span.sr-only #{__('Toggle navigation')}
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      .logo-app
+        img(src='/coreassets/assets/elmeme1-1.jpg')
+        h1.hidden-xs Elmeme
+    #navbar.navbar-collapse.collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href='/admin') #{__('Dashboard')}
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown', href='#') #{__('Content')} 
+            span.glyphicon.glyphicon-menu-down
+          ul.dropdown-menu(role='menu')
+            li
+              a(href='#') #{__('Categories Manager')}
+            li
+              a(href='/admin/screens') #{__('Screens Manager')}
+            li
+              a(href='menues-manager.html') #{__('Menues Manager')}
+        li
+          a(href='/admin/plugins') #{__('Plugins')}
+        li
+          a(href='/admin/templates') #{__('Themes')}
+        li
+          a(href='/admin/build') #{__('Publish')}
+        li
+          a.preview-app(href='#')
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown', href='#')
+            img.profile-icon(src='/coreassets/assets/username-grey.svg')
+            span.drop-down
+          ul.dropdown-menu(role='menu')
+            //li
+            //  a(href='/admin/apps') #{__('My Apps')}
+            //li
+            //  a(href='#') My Account
+            li
+              a(href='/logout') #{__('Log Out')}

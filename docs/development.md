@@ -2,16 +2,15 @@
 layout: default
 ---
 
-#Development
+# Development
 
 The CMS is based on well known technologies from the nodejs world like
-[express](http://expressjs.com), [socket.io](http://socket.io), [JSON storage](https://www.npmjs.com/package/nedb),
-[JSON based express sessions](https://www.npmjs.com/package/express-session-json) and [JADE](http://jade-lang.com/) templates.
+[express](http://expressjs.com), [socket.io](http://socket.io), [NeDB storage](https://www.npmjs.com/package/nedb),
+and [JADE](http://jade-lang.com/)/[EJS](http://www.embeddedjs.com/)/HTML  themes.
 
-
-* [Debugging](#debugging)
-* [Templates](#templates)
-* [Plugins](#plugins)
+* [Themes](themes)
+* [Plugins](plugins)
+* [Hooks](api#hooks)
 
 ## Shovel apps CMS directory structure
 
@@ -24,11 +23,16 @@ The CMS is based on well known technologies from the nodejs world like
     ├── server.js  // this is the process that is lifted by the start scripts
     ├── start.sh  // Linux/OSX start script
     ├── start.bat  // Windows start batch script
-    ├── templates
+    ├── themes
     │   ├── admin
     │   └── bootstrap-3-jade
     └── README.md
-    
+
+### express 4 as a backbone for the CMS
+
+The CMS is a standard express app. Every lib and plugin has access to the
+express `app` object, so extending the CMS core is as simple as extending
+express.
 
 ### About the CMS's storage
 
@@ -41,54 +45,11 @@ the filesystem in these directories by means of the [NeDB](https://www.npmjs.com
         ├── tmp // Temporary App's source code in a `zip` file after a build request.
         └── .session // Session data *(Using express-session-json module);
 
-## Templates
 
-Templates are the base for an app. An hybrid app should respect the mobile OSs
-standards and this task is difficult to achieve from pure HTML and having to rely
-on multiple tools and iterations in order for the app to have a design consistent
-with the mobile's OS look & feel.
-
-Shovel apps CMS templates offer a precise UI structure for designing a professional
-app that is designed with the practiques you may already use in web development
-as your own CSS or the [IDE](http://en.wikipedia.org/wiki/Integrated_development_environment) of your choide.
-
-### How to make a template
-
-Templates are written in the [Jade](http://jade-lang.com/) language. 
-*Jade allows you to write HTML code that is not bogus in terms of orphan tags.*
-
-1. Create a directory  called `mytemplate` under the `templates` dir.
-1. Start from an `index.jade`. Put all of your page there. For example,
-download a responsive template from some bootstrap  theme providers for example. **Tip:** *If you want to try with your own HTML, convert it to JADE with [HTML to Jade converter](http://html2jade.aaron-powell.com/)*.
-1. Create an assets directory under `templates/mytemplate`. **All files in assets will be available at the `assets/` URL in your apps frontend**.
-
-### Recommendations about assets and libraries for your app
-
-* Load phonegap.js
-* Load cordova.js
-* Recommend loading jQuery
-* Recommend loading FastClick
-* Plugins and templates are written in jade
-* Jade offers tidinees to other developers and designers. When the user or 
-  another developers will 
-  rarely find basic nesting issues with HTML tags that often cause misalignments.
-
-
-####About paths in template files
-
-* Use relative paths in the templates in order to keep consistent with 
-the final structure that the app will have inside phonegap
-
-
-####Variables available to templates (locals)
-
-* `config.app`
-* `isPreviewing`
-* `session`
 
 ## Debugging
 
-Shovel apps CMS uses the `debug` module and debugs under the namespace `"cms*"`.
+Shovel apps CMS uses the [debug](https://www.npmjs.com/package/debug) module and logs under the namespace `"cms*"`.
 
 So in order to see debug messages logged by **shovelapps CMS** run it like this
 
@@ -102,73 +63,8 @@ Or if you prefer, watch every module log with
 $ DEBUG='*' node server.js 
 ```
 
-##Plugins
+## Configuration
 
-Plugins extend **Shovel apps CMS**'s backend features or the frontend by using extra
-scripts or whatever HTML you want for extending the core.
-
-Every plugin should be presented as a directory inside the plugins directory.
-
-The plugin will be loaded using [require()](http://nodejs.org/api/modules.html#modules_module_require_id) as is the standard in node
-for loading modules, (i.e. the [CommonJS](http://en.wikipedia.org/wiki/CommonJS) interface), thus, the `index.js` file
-will be the main file for the plugin. 
-
-    shovelapps-cms
-    └── plugins
-        └── chat    
-
-###Required files
-
-
-You need at least an `index.js` file inside the plugin directory.
-
-    shovelapps-cms
-    └── plugins
-        └── chat
-            └── index.js
-
-
-
-###File structure of a plugin
-
-    shovelapps-cms
-    └── plugins
-        └── chat
-            ├── chat.html
-            └── index.js
-
-####index.js
-
-
-The file `index.js` is a regular `common.js` module. I.e. you write it
-like any other module that is loaded by `var plugin  = require("plugin")`.
-**Shovel apps CMS** will run that `index.js` like that on start. 
-
-In fact, it will asumme the plugin exports a function (`module.exports = functionName`)
-and calls it with 3 arguments that let you extend the CMS.
-
-
-    module.exports = myModuleInit;
-
-    function myModuleInit(app, server, sockets) {
-      
-    }
-
-
-#####Plugin exported function
-
-The function exported by the `index.js` of a plugin receives these 3 arguments
-
-* **app:**. The express app object (i.e, the request handler by calling `express()` ). 
-* **server:** The server on which this plugin is being initialized
-* **sockets:** **Shovel apps CMS** creates three websockets for communicating 
-with the **App frontend**, the **CMS Admin Panel** and **Shovel apps build Platform**.
-The latter connection allows the CMS to build the app for you without worrying
-about a Phonegap installation. 
-*  * **socket.frontend**. A `socket.io` server for the default namespace (`/`).
-*  * **socket.adminpanel**. A `socket.io` server to the  namespace (`/admin`).
-*  * **socket.adminpanel**. A `socket.io` server to the  namespace (`/admin`).
-
-The exported function will receive `app`, `server` and `sockets` parameters
-in order for you to extend the CMS. *Remember, the cms backend is an express app*.
-
+The CMS loads its config from filestystem on start. 
+It uses the [config](https://www.npmjs.com/package/config) module and stores the
+files under the `./config` directory.

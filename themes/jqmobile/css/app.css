@@ -1,0 +1,9 @@
+/* CSS Code for this PhoneGap App to Go Here */
+
+ body,.ui-page
+ {
+ 	background: #FFFFFF;
+ }
+ .ui-page {
+   -webkit-animation-fill-mode: both;
+ }

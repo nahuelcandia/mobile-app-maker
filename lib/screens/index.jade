@@ -1,0 +1,35 @@
+extend ../../themes/admin/layout 
+
+block content
+	.container-fluid.bg-white.cms(role='main')
+		.header.center-block.row.voffset6
+			a.back-button.pull-left(href='#')
+			.col-md-6.col-md-offset-3
+				h2 #{__('My Screens')}
+				.search
+					input(type='text', placeholder='#{__("Search")}')
+			.col-md-1.col-md-offset-1
+				button.btn.btn-success(onclick="window.location='/admin/screens/new';")
+					| + #{__('New')}
+		if screens.length
+			.row.center-block.voffset7.text-left
+				.col-md-8.col-md-offset-2.categories
+					.categorie.clearfix
+						h3 Uncategorized
+						select.form-control.pull-right
+							option Splash
+					.row.screens
+						each screen in screens
+							.col-md-4
+								a(href='/admin/screens/#{screen.id}')
+									img(src='/coreassets/assets/elmeme1-1.jpg')
+									h4=screen.title
+		.voffset6
+
+block stylesheets
+block scripts
+//- script(src="/coreassets/jquery.ui/jquery-ui.min.js")
+//- script(src="screens/js/jquery.rest.min.js")
+//- script(src="screens/js/screenposition.js")
+
+

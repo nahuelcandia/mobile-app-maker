@@ -2,14 +2,13 @@
 //var config = require("config");
 var http = require("http");
 var app = require("express")();
-var bodyParser = require("body-parser");
 var myelements = require("myelements.jquery");
 
 // Regular HTTP Server
 var server = http.createServer(app);
 
 myelements(app, server, {
-  socketPath: "/myelements"
+  socketPath: "/myelements.io"
 });
 //Using HTTPS server
 // http://docs.nodejitsu.com/articles/HTTP/servers/how-to-create-a-HTTPS-server
@@ -26,18 +25,21 @@ myelements(app, server, {
 //   cert: fs.readFileSync('.sslcerts/cert.pem')
 // }, app);
 
-app.use(bodyParser.urlencoded({
-  limit: "50mb",
-  extended: false
-}));
+app.cms = {};
+app.cms.server = server;
+require("./lib/setup")(app);
+app.cms.i18n = require("./lib/i18n")(app);
+app.cms.session = require("./lib/session")(app);
+app.cms.sockets = require("./lib/sockets")(app, server);
+app.cms.installer = require("./lib/installer")(app);
+app.cms.theme = require("./lib/theme")(app);
+app.cms.frontend = require("./lib/frontend")(app);
+app.cms.menus = require("./lib/menus")(app);
+app.cms.pluginloader = require("./lib/plugin-loader")(app, server, app.cms.sockets);
+app.cms.admin = require("./lib/admin")(app);
+app.cms.packager = require("./lib/packager")(app);
+app.cms.screens = require("./lib/screens")(app);
+app.cms.appmenus = require("./lib/appmenus")(app);
+require("./lib/optimism")(app);
 
-require("./lib/i18n")(app);
-require("./lib/session")(app);
-var sockets = require("./lib/sockets")(app, server);
-require("./lib/installer")(app);
-require("./lib/plugin-loader")(app, server, sockets);
-require("./lib/template")(app);
-require("./lib/frontend")(app);
-require("./lib/admin")(app);
-require("./lib/packager")(app);
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000)

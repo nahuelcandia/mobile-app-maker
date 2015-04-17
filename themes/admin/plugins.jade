@@ -1,0 +1,80 @@
+extends layout
+
+block title
+  title #{__('asdasdsadasdasdasdasd')} - #{__('Admin Panel')}
+
+block stylesheets
+
+block content
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href='#')
+      .col-md-3.devices.text-right
+        .os
+          a.android.active(href='#')
+          a.ios.active(href='#')
+        a.phone.active(href='#')
+        a.tablet.active(href='#')
+      .col-md-6
+        h2 #{__('My Plugins')}
+        .search
+          input(type='text', placeholder='#{__("Search")}')
+    .row.center-block.voffset7
+      .col-md-8.col-md-offset-2
+        .row.plugins
+          each plugin in states
+            .col-md-3
+              a(href="/admin/plugin/" + plugin.name)
+                img(src='assets/plugins/splash.svg')
+                span.ellipsis= (typeof plugins[plugin.name].metadata.name === 'undefined' ? plugin.name : plugins[plugin.name].metadata.name)
+              .options
+                a.enable(href='#')
+                a.delete(href='#')
+
+          .col-md-3
+            .add-plugin
+              .options
+                a.chart(href='plugins.html')
+                a.upload(href='upload-plugin.html')
+    .voffset6
+
+block scripts
+  script.
+    $(function() {
+      $("button[data-action='toggle']").bind('click', function(){
+        var plugin = $(this).data('id');
+        var that = this;
+        $.ajax({
+          url: '/admin/plugin/toggle/' + plugin,
+          dataType: 'json',
+          complete: function(response){
+            var data = $.parseJSON(response.responseText);
+            var icon, btnclass, action;
+            if(data.state=='enabled'){
+              action = '#{__('Click to disable')}';
+              icon = 'ion-close-circled';
+              btnclass = 'btn-warning';
+            }else if(data.state=='disabled'){
+              action = '#{__('Click to enable')}';
+              icon = 'ion-checkmark-circled';
+              btnclass = 'btn-success';
+            }
+            console.log(data.state);
+            $("button[data-id='" + data.key + "']").removeClass (function (index, css) {
+                return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
+              .addClass(btnclass)
+              .css({'color': 'white'});
+            $("button[data-id='" + data.key + "']").find('i')
+              .removeClass (function (index, css) {
+                return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
+              .addClass(icon);
+            $("button[data-id='" + data.key + "']")
+              .attr('data-original-title', action)
+              .tooltip('fixTitle')
+              .tooltip('show');
+          }
+        
+
+        });
+      });
+    });
