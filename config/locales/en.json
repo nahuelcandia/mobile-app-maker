@@ -88,8 +88,15 @@
   "Categories Manager": "Categories Manager",
   "Screens Manager": "Screens Manager",
   "Menues Manager": "Menues Manager",
-  "Themes": "Themes",
   "Publish": "Publish",
   "My Apps": "My Apps",
-  "Log Out": "Log Out"
+  "Log Out": "Log Out",
+  "Apps": "Apps",
+  "apps used of": "apps used of",
+  "available": "available",
+  "Insert the name for your new app": "Insert the name for your new app",
+  "apps name": "apps name",
+  "Create!": "Create!",
+  "My": "My",
+  "Create new app": "Create new app"
 }
