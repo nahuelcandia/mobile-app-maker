@@ -1,20 +1,4 @@
-{"title":"aaa","screenID":"screen-OUUJB","icon":"none","menu":"tabbar","position":"1","state":"enabled","type":"Link to page","_id":"6zQGJmgCNRewMZCB"}
-{"title":"asdasd","screenID":"screen-OUUJB","icon":"ion-music-note","menu":"sidemenu","position":"2","state":"enabled","type":"Link to page","_id":"Ft8boKrmdRx9KNZz"}
-{"title":"bbb","screenID":"screen-GNDJ1","icon":"ion-monitor","menu":"tabbar","position":"2","state":"enabled","type":"Link to page","_id":"f6NYX6blItSI75ba"}
-{"title":"zzzz","screenID":"screen-OUUJB","icon":"none","menu":"sidemenu","position":"1","state":"enabled","type":"Menu header","_id":"frhAMQy9ecK59Uu5"}
-{"$$deleted":true,"_id":"6zQGJmgCNRewMZCB"}
-{"$$deleted":true,"_id":"frhAMQy9ecK59Uu5"}
-{"title":"aaa","screenID":"screen-OUUJB","icon":"none","menu":"tabbar","position":"1","state":"enabled","type":"Link to page","_id":"f5slOMjGWIELI0ve"}
-{"title":"bbb","screenID":"screen-GNDJ1","icon":"ion-monitor","menu":"tabbar","position":"2","state":"enabled","type":"Link to page","_id":"ZjA3iU7hyjgKDpIQ"}
-{"title":"zzzz","screenID":"screen-OUUJB","icon":"none","menu":"sidemenu","position":"1","state":"enabled","type":"Menu header","_id":"2ZUxpztcxFlSGcxO"}
-{"title":"asdasd","screenID":"screen-OUUJB","icon":"none","menu":"sidemenu","position":"2","state":"enabled","type":"Link to page","_id":"MrwgllOWh1N0Q2Vu"}
-{"$$deleted":true,"_id":"Ft8boKrmdRx9KNZz"}
-{"$$deleted":true,"_id":"f6NYX6blItSI75ba"}
-{"$$deleted":true,"_id":"2ZUxpztcxFlSGcxO"}
-{"$$deleted":true,"_id":"f5slOMjGWIELI0ve"}
-{"$$deleted":true,"_id":"MrwgllOWh1N0Q2Vu"}
-{"title":"aaa","screenID":"screen-OUUJB","icon":"none","menu":"tabbar","position":"1","state":"enabled","type":"Link to page","_id":"Xif8cF0z21yppdmN"}
-{"title":"bbb","screenID":"screen-GNDJ1","icon":"ion-monitor","menu":"tabbar","position":"2","state":"enabled","type":"Link to page","_id":"p6nIbpQ0VANCbAYW"}
-{"title":"zzzz","screenID":"screen-OUUJB","icon":"none","menu":"sidemenu","position":"1","state":"enabled","type":"Menu header","_id":"Q5Pqog1W1QJITFaE"}
-{"title":"asdasd","screenID":"screen-OUUJB","icon":"ion-gear-b","menu":"sidemenu","position":"2","state":"enabled","type":"Link to page","_id":"IIYkJjJ3f3sWLEV5"}
-{"$$deleted":true,"_id":"ZjA3iU7hyjgKDpIQ"}
+{"title":"titulo1","screenID":"screen-OUUJB","icon":"none","menu":"sidemenu","position":"1","state":"enabled","type":"Menu header","_id":"783Ej5g11rXlvimZ"}
+{"title":"aaa","screenID":"screen-OUUJB","icon":"none","menu":"tabbar","position":"1","state":"enabled","type":"Link to page","_id":"GDGCLL4rfH07sL5c"}
+{"title":"bbb","screenID":"screen-GNDJ1","icon":"ion-monitor","menu":"tabbar","position":"2","state":"enabled","type":"Link to page","_id":"GMoocaZOZrRnrAcP"}
+{"title":"asdasd","screenID":"screen-OUUJB","icon":"ion-music-note","menu":"sidemenu","position":"2","state":"enabled","type":"Link to page","_id":"Okgdz0wyNl9k3M0W"}

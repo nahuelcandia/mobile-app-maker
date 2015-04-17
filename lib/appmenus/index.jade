@@ -27,7 +27,7 @@ block content
                   select.selectScreenID.form-control
                     each screen in screens
                       -var sel = appmenu.screenID==screen.id
-                      option(selected=sel)=screen.id
+                      option(selected=sel, value=screen.id)=screen.title
                 td
                   if appmenu.icon=="none"
                     button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
@@ -51,7 +51,7 @@ block content
             td
               select.selectScreenID.form-control
                 each screen in screens
-                  option=screen.id
+                  option(value=screen.id)=screen.title
             td
               button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
             td
@@ -85,7 +85,7 @@ block content
                   select.selectScreenID.form-control
                     each screen in screens
                       -var sel = appmenu.screenID==screen.id
-                      option(selected=sel)=screen.id
+                      option(selected=sel, value=screen.id)=screen.title
                 td
                   if appmenu.icon=="none"
                     button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
@@ -113,7 +113,7 @@ block content
             td
               select.selectScreenID.form-control
                 each screen in screens
-                  option=screen.id
+                  option(value=screen.id)=screen.title
             td
               button.btn.btn-default.btn-icon(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
             td
