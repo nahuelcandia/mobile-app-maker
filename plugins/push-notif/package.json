@@ -1,0 +1,16 @@
+{
+  "name": "notif-plugin",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "apn": "~1.6.2",
+    "node-gcm": "~0.9.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}
