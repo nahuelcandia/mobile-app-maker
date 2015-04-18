@@ -137,5 +137,15 @@
   "Save changes": "Save changes",
   "Title": "Title",
   "Linked to": "Linked to",
-  "Icon": "Icon"
+  "Icon": "Icon",
+  "Menues manager": "Menues manager",
+  "Customize": "Customize",
+  "Download iOS App": "Download iOS App",
+  "Download Android App": "Download Android App",
+  "Edit publish settings": "Edit publish settings",
+  "Screen manager": "Screen manager",
+  "Category manager": "Category manager",
+  "Plugin manager": "Plugin manager",
+  "Category name": "Category name",
+  "Parent": "Parent"
 }

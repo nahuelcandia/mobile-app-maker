@@ -4,6 +4,8 @@ block title
   title Shovel apps CMS - #{__('Menues Manager')}
 
 block content
+  - var places = [{"title": "Main Menu", "menu": "tabbar"}, {"title": "Side Menu", "menu": "sidemenu"}];
+  - var icons = ["icon-map", "icon-tree", "icon-car", "icon-home", "icon-settings"];
   .container-fluid.bg-white.cms.menues-manager(role="main")
     .header.center-block.row.voffset6
       a.back-button.pull-left(href="#")
@@ -27,7 +29,6 @@ block content
       -   return result;
       - }
       
-      - var places = [{"title": "Main Menu", "menu": "tabbar"}, {"title": "Side Menu", "menu": "sidemenu"}];
 
       each place in places
         h4.voffset7=place.title
