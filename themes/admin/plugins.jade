@@ -1,150 +1,63 @@
 extends layout
 
 block title
-  title #{__(componentTypePlural)} - #{__('Admin Panel')}
+  title Shovel apps CMS - #{__('My Plugins')}
 
 block stylesheets
 
 block content
 
-  .container
-    h2 #{__('Manage')} #{__(componentTypePlural)}
-    table.table.table-responsive.table-hover
-      thead: tr
-        th #{__(componentTypePlural + ' name')}
-        th.hidden-xs #{__('Description')}
-        th 
-          .hidden-xs #{__('Actions')}
-      tbody
-        each component in states
-          -var componentExists = components[component.name] ? true : false
-          -var componentHasMetadata = componentExists && components[component.name].metadata ? true : false
-          tr
-            td
-              //- no es lo mas elegante, pero chequear las diff antes de este commit
-              //- b.panel-title= (typeof components[component.name] === 'undefined' ? component.name : components[component.name].metadata.name)
-              b.panel-title
-                if componentExists
-                  p= component.name
-                else
-                  p.text-muted= component.name
-              .visible-xs
-                if componentExists && componentHasMetadata
-                  p= components[component.name].metadata.description
-                  p= components[component.name].metadata.author
-            td.hidden-xs
-              small
-                if componentExists && componentHasMetadata
-                  p= components[component.name].metadata.description
-                  p= components[component.name].metadata.author
-            td
-              div(aria-label="#{__('Options')}")
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href='#')
+      .col-md-3.devices.text-right
+        .os
+          a.android.active(href='#')
+          .separate
+          a.ios.active(href='#')
+      .col-md-6
+        h2 #{__('My Plugins')}
+        .search
+          input(type='text', placeholder='#{__("Search")}')
+    .row.center-block.voffset7
+      .col-md-8.col-md-offset-2
+        .row.plugins
+           each component in states
+            -var action= (component.enabled? 'disable' : 'enable')
+            .col-md-3
+              a(href="/admin/plugin/" + component.name)
+                img(src='/coreassets/assets/plugins/splash.svg')
+                span.ellipsis=component.name
+              .options
+                a(href='#', class=action, data-id=component.name)
+                a.delete(href='#')
+              a.delete(href='#')
+          .col-md-3
+            .add-plugin
+              .options
+                a.chart(href='plugins.html')
+                a.upload(href='upload-plugin.html')
+    .voffset6
 
-                -var action= (component.enabled? 'disable' : 'enable')
-                -var btnclass= (component.enabled? 'btn-primary' : 'btn-info')
-                -var icon= (component.enabled? 'ion-checkmark-circled' : 'ion-close-circled')
-                
-                if componentType == 'theme'
 
-                  -var enabled= (componentExists ? false : true)
-                  button.btn.live-btn(disabled=enabled, class=btnclass, data-action="activate", data-id=component.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
-                    i.icon(class=icon, style="color:white")
-                  a(href="/admin/#{componentType}/edit/" + component.name): button.btn.btn-info.live-btn(disabled=enabled, data-action="edit", type="button", data-toggle="tooltip", data-placement="top", title="#{__('Edit')}") 
-                    i.icon.ion-edit(style="color:white")
-
-                else
-
-                  button.btn.live-btn(class=btnclass, data-action="toggle", data-id=component.name, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Click to ' + action)}") 
-                    i.icon(class=icon, style="color:white")
-
-                a(href="/admin/#{componentType}/" + component.name ): button.btn.btn-default.live-btn(disabled=enabled, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Configuration')}")
-                  i.icon.ion-levels
-                //a(href="#", data-action="delete" ): button.btn.btn-danger(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Remove this #{componentType}...')}")
-                //  i.icon.ion-trash-b(style="color:white")
 block scripts
   script.
     $(function() {
-      $("button[data-action='toggle']").bind('click', function(){
-        var component= $(this).data('id');
-        var that = this;
+      $(".enable, .disable").bind('click', function(){
+        var plugin_id = $(this).data('id');
+        var that = $(this);
+
         $.ajax({
-          url: '/admin/#{componentType}/toggle/' + component,
+          url: '/admin/plugin/toggle/' + plugin_id,
           dataType: 'json',
           complete: function(response){
             var data = $.parseJSON(response.responseText);
-            var icon, btnclass, action;
-            if(data.state=='enabled'){
-              action = '#{__('Click to disable')}';
-              icon = 'ion-checkmark-circled';
-              btnclass = 'btn-primary';
-            }else if(data.state=='disabled'){
-              action = '#{__('Click to enable')}';
-              icon = 'ion-close-circled';
-              btnclass = 'btn-info';
-            }
-            console.log(data.state);
-            $("button[data-id='" + data.key + "']").removeClass (function (index, css) {
-                return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
-              .addClass(btnclass)
-              .css({'color': 'white'});
-            $("button[data-id='" + data.key + "']").find('i')
-              .removeClass (function (index, css) {
-                return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
-              .addClass(icon);
-            $("button[data-id='" + data.key + "']")
-              .attr('data-original-title', action)
-              .tooltip('fixTitle')
-              .tooltip('show');
+            that.removeClass("enable disable").addClass(data.state == 'enabled'? "disable" : "enable");
           }
-        
-
         });
+
+        return false;
       });
-      $("button[data-action='activate']").bind('click', function(){
-        var component= $(this).data('id');
-        var that = this;
-        $.ajax({
-          url: '/admin/#{componentType}/toggle/' + component,
-          dataType: 'json',
-          complete: function(response){
-            var data = $.parseJSON(response.responseText);
-            var icon, btnclass, action;
-            if(data.state=='enabled'){
-              action = '#{__('Click to disable')}';
-              icon = 'ion-checkmark-circled';
-              btnclass = 'btn-success';
-            }else if(data.state=='disabled'){
-              action = '#{__('Click to enable')}';
-              icon = 'ion-close-circled';
-              btnclass = 'btn-inverse';
-            }
-            console.log(data.state);
 
-            $("button[data-action='activate']").removeClass (function (index, css) {
-                return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
-              .addClass('btn-inverse')
-              .css({'color': 'white'});
-            $("button[data-action='activate']").find('i')
-              .removeClass (function (index, css) {
-                return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
-              .addClass('ion-close-circled');
-
-            $("button[data-id='" + data.key + "']").removeClass (function (index, css) {
-                return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
-              .addClass(btnclass)
-              .css({'color': 'white'});
-            $("button[data-id='" + data.key + "']").find('i')
-              .removeClass (function (index, css) {
-                return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
-              .addClass(icon);
-            $("button[data-id='" + data.key + "']")
-              .attr('data-original-title', action)
-              .tooltip('fixTitle')
-              .tooltip('show');
-          }
-        
-
-        });
-      });
     });
   

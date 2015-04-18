@@ -88,8 +88,10 @@
   "Categories Manager": "Categories Manager",
   "Screens Manager": "Screens Manager",
   "Menues Manager": "Menues Manager",
-  "Themes": "Themes",
   "Publish": "Publish",
   "My Apps": "My Apps",
-  "Log Out": "Log Out"
+  "Log Out": "Log Out",
+  "Category Manager": "Category Manager",
+  "Screen Manager": "Screen Manager",
+  "Menu Manager": "Menu Manager"
 }
