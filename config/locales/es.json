@@ -132,5 +132,9 @@
   "My apps": "My apps",
   "Select available plugins": "Select available plugins",
   "Create App": "Create App",
-  "App name": "App name"
+  "App name": "App name",
+  "Save changes": "Save changes",
+  "Title": "Title",
+  "Linked to": "Linked to",
+  "Icon": "Icon"
 }
