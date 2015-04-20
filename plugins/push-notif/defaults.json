@@ -1,11 +1,11 @@
 {
-  "gcmServerApiKey": "AIzaSyBov7ExW5pFswAR3_xjR3c-IfU2BD2ccLw",
+  "gcmServerApiKey": "",
   "regIdsGcm": [],
   "regIdsApn": [],
   "ApnConfig": {
     "gateway": "gateway.push.apple.com",
-    "cert": "jsconfPush.pem",
-    "key": "jsconfPushKey.pem",
-    "passphrase": "Mentagranizada2"
+    "cert": "certfilename",
+    "key": "keyfilename",
+    "passphrase": ""
   }
 }

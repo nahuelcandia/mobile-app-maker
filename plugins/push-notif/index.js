@@ -36,7 +36,7 @@ shovelMessenger.prototype.sendMessage = function(msgOptions) {
   //gcm
   //preparo el mensaje
   var message = new gcm.Message({
-    collapseKey: 'New Notifications',
+    collapseKey: __('New Notifications'),
     delayWhileIdle: true,
     timeToLive: 3,
     data: {

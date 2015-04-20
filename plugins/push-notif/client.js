@@ -6,7 +6,7 @@ try {
     device.platform == 'amazon-fireos') {
 
     pushNotification.register(successHandler, errorHandler, {
-      "senderID": "153292884918", //Google developer console proyect id
+      "senderID": "", //Google developer console proyect id
       "ecb": "onNotification" //android function
     });
   } else {
@@ -56,7 +56,7 @@ function onNotificationAPN(e) {
 // Android notification handler
 function onNotification(e) {
 
-  var registerDB = new Firebase("https://shovelChat.firebaseio.com/registered");
+  var registerDB = new Firebase("firebaseurl");
 
   switch (e.event) {
     case 'registered':
@@ -109,7 +109,7 @@ function onNotification(e) {
 
 function tokenHandler(result) {
   //add device id to db
-  var registerDBIos = new Firebase("https://shovelChat.firebaseio.com/registeredIos");
+  var registerDBIos = new Firebase("firebaseurl");
 
   registerDBIos.once('value', function(snapshot) {
     if (!snapshot.hasChild(result)) {

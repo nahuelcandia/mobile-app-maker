@@ -1,7 +1,7 @@
 {
   "name": "notif-plugin",
   "version": "0.0.0",
-  "description": "",
+  "description": "Shovel apps cms push notification plugin",
   "main": "index.js",
   "dependencies": {
     "apn": "~1.6.2",
@@ -11,6 +11,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Tomás Marcote",
   "license": "BSD-2-Clause"
 }
