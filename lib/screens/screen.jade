@@ -58,13 +58,6 @@ block content
             // <iframe src="https://www.shovelapps.org/"></iframe>
 
         .col-md-12
-          .checkbox
-            label
-              if screen.showinmenu
-                input(name="showinmenu", type="checkbox", checked) 
-              else
-                input(name="showinmenu", type="checkbox") 
-              | Show in menu
           .form-group
             label(for="title") Screen id
             input.form-control(name="id", value="#{screen.id}")  

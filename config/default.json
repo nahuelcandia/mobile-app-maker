@@ -5,7 +5,7 @@
   "theme": "jqmobile",
   //"theme": "framework7",
   "app": {
-    "appName": "My New App"
+    "appName": "Awesome App"
   },
   //-----------------------
   // If "availableApps" is greater than one, the CMS will then be multitenant, 

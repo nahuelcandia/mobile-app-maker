@@ -1,0 +1,35 @@
+extends layout-noapp
+
+block title
+  title Shovel apps CMS - #{__('My apps')}
+
+block content
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href='#')
+      .col-md-6.col-md-offset-3
+        h2 #{__('Create App')}
+    form.row.create-app.voffset5
+      input.shovel-control.center-block.app-name(type='text', placeholder='#{__("App name")}', value='')
+      button.btn.btn-primary.voffset6.create-app-button(type="submit")
+        | #{__('Create App')}
+    .voffset6
+
+block scripts
+  script.
+    $(function(){
+      $(".app-name").focus();
+
+      $(document).on("submit", "form:first", function(){
+        var name = $(".app-name").val().trim();
+        
+        if(name == "")
+        {
+          alert("The name is empty.");
+          return false;
+        }
+
+        window.location = '/admin/app/' + name;
+        return false;
+      });
+    });

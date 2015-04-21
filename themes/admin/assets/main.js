@@ -37,18 +37,26 @@
  * (info@shovelapps.com) / www.shovelapps.com / www.shovelapps.org
  */
 
-var debug = require("debug")("cms:db:themes");
+$(function() {
+  $(document).on("click", ".dropdown.keep-open .dropdown-menu", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  });
 
-module.exports = themesModule;
+  $(document).on("click", ".shovel-group-panel .panel-heading[data-toggle]", function(e) {
+    $(this).parent(".panel").toggleClass("open");
+  });
 
-function themesModule(themes) {
-  debug("Creating theme db object");
-  themes.all = function(callback) {
-    themes.find({}).sort({
-      themeId: 1
-    }).exec(callback);
-  };
+  /*if($('.select2').length && typeof $('.select2').select2 != "undefined")
+		{
+			$('.select2').select2();
+		}*/
 
-  return themes;
+  $(document).on("click", ".up-arrow", function() {
+    $("html, body").animate({
+      scrollTop: 0
+    });
+  });
 
-}
+});

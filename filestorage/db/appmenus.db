@@ -1,4 +1,14 @@
-{"title":"titulo1","screenID":"screen-OUUJB","icon":"none","menu":"sidemenu","position":"1","state":"enabled","type":"Menu header","_id":"783Ej5g11rXlvimZ"}
-{"title":"aaa","screenID":"screen-OUUJB","icon":"none","menu":"tabbar","position":"1","state":"enabled","type":"Link to page","_id":"GDGCLL4rfH07sL5c"}
-{"title":"bbb","screenID":"screen-GNDJ1","icon":"ion-monitor","menu":"tabbar","position":"2","state":"enabled","type":"Link to page","_id":"GMoocaZOZrRnrAcP"}
-{"title":"asdasd","screenID":"screen-OUUJB","icon":"ion-music-note","menu":"sidemenu","position":"2","state":"enabled","type":"Link to page","_id":"Okgdz0wyNl9k3M0W"}
+{"title":"aaa","screenID":"screen-OUUJB","icon":"icon-tree","menu":"tabbar","position":"1","_id":"71s9239MucPmFQ9K"}
+{"title":"bbb","screenID":"screen-GNDJ1","icon":"icon-map","menu":"tabbar","position":"2","_id":"9gBSyL84yeX1cnww"}
+{"title":"asdddd","screenID":"screen-OUUJB","icon":"icon-map","menu":"tabbar","position":"3","_id":"Hw33iugtrHmZdHRe"}
+{"title":"titulo1","screenID":"screen-OUUJB","icon":"icon-map","menu":"sidemenu","position":"1","_id":"TeMJGMgH4nO3R4r3"}
+{"title":"asdasd","screenID":"screen-OUUJB","icon":"icon-map","menu":"sidemenu","position":"2","_id":"hEcN3Xc7GDJXPE7e"}
+{"$$deleted":true,"_id":"71s9239MucPmFQ9K"}
+{"$$deleted":true,"_id":"TeMJGMgH4nO3R4r3"}
+{"$$deleted":true,"_id":"9gBSyL84yeX1cnww"}
+{"$$deleted":true,"_id":"hEcN3Xc7GDJXPE7e"}
+{"$$deleted":true,"_id":"Hw33iugtrHmZdHRe"}
+{"title":"asdddd","screenID":"screen-OUUJB","icon":"icon-map","menu":"tabbar","position":"1","_id":"77DPjZHArvBqzhmi"}
+{"title":"bbb","screenID":"screen-GNDJ1","icon":"icon-map","menu":"tabbar","position":"2","_id":"BJOKiFRfWez3RRqv"}
+{"title":"titulo1","screenID":"screen-OUUJB","icon":"icon-map","menu":"sidemenu","position":"1","_id":"K8YrIPmhWcJJkHKN"}
+{"title":"asdasd","screenID":"screen-OUUJB","icon":"icon-map","menu":"sidemenu","position":"2","_id":"V9rUctkrYlREqoa6"}

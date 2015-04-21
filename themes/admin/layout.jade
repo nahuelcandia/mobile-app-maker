@@ -1,6 +1,7 @@
 doctype html
 html(lang="en")
   head
+    base(href="/admin/")
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
@@ -41,10 +42,11 @@ html(lang="en")
     script(src="/coreassets/FastClick/fastclick.js")
     //jQuery
     script(src="/coreassets/jquery/jquery.js")
+    script(src="/coreassets/main.js")
     script(src="/coreassets/Tokenize-2.2.2/jquery.tokenize.js")
     //Bootstrap JavaScript 
     script(src="/coreassets/bootstrap/bootstrap.min.js")
-    script(src="/coreassets/bootstrap/jasny-bootstrap.min.js")
+    //script(src="/coreassets/bootstrap/jasny-bootstrap.min.js")
     script.
       window.myElementsOptions = {
         socketPath: "/myelements.io"

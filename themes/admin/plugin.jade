@@ -1,18 +1,18 @@
 extends layout
 
 block title
-  title #{__('Plugin')} - #{__('Admin Panel')}
+  title #{__(componentType)} - #{__('Admin Panel')}
 
 block stylesheets
   link(href="/coreassets/jsoneditor/jsoneditor.css", rel="stylesheet")
   style.
     .menu button.collapse-all,.menu button.expand-all{
-    	display:none;
+      display:none;
     }
 
 block content
   .container
-    h2 #{__('Manage')} #{__('Plugin')}#{__(':')} #{plugin[0].name}
+    h2 #{__('Manage')} #{__(componentType)}#{__(':')} #{component[0].name}
     #alerts
     .row
       #jsoneditor.col-sm-12(style="margin-bottom:15px;")
@@ -35,17 +35,19 @@ block scripts
       var container = document.getElementById("jsoneditor");
       var editor = new JSONEditor(container, options);
       // set json
-      var json = !{JSON.stringify(plugin[0].config)};
+      var json = !{JSON.stringify(component[0].config)};
       editor.set(json);
       // get json
       $('.save').bind('click', function(){
+       console.log(JSON.stringify(editor.get()));
         $.ajax({
-          url: '/admin/plugin/config/#{plugin[0].name}',
+          url: '/admin/#{componentType}/config/#{component[0].name}',
           type: "POST",
           data: JSON.stringify(editor.get()),
+          dataType: "json",
           contentType: "application/json",
           complete: function(response){
-          	var alert = $(".alert-message").clone().removeClass('alert-message');
+            var alert = $(".alert-message").clone().removeClass('alert-message');
             if(response.responseText=='ok'){
               $(alert).addClass('alert-success').html('<i class="icon ion-checkmark-circled"/> #{__('Configuration successfully saved')}').appendTo('#alerts').alert();
             }else{
