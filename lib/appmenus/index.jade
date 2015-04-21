@@ -4,8 +4,9 @@ block title
   title Shovel apps CMS - #{__('Menues Manager')}
 
 block content
+  - var types=['Link to page','Container']
   - var places = [{"title": "Main Menu", "menu": "tabbar"}, {"title": "Side Menu", "menu": "sidemenu"}];
-  - var icons = ["icon-map", "icon-tree", "icon-car", "icon-home", "icon-settings"];
+  -var icons = ["ion-monitor", "ion-play", "ion-images", "ion-map", "ion-gear-b","ion-music-note", "ion-radio-waves", "ion-earth", "ion-eye", "ion-person", "ion-location", "ion-link", "ion-chevron-left", "ion-information-circled", "ion-share"]
   .container-fluid.bg-white.cms.menues-manager(role="main")
     .header.center-block.row.voffset6
       a.back-button.pull-left(href="#")
@@ -37,6 +38,8 @@ block content
             tr
               th #
               th #{__('Title')}
+              if place.menu == 'sidemenu'
+                th #{__('Type')}
               th #{__('Linked to')}
               th #{__('Icon')}
               th #{__('Actions')}
@@ -51,17 +54,27 @@ block content
                   td.text-center=appmenu.position
                   td
                     input.title(type="text", value=appmenu.title, placeholder="Name your menu")
+                  if place.menu == 'sidemenu'
+                    td
+                      select.select2.selectType(data-placeholder="Type")
+                        each type in types
+                          -var tsel = appmenu.type==type
+                          option(selected=tsel)=type
                   td
                     select.select2.screenId(data-placeholder="Parent")
                       each screen in screens
                         -var sel = appmenu.screenID==screen.id
                         option(selected=sel, value=screen.id)=screen.title
                   td
-                    select.select2.iconId(data-placeholder="Icons")
-                      each icon in icons
-                        -var sel = appmenu.icon==icon
-                        option(selected=sel,value=icon)=icon
+                    if appmenu.icon=="none"
+                      button.btn.btn-default.iconId(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
+                    else
+                      button.btn.btn-default.iconId(type="button", data-toggle="modal", data-target="#iconsModal")=appmenu.icon
                   td.actions
+                    if appmenu.state=="enabled"
+                      a.icon.publish.state(href="#")
+                    else
+                      a.icon.unpublish.state(href="#")
                     .move
                       a(class=moveUp, href="#")
                       a(class=moveDown, href="#")
@@ -71,14 +84,17 @@ block content
               td
               td
                 input.title(type="text", placeholder="Name your menu")
+              if place.menu == 'sidemenu'
+                td
+                  select.select2.selectType(data-placeholder="Type")
+                    each type in types
+                      option=type
               td
                 select.select2.screenId(data-placeholder="Parent")
                   each screen in screens
                     option(value=screen.id)=screen.title
               td
-                select.select2.iconId(data-placeholder="Icons")
-                  each icon in icons
-                    option(value=icon)=icon
+                button.btn.btn-default.iconId(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
               td.actions
                 a.add(href="#")
 
@@ -87,17 +103,16 @@ block content
   .modal.fade(id="iconsModal", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
     .modal-dialog
       .modal-content
-        .modal-header(style="border-bottom:none; min-height:100px;")
-          .container.col-md-12
+        .modal-header(style="border-bottom:none;")
+          .container.col-xs-12
             .row
               button.close(type="button", data-dismiss="modal", aria-label="Close")
                 span(aria-hidden="true") &times;
             .row
-              .col-md-6
+              .col-xs-6
                 h4.modal-title(id="myModalLabel") Choose Icon
-              .col-md-6
-                button.btn.btn-default.iconSelect(style="float:right;",type="button", data-dismiss="modal", data-iconname="Select icon") No icon
-
+              .col-xs-6(style="text-align: right;")
+                button.btn.btn-default.iconSelect(type="button", data-dismiss="modal", data-iconname="Select icon") No icon
         .modal-body
           each icon in icons
             a.icon.iconSelect(class=icon, style="font-size:40px; margin:30px; color:#676767;", href="#", data-dismiss="modal", data-iconname=icon)
@@ -107,6 +122,15 @@ block scripts
   script(src="screens/js/jquery.rest.min.js")
   script.
     $(document).ready(function(){
+        checktypes();
+        var lastIconButton;
+        $('#iconsModal').on('show.bs.modal', function (e) {
+          lastIconButton=e.relatedTarget;
+        });
+        $('.modal').on("click",".iconSelect", function(e){
+          e.preventDefault();
+          $(lastIconButton).html($(this).attr('data-iconname'));
+        });
         $("table").on("click",".delete",function(e){
           var btn = $(this), row = btn.parents("tr");
 
@@ -118,6 +142,7 @@ block scripts
 
           row.before(newRow.hide());
           newRow.fadeIn().find("td:last").html("").append(
+            $("<a>").addClass("icon publish state").attr("href", "#"),
             $("<div>").addClass("move").append(
               $("<a>").addClass("move-up").attr("href", "#"),
               $("<a>").addClass("move-down").attr("href", "#")
@@ -126,7 +151,7 @@ block scripts
           );
 
           row.find('input:first').val('');
-
+          row.find('.iconId:first').html('Select icon')
           checkPosition();
 
           return false;
@@ -147,29 +172,29 @@ block scripts
         });
         $("table").on("click",".state",function(e){
           e.preventDefault();
-          if($(this).hasClass('ion-eye')){
-            $(this).addClass('ion-eye-disabled')
-            $(this).removeClass('ion-eye');
+          if($(this).hasClass('publish')){
+            $(this).addClass('unpublish')
+            $(this).removeClass('publish');
           } else {
-            $(this).addClass('ion-eye')
-            $(this).removeClass('ion-eye-disabled');
+            $(this).addClass('publish')
+            $(this).removeClass('unpublish');
           }
         });
         $("table").on("change",".selectType",function(e){
           e.preventDefault();
           var row = $(this).parents("tr:first");
-          if($(this).val()=='Menu header'){
-            row.find('.selectScreenID').attr('disabled',true);
+          if($(this).val()=='Container'){
+            row.find('.screenId:first').attr('disabled',true);
           } else {
-            row.find('.selectScreenID').attr('disabled',false);
+            row.find('.screenId:first').attr('disabled',false);
           }
         });
         function checktypes(){
-          $('#tableSidemenu tr').each(function(index){
-            if($(this).find('.selectType').val()=='Menu header'){
-              $(this).find('.selectScreenID').attr('disabled',true);
+          $('tr').each(function(index){
+            if($(this).find('.selectType').val()=='Container'){
+              $(this).find('.screenId:first').attr('disabled',true);
             } else {
-              $(this).find('.selectScreenID').attr('disabled',false);
+              $(this).find('.screenId:first').attr('disabled',false);
             }
           });
         }
