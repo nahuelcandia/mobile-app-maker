@@ -14,12 +14,12 @@ block content
           a.phone.active(href='#')
           a.tablet(href='#')
         .col-md-3
-          input.shovel-control(type='text', value="#{screen.title}")
+          input.shovel-control(name='title',type='text', value="#{screen.title}")
         .col-md-3.col-md-offset-2
           select.form-control
             option Splash
         .col-md-1
-          a.upload-theme.pull-right(href='#', onclick='return $("#screenform").submit(), false;')
+          a#save.upload-theme.pull-right(href='#')
             img(src='/coreassets/assets/save-icon.svg')
             span Save
       .row.center-block.voffset7.text-left
@@ -50,7 +50,32 @@ block content
                   a.list-group-item(href='#') Grooveshark
                   a.list-group-item(href='#') Cloud Up
         .col-md-5
-          textarea.form-control(rows='12')=screen.content
+          #editortoolbar
+            // Add font size dropdown
+            select.ql-size
+              option(value='small') Small
+              option(value='normal', selected='') Normal
+              option(value='large') Large
+              option(value='huge') Huge
+            // Add a bold button
+            span.ql-format-group
+              span.ql-format-button.ql-bold(title='Bold')
+              span.ql-format-separator
+              span.ql-format-button.ql-italic(title='Italic')
+              span.ql-format-separator
+              span.ql-format-button.ql-underline(title='Underline')
+              span.ql-format-separator
+            span.ql-format-group
+              span.ql-format-button.ql-list(title='List')
+              span.ql-format-separator
+              span.ql-format-button.ql-bullet(title='Bullet')
+              span.ql-format-separator
+              select.ql-align(title='Text Alignment')
+                option(value='left', label='Left', selected='')
+                option(value='center', label='Center')
+                option(value='right', label='Right')
+                option(value='justify', label='Justify')
+            div.form-control#screen(name="content",style="height:400px")!=screen.content
         .col-md-4.demo-phone.text-left
           .demo-theme.android
             img.phone(src='/coreassets/assets/android-cel.svg')
@@ -67,4 +92,9 @@ block content
             a#destroyScreenButton(href="#") Remove screen   
 
 block stylesheets
+  link(rel="stylesheet", href="screens/css/quill.base.css")
+  link(rel="stylesheet", href="screens/css/quill.snow.css")
 block scripts
+  script(src="screens/js/quill.min.js")
+  script(src="screens/js/jquery.rest.min.js")
+  script(src="screens/js/screeneditor.js")
