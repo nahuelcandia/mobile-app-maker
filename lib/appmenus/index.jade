@@ -67,9 +67,9 @@ block content
                         option(selected=sel, value=screen.id)=screen.title
                   td
                     if appmenu.icon=="none"
-                      button.btn.btn-default.iconId(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
+                      button.btn.btn-default.btn-xs.iconId(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
                     else
-                      button.btn.btn-default.iconId(type="button", data-toggle="modal", data-target="#iconsModal")=appmenu.icon
+                      button.btn.btn-default.btn-xs.iconId(type="button", data-toggle="modal", data-target="#iconsModal")=appmenu.icon
                   td.actions
                     if appmenu.state=="enabled"
                       a.icon.publish.state(href="#")
@@ -92,9 +92,9 @@ block content
               td
                 select.select2.screenId(data-placeholder="Parent")
                   each screen in screens
-                    option(value=screen.id)=screen.title
+                    option(value=screen.id, style='background-image: url(../assets/delete.svg);')=screen.title
               td
-                button.btn.btn-default.iconId(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
+                button.btn.btn-default.btn-xs.iconId(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
               td.actions
                 a.add(href="#")
 
