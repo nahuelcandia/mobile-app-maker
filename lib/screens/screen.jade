@@ -15,9 +15,13 @@ block content
           a.tablet(href='#')
         .col-md-3
           input.shovel-control(name='title',type='text', value="#{screen.title}")
-        .col-md-3.col-md-offset-2
+        .col-md-3.col-md-offset-1
           select.form-control
             option Splash
+        .col-md-1
+          a#destroyScreenButton.upload-theme.pull-right(href="#")
+            img(src='/coreassets/assets/delete.svg')
+            span Delete
         .col-md-1
           a#save.upload-theme.pull-right(href='#')
             img(src='/coreassets/assets/save-icon.svg')
@@ -82,14 +86,14 @@ block content
             img.theme(src='/coreassets/assets/elmeme.jpg')
             // <iframe src="https://www.shovelapps.org/"></iframe>
 
-        .col-md-12
+        .col-md-12(style="display:none;")
           .form-group
             label(for="title") Screen id
             input.form-control(name="id", value="#{screen.id}")  
             span.help-block For links between screens   
           h4.page-header Other screen actions
           p
-            a#destroyScreenButton(href="#") Remove screen   
+            a#destroyScreenButtonB(href="#") Remove screen   
 
 block stylesheets
   link(rel="stylesheet", href="screens/css/quill.base.css")
