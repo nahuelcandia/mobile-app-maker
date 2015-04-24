@@ -86,13 +86,13 @@ block content
                 input.title(type="text", placeholder="Name your menu")
               if place.menu == 'sidemenu'
                 td
-                  select.select2.selectType(data-placeholder="Type")
+                  select.select2.selectType
                     each type in types
                       option=type
               td
-                select.select2.screenId(data-placeholder="Parent")
+                select.select2.screenId
                   each screen in screens
-                    option(value=screen.id, style='background-image: url(../assets/delete.svg);')=screen.title
+                    option(value=screen.id)=screen.title
               td
                 button.btn.btn-default.btn-xs.iconId(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
               td.actions
@@ -139,7 +139,6 @@ block scripts
         $("table").on("click",".add",function(e){
           var row = $(this).parents("tr:first");
           var newRow = $(this).parents("tr:first").clone().removeClass("new");
-
           row.before(newRow.hide());
           newRow.fadeIn().find("td:last").html("").append(
             $("<a>").addClass("icon publish state").attr("href", "#"),
@@ -149,11 +148,14 @@ block scripts
             ),
             $("<a>").addClass("delete").attr("href", "#")
           );
-
+          newRow.find('select.selectType').val(row.find('select.selectType').val());
+          newRow.find('select.screenId').val(row.find('select.screenId').val());
           row.find('input:first').val('');
+          row.find('select.selectType').val(row.find('select.selectType option:first').val());
+          row.find('select.screenId').val(row.find('select.screenId option:first').val());
           row.find('.iconId:first').html('Select icon')
           checkPosition();
-
+          checktypes();
           return false;
         });
         $("table").on("click",".move-up",function(e){
