@@ -1,0 +1,11 @@
+{
+  "gcmServerApiKey": "",
+  "regIdsGcm": [],
+  "regIdsApn": [],
+  "ApnConfig": {
+    "gateway": "gateway.push.apple.com",
+    "cert": "certfilename",
+    "key": "keyfilename",
+    "passphrase": ""
+  }
+}

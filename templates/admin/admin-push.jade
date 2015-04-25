@@ -1,0 +1,35 @@
+extends layout
+
+block title
+  title Shovel apps CMS - Push Notifications
+
+block content
+  .container-fluid
+    form.form-horizontal#myform(action="/",method="post")
+      fieldset
+        legend New Notification:
+        .form-group
+          label.col-md-4.control-label(for="title") Title
+          .col-md-4
+            input.form-control.input-md#title(name="title",type="text")
+        .form-group
+          label.col-md-4.control-label(for="notification") Message
+          .col-md-4
+            textarea.form-control#notification(name="notification")
+        .form-group
+          label.col-md-4.control-label(for="sound") Sound
+          .col-md-4
+            input.form-control.input-md#sound(name="sound",type="text")
+        .form-group
+          label.col-md-4.control-label(for="submit")
+          .col-md-4
+            button.btn.btn-primary#submit(type="submit",name="submit") Submit
+
+block navbar-buttons
+  ul.nav.navbar-nav
+    li
+      a(href="/")#adminhome Back to the frontend
+
+  ul.nav.navbar-nav.navbar-right
+    li
+      a(href="/logout") Logout
