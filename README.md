@@ -63,6 +63,7 @@ All config is loaded from the `config/default.json` once the CMS is installed.
 * jQuery
 * socket.io
 * FastClick
+* ace-editor
 * medium-editor
  * MediumButton
 
