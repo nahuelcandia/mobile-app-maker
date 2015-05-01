@@ -2,7 +2,7 @@
   "installed": true,
   //--- DEPRECATED: -------
   //"theme": "bootstrap-3-jade",
-  "theme": "jqmobile",
+  "theme": "onsenui",
   //"theme": "framework7",
   "app": {
     "appName": "Awesome App"
