@@ -4,6 +4,7 @@ block content
   form#screenform(action="/admin/screens", method="post")
     input(type="hidden", name="currentId", value="#{screen.id}")
     input(type="hidden", name="position", value="#{screen.position}")
+    input(type="hidden", name="isMain", value="#{screen.isMain}")
     .container-fluid.bg-white.cms(role='main')
       .header.center-block.row.voffset6
         a.back-button.pull-left(href='#')
