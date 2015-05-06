@@ -12,19 +12,15 @@ block content
 				button.btn.btn-success(onclick="window.location='/admin/screens/new';")
 					| + #{__('New')}
 		if screens.length
-			.row.center-block.voffset6.text-left
-				.col-md-3.col-md-offset-2
-					select#selectMain.form-control.pull-right
-						option(value="not selected") Select main screen
-						each screen in screens
-							-var sel = "true"==screen.isMain
-							option(selected=sel, value=screen.id)=screen.title
 			.row.center-block.voffset5.text-left
 				.col-md-8.col-md-offset-2.categories
 					.categorie.clearfix
 						h3 Uncategorized
-						select.form-control.pull-right
-							option Splash
+						select#selectMain.form-control.pull-right
+							option(value="not selected") Select main screen
+							each screen in screens
+								-var sel = "true"==screen.isMain
+								option(selected=sel, value=screen.id)=screen.title
 					.row.screens
 						each screen in screens
 							.col-md-4
