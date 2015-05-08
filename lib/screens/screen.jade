@@ -53,38 +53,38 @@ block content
                   a.list-group-item(href='#') Youtube
                   a.list-group-item(href='#') Grooveshark
                   a.list-group-item(href='#') Cloud Up
-        .col-md-5
-          #editortoolbar
-            // Add font size dropdown
-            select.ql-size
-              option(value='small') Small
-              option(value='normal', selected='') Normal
-              option(value='large') Large
-              option(value='huge') Huge
-            // Add a bold button
-            span.ql-format-group
-              span.ql-format-button.ql-bold(title='Bold')
-              span.ql-format-separator
-              span.ql-format-button.ql-italic(title='Italic')
-              span.ql-format-separator
-              span.ql-format-button.ql-underline(title='Underline')
-              span.ql-format-separator
-            span.ql-format-group
-              span.ql-format-button.ql-list(title='List')
-              span.ql-format-separator
-              span.ql-format-button.ql-bullet(title='Bullet')
-              span.ql-format-separator
-              select.ql-align(title='Text Alignment')
-                option(value='left', label='Left', selected='')
-                option(value='center', label='Center')
-                option(value='right', label='Right')
-                option(value='justify', label='Justify')
-            div.form-control#screen(name="content",style="height:400px")!=screen.content
-        .col-md-4.demo-phone.text-left
-          .demo-theme.android
-            img.phone(src='/coreassets/assets/android-cel.svg')
-            img.theme(src='/coreassets/assets/elmeme.jpg')
-            // <iframe src="https://www.shovelapps.org/"></iframe>
+        .col-md-9
+          textarea(cols="80",id="editor1",name="editor1",rows="10")!=screen.content
+            //- // Add font size dropdown
+            //- select.ql-size
+            //-   option(value='small') Small
+            //-   option(value='normal', selected='') Normal
+            //-   option(value='large') Large
+            //-   option(value='huge') Huge
+            //- // Add a bold button
+            //- span.ql-format-group
+            //-   span.ql-format-button.ql-bold(title='Bold')
+            //-   span.ql-format-separator
+            //-   span.ql-format-button.ql-italic(title='Italic')
+            //-   span.ql-format-separator
+            //-   span.ql-format-button.ql-underline(title='Underline')
+            //-   span.ql-format-separator
+            //- span.ql-format-group
+            //-   span.ql-format-button.ql-list(title='List')
+            //-   span.ql-format-separator
+            //-   span.ql-format-button.ql-bullet(title='Bullet')
+            //-   span.ql-format-separator
+            //-   select.ql-align(title='Text Alignment')
+            //-     option(value='left', label='Left', selected='')
+            //-     option(value='center', label='Center')
+            //-     option(value='right', label='Right')
+            //-     option(value='justify', label='Justify')
+            //- div.form-control#screen(name="content",style="height:400px")!=screen.content
+        //- .col-md-4.demo-phone.text-left
+        //-   .demo-theme.android
+        //-     img.phone(src='/coreassets/assets/android-cel.svg')
+        //-     img.theme(src='/coreassets/assets/elmeme.jpg')
+        //-     // <iframe src="https://www.shovelapps.org/"></iframe>
 
         .col-md-12(style="display:none;")
           .form-group
@@ -96,9 +96,20 @@ block content
             a#destroyScreenButtonB(href="#") Remove screen   
 
 block stylesheets
-  link(rel="stylesheet", href="screens/css/quill.base.css")
-  link(rel="stylesheet", href="screens/css/quill.snow.css")
+  //- link(rel="stylesheet", href="screens/css/quill.base.css")
+  //- link(rel="stylesheet", href="screens/css/quill.snow.css")
 block scripts
-  script(src="screens/js/quill.min.js")
+  script(src="screens/js/CKEditor/ckeditor.js")
+  script(src="screens/js/CKEditor/adapters/jquery.js")
+  //- script(src="screens/js/quill.min.js")
   script(src="screens/js/jquery.rest.min.js")
   script(src="screens/js/screeneditor.js")
+  script.
+    CKEDITOR.disableAutoInline = true;
+    $( document ).ready( function() {
+      $( '#editor1' ).ckeditor(); // Use CKEDITOR.replace() if element is <textarea>.
+      $( '#editable' ).ckeditor(); // Use CKEDITOR.inline().
+    } );
+    function setValue() {
+      $( '#editor1' ).val( $( 'input#val' ).val() );
+    }
