@@ -7,12 +7,20 @@
 mobile apps for Android and iOS  with full control over the UI/UX as well functionality of each platform.
 From this Web CMS and App Maker, you are also able to update the contents of your app in realtime, creating production-ready binaries, and also publishing to AppStore and Google Play from a single place.
 
+Join us @ Slack!
+
+[![](https://shovelappsinc.herokuapp.com/badge.svg)](https://shovelappsinc.herokuapp.com/)
+
 ##Download
 
 [Latest version](https://github.com/shovelapps/shovelapps-cms/releases/latest)
 
 
 ## Installation
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/shovelapps/shovelapps-cms/tree/master)
+
+Or install it and launch it on your sever:
 
 ###Requirements 
 
@@ -24,19 +32,13 @@ You need [NodeJS](http://nodejs.org/download/) installed to run **Shovel apps CM
 $ wget https://github.com/shovelapps/shovelapps-cms/archive/latest.zip
 $ cd ~/shovelapps-cms
 ```
-* Unzip it, install dependencies and submodules and run it.
+* Unzip it, install dependencies and run it.
 ```
 $ unzip latest.zip
 $ cd shovelapps-cms-latest/
 $ npm install
 $ ./start.sh
 ```
-
-### Submodules
-
-The CMS css is a customized bootstrap, wich is in another repo [shovelapps/shovelapps-bootstrap](https://github.com/shovelapps/shovelapps-bootstrap) used as a [submodule](http://git-scm.com/book/en/v2/Git-Tools-Submodules).
-
-
 
 
 ## Run and open your browser

@@ -1,0 +1,7 @@
+{
+  "name": "Shovel apps",
+  "description": "Start creating your first mobile app today!",
+  "repository": "https://github.com/shovelapps/shovelapps-cms",
+  "logo": "https://shovelapps.com/assets/img/logo-shove-1.png",
+  "keywords": ["node", "express", "shovelapps"]
+}
