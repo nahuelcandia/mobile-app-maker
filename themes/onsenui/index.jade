@@ -29,15 +29,15 @@ html(lang="en", ng-app="myApp")
                 ons-toolbar-button(onclick="Smenu.toggleMenu()")
                   ons-icon(icon="fa-bars")
             div(class="center")=mainScreen[0].title
-          ons-row(style="padding:8px")
-            ons-col !{mainScreen[0].content}
+          ons-row(style="padding:8px;word-wrap: break-word;")
+            ons-col(style="overflow:auto;") !{mainScreen[0].content}
     else
       //- If there are no menus then the home screen should be an osn-page element
       ons-page
         ons-toolbar(fixed-style)
           div(class="center")=mainScreen[0].title
-        ons-row(style="padding:8px")
-          ons-col !{mainScreen[0].content}
+        ons-row(style="padding:8px;word-wrap: break-word;")
+          ons-col(style="overflow:auto;") !{mainScreen[0].content}
 
     if sidemenulist.length
       //- If a sidemenu is present, the main part of the code is declaring wich screen is
@@ -61,8 +61,8 @@ html(lang="en", ng-app="myApp")
                   ons-toolbar-button(onclick="Smenu.toggleMenu()")
                     ons-icon(icon="fa-bars")
               div(class="center")=screen.title
-            ons-row(style="padding:8px")
-              ons-col !{screen.content}
+            ons-row(style="padding:8px;word-wrap: break-word;")
+              ons-col(style="overflow:auto;") !{screen.content}
 
     //- Add the tabbar
     if tabbarlist.length
@@ -113,3 +113,5 @@ style.
   ons-list-item > ons-icon {
   margin: 0 6px 0 0;
   }
+script.
+  ons.bootstrap();
