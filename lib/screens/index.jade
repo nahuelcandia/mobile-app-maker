@@ -12,12 +12,15 @@ block content
 				button.btn.btn-success(onclick="window.location='/admin/screens/new';")
 					| + #{__('New')}
 		if screens.length
-			.row.center-block.voffset7.text-left
+			.row.center-block.voffset5.text-left
 				.col-md-8.col-md-offset-2.categories
 					.categorie.clearfix
 						h3 Uncategorized
-						select.form-control.pull-right
-							option Splash
+						select#selectMain.form-control.pull-right
+							option(value="not selected") Select main screen
+							each screen in screens
+								-var sel = "true"==screen.isMain
+								option(selected=sel, value=screen.id)=screen.title
 					.row.screens
 						each screen in screens
 							.col-md-4
@@ -28,8 +31,7 @@ block content
 
 block stylesheets
 block scripts
-//- script(src="/coreassets/jquery.ui/jquery-ui.min.js")
-//- script(src="screens/js/jquery.rest.min.js")
-//- script(src="screens/js/screenposition.js")
+	script(src="screens/js/jquery.rest.min.js")
+	script(src="screens/js/setmain.js")
 
 
