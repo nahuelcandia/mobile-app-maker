@@ -432,8 +432,10 @@ body {
 	margin-bottom: 30px;
 	width: 80%;
 }
-.cms .themes > div {
+.cms .themes .theme {
 	text-align: left;
+	display: inline-block;
+	margin: 0 3%;
 }
 .cms .themes > div h3 {
 	color: #676766;
@@ -1277,6 +1279,60 @@ body {
 .cms input:focus {
 	outline: none;
 }
+.cms .previews .preview {
+	display: inline-block;
+	width: 25%;
+	margin-right: 5%;
+}
+.cms .previews .preview > h3 {
+	font-size: 22px;
+	font-weight: 400;
+}
+.cms .previews .preview > h3 > span {
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	vertical-align: bottom;
+	background-size: cover;
+	margin-right: 10px;
+}
+.cms .previews .preview > h3 > span.android {
+	background-image: url('../assets/icon_android.svg');
+}
+.cms .previews .preview > h3 > span.apple {
+	background-image: url('../assets/icon_ios.svg');
+}
+.cms .previews .preview .options {
+	width: 65%;
+	margin: 0 auto;
+	padding-top: 15px;
+	border-top: solid 1px #c0c0c0;
+}
+.cms .previews .preview .options a {
+	color: #5c5c5c;
+	width: 35px;
+	height: 35px;
+	display: inline-block;
+	opacity: 0.7;
+	background-size: cover;
+	margin-right: 25px;
+	vertical-align: middle;
+	background-color: #ccc;
+}
+.cms .previews .preview .options a:last-child {
+	margin-right: 0;
+}
+.cms .previews .preview .options a:hover {
+	opacity: 1;
+	text-decoration: none;
+}
+.cms .previews .preview:last-child {
+	margin-right: 0;
+}
+.cms .preview .demo-theme.ios {
+	width: 68.2%;
+}
+
 
 
 .upload-zone {
@@ -1470,23 +1526,30 @@ body {
 
 input[type="checkbox"] {
 	position: relative;
-	margin-left: 2%;
+	-webkit-appearance: none;
+	width: 15px;
+	height: 15px;
+	vertical-align: text-bottom;
+	background-color: #fff;
+	border: solid 1px #e9e9ea;
+	margin: 0 5px;
+	outline: none;
+}
+input[type="checkbox"]:hover,input[type="checkbox"]:focus {
+	border-color: #adafaf;
+	outline: none;
 }
 input[type="checkbox"]:before {
 	content: " ";
-	background-color: #FFF;
-	background-image: url('../assets/check-box_empty.svg');
-	background-size: cover;
-	width: 22px;
-	height: 22px;
-	margin-top: -5px;
-	display: inline-block;
+	width: 19px;
+	height: 19px;
+	top: -8px;
+	left: -2px;
 	position: absolute;
-	top: 0;
-	left: 0;
+	background-size: cover;
 }
 input[type="checkbox"]:checked:before {
-	background-image: url('../assets/check-box.svg');
+	background-image: url('../assets/check.svg');
 }
 input:focus {
 	outline: none;

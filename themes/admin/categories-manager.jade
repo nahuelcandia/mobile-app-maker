@@ -4,6 +4,8 @@ block title
   title Shovel apps CMS - #{__('Category Manager')}
 
 block content
+  - var categories = [{"id":"category-0","name":"Root","parent":"","publish":false},{"id":"category-1","name":"Uncategorized","parent":"","publish":true},{"id":"category-2","name":"Behaviors","parent":"Root","publish":false},{"id":"category-3","name":"Content","parent":"Behaviors","publish":true}];
+
   .container-fluid.bg-white.cms.menues-manager(role='main')
     .header.center-block.row.voffset6
       a.back-button.pull-left(href='#')
@@ -33,43 +35,92 @@ block content
             th #{__('Parent')}
             th #{__('Actions')}
         tbody
-          tr
-            td.text-center 1
-            td
-              input(type='text', value='Behaviors', placeholder='Name your category')
-            td
-              select.select2(data-placeholder='Parent')
-                option Root
-                option Uncategorized
-                option Behaviors
-                option Content
-            td.actions
-              a.publish(href='#')
-              a.delete(href='#')
-          tr
-            td.text-center 2
-            td
-              input(type='text', value='Content', placeholder='Name your category')
-            td
-              select.select2(data-placeholder='Parent')
-                option Root
-                option Uncategorized
-                option Behaviors
-                option Content
-            td.actions
-              a.unpublish(href='#')
-              a.delete(href='#')
+          each category, index in categories
+            - var i = index + 1;
+            tr(data-position=index, data-id=category.id)
+              td.text-center=i
+              td
+                input.name(type='text', value=category.name, placeholder='#{__("Name your category")}')
+              td
+                select.parent.select2(data-placeholder='Parent')
+                  option
+                  each c in categories
+                    - var sel = c.name == category.parent
+                    option(selected=sel, value=c.id)=c.name
+              td.actions
+                if category.publish
+                  a.publish(href='#')
+                else
+                  a.unpublish(href='#')
+                a.delete(href='#')
           tr.new
             td
             td
-              input(type='text', placeholder='Name your category')
+              input.name(type='text', placeholder='Name your category')
             td
-              select.select2(data-placeholder='Parent')
+              select.parent.select2(data-placeholder='Parent')
                 option
-                // Necesario para el placeholder
-                option Root
-                option Uncategorized
-                option Behaviors
-                option Content
+                each c in categories
+                  option(value=c.id)=c.name
             td.actions
               a.add(href='#')
+block scripts
+  script.
+    $(document).on("click", "a[href='#']", function(){ return false; });
+    $(".table-category").length > 0 && $(document).on("click", ".table-category .publish, .table-category .unpublish", function(){
+      $(this).toggleClass("publish").toggleClass("unpublish");
+    });
+    $(document).on('click', '.menues-manager .delete', function(){
+        $(this).parent().parent().fadeOut(function(){$(this).remove();checkPosition();});
+    });
+    $(document).on('click', '.menues-manager .add', function(){
+          var row = $(this).parents("tr:first"), position = $("tbody tr:not(.new)").length + 1;
+          var newRow = $(this).parents("tr:first").clone().removeClass("new").data("position", position).data("id", Math.random());
+          row.before(newRow.hide());
+          newRow.fadeIn().find("td:last").html("").append(
+            $("<a>").addClass("publish").attr("href", "#"),
+            $("<a>").addClass("delete").attr("href", "#")
+          );
+          newRow.find('select.parent').val(row.find('select.parent').val());
+          newRow.find("td:first").text(position);
+
+          row.find(".name").val("");
+          row.find(".parent").val("");
+
+          checkParents();
+    });
+
+    $(document).on("focusout", "input.name", function(){checkParents();});
+
+    var checkPosition = function(){
+       var tables = $("table");
+       tables.each(function(){
+         var rows = $(this).find("tbody tr:not(.new)");
+         for(var i = 0; i < rows.length; i++)
+           {
+             var position = i + 1;
+             rows.eq(i).data("position", position);
+             rows.eq(i).find("td:first").text(position);
+           }
+       });
+
+       checkParents();
+    };
+
+    var checkParents = function(){
+      var inputs = $("tbody tr:not(.new)");
+      var parents = [];
+      for(var i = 0; i < inputs.length; i++)
+      {
+        var id = inputs.eq(i).data("id"), name = inputs.eq(i).find(".name").val();
+        parents.push({id: id, name: name});
+      }
+
+      var selects = $(".parent");
+      selects.each(function(){
+        var elm = $(this), val = elm.val(), id = elm.parents("tr").data("id");
+        elm.html($('<option>'));
+        for(var i in parents)
+          id !== parents[i].id && elm.append($('<option>', {value:parents[i].id, text:parents[i].name, selected: parents[i].id == val}));
+      });
+    };
