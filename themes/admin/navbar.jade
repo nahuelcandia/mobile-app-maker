@@ -7,9 +7,12 @@ nav.navbar.navbar-shovel
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a(href="/admin/").logo-app
-        img(src='/icon.png')
-        h1.hidden-xs #{locals.config.app.appName}
+      .logo
+        a(href="/admin/apps")
+          img(src='/coreassets/assets/shovel-nav.svg')
+        i.glyphicon.glyphicon-menu-right
+        a(href="/admin/")
+          h1 #{locals.config.app.appName}
     #navbar.navbar-collapse.collapse
       ul.nav.navbar-nav.navbar-right
         li

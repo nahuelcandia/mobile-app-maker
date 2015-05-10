@@ -39,7 +39,7 @@ block content
           tr
             th #{__('Build date')}
             th #{__('User')}
-            th #{__('ID')}
+            //th #{__('ID')}
             th #{__('Download')}
             th #{__('QR')}
             th #{__('Delete')}
@@ -49,7 +49,7 @@ block content
               tr
                 th=build.date
                 th User
-                th=build.buildIdShort
+                //th=build.buildIdShort
                 th.devices
                   .os
                     a.android.small(href="#{build.apkUrl}", target="_blank", title="#{__('Download')} .apk")
