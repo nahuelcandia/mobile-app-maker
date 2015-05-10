@@ -4,7 +4,7 @@ block title
   title Shovel apps CMS - #{__('Category Manager')}
 
 block content
-  - var categories = [{"id":"category-0","name":"Root","parent":"","publish":false},{"id":"category-1","name":"Uncategorized","parent":"","publish":true},{"id":"category-2","name":"Behaviors","parent":"Root","publish":false},{"id":"category-3","name":"Content","parent":"Behaviors","publish":true}];
+  - var categories = [{"id":"category-0","name":"Root","parentId":"","public":false},{"id":"category-1","name":"Uncategorized","parentId":"","public":true},{"id":"category-2","name":"Behaviors","parentId":"category-0","public":false},{"id":"category-3","name":"Content","parentId":"category-2","public":true}];
 
   .container-fluid.bg-white.cms.menues-manager(role='main')
     .header.center-block.row.voffset6
@@ -45,10 +45,10 @@ block content
                 select.parent.select2(data-placeholder='Parent')
                   option
                   each c in categories
-                    - var sel = c.name == category.parent
+                    - var sel = c.id == category.parentId
                     option(selected=sel, value=c.id)=c.name
               td.actions
-                if category.publish
+                if category.public
                   a.publish(href='#')
                 else
                   a.unpublish(href='#')
@@ -56,7 +56,7 @@ block content
           tr.new
             td
             td
-              input.name(type='text', placeholder='Name your category')
+              input.name(type='text', placeholder='#{__("Name your category")}')
             td
               select.parent.select2(data-placeholder='Parent')
                 option

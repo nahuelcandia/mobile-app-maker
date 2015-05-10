@@ -14,31 +14,25 @@ nav.navbar.navbar-shovel
       ul.nav.navbar-nav.navbar-right
         li
           a(href='/admin/') #{__('Dashboard')}
-        li.dropdown
-          a.dropdown-toggle(data-toggle='dropdown', href='#') #{__('Content')} 
-            span.glyphicon.glyphicon-menu-down
-          ul.dropdown-menu(role='menu')
-            li
-              a(href='#') #{__('Category Manager')}
-            li
-              a(href='/admin/screens') #{__('Screen Manager')}
-            li
-              a(href='/admin/menus') #{__('Menu Manager')}
+        li
+          a(href='screens') #{__('Screens')}
+        li
+          a(href='menus') #{__('Menus')}
         li
           a(href='plugins') #{__('Plugins')}
         li
-          a(href='/admin/themes') #{__('Themes')}
+          a(href='themes') #{__('Themes')}
         li
           a(href='build') #{__('Publish')}
         li
-          a.preview-app(href='/admin/app-preview')
+          a.preview-app(href='app-preview')
         li.dropdown
           a.dropdown-toggle(data-toggle='dropdown', href='#')
             img.profile-icon(src='/coreassets/assets/username-grey.svg')
             span.drop-down
           ul.dropdown-menu(role='menu')
             li
-              a(href='/admin/apps') #{__('My Apps')}
+              a(href='apps') #{__('My Apps')}
             //li
             //  a(href='#') My Account
             li

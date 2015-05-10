@@ -125,7 +125,6 @@ body {
 	padding-left: 15px;
 	text-align: left;
 	margin-right: -35%;
-
 }
 .cms .header .search input {
 	border: none;
@@ -135,6 +134,7 @@ body {
 	background: url('../assets/search1.svg') no-repeat 0;
 	background-size: 20px;
 	padding-left: 35px;
+	max-width: 150px;
 }
 .cms .header .upload-theme {
 	color: #adafaf;
@@ -552,6 +552,14 @@ body {
 	text-align: left;
 	margin: 0 auto;
 }
+.cms .table-shovel .iconId {
+	display: block;
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
+	background-color: #e9e9ea;
+	color: #676767;
+} 
 .cms .table-shovel .actions {
 	text-align: center;
 	letter-spacing: 0;
@@ -794,46 +802,46 @@ body {
 	margin-left: 10px;
 	vertical-align: middle;
 }
-.cms .tab-content {
+.cms.publish .tab-content {
 	border: solid 1px #adafaf;
 	border-top: none;
 	padding: 10px 10px 50px 10px;
 	border-radius: 0 0 10px 10px;
 }
-.cms .nav-tabs .nav {
+.cms.publish .nav-tabs .nav {
 	background: #e9e9ea;
 }
-.cms .nav-tabs .nav:first-child {
+.cms.publish .nav-tabs .nav:first-child {
 	border-top-left-radius: 5px;
 }
-.cms .nav-tabs .nav:last-child {
+.cms.publish .nav-tabs .nav:last-child {
 	border-top-right-radius: 5px;
 }
-.cms .nav-tabs > li > a:hover {
+.cms.publish .nav-tabs > li > a:hover {
 	border-color: transparent;
 }
-.cms .nav-tabs .nav a {
+.cms.publish .nav-tabs .nav a {
 	color: #676767;
 	margin-top: -1px;
 }
-.cms .nav-tabs .nav.active {
+.cms.publish .nav-tabs .nav.active {
 	border-top-right-radius: 0;
 	border-right: none;
 }
-.cms .nav-tabs .nav.active a {
+.cms.publish .nav-tabs .nav.active a {
 	line-height: 2;
 	margin-top: -10px;
 	margin-right: 0;
 }
-.cms .nav-tabs .nav a img {
+.cms.publish .nav-tabs .nav a img {
 	width: 47px;
 }
-.cms .nav-tabs .nav.active a img {
+.cms.publish .nav-tabs .nav.active a img {
 	width: 57px;
 }
-.cms .nav-tabs .nav.active > a {
-	border: 1px solid #c0c0c0!important;
-	border-bottom-color: #FFF!important;
+.cms.publish .nav-tabs .nav.active > a {
+	border: 1px solid #c0c0c0;
+	border-bottom-color: #FFF;
 }
 .cms .information-build > .tab-pane {
 	padding: 0 35px;
@@ -1227,7 +1235,12 @@ body {
 	background: white;
 }
 
-
+.cms .header .addNewScreen {
+	display: inline-block;
+	height: 40px;
+	width: 30px;
+	color: #ec1164;
+}
 .cms .categories .categorie h3 {
 	color: #676767;
 	font-size: 26px;
@@ -1247,16 +1260,22 @@ body {
 	border-bottom: solid 1px #aeafb2;
 	padding-bottom: 20px;
 	margin-bottom: 20px;
+	clear: both;
+	margin: 0;
 }
 .cms .categories .screens:last-child {
 	border-bottom: none;
 }
-.cms .categories .screens > div {
+.cms .categories .screens .screen {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 8%;
 	margin-bottom: 30px;
+	text-align: center;
 }
 .cms .categories .screens > div img {
-	width: 180px;
-	height: 180px;
+	width: 200px;
+	height: 300px;
 	border: solid 4px #aeafb2;
 	border-radius: 5px;
 }
@@ -1265,9 +1284,9 @@ body {
 }
 .cms .categories .screens > div h4 {
 	font-size: 16px;
-	margin: 0;
+	margin: 0 auto;
 	padding: 17px 0;
-	width: 180px;
+	display: block;
 }
 .cms .categories .screens > div a:hover, .cms .categories .screens > div a.active {
 	text-decoration: none;
@@ -1276,13 +1295,37 @@ body {
 .cms .categories .screens > div a:hover img, .cms .categories .screens > div a.active img {
 	border: solid 4px #ec1164;
 }
+.cms .categories .screens .screen .options a {
+	display: inline-block;
+	position: relative;
+	width: 25px;
+	height: 25px;
+	margin-right: 15px;
+	background-size: cover;
+	opacity: 0.7;
+}
+.cms .categories .screens .screen .options a:hover {
+	opacity: 1;
+}
+.cms .categories .screens .screen .options a:last-child {
+	margin-right: 0;
+}
+.cms .categories .screens .screen .options a.delete {
+	background-image: url('../assets/delete.svg');
+}
+.cms .categories .screens .screen .options a.publish {
+	background-image: url('../assets/icons_preview.svg');
+}
+.cms .categories .screens .screen .options a.unpublish {
+	background-image: url('../assets/icons_preview-none.svg');
+}
+
 .cms input:focus {
 	outline: none;
 }
 .cms .previews .preview {
 	display: inline-block;
-	width: 25%;
-	margin-right: 5%;
+	width: 43%;
 }
 .cms .previews .preview > h3 {
 	font-size: 22px;
@@ -1315,7 +1358,7 @@ body {
 	display: inline-block;
 	opacity: 0.7;
 	background-size: cover;
-	margin-right: 25px;
+	margin-right: 23%;
 	vertical-align: middle;
 	background-color: #ccc;
 }
@@ -1332,9 +1375,101 @@ body {
 .cms .preview .demo-theme.ios {
 	width: 68.2%;
 }
-
-
-
+.cms.settingsapp .attach-icon {
+	border: solid 1px #c0c0c0;
+	margin-bottom: 20px;
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
+	font-size: 15px;
+	text-align: center;
+	padding-top: 40px;
+}
+.cms.settingsapp .attach-icon input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	min-width: 100%;
+	height: 100%;
+	min-height: 100%;
+	z-index: 1000;
+	opacity: 0;
+	cursor: pointer;
+}
+.cms.settingsapp .attach-icon img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	z-index: 100;
+}
+.cms.settingsapp .attach-icon input:hover ~ *, .cms.settingsapp .attach-icon:hover {
+	color: #ec1164;
+	border-color: #ec1164;
+	z-index: 110;
+}
+.cms.settingsapp .attach-icon input:hover ~ img {
+	opacity: 0.7;
+}
+.cms.settingsapp .attach-icon span {
+	display: block;
+	font-size: 40px;
+	position: relative;
+}
+.cms.settingsapp .attach-icon p {
+	position: relative;
+}
+.cms.settingsapp label {
+	display: block;
+	margin-bottom: 15px;
+	font-size: 15px;
+}
+.cms.settingsapp .shovel-control {
+	color: #676767;
+	margin-bottom: 25px;
+	margin-top: 10px;
+	font-size: 15px;
+	padding: 0;
+}
+.cms.settingsapp .tab-content-padding {
+	padding: 50px 0;
+}
+.cms.settingsapp .message {
+	font-size: 15px;
+	margin: 5px 0;
+}
+.cms.settingsapp .addNewUser {
+	color: #adafaf;
+	font-size: 15px;
+	margin-bottom: 25px;
+	display: block;
+}
+.cms.settingsapp .addNewUser:hover {
+	text-decoration: none;
+	color: #ec1164;
+}
+.cms.settingsapp .addNewUser:hover span {
+	border-color: #ec1164;
+}
+.cms.settingsapp .addNewUser span {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+	border: dotted 1px #adafaf;
+	width: 30px;
+	text-align: center;
+	line-height: 30px;
+}
 .upload-zone {
 	width: 45%;
 	margin: 20px auto;
@@ -1356,8 +1491,28 @@ body {
 	font-weight: 500;
 	margin-bottom: 11px;
 }
-.upload-zone a {
+.upload-zone .attach {
+	color: #ec1164;
 	text-decoration: underline;
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	overflow: hidden;
+}
+.upload-zone .attach input {
+	position: absolute;
+	top: -100px;
+	left: -100px;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	width: 400px;
+	height: 400px;
+	cursor: pointer;
+	z-index: 1000;
+}
+.upload-zone .attach input:hover ~ span {
+	opacity: 0.7;
 }
 .container-fluid footer {
 	color: #adafaf;
@@ -1377,6 +1532,100 @@ body {
 	vertical-align: text-top;
 	margin: 1px 4px 0 0;
 }
+
+
+.shovel-tabs > .nav-tabs {
+	border-radius: 10px 10px 0 0;
+	overflow: hidden;
+	border: none;
+	margin-bottom: -1px;
+}
+.shovel-tabs > .nav-tabs > li {
+	background: #e9e9ea;
+	width: auto;
+	text-align: center;
+	border: none!important;
+	margin-bottom: -2px;
+}
+.shovel-tabs > .nav-tabs > li > a {
+	color: #676767;
+	border-left: solid 2px #FFF;
+	border-top-left-radius: 10px;
+	border-top: none;
+	border-right: none;
+	border-bottom: none;
+}
+.shovel-tabs > .nav-tabs > li:first-child > a {
+	border-left: none;
+	border-top-left-radius: 0;
+}
+.shovel-tabs > .nav-tabs > li:last-child > a {
+	border-right: none!important;
+}
+.shovel-tabs > .nav-tabs > li:last-child {
+	border-top-right-radius: 10px!important;
+}
+.shovel-tabs > .nav-tabs > li.active ~ li > a {
+	border-left: none;
+	border-right: solid 2px #FFF;
+	border-top-right-radius: 10px;
+}
+.shovel-tabs > .nav-tabs > li > a:hover, 
+.shovel-tabs > .nav-tabs > li > a:focus {
+	border-color: #ffffff;
+}
+.shovel-tabs > .nav-tabs > li.active > a, 
+.shovel-tabs > .nav-tabs > li.active > a:hover, 
+.shovel-tabs > .nav-tabs > li.active > a:focus {
+	font-weight: 400;
+	border-radius: 10px 10px 0 0;
+	color: #676767!important;
+	border: solid 1px #e9e9ea!important;
+	line-height: normal!important;
+	margin-top: 0!important;
+	background-color: #fff; 
+	border-bottom-color: #fff!important;
+	font-weight: 300!important;
+}
+.shovel-tabs > .nav-tabs > li:last-child > a {
+	margin-right: 0;
+}
+.shovel-tabs  > .tab-content {
+	border: solid 1px #e9e9ea;
+	padding: 15px;
+	border-radius: 0 0 10px 10px;
+}
+
+
+.shovel-tabs-vertical .nav-tabs {
+	border: none;
+
+}
+.shovel-tabs-vertical .nav-tabs > li {
+	float: none;
+	display: block;
+	border: none;
+}
+.shovel-tabs-vertical .nav-tabs > li a {
+	border: none;
+	border-radius: 0;
+	color: #676767;
+	border-top: solid 1px #adafaf;
+	font-size: 15px;
+}
+.shovel-tabs-vertical .nav-tabs > li.active > a, 
+.shovel-tabs-vertical .nav-tabs > li.active > a:hover, 
+.shovel-tabs-vertical .nav-tabs > li.active > a:focus {
+	background: #e9e9ea;
+	color: #676767;
+	border: none;
+}
+.shovel-tabs-vertical .nav-tabs > li.active ~ li a {
+	border-bottom: solid 1px #adafaf;
+	border-top: none;
+}
+
+
 
 
 .message-pro {
@@ -1573,6 +1822,9 @@ input:focus {
 .select2-container--default .select2-selection--single .select2-selection__placeholder {
 	color: #676767;
 }
+
+
+
 
 
 
