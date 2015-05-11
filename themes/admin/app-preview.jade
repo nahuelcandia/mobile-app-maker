@@ -1,0 +1,37 @@
+extends layout
+
+block title
+  title Shovel apps CMS - #{__('App Preview')}
+
+
+block content
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset4
+      a.back-button(href='#')
+      .col-md-6.col-md-offset-3
+        h2 #{__('App Preview')}
+    .row.previews.center-block.voffset3.text-center
+      .preview
+        h3
+          span.android
+          | Android
+        .demo-phone
+          .demo-theme.android
+            img.phone(src='/coreassets/assets/android-cel.svg')
+            img.theme(src='/coreassets/assets/elmeme.jpg')
+          //.options
+            a(href='#')
+            a(href='#')
+            a(href='#')
+      .preview
+        h3
+          span.apple
+          | iOS
+        .demo-phone
+          .demo-theme.ios
+            img.phone(src='/coreassets/assets/iphone-cel.png')
+            img.theme(src='/coreassets/assets/elmeme.jpg')
+          //.options
+            a(href='#')
+            a(href='#')
+            a(href='#')

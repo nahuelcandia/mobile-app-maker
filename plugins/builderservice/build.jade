@@ -1,86 +1,972 @@
 extends ../../themes/admin/layout.jade
 
 block title
-  title Shovel apps CMS - #{__('Admin Panel')}
+  title Shovel apps CMS - #{__('Build Your App!')}
 
-block stylesheets
-  style.
-    .downloadapkqrcode {
-        }
-    .modal-dialog{
-      margin-top: 75px;
-    } 
 
 block content
-  
-  .container
-    .row
-      .col-lg-12
-        h1 #{__('Build!')}
-    .row
-      .col-lg-12
-        .well
-          p #{__('Here you can build and rebuild your app as many times as you need')}
+  .container-fluid.bg-white.cms.publish(role='main')
+    .header.center-block.row.voffset6
+      a.back-button(href='#')
+      h2 #{__('Build Your App!')}
+    .row.center-block.voffset5.text-left
+      .col-md-6.text-right
+        .row.device
+          .col-md-6
+            img(src='/coreassets/assets/android-grey.svg')
+          .col-md-6
+            a.btn.btn-success(href="/package/download")
+              span .ZIP 
+              i.download
+            button.btn.btn-success.build.android
+              span .APK 
+              i.download
+      .col-md-6.text-left
+        .row.device
+          .col-md-6
+            img(src='/coreassets/assets/ios-grey.svg')
+          .col-md-6
+            a.btn.btn-success
+              span .ZIP 
+              i.download
+            button.btn.btn-success.build.ios
+              span .IPA 
+              i.download
+    .row.center-block.voffset5.text-left.wrap80
+      h4 #{__('History')}
+      table.table.table-bordered.table-shovel.light.publish-history-table
+        thead
+          tr
+            th #{__('Build date')}
+            th #{__('User')}
+            //th #{__('ID')}
+            th #{__('Download')}
+            th #{__('QR')}
+            th #{__('Delete')}
+        tbody
+          each build in builds
+            if build.built == 1
+              tr
+                th=build.date
+                th User
+                //th=build.buildIdShort
+                th.devices
+                  .os
+                    a.android.small(href="#{build.apkUrl}", target="_blank", title="#{__('Download')} .apk")
+                    a.ios.small(href='#')
+                th
+                  a(href='#', data-toggle="modal", data-target="#qr-modal", data-uri=build.apkUrl, data-buildid=build.buildId)
+                    span.glyphicon.glyphicon-qrcode
+                th
+                  a(href='#')
+                    span.delete
 
-        div.col-xs-6
-          // This button is disabled untile we can reach
-          // shovelapps build platform. 
-          a#build.disabled.btn.btn-default.btn-lg.btn-block.live-btn(href="#")
-            i.icon.ion-social-android
-            span.hidden-xs.btn-text #{__('Checking status')}
-            span.visible-xs.btn-text #{__('...')}
-            span#upload-progress
-          a.btn.btn-default.btn-lg.btn-block.text-center.live-btn(href="/package/download")
-            i.icon.ion-code-download
-            span.hidden-xs #{__('Download')} #{__('app as HTML')}
-            span.visible-xs #{__('Get ')} #{__('HTML')}   
-          a.btn.btn-default.btn-lg.btn-block.hidden.live-btn#downloadapklink 
-            span.hidden-xs #{__('Download')} #{__('Android binary')}          
-            span.visible-xs
-              i.icon.ion-social-android
-              |  #{__('Get APK')}          
-        div.col-xs-6.text-center#latestbuild
-          p.downloadapkqrcode.hidden-xs
-            img.img-responsive(src="/coreassets/img/qr-placeholder.png", width="200")
-          p.downloadapkqrcode.visible-xs
-            img.img-responsive(src="/coreassets/img/qr-placeholder.png", width="200")
+      .modal.fade#qr-modal(tabindex="-1", role="dialog", aria-labelledby="qrModalLabel")
+        .modal-dialog.modal-sm
+          .modal-content
+            .modal-body
+              button.close(type="button", data-dismiss="modal", aria-label="#{__('Close')}")
+                span(aria-hidden="true") &times;
+              p #{__('Scan this QR code to install this build in your device, or download to use wherever you need.')}
+              .text-center
+                #modal-qr-container
+                small#modal-build-id
 
-      .col-lg-12.col-sm-12.col-xs-12
-
-        h2 #{__('Previous builds')}
-        .row
-          table.table.table-responsive
+      ul.nav.nav-tabs.information-tab-build
+        li.nav.active
+          a(href='#AllDevices', data-toggle='tab')
+            img(src='/coreassets/assets/build_devices.svg')
+        li.nav
+          a(href='#AndroidDevice', data-toggle='tab')
+            img(src='/coreassets/assets/build_android.svg')
+        li.nav
+          a(href='#IosDevice', data-toggle='tab')
+            img(src='/coreassets/assets/build_ios.svg')
+      .tab-content.information-build
+        #AllDevices.tab-pane.fade.in.active
+          p.text-right.message.small
+            | Field marked with 
+            span.text-primary *
+            |  need to be filled before publishing.
+          h4 Product details
+          h5
+            | Languages
+            span *
+          .row
+            .col-md-4
+              select.form-control
+                option Select Primary language
+            .col-md-4
+              select.form-control
+                option Select languages
+          .row.voffset4
+            .col-md-3
+              h5
+                | Tile
+                span *
+            .col-md-5
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Short description
+                span *
+            .col-md-5
+              input.form-control(type='text')
+          p.message.voffset4
+            | Plase check out these 
+            a(href='#') tips on how to create policy compliant app descriptions
+            |  to avoid some common reasons for app suspension.
+          h4.voffset4 Categorization
+          .row.voffset4
+            .col-md-3
+              h5
+                | Application Type
+                span *
+            .col-md-5
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Category
+                span *
+            .col-md-5
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Classification
+                span *
+            .col-md-5
+              input.form-control(type='text')
+          h4.voffset4 Contact details
+          .row.voffset4
+            .col-md-3
+              h5
+                | Name
+                span *
+            .col-md-5
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Last name
+                span *
+            .col-md-5
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5 Phone
+            .col-md-5
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Email
+                span *
+            .col-md-5
+              input.form-control(type='text')
+          h4.voffset4 Privacy Policy
+          p.voffset4.message
+            | If you wish to provide a privacy policy URL for this application, plase enter it below.
+          .row.voffset4
+            .col-md-3
+              h5 URL
+            .col-md-5
+              input.form-control(type='text')
+              label.voffset2
+                input(type='checkbox')
+                |                 Not submitting a provacy policy URL at this time.
+        #AndroidDevice.tab-pane.fade
+          p.text-right.message.small
+            | Field marked with 
+            span.text-primary *
+            |  need to be filled before publishing.
+          h4 App details
+          .row.voffset4
+            .col-md-3
+              h5
+                | Full description
+                span *
+            .col-md-5
+              textarea.form-control(rows='5')
+          h4 Graphic Assets
+          p.voffset4.message
+            | If you haven't added localized graphics for each lenguage, graphics for your defailt language will be used. 
+            a(href='#') Learn more about graphic assets.
+          .row.voffset4
+            .col-md-3
+              h5
+                | Screenshots
+                span *
+            .col-md-7.message.voffset2
+              | JPEG or 24-bit PNG (no alpha)
+              br
+              |               Min length for any side: 320px. Max length for any side: 3840px.
+              br
+              |               At least 
+              strong 2 screenshots are required
+              |  overall. 
+              strong Max 8 screenshots per type.
+              br
+              |               Drag to reorder or to move between types.
+              br
+              br
+              |               For your app to be showcased in the 'Designed for tablets' list in the Play Store, you need to upload at least one 7-inch and one 10-inch screnshot.
+              br
+              |               If you previously uploaded screenshots, make sure to move them into the right area below. 
+              a(href='#') Learn how tablet screenshots will be displayed in the sotre listing.
+          h5 Phone
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen.small
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+          h5
+            | 7-inch tablet
+            span *
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen.small
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+          h5
+            | 10-inch tablet
+            span *
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen.small
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+          h5 TV
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+            .addscreen.small
+              input(type='file', accept='image/*')
+              span +
+              |               Add Screen
+          .row
+            .col-md-6
+              h5
+                | Hi-res icon
+                span *
+              p.message.small
+                | 512 x 512 | 32-bit PNG (with alpha)
+              .addscreen.i512x512
+                input(type='file', accept='image/*')
+                span +
+                |                 Add Screen*
+            .col-md-6
+              h5
+                | Feature Graphic
+                span *
+              p.message.small
+                | 1024 w x 500 h | JPG or 24-bit PNG (no alpha)
+              .addscreen.i1024x500
+                input(type='file', accept='image/*')
+                span +
+                |                 Add Screen*
+          h4 Pricing & Distribution
+          .row
+            .col-md-3
+              h5 This application is
+            .col-md-5
+              .btn-group(data-toggle='buttons')
+                label.btn.btn-default.active
+                  input(checked='', type='radio', name='options')
+                  | Paid
+                label.btn.btn-default
+                  input(type='radio', name='options')
+                  | Free
+          h5
+            | Distribute in this Countries
+            span *
+          .list-selects
+            .header
+              label
+                input(type='checkbox')
+                span Select all countries
+            ul.list
+              li
+                label
+                  input(type='checkbox')
+                  span Lorem ipsum dolor sit.
+              li
+                label
+                  input(type='checkbox')
+                  span Doloremque nesciunt esse assumenda.
+              li
+                label
+                  input(type='checkbox')
+                  span Quae eum doloremque, non!
+              li
+                label
+                  input(type='checkbox')
+                  span Provident dolor quis recusandae?
+              li
+                label
+                  input(type='checkbox')
+                  span Error provident hic, dignissimos!
+              li
+                label
+                  input(type='checkbox')
+                  span Sed dolore blanditiis quibusdam.
+              li
+                label
+                  input(type='checkbox')
+                  span Quos recusandae quasi, quisquam.
+              li
+                label
+                  input(type='checkbox')
+                  span Eius incidunt, necessitatibus quae.
+              li
+                label
+                  input(type='checkbox')
+                  span Laboriosam temporibus ullam, laudantium!
+              li
+                label
+                  input(type='checkbox')
+                  span Alias placeat qui, nulla!
+              li
+                label
+                  input(type='checkbox')
+                  span At pariatur alias rerum?
+              li
+                label
+                  input(type='checkbox')
+                  span Officiis placeat dolore deleniti.
+              li
+                label
+                  input(type='checkbox')
+                  span Facilis obcaecati, labore distinctio.
+              li
+                label
+                  input(type='checkbox')
+                  span Esse nemo id sed.
+              li
+                label
+                  input(type='checkbox')
+                  span Esse, tempore suscipit nostrum.
+              li
+                label
+                  input(type='checkbox')
+                  span Provident doloribus, atque hic.
+              li
+                label
+                  input(type='checkbox')
+                  span Excepturi in, deserunt hic!
+              li
+                label
+                  input(type='checkbox')
+                  span Neque ullam, sit repudiandae.
+              li
+                label
+                  input(type='checkbox')
+                  span Laudantium voluptas, laboriosam sed.
+              li
+                label
+                  input(type='checkbox')
+                  span Distinctio molestiae possimus, eligendi!
+          h4 Android wear
+          .row
+            .col-md-offset-3.col-md-5
+              label
+                input(type='checkbox')
+                |                 Distribute your app on Android Wear.
+              p.message.small
+                | If your app includes Android Wear feactures, opt-in to have your app reviewed for designation as an Android Wear app on Google Play. Before opting-in, read the Android Wear design guidelines. 
+                a(href='#') Learn more
+          h4 Android TV
+          .row
+            .col-md-offset-3.col-md-7
+              label
+                input(type='checkbox')
+                |                 Add a Leanback launch intent to distribute your app on Android TV.
+                a(href='#') Learn more
+          .row
+            .col-md-3
+              h4 Google Play for Education
+            .col-md-7.voffset6
+              label
+                input(type='checkbox')
+                |                             Distribute your app through Google Play for Education.
+                a(href='#') Learn more
+              p.message.small
+                | Checking this box submits this app for inclusion in the "educator recommended" section of Google Play for Education. The final decision on which apps to recommend is made by a 3rd party network of teachers. If your app is selected, we will notify you by e-mail.
+                br
+                |                             If no, your app will still be searchable in Google Play for Education.
+          h4 Consent
+          .row.voffset4
+            .col-md-3
+              h5 Marketing opt-out
+            .col-md-7
+              label
+                input(type='checkbox')
+                |                             Do not promote my application except in Google Play and in any Google-owned online or mobile properties. I understand that any changes to this preference may take sixty days to take effect.
+          .row.voffset4
+            .col-md-3
+              h5
+                | Content Guidlines
+                span *
+            .col-md-7
+              label
+                input(type='checkbox')
+                |                             This application meets
+                a(href='#') Android Content Guidelines.
+              p.message.small
+                | Please check out these 
+                a(href='#') tips on how to create policy compliant app descriptions
+                |  to avoid some common reasons for app suspension.
+          .row.voffset4
+            .col-md-3
+              h5
+                | US export laws
+                span *
+            .col-md-7
+              label
+                input(type='checkbox')
+                |                             I acknowledge that my software application may be subject to United States export laws, regardless of my location or nationality. I agree that I have complied with all such laws, including any requirements for software with encruption functions. I hereby certify that my application is authorized for export from the United States under these laws.
+                a(href='#') Learn more
+          table.table.table-bordered.table-shovel.light.voffset4
             thead
+              tr
+                th App Id
+                th Version
+                th Owned By
+                th Source
+                th Last built
             tbody
-              each build in builds
-                tr
-                  td.col-xs-2.hidden-xs
-                    .label.label-default= build.date
-                  td
-                    a.label.label-primary
-                      i.icon.ion-pound
-                      |  #{build.buildIdShort}
-                  td.text-right
-                    if build.built == 1
-                      a.label.label-primary(href="#{build.apkUrl}", target="_blank", title="#{__('Download')} .apk")
-                        i.icon.ion-android-download
-                        |  #{__('Download')}
-                      a.label.label-info(data-toggle="modal", data-target="#qr-modal", data-uri=build.apkUrl, data-buildid=build.buildId)
-                        i.icon.ion-qr-scanner
-                        |  #{__('Display QR')}
-                    else
-                      .label.label-danger #{__('Not built')}
+              tr
+                th 1002821
+                th 2.0
+                th elmeme
+                th .zip package
+                th 1 month
+          table.table.table-bordered.table-shovel.publish-build-table.wrap80
+            tbody
+              tr
+                th
+                  i.android
+                th
+                  .dropdown.keep-open.open
+                    button.btn.btn-default.bg-white.center-block.text-left(data-toggle='dropdown')
+                      | No key selected
+                      span.caret
+                    .dropdown-menu
+                      input.shovel-control(type='text', placeholder='Title')
+                      input.shovel-control(type='text', placeholder='Alias')
+                      h6 Keystore file
+                      .attach
+                        input(type='file')
+                        i +
+                        span No file choosen
+                      .options
+                        button.btn.btn-success.dropdown-close(data-toggle='dropdown') Cancel
+                        button.btn.btn-success Submit Key
+                th.options
+                  button.btn.btn-success
+                    i.rebuild
+                    | Rebuild
+                  button.btn.btn-success
+                    i.log
+                    | Log
+                  button.btn.btn-success
+                    i.download
+                    | .APK
+                th.add
+                  a.add(href='#') +
+          .text-right
+            button.btn.btn-primary.voffset5
+              | Publish to Google Play Store
+        #IosDevice.tab-pane.fade
+          p.text-right.message.small
+            | Field marked with 
+            span.text-primary *
+            |  need to be filled before publishing.
+          h4 App Details
+          h4 Version Information
+          .row.voffset4
+            .col-md-3
+              h5
+                | Screenshots
+                span *
+            p.col-md-9.message
+              strong One screenshot is required. Up to four additional screnshots can be uploaded.
+              br
+              |                     You can rearramge tje screenshots when you create or edit the iTunes Connect record.
+              br
+              strong Don't include the device status bar in your screenshots.
+              br
+              strong Screnshot requirements are:
+              br
+              |                     72 dpi, RGB, flattened, no transparency | Hight-quality JPEG or PNG image file format.
+          h5
+            | 3.5-Inch Retina Display
+            span *
+          p.message.small
+            | 640 x 920 pixels for hi-res portrait (without status bar) minimum
+            br
+            |                 640 x 960 pixels for hi-res portrait (full screen) maximum
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen*
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+          h5
+            | 4-Inch Retina Display
+            span *
+          .row
+            p.col-md-6.message.small
+              | 640 x 1096 pixels for portrait (without status bar) minimum
+              br
+              |                     640 x 1136 pixels for portrait (full screen) maximum
+            p.col-md-6.message.small
+              | 1136 x 600 pixels for landscape (without status bar) minimum
+              br
+              |                     1136 x 340 pixels for landscape (full screen) maximum
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen*
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+          .row.voffset4
+            .col-md-3
+              h5 4.7-Inch Retina.
+            .col-md-7.message.small
+              p.message
+                | If you app indicates that it is optimized for the 
+                strong iPhone 6, at least one 4.7-inch screenshot is required.
+              p.message.small
+                | 750 x 1334 pixels for hi-res portrait
+                br
+                |                         1334 x 750 pixels for hi-res landscape
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen*
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+          .row.voffset4
+            .col-md-3
+              h5 5.5-Inch Retina.
+            .col-md-7.message.small
+              p.message
+                | If you app indicates that it is optimized for the 
+                strong iPhone 6 Plus, at least one 5.5-inch screenshot is required.
+              p.message.small
+                | 1242 x 2208 pixels for hi-res portrait
+                br
+                |                         2208 x 1242 pixels for hi-res landscape
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen*
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+          .row.voffset4
+            .col-md-3
+              h5 iPad.
+            .col-md-7.message.small
+              p.message
+                | If your binary indicates that 
+                strong your app runs on iPad
+                | , you're required to upload at least one iPad screenshot.
+          .row
+            p.col-md-6.message.small
+              | 1024 x 748 pixels for landscape (without status bar) minimum
+              br
+              |                     1024 x 768 pixels for landscape (full screen) maximum
+              br
+              |                     2048 x 1496 pixels for hi-res (without status bar) minimum
+              br
+              |                     2048 x 1496 pixels for hi-res landscape (full screen) maximum
+            p.col-md-6.message.small
+              | 768 x 1004 pixels for portrait (without status bar) minimum
+              br
+              |                     768 x 1024 pixels for portrait (full screen) maximum
+              br
+              |                     1536 x 2008 pixels for hi-res portrait (without status bar) minimum
+              br
+              |                     1536 x 2048 pixels for hi-res portrait (full screen) maximum
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen*
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Screen
+          .row.voffset4
+            .col-md-3
+              h5
+                | Mac OS X App
+                span *
+            .col-md-9
+              p.message
+                strong One OS X screenshot only is required for Mac apps.
+                br
+                |                         72 dpi, RGB, flattened, no transparency | High-quality JPEG or PNG image file format in the RGB color space | 16:10 aspect ratio.
+              p.message.small
+                | 1280 x 800 pixels
+                br
+                |                         1440 x 900 pixels
+                br
+                |                         2880 x 1800 pixels
+              .screens
+                .addscreen.i16-10ratio
+                  input(type='file', accept='image/*')
+                  span +
+                  |                             Add Screen*
+          .row.voffset4
+            .col-md-3
+              h5 App Preview
+            .col-md-7
+              p.message
+                | The resolutions for app previews for the supported displays are specified in 
+                a(href='#') App Preview Resolutions.
+                |  Uoloads must be done using Safari and OS X 10.10, and only one localization is accepted.
+                br
+                |                         App previews must disclose In-APp Purshases and may contain no ads, no plataform logos, no pricing, and no timelines.
+                br
+                |                         App preview properties are locked and so they can only be edited when the app is in an editable state. 
+                strong The app preview feature is not available for 3.5 inch display.
+          .screens
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Preview 5 Series
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Preview 5 Series
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Preview 5 Series
+            .addscreen
+              input(type='file', accept='image/*')
+              span +
+              |                     Add Preview 5 Series
+          .row.voffset4
+            .col-md-3
+              h5
+                | Keywords
+                span *
+            .col-md-7
+              p.message
+                | One or more localized keywords that describe your app.
+                br
+                |                         Separate search terms with commas. At least one keyword of greater than two characters is required. You can provide up to 100 bytes of content. Your app is searchable by app name and company name, so you do not need to duplicate these values in the keyword list. Names of other apps or companies are not allowed.
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Support URL
+                span *
+            .col-md-7
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Marketing URL
+                span *
+            .col-md-7
+              input.form-control(type='text')
+          h4 General App Information
+          .row.voffset4
+            .col-md-3
+              h5
+                | App Icon
+                span *
+            .col-md-7
+              p.message
+                | The large app icon is displayed for your app on the APp Store and, if needed, is used to feature your app on the App Store.
+                br
+                strong iOS app icons need to meet the following requirements:
+                br
+                |                         1024 x 1024 pixels (don't scale up smaller artwork, because this could appear pixelated and blurry) 72 dpi, RGB, flattened, no transparency, no rounded corners High-quality JPEG or PNG image file format.
+                br
+                |                         Note: The small icon (57 x 57 pixels for iPhone and iPod touch, 50 x 50 pixels and 72 x 72 pixels for iPad) that you include inside the binary is used on the device Home screen when installed.
+              .addscreen.i512x512
+                input(type='file', accept='image/*')
+                span +
+                |                         Add icon*
+          .row.voffset4
+            .col-md-3
+              h5
+                | Version number
+                span *
+            .col-md-7
+              p.message
+                | This is the version number that will display on the App Store for customers.
+                br
+                |                         Numbering shild follow typical software versioning convetions (for example, 1.0, 1.0.1, 1.1). 
+                strong Important: 
+                |  Make sure this App Store version number matches the version number set in the bundle. If these don't match, upload erros for later updates might occur.
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Primary Category
+                span *
+            .col-md-7
+              p.message
+                | For list of categories and their descriptions, click the App Store Category Definitions link in the Category section of the Version Information.
+                br
+                |                        See also 
+                a(href='#')  Categories: Get in the Right Place.
+                br
+                |                        For Mac apps, you must define a category in the 
+                strong Info.plist
+                |  of your app binary using the 
+                strong LSApplicationCategoryType key
+                | . The list of categories you can shoose to define in your property list is the same as the available categories for Mac apps in iTunes Connect. The primary category selected in iTUnes Connect should math the category defined in the app binary property list.
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Secondary Category
+                span *
+            .col-md-7
+              p.message
+                | Subcategories for games. If you select Games as the Primary or Secondary Category, you can also select one or two subcategories to help more accurately define your game.
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Rating
+                span *
+            .col-md-7
+              input.form-control(type='text')
+              p.message.small
+                | For information, see 
+                a(href='#') Set App Ratings.
+          .row.voffset4
+            .col-md-3
+              h5
+                | Copyright
+                span *
+            .col-md-7
+              input.form-control(type='text')
+          h4 App review information
+          .row.voffset4
+            .col-md-3
+              h5
+                | First Name
+                span *
+            .col-md-7
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Last Name
+                span *
+            .col-md-7
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Email
+                span *
+            .col-md-7
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5
+                | Phone Number
+                span *
+            .col-md-7
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5 Notes
+            .col-md-7
+              textarea.form-control(rows='5')
+          .row.voffset4
+            .col-md-3
+              h5 Demo Account User Name
+            .col-md-7
+              input.form-control(type='text')
+          .row.voffset4
+            .col-md-3
+              h5 Demo Account Password
+            .col-md-7
+              input.form-control(type='text')
+          table.table.table-bordered.table-shovel.light.voffset4
+            thead
+              tr
+                th App Id
+                th Version
+                th Owned By
+                th Source
+                th Last built
+            tbody
+              tr
+                th 1002821
+                th 2.0
+                th elmeme
+                th .zip package
+                th 1 month
+          table.table.table-bordered.table-shovel.publish-build-table.wrap80
+            tbody
+              tr
+                th
+                  i.ios
+                th
+                  .dropdown.keep-open.open
+                    button.btn.btn-default.bg-white.center-block.text-left(data-toggle='dropdown')
+                      | No key selected
+                      span.caret
+                    .dropdown-menu
+                      input.shovel-control(type='text', placeholder='Title')
+                      h6 Certificate (p12) file
+                      .attach
+                        input(type='file')
+                        i +
+                        span No file choosen
+                      h6 Provisioning profile
+                      .attach
+                        input(type='file')
+                        i +
+                        span No file choosen
+                      .options
+                        button.btn.btn-success.dropdown-close(data-toggle='dropdown') Cancel
+                        button.btn.btn-success Submit Key
+                th.options
+                  button.btn.btn-success
+                    i.rebuild
+                    | Rebuild
+                  button.btn.btn-success
+                    i.log
+                    | Log
+                  button.btn.btn-success
+                    i.download
+                    | .IPA
+                th.add
+                  a.add(href='#') +
+          .text-right
+            button.btn.btn-primary.voffset5
+              | Publish to App Store
+    .voffset6
 
-    .modal.fade#qr-modal(tabindex="-1", role="dialog", aria-labelledby="qrModalLabel")
-      .modal-dialog.modal-sm
-        .modal-content
-          .modal-body
-            button.close(type="button", data-dismiss="modal", aria-label="#{__('Close')}")
-              span(aria-hidden="true") &times;
-            p #{__('Scan this QR code to install this build in your device, or download to use wherever you need.')}
-            .text-center
-              #modal-qr-container
-              small#modal-build-id
              
 
 block scripts
@@ -94,7 +980,7 @@ block scripts
         $("#modal-build-id").html($(e.relatedTarget).data('buildid'));
         $("#modal-qr-container").html('')
         .qrcode({
-          "color": "#3a3",
+          "color": "#000",
           "text": $(e.relatedTarget).data('uri')
         });
       });

@@ -1,12 +1,28 @@
 extends layout
 
 block title
-  title #{__(componentTypePlural)} - #{__('Admin Panel')}
+  title Shovel apps CMS - #{__('My Themes')}
 
-block stylesheets
 
 block content
+  - var themes = {"ios": {"platform": "iOS", "name": "Shovel iOS", "preview": "/coreassets/assets/elmeme.jpg"}, "android": {"platform": "Android", "name": "Shovel Android", "preview": "/coreassets/assets/elmeme.jpg"}};
+  
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset4
+      a.back-button(href='#')
+      .col-md-6.col-md-offset-3
+        h2 #{__('My Themes')}
+    .row.themes.center-block.voffset5.text-center
+      each theme in themes
+        .theme
+          h3=theme.platform
+          img(src=theme.preview)
+          span.center-block=theme.name
+          .options.center-block
+            a.upload(href='#')
+            a.chart(href='#')
 
+//
   .container
     h2 #{__('Manage')} #{__(componentTypePlural)}
     table.table.table-responsive.table-hover
@@ -59,112 +75,113 @@ block content
 
                 a(href="/admin/#{componentType}/" + component.name ): button.btn.btn-default.live-btn(disabled=enabled, type="button", data-toggle="tooltip", data-placement="top", title="#{__('Configuration')}")
                   i.icon.ion-levels
-                //a(href="#", data-action="delete" ): button.btn.btn-danger(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Remove this #{componentType}...')}")
-                //  i.icon.ion-trash-b(style="color:white")
-block scripts
-  script.
-    $(function() {
-      $("button[data-action='toggle']").bind('click', function(){
-        var component= $(this).data('id');
-        var that = this;
-        $.ajax({
-          url: '/admin/#{componentType}/toggle/' + component,
-          dataType: 'json',
-          complete: function(response){
-            var data = $.parseJSON(response.responseText);
-            var icon, btnclass, action;
-            if(data.state=='enabled'){
-              action = '#{__('Click to disable')}';
-              icon = 'ion-checkmark-circled';
-              btnclass = 'btn-success';
-            }else if(data.state=='disabled'){
-              action = '#{__('Click to enable')}';
-              icon = 'ion-close-circled';
-              btnclass = 'btn-inverse';
-            }
-            console.log(data.state);
-            $("button[data-id='" + data.key + "']").removeClass (function (index, css) {
-                return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
-              .addClass(btnclass)
-              .css({'color': 'white'});
-            $("button[data-id='" + data.key + "']").find('i')
-              .removeClass (function (index, css) {
-                return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
-              .addClass(icon);
-            $("button[data-id='" + data.key + "']")
-              .attr('data-original-title', action)
-              .tooltip('fixTitle')
-              .tooltip('show');
-          }
-        
-
-        });
-      });
-      $("button[data-action='activate']").bind('click', function(){
-        var component= $(this).data('id');
-        var that = this;
-        $.ajax({
-          url: '/admin/#{componentType}/toggle/' + component,
-          dataType: 'json',
-          complete: function(response){
-            var data = $.parseJSON(response.responseText);
-            var icon, btnclass, action;
-            if(data.state=='enabled'){
-            $.ajax({
-              type: "GET",
-              url: "/icon.png",
-              success: function(data){
-
-                var logo = $('.logo-app img').clone();
-                $('.logo-app img').hide().remove();
-                $(logo).attr('src', "/icon.png");
-                $('.logo-app').prepend(logo);
-              },
-              error: function(){
-
-                var logo = $('.logo-app img').clone();
-                $('.logo-app img').hide().remove();
-                $(logo).attr('src', "/coreassets/css/shovelapps-logo.png");
-                $('.logo-app').prepend(logo);
+                a(href="#", data-action="delete" ): button.btn.btn-danger(type="button", data-toggle="tooltip", data-placement="top", title="#{__('Remove this #{componentType}...')}")
+                  i.icon.ion-trash-b(style="color:white")
+//
+  block scripts
+    script.
+      $(function() {
+        $("button[data-action='toggle']").bind('click', function(){
+          var component= $(this).data('id');
+          var that = this;
+          $.ajax({
+            url: '/admin/#{componentType}/toggle/' + component,
+            dataType: 'json',
+            complete: function(response){
+              var data = $.parseJSON(response.responseText);
+              var icon, btnclass, action;
+              if(data.state=='enabled'){
+                action = '#{__('Click to disable')}';
+                icon = 'ion-checkmark-circled';
+                btnclass = 'btn-success';
+              }else if(data.state=='disabled'){
+                action = '#{__('Click to enable')}';
+                icon = 'ion-close-circled';
+                btnclass = 'btn-inverse';
               }
-
-            });
-              
-              action = '#{__('Click to disable')}';
-              icon = 'ion-checkmark-circled';
-              btnclass = 'btn-primary';
-            }else if(data.state=='disabled'){
-              action = '#{__('Click to enable')}';
-              icon = 'ion-close-circled';
-              btnclass = 'btn-info';
+              console.log(data.state);
+              $("button[data-id='" + data.key + "']").removeClass (function (index, css) {
+                  return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
+                .addClass(btnclass)
+                .css({'color': 'white'});
+              $("button[data-id='" + data.key + "']").find('i')
+                .removeClass (function (index, css) {
+                  return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
+                .addClass(icon);
+              $("button[data-id='" + data.key + "']")
+                .attr('data-original-title', action)
+                .tooltip('fixTitle')
+                .tooltip('show');
             }
-            console.log(data.state);
+          
 
-            $("button[data-action='activate']").removeClass (function (index, css) {
-                return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
-              .addClass('btn-info')
-              .css({'color': 'white'});
-            $("button[data-action='activate']").find('i')
-              .removeClass (function (index, css) {
-                return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
-              .addClass('ion-close-circled');
+          });
+        });
+        $("button[data-action='activate']").bind('click', function(){
+          var component= $(this).data('id');
+          var that = this;
+          $.ajax({
+            url: '/admin/#{componentType}/toggle/' + component,
+            dataType: 'json',
+            complete: function(response){
+              var data = $.parseJSON(response.responseText);
+              var icon, btnclass, action;
+              if(data.state=='enabled'){
+              $.ajax({
+                type: "GET",
+                url: "/icon.png",
+                success: function(data){
 
-            $("button[data-id='" + data.key + "']").removeClass (function (index, css) {
-                return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
-              .addClass(btnclass)
-              .css({'color': 'white'});
-            $("button[data-id='" + data.key + "']").find('i')
-              .removeClass (function (index, css) {
-                return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
-              .addClass(icon);
-            $("button[data-id='" + data.key + "']")
-              .attr('data-original-title', action)
-              .tooltip('fixTitle')
-              .tooltip('show');
-          }
-        
+                  var logo = $('.logo-app img').clone();
+                  $('.logo-app img').hide().remove();
+                  $(logo).attr('src', "/icon.png");
+                  $('.logo-app').prepend(logo);
+                },
+                error: function(){
 
+                  var logo = $('.logo-app img').clone();
+                  $('.logo-app img').hide().remove();
+                  $(logo).attr('src', "/coreassets/css/shovelapps-logo.png");
+                  $('.logo-app').prepend(logo);
+                }
+
+              });
+                
+                action = '#{__('Click to disable')}';
+                icon = 'ion-checkmark-circled';
+                btnclass = 'btn-primary';
+              }else if(data.state=='disabled'){
+                action = '#{__('Click to enable')}';
+                icon = 'ion-close-circled';
+                btnclass = 'btn-info';
+              }
+              console.log(data.state);
+
+              $("button[data-action='activate']").removeClass (function (index, css) {
+                  return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
+                .addClass('btn-info')
+                .css({'color': 'white'});
+              $("button[data-action='activate']").find('i')
+                .removeClass (function (index, css) {
+                  return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
+                .addClass('ion-close-circled');
+
+              $("button[data-id='" + data.key + "']").removeClass (function (index, css) {
+                  return (css.match (/(^|\s)btn-\S+/g) || []).join(' ');})
+                .addClass(btnclass)
+                .css({'color': 'white'});
+              $("button[data-id='" + data.key + "']").find('i')
+                .removeClass (function (index, css) {
+                  return (css.match (/(^|\s)ion-\S+/g) || []).join(' ');})
+                .addClass(icon);
+              $("button[data-id='" + data.key + "']")
+                .attr('data-original-title', action)
+                .tooltip('fixTitle')
+                .tooltip('show');
+            }
+          
+
+          });
         });
       });
-    });
-  
+    

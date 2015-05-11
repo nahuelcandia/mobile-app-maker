@@ -1,37 +1,45 @@
 extend ../../themes/admin/layout 
 
 block content
-	.container-fluid.bg-white.cms(role='main')
-		.header.center-block.row.voffset6
-			a.back-button.pull-left(href='#')
-			.col-md-6.col-md-offset-3
-				h2 #{__('My Screens')}
-				.search
-					input(type='text', placeholder='#{__("Search")}')
-			.col-md-1.col-md-offset-1
-				button.btn.btn-success(onclick="window.location='/admin/screens/new';")
-					| + #{__('New')}
-		if screens.length
-			.row.center-block.voffset5.text-left
-				.col-md-8.col-md-offset-2.categories
-					.categorie.clearfix
-						h3 Uncategorized
-						select#selectMain.form-control.pull-right
-							option(value="not selected") Select main screen
-							each screen in screens
-								-var sel = "true"==screen.isMain
-								option(selected=sel, value=screen.id)=screen.title
-					.row.screens
-						each screen in screens
-							.col-md-4
-								a(href='/admin/screens/#{screen.id}')
-									img(src='/coreassets/assets/elmeme1-1.jpg')
-									h4=screen.title
-		.voffset6
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href='#')
+      .col-md-6.col-md-offset-2
+        h2 #{__('My Screens')}
+        .search
+          input(type='text', placeholder='#{__("Search")}')
+      .col-md-3
+        button.btn.btn-success(onclick="window.location='categories';")
+          | #{__('Manage Categories')}
+        a.addNewScreen(href='/admin/screens/new')
+          
+
+    if screens.length
+      .row.center-block.voffset5.text-left
+        .col-md-8.col-md-offset-2.categories
+          .categorie.clearfix
+            h3 Uncategorized
+            select#selectMain.form-control.pull-right
+              option(value="not selected") Select main screen
+              each screen in screens
+                -var sel = "true"==screen.isMain
+                option(selected=sel, value=screen.id)=screen.title
+          .row.screens
+            each screen in screens
+              .screen(data-id=screen.id)
+                a(href='/admin/screens/#{screen.id}')
+                  img(src='/coreassets/assets/elmeme.jpg')
+                  h4=screen.title
+                .options
+                  a.publish(href='#')
+                  a.delete(href='#')
+
+    .voffset6
 
 block stylesheets
 block scripts
-	script(src="screens/js/jquery.rest.min.js")
-	script(src="screens/js/setmain.js")
+  script(src="screens/js/jquery.rest.min.js")
+  script(src="screens/js/setmain.js")
+  script(src="screens/js/screenoptions.js")
 
 
