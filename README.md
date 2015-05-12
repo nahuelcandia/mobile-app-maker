@@ -9,7 +9,7 @@ From this Web CMS and App Maker, you are also able to update the contents of you
 
 Join us @ Slack!
 
-[![](https://shovelappsinc.herokuapp.com/badge.svg)](https://shovelappsinc.herokuapp.com/)
+[![](https://slack.shovelapps.com/badge.svg)](https://slack.shovelapps.com)
 
 ##Download
 
