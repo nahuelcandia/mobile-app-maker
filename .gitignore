@@ -1,3 +1,4 @@
+.DS_Store
 config/production.json
 config/development.json
 # Ignore session files
@@ -11,20 +12,23 @@ filestorage/db/apps.db
 filestorage/db/builds.db
 filestorage/db/editables.db
 filestorage/db/plugins.db
-filestorage/db/templates.db
+filestorage/db/themes.db
 filestorage/db/screens.db
+filestorage/db/appmenus.db
 
-#Ignore non-default templates
-templates/*
-!templates/admin/
-!templates/bootstrap-3-jade/
-!templates/jqmobile/
+#Ignore non-default themes
+themes/*
+!themes/admin/
+!themes/bootstrap-3-jade/
+!themes/jqmobile/
+!themes/onsenui/
 
 #Ignore non-default plugins
 plugins/*
 !plugins/builderservice/
 !plugins/chat/
 !plugins/google-map/
+!plugins/push-notif/
 
 
 .sslcerts

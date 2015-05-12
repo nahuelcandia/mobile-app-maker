@@ -1,0 +1,117 @@
+doctype html
+html(lang="en", ng-app="myApp")
+  head
+    meta(charset="utf-8")
+    title Tabbar Demo | Onsen UI
+    //- link(rel="stylesheet", href="css/app.css")
+    link(rel="stylesheet", href="css/onsenui.css")
+    link(rel="stylesheet", href="css/onsen-css-components.css")
+    script(src="js/angular/angular.js")
+    script(src="js/onsenui.min.js")
+    script(src="js/jquery.js")
+    script(src="js/app.js")
+  body
+
+    //- Load the menues in 2 different arrays
+    if appmenus
+      -var sidemenulist=appmenus.filter(function(i){return i.menu=="sidemenu" && i.state=='enabled'})
+      -var tabbarlist=appmenus.filter(function(i){return i.menu=="tabbar" && i.state=='enabled'})
+      -var mainScreen=screens.filter(function(i){return i.isMain=="true"})
+      -var noMainScreen=screens.filter(function(i){return i.isMain=="false"})
+    //- If a menu exists then the home screen should be on an ons-template element
+    if sidemenulist.length || tabbarlist.length
+      ons-template(id=mainScreen[0].id+".html")
+        ons-page
+          ons-toolbar(fixed-style)
+            //- If a sidemenu exists then I need the open menu button on the toolbar
+            if sidemenulist.length
+              div(class="left")
+                ons-toolbar-button(onclick="Smenu.toggleMenu()")
+                  ons-icon(icon="fa-bars")
+            div(class="center")=mainScreen[0].title
+          ons-row(style="padding:8px;word-wrap: break-word;")
+            ons-col(style="overflow:auto;") !{mainScreen[0].content}
+    else
+      //- If there are no menus then the home screen should be an osn-page element
+      ons-page
+        ons-toolbar(fixed-style)
+          div(class="center")=mainScreen[0].title
+        ons-row(style="padding:8px;word-wrap: break-word;")
+          ons-col(style="overflow:auto;") !{mainScreen[0].content}
+
+    if sidemenulist.length
+      //- If a sidemenu is present, the main part of the code is declaring wich screen is
+      //- the menu and wich one is our main page
+      if tabbarlist.length
+        //- if there is a tabbar menu, our main page is the tabbar itself.
+        ons-sliding-menu(main-page="tab-bar.html", menu-page="menu.html", side="left", var="Smenu")
+      else
+        //- if there's no tabbar, the main page is the home screen.
+        ons-sliding-menu(main-page=mainScreen[0].id+".html", menu-page="menu.html", side="left", var="Smenu")
+
+    //- Add every screen as an ons-template element
+    if screens
+      each screen in noMainScreen
+        ons-template(id=screen.id+".html")
+          ons-page
+            ons-toolbar(fixed-style)
+              //- If a sidemenu exists then I need the open menu button on the toolbar
+              if sidemenulist.length
+                div(class="left")
+                  ons-toolbar-button(onclick="Smenu.toggleMenu()")
+                    ons-icon(icon="fa-bars")
+              div(class="center")=screen.title
+            ons-row(style="padding:8px;word-wrap: break-word;")
+              ons-col(style="overflow:auto;") !{screen.content}
+
+    //- Add the tabbar
+    if tabbarlist.length
+      if sidemenulist.length
+        //- If both menues are present, the tabbar should be a ons-template element
+        ons-template(id="tab-bar.html")
+          ons-tabbar(var="tabbar")
+            //- ons-tab(label=mainScreen[0].title, page=mainScreen[0].id+".html", active="true")
+            //- add tabbar items for each menu
+            ons-tab(label=mainScreen[0].title, page=mainScreen[0].id+".html", active="true", style="display:none;")
+            each menu in tabbarlist
+              if menu.icon=='none'
+                ons-tab(label=menu.title, page=menu.screenID+".html")
+              else
+                ons-tab(label=menu.title, icon=menu.icon, page=menu.screenID+".html")
+      else
+        //- if only tabbar menu is present, tabbar should be a ons-page element
+        ons-page
+          ons-tabbar(var="tabbar")
+            //- ons-tab(label=mainScreen[0].title, page=mainScreen[0].id+".html", active="true")
+            //- add tabbar items for each menu
+            ons-tab(label=mainScreen[0].title, page=mainScreen[0].id+".html", active="true", style="display:none;")
+            each menu in tabbarlist
+              if menu.icon=='none'
+                ons-tab(label=menu.title, page=menu.screenID+".html")
+              else
+                ons-tab(label=menu.title, icon=menu.icon, page=menu.screenID+".html")
+
+    //- if sidemenu is present, add the ons template for the menu screen
+    if sidemenulist.length
+      ons-template(id="menu.html")
+        ons-list
+          if tabbarlist.length
+          //- if tabbar is present, main page is the tabbar
+          ons-list-item(modifier="chevron", onclick="Smenu.setMainPage('tab-bar.html', {closeMenu: true})")
+            span=mainScreen[0].title
+          each menu in sidemenulist
+            //- add link for each item in the sidemenu
+            if menu.type=='Link to page'
+              ons-list-item(modifier="chevron", onclick="Smenu.setMainPage('#{menu.screenID}.html', {closeMenu: true})")
+                if menu.icon!=='none'
+                  ons-icon(icon=menu.icon)
+                span=menu.title
+            else if menu.type=='Container'
+              ons-list-header=menu.title
+
+style.
+  ons-list-item > ons-icon {
+  margin: 0 6px 0 0;
+  }
+script.
+  ons.bootstrap();

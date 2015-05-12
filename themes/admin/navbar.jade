@@ -1,0 +1,42 @@
+block navbar
+nav.navbar.navbar-shovel
+  .container-fluid.bg-white
+    .navbar-header
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+        span.sr-only #{__('Toggle navigation')}
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      .logo
+        a(href="/admin/apps")
+          img(src='/coreassets/assets/shovel-nav.svg')
+        i.glyphicon.glyphicon-menu-right
+        a(href="/admin/")
+          h1 #{locals.config.app.appName}
+    #navbar.navbar-collapse.collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href='/admin/') #{__('Dashboard')}
+        li
+          a(href='screens') #{__('Screens')}
+        li
+          a(href='menus') #{__('Menus')}
+        li
+          a(href='plugins') #{__('Plugins')}
+        li
+          a(href='themes') #{__('Themes')}
+        li
+          a(href='build') #{__('Publish')}
+        li
+          a.preview-app(href='app-preview')
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown', href='#')
+            img.profile-icon(src='/coreassets/assets/username-grey.svg')
+            span.drop-down
+          ul.dropdown-menu(role='menu')
+            li
+              a(href='apps') #{__('My Apps')}
+            //li
+            //  a(href='#') My Account
+            li
+              a(href='/logout') #{__('Log Out')}

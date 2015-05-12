@@ -1,0 +1,63 @@
+extends layout
+
+block title
+  title Shovel apps CMS - #{__('My Plugins')}
+
+block stylesheets
+
+block content
+
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href='#')
+      .col-md-3.devices.text-right
+        .os
+          a.android.active(href='#')
+          .separate
+          a.ios.active(href='#')
+      .col-md-6
+        h2 #{__('My Plugins')}
+        .search
+          input(type='text', placeholder='#{__("Search")}')
+    .row.center-block.voffset7
+      .col-md-8.col-md-offset-2
+        .row.plugins
+           each component in states
+            -var action= (component.enabled? 'disable' : 'enable')
+            .col-md-3
+              a(href="/admin/plugin/" + component.name)
+                img(src='/coreassets/assets/plugins/splash.svg')
+                span.ellipsis=component.name
+              .options
+                a(href='#', class=action, data-id=component.name)
+                a.delete(href='#')
+              a.delete(href='#')
+          .col-md-3
+            .add-plugin
+              .options
+                a.chart(href='plugins.html')
+                a.upload(href='upload-plugin.html')
+    .voffset6
+
+
+block scripts
+  script.
+    $(function() {
+      $(".enable, .disable").bind('click', function(){
+        var plugin_id = $(this).data('id');
+        var that = $(this);
+
+        $.ajax({
+          url: '/admin/plugin/toggle/' + plugin_id,
+          dataType: 'json',
+          complete: function(response){
+            var data = $.parseJSON(response.responseText);
+            that.removeClass("enable disable").addClass(data.state == 'enabled'? "disable" : "enable");
+          }
+        });
+
+        return false;
+      });
+
+    });
+  

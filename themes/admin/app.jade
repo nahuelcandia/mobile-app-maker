@@ -1,0 +1,89 @@
+extends layout-noapp
+
+block title
+  title #{__('app')} - #{__('Admin Panel')}
+
+block stylesheets
+  link(href="/coreassets/jsoneditor/jsoneditor.css", rel="stylesheet")
+  style.
+    .menu button.collapse-all,.menu button.expand-all{
+    	display:none;
+    }
+
+block content
+  .container
+    h2 #{__('Manage')} #{__('app')}#{__(':')} #{component[0].name}
+    #alerts
+    .well
+      .row
+        .col-xs-12
+          .well
+            .carousel.fdi-carousel.slide#themes
+              each theme in themes
+                .carousel.fdi-Carousel.slide#eventCarousel(data-interval="0")
+                  .carousel-inner.onebyone-carousel
+                    .item.active
+                      .col-md-4
+                        h1 Theme
+                        
+      .row
+        .col-xs-12.col-md-6.columns
+            input.form-control(type="text", data-provide="typeahead", data-object="theme", autocomplete="off", placeholder="Apps theme")
+        .col-xs-12.col-md-6.column
+           select#tokenize(style="width:300px", multiple="multiple", data-object="plugin", placeholder="Apps plugins")
+    .row
+      #jsoneditor.col-sm-12(style="margin-bottom:15px;")
+      .col-sm-12
+        button.btn.btn-success.live-btn.save
+          i.icon.ion-checkmark
+          |  #{__('Save')}
+  .alert.alert-message(role="alert")
+
+block scripts
+  script(src="/coreassets/jsoneditor/jsoneditor.min.js")
+  script.
+    $(function() {
+      // create the editor
+      var options = {
+          "mode": "form",
+          "search": false,
+          "name": "Config"
+      };
+      var container = document.getElementById("jsoneditor");
+      var editor = new JSONEditor(container, options);
+      // set json
+      var json = !{JSON.stringify(component[0].config)};
+      editor.set(json);
+      // get json
+      var plugins = !{JSON.stringify(pluginsArray)};
+      //plugins = JSON.stringify(plugins);
+      //plugins += '[' + plugins.substring(1, plugins.length-1) + ']';
+      console.log(plugins);
+      $('#tokenize').tokenize({
+          datas: "/admin/plugins/json",
+          textField: 'name',
+          valueField: '_id',
+          placeholder: '#{__('Select available plugins')}',
+          displayDropdownOnFocus: true
+      });
+
+      $('.save').bind('click', function(){
+        $.ajax({
+          url: '/admin/app/config/#{component[0].name}',
+          type: "POST",
+          data: JSON.stringify(editor.get()),
+          dataType: "json",
+          contentType: "application/json",
+          complete: function(response){
+          	var alert = $(".alert-message").clone().removeClass('alert-message');
+            if(response.responseText=='ok'){
+              $(alert).addClass('alert-success').html('<i class="icon ion-checkmark-circled"/> #{__('Configuration successfully saved')}').appendTo('#alerts').alert();
+            }else{
+              $(alert).addClass('alert-danger').html('<i class="icon ion-alert-circled"/> #{__('Error ocurred while saving configuration')}').appendTo('#alerts').alert();
+            }
+            $(alert).delay(1500).fadeOut();
+          }
+        });
+      });
+    });
+

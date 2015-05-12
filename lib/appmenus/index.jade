@@ -1,0 +1,227 @@
+extend ../../themes/admin/layout 
+
+block title
+  title Shovel apps CMS - #{__('Menues Manager')}
+
+block content
+  - var types=['Link to page','Container']
+  - var places = [{"title": "Main Menu", "menu": "tabbar"}, {"title": "Side Menu", "menu": "sidemenu"}];
+  -var icons = ["ion-monitor", "ion-play", "ion-images", "ion-map", "ion-gear-b","ion-music-note", "ion-radio-waves", "ion-earth", "ion-eye", "ion-person", "ion-location", "ion-link", "ion-chevron-left", "ion-information-circled", "ion-share"]
+  .container-fluid.bg-white.cms.menues-manager(role="main")
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href="#")
+      .col-md-3.col-sm-4.devices.text-right.hidden-xs
+        .os
+          a.android.active(href="#")
+          .separate
+          a.ios(href="#")
+      .col-md-6.col-sm-6
+        h2 #{__('Menues Manager')}
+      .col-md-1
+        a.upload-theme.pull-right#saveMenus(href="#")
+          img(src="/coreassets/assets/save-icon.svg")
+          span #{__('Save changes')}
+    .col-md-8.col-md-offset-2.voffset7.text-left
+
+      - var appmenusByMenu = function(m){
+      -   for(var i = 0, result = []; i < appmenus.length; i++){
+      -     appmenus[i].menu == m && result.push(appmenus[i]);
+      -   }
+      -   return result;
+      - }
+      
+
+      each place in places
+        h4.voffset7=place.title
+        table.table.table-bordered.table-shovel(data-menu=place.menu)
+          thead
+            tr
+              th #
+              th #{__('Title')}
+              if place.menu == 'sidemenu'
+                th #{__('Type')}
+              th #{__('Linked to')}
+              th #{__('Icon')}
+              th #{__('Actions')}
+          tbody
+
+
+            - var menues = appmenusByMenu(place.menu);
+            each appmenu in menues
+                - var moveUp = appmenu.position == 1? "move-up hidden" : "move-up";
+                - var moveDown = (appmenu.position == menues.length)? "move-down hidden" : "move-down";
+                tr(data-position=appmenu.position)
+                  td.text-center=appmenu.position
+                  td
+                    input.title(type="text", value=appmenu.title, placeholder="Name your menu")
+                  if place.menu == 'sidemenu'
+                    td
+                      select.select2.selectType(data-placeholder="Type")
+                        each type in types
+                          -var tsel = appmenu.type==type
+                          option(selected=tsel)=type
+                  td
+                    select.select2.screenId(data-placeholder="Parent")
+                      each screen in screens
+                        -var sel = appmenu.screenID==screen.id
+                        option(selected=sel, value=screen.id)=screen.title
+                  td
+                    if appmenu.icon=="none"
+                      button.btn.btn-default.btn-xs.iconId(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
+                    else
+                      button.btn.btn-default.btn-xs.iconId(type="button", data-toggle="modal", data-target="#iconsModal")=appmenu.icon
+                  td.actions
+                    if appmenu.state=="enabled"
+                      a.icon.publish.state(href="#")
+                    else
+                      a.icon.unpublish.state(href="#")
+                    .move
+                      a(class=moveUp, href="#")
+                      a(class=moveDown, href="#")
+                    a.delete(href="#")
+
+            tr.new
+              td
+              td
+                input.title(type="text", placeholder="Name your menu")
+              if place.menu == 'sidemenu'
+                td
+                  select.select2.selectType
+                    each type in types
+                      option=type
+              td
+                select.select2.screenId
+                  each screen in screens
+                    option(value=screen.id)=screen.title
+              td
+                button.btn.btn-default.btn-xs.iconId(type="button", data-toggle="modal", data-target="#iconsModal") Select icon
+              td.actions
+                a.add(href="#")
+
+    .voffset5
+
+  .modal.fade(id="iconsModal", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-header(style="border-bottom:none; padding-bottom: 65px;")
+          .container.col-xs-12
+            .row
+              button.close(type="button", data-dismiss="modal", aria-label="Close")
+                span(aria-hidden="true") &times;
+            .row
+              .col-xs-6
+                h4.modal-title(id="myModalLabel") Choose Icon
+              .col-xs-6(style="text-align: right;")
+                button.btn.btn-default.iconSelect(type="button", data-dismiss="modal", data-iconname="Select icon") No icon
+        .modal-body
+          each icon in icons
+            a.icon.iconSelect(class=icon, style="font-size:40px; margin:30px; color:#676767;", href="#", data-dismiss="modal", data-iconname=icon)
+
+
+block scripts
+  script(src="screens/js/jquery.rest.min.js")
+  script.
+    $(document).ready(function(){
+        checktypes();
+        var lastIconButton;
+        $('#iconsModal').on('show.bs.modal', function (e) {
+          lastIconButton=e.relatedTarget;
+        });
+        $('.modal').on("click",".iconSelect", function(e){
+          e.preventDefault();
+          $(lastIconButton).html($(this).attr('data-iconname'));
+        });
+        $("table").on("click",".delete",function(e){
+          var btn = $(this), row = btn.parents("tr");
+
+          return row.fadeOut(function(){ $(this).remove(); checkPosition();}), false;
+        });
+        $("table").on("click",".add",function(e){
+          var row = $(this).parents("tr:first");
+          var newRow = $(this).parents("tr:first").clone().removeClass("new");
+          row.before(newRow.hide());
+          newRow.fadeIn().find("td:last").html("").append(
+            $("<a>").addClass("icon publish state").attr("href", "#"),
+            $("<div>").addClass("move").append(
+              $("<a>").addClass("move-up").attr("href", "#"),
+              $("<a>").addClass("move-down").attr("href", "#")
+            ),
+            $("<a>").addClass("delete").attr("href", "#")
+          );
+          newRow.find('select.selectType').val(row.find('select.selectType').val());
+          newRow.find('select.screenId').val(row.find('select.screenId').val());
+          row.find('input:first').val('');
+          row.find('select.selectType').val(row.find('select.selectType option:first').val());
+          row.find('select.screenId').val(row.find('select.screenId option:first').val());
+          row.find('.iconId:first').html('Select icon')
+          checkPosition();
+          checktypes();
+          return false;
+        });
+        $("table").on("click",".move-up",function(e){
+          var row = $(this).parents("tr:first");
+          row.insertBefore(row.prev());
+          checkPosition();
+
+          return false;
+        });
+        $("table").on("click",".move-down",function(e){
+          var row = $(this).parents("tr:first");
+          row.insertAfter(row.next());
+          checkPosition();
+
+          return false;
+        });
+        $("table").on("click",".state",function(e){
+          e.preventDefault();
+          if($(this).hasClass('publish')){
+            $(this).addClass('unpublish')
+            $(this).removeClass('publish');
+          } else {
+            $(this).addClass('publish')
+            $(this).removeClass('unpublish');
+          }
+        });
+        $("table").on("change",".selectType",function(e){
+          e.preventDefault();
+          var row = $(this).parents("tr:first");
+          if($(this).val()=='Container'){
+            row.find('.screenId:first').attr('disabled',true);
+          } else {
+            row.find('.screenId:first').attr('disabled',false);
+          }
+        });
+        function checktypes(){
+          $('tr').each(function(index){
+            if($(this).find('.selectType').val()=='Container'){
+              $(this).find('.screenId:first').attr('disabled',true);
+            } else {
+              $(this).find('.screenId:first').attr('disabled',false);
+            }
+          });
+        }
+        function checkPosition(){
+          var tables = $("table");
+
+          tables.each(function(){
+            var rows = $(this).find("tbody tr:not(.new)");
+            for(var i = 0; i < rows.length; i++)
+              {
+                var position = i + 1;
+
+                rows.eq(i).data("position", position);
+
+                rows.eq(i).find("td:first").text(position);
+                rows.eq(i).find(".move-up, .move-down").removeClass("hidden");
+
+                rows.eq(i).find(".move-up").addClass(position == 1? "hidden" : "");
+                rows.eq(i).find(".move-down").addClass(position == rows.length? "hidden" : "");
+              }
+          });
+        };
+
+    });
+  script(src="menus/js/menueditor.js")
+
+
+

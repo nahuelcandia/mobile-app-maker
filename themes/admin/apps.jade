@@ -1,0 +1,33 @@
+extends layout-noapp
+
+block title
+  title Shovel apps CMS - #{__('My apps')}
+
+block content
+  .container-fluid.bg-white.cms(role='main')
+    .header.center-block.row.voffset6
+      a.back-button.pull-left(href='#')
+      .col-md-3.col-sm-4.devices.text-right.hidden-xs
+        .os
+          a.android(href='#')
+          span.separate
+          a.ios(href='#')
+      .col-md-6.col-sm-7
+        h2 #{__('My apps')}
+        .search
+          input(type='text', placeholder='Search')
+      .devices.text-center.visible-xs
+        .os
+          a.android(href='#')
+          .separate
+          a.ios(href='#')
+    .row.apps.center-block.voffset7
+      each component in components
+        .app
+          a(href='/admin/app/' + component.name)
+            img(src='/coreassets/assets/elmeme.jpg')
+            span.ellipsis=component.name
+      .app.add-app
+        a(href='/admin/create-app')
+          span
+          | #{__('Create App')}

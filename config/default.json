@@ -1,19 +1,19 @@
 {
   "installed": true,
   //--- DEPRECATED: -------
-  //"template": "bootstrap-3-jade",
-  "template": "jqmobile",
-  //"template": "framework7",
+  //"theme": "bootstrap-3-jade",
+  "theme": "onsenui",
+  //"theme": "framework7",
   "app": {
-    "appName": "My New App"
+    "appName": "Awesome App"
   },
   //-----------------------
   // If "availableApps" is greater than one, the CMS will then be multitenant, 
   // otherwise it will be dedicated to a single app
   "availableApps": 1,
   "paths": {
-    "templatesBase": "templates",
-    "adminTemplateBase": "templates/admin"
+    "themesBase": "themes",
+    "adminThemeBase": "themes/admin"
   },
   "session": {
     "salt": "$2a$10$phUYETiJArxNIGLh6P.ZSe",
@@ -28,8 +28,11 @@
     "directory": "./config/locales"
   },
   "packager": {
+    "resourcesPath": "res",
     "htmlBasePath": "www",
-    "zipFilename": "shovelapps-cms-app.zip"
+    "zipFilename": "shovelapps-cms",
+    "zipPrefix": "app-",
+    "zipPostfix": "-shovelapps"
   },
   "backend": {
     // should be a reachable url for the shipped app in order to communicate to the backend to fetch dynamic content.
