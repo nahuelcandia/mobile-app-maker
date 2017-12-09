@@ -1,24 +1,15 @@
-#Shovel apps CMS 
 ### **Open Source mobile App Maker**.
-[http://shovelapps.org](http://shovelapps.org)
 
 
-**Shovel apps CMS** is a web CMS that lets you create
+Web CMS that lets you create
 mobile apps for Android and iOS  with full control over the UI/UX as well functionality of each platform.
 From this Web CMS and App Maker, you are also able to update the contents of your app in realtime, creating production-ready binaries, and also publishing to AppStore and Google Play from a single place.
 
-Join us @ Slack!
-
-[![](https://slack.shovelapps.com/badge.svg)](https://slack.shovelapps.com)
-
 ##Download
-
-[Latest version](https://github.com/shovelapps/shovelapps-cms/releases/latest)
-
 
 ## Installation
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/shovelapps/shovelapps-cms/tree/master)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nahuelcandia/mobile-app-maker/tree/master)
 
 Or install it and launch it on your sever:
 
@@ -29,13 +20,13 @@ You need [NodeJS](http://nodejs.org/download/) installed to run **Shovel apps CM
 * Download the latest version in this directory.
 
 ```
-$ wget https://github.com/shovelapps/shovelapps-cms/archive/latest.zip
-$ cd ~/shovelapps-cms
+$ wget https://github.com/nahuelcandia/mobile-app-maker/archive/latest.zip
+$ cd ~/mobile-app-maker
 ```
 * Unzip it, install dependencies and run it.
 ```
 $ unzip latest.zip
-$ cd shovelapps-cms-latest/
+$ cd mobile-app-maker
 $ npm install
 $ ./start.sh
 ```
@@ -44,7 +35,7 @@ $ ./start.sh
 ## Run and open your browser
 
 ```
-$ cd shovelapps-cms-latest/
+$ cd mobile-app-maker-latest/
 $ ./start.sh
 ```
 
@@ -58,7 +49,7 @@ All config is loaded from the `config/default.json` once the CMS is installed.
 
 ##Issues
 
-[Report your issues with Shovel apps CMS here](http://github.com/shovelapps/shovelapps-cms/issues).
+[Report your issues here](https://github.com/nahuelcandia/mobile-app-maker/issues).
 
 ##Libraries used
 
@@ -76,7 +67,7 @@ The MIT License (MIT)
 
 This software consists of voluntary contributions made by many
 individuals. For exact contribution history, see the revision history
-available at https://github.com/shovelapps/shovelapps-cms
+available at https://github.com/nahuelcandia/mobile-app-maker
 
 The following license applies to all parts of this software except as
 documented below:
@@ -108,8 +99,3 @@ All files located in the node_modules and external directories are
 externally maintained libraries used by this software which have their
 own licenses; we recommend you read them, as their terms may differ from
 the terms above.
-
-====
-
-Copyright (c) 2014-2015 Shovel apps, Inc. All rights reserved.
-(info@shovelapps.com) / www.shovelapps.com / www.shovelapps.org
