@@ -60,6 +60,17 @@ All config is loaded from the `config/default.json` once the CMS is installed.
 * medium-editor
  * MediumButton
 
+## Special Thanks
+
+Former Shovel Apps Dev Team:
+
+- [Oscar Lopez](https://github.com/oskosk2)
+- [Samuel Chalela](https://github.com/schalela)
+- [Tomas Marcote](https://github.com/tmarcote)
+- [Guido Maliandi](https://github.com/gmaliandi)
+- [Patricio Perez](https://github.com/pato12)
+- [Christian Gastrell](https://github.com/cgastrell)
+- [Fernando Sanz](https://github.com/f3rnando)
 
 #License 
 
